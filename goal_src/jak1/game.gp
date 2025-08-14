@@ -1656,13 +1656,38 @@
 ;; this path is relative to the custom_assets/jak1/levels/ folder
 ;; it should point to the .jsonc file that specifies the level.
 (build-custom-level "test-zone")
+
+(build-custom-level "brume")
+
+(build-custom-level "abandon")
+
+(build-custom-level "mount")
+
+(build-custom-level "preundg")
+
 ;; the DGO file
 (custom-level-cgo "TSZ.DGO" "test-zone/testzone.gd")
+
+(custom-level-cgo "BRU.DGO" "brume/brume.gd")
+
+(custom-level-cgo "ABA.DGO" "abandon/abandon.gd")
+
+(custom-level-cgo "MOU.DGO" "mount/mount.gd")
+
+(custom-level-cgo "PRE.DGO" "preundg/preundg.gd")
 
 ;; generate the art group for a custom actor.
 ;; requires a .glb model file in custom_assets/jak1/models/custom_levels
 ;; to also generate a collide-mesh, add :gen-mesh #t
 (build-actor "test-actor" :gen-mesh #t)
+
+(build-actor "test-actor2" :gen-mesh #t)
+
+(build-actor "brumesteamcap" :gen-mesh #t)
+
+(build-actor "gravityswitch" :gen-mesh #t)
+
+(build-actor "ambushdoor" :gen-mesh #t)
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Game Engine Code
@@ -2119,6 +2144,9 @@
 )
 
 (goal-src "levels/test-zone/test-zone-obs.gc" "process-drawable")
+(goal-src "levels/abandoned/abandoned-obs.gc" "process-drawable")
+(goal-src "levels/mount/mount-obs.gc" "process-drawable")
+(goal-src "levels/preundg/preundg-obs.gc" "process-drawable")
 
 
 (group-list "all-code"

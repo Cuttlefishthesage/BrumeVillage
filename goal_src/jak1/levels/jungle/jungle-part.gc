@@ -720,8 +720,8 @@
   :id 184
   :bounds (static-bspherem 0 0 0 55)
   :parts
-  ((sp-item 864 :hour-mask #b111111100000000000111111)
-   (sp-item 853 :fade-after (meters 130) :falloff-to (meters 160) :hour-mask #b11111111111000000)))
+  (
+   (sp-item 853 :fade-after (meters 130) :falloff-to (meters 160) :hour-mask #b0000000000000000000000000)))
 
 (defpartgroup group-jungle-tower-spewer
   :id 185

@@ -1728,8 +1728,15 @@
          (set! (-> this block-func)
                (the-as (function vent symbol) (lambda () (not (task-complete? *game-info* (game-task red-eggtop)))))))
         (((pickup-type eco-yellow))
-         (set! (-> this block-func)
-               (the-as (function vent symbol) (lambda () (not (task-complete? *game-info* (game-task snow-eggtop))))))))
+ (if (not (= (-> (level-get-target-inside *level*) name) 'snow))
+     ;; Brume uses its own task
+     (set! (-> this block-func)
+           (the-as (function vent symbol)
+             (lambda () (not (task-complete? *game-info* (game-task brume-restore-power))))))
+     ;; All other yellow eco vents
+     (set! (-> this block-func)
+           (the-as (function vent symbol)
+             (lambda () (not (task-complete? *game-info* (game-task snow-eggtop)))))))))
       (process-spawn ecovalve (-> this block-func) :from *pickup-dead-pool* :to this))
     (if ((-> this block-func) this) (go vent-blocked)))
   (go vent-wait-for-touch)

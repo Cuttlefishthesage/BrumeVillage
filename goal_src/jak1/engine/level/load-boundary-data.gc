@@ -1495,6 +1495,176 @@
                                         :fwd
                                         (checkpt "finalboss-fight" #f)
                                         :bwd
-                                        (checkpt "finalboss-start" #f))))
+                                        (checkpt "finalboss-start" #f))
+                  ;; custom levels
+
+                   (static-load-boundary :flags ( player )
+                  :top (meters 255)
+                  :bot (meters 155)
+                  :points ((meters -1677.5) (meters 430.35) (meters -1606.5) (meters 430.37))
+                  
+                  :bwd (load mount brume)
+  )
+
+  (static-load-boundary :flags ( player )
+                  :top (meters 255)
+                  :bot (meters 155)
+                  :points ((meters -1677.5) (meters 440.35) (meters -1606.5) (meters 440.37))
+                  
+                  :bwd (display mount brume)
+  )
+  
+  (static-load-boundary :flags ( player )
+                  :top (meters 255)
+                  :bot (meters 155)
+                  :points ((meters -1677.5) (meters 430.35) (meters -1606.5) (meters 430.37))
+                  :fwd (load abandon brume)
+                  
+  )
+
+  (static-load-boundary :flags ( player )
+                  :top (meters 255)
+                  :bot (meters 155)
+                  :points ((meters -1677.5) (meters 411.35) (meters -1606.5) (meters 411.37))
+                  :fwd (display abandon brume)
+                  
+  )
+
+  
+
+
+(static-load-boundary :flags (player)
+  :top (meters 200.18)
+  :bot (meters 173.55)
+  :points ((meters -1523.71) (meters 270.27) (meters -1521.30) (meters 295.53))
+  :fwd (checkpt "abandon-checkpoint1" #f)
+  :bwd (checkpt "brume-start" #f))  
+
+(static-load-boundary :flags (player)
+  :top (meters 200.58)
+  :bot (meters 178.26)
+  :points ((meters -1130.56) (meters 230.80) (meters -1171.94) (meters 255.61))
+  :fwd (checkpt "abandon-checkpoint2" #f)
+  :bwd (checkpt "abandon-checkpoint2" #f))
+
+(static-load-boundary :flags (player)
+  :top (meters 200.72)
+  :bot (meters 180.38)
+  :points ((meters -1140.22) (meters 152.59) (meters -1110.81) (meters 160.51))
+  :fwd (checkpt "abandon-checkpoint2.5" #f)
+  :bwd (checkpt "abandon-checkpoint2.5" #f))
+
+(static-load-boundary :flags (player)
+  :top (meters 200.66)
+  :bot (meters 143.40)
+  :points ((meters -1227.81) (meters 510.55) (meters -1204.43) (meters 550.65))
+  :fwd (checkpt "abandon-checkpoint3" #f)
+  :bwd (checkpt "abandon-checkpoint3" #f))
+
+(static-load-boundary :flags (player)
+  :top (meters 200.03)
+  :bot (meters 158.53)
+  :points ((meters -1367.73) (meters 970.51) (meters -1368.46) (meters 930.19))
+  :fwd (checkpt "abandon-checkpoint4" #f)
+  :bwd (checkpt "abandon-checkpoint4" #f))
+
+(static-load-boundary :flags (player)
+  :top (meters 200.26)
+  :bot (meters 168.30)
+  :points ((meters -1505.46) (meters 440.35) (meters -1467.97) (meters 442.01))
+  :fwd (checkpt "brume-start" #f)
+  :bwd (checkpt "abandon-checkpoint5" #f))
+                        
+
+(static-load-boundary :flags (player)
+  :top (meters 260.73)
+  :bot (meters 230.06)
+  :points ((meters -1660.79) (meters 488.20) (meters -1620.48) (meters 482.73))
+  :fwd (checkpt "brume-start" #f)
+  :bwd (checkpt "mount-checkpoint1" #f)
+  )
+                                             
+(static-load-boundary :flags (player)
+  :top (meters 260.65)
+  :bot (meters 233.92)
+  :points ((meters -1840.78) (meters 964.61) (meters -1905.24) (meters 961.98))
+  :fwd (checkpt "mount-checkpoint3" #f)
+  :bwd (checkpt "mount-checkpoint3" #f))                                        
+                                        
+(static-load-boundary :flags (player)
+  :top (meters 265.50)
+  :bot (meters 235.88)
+  :points ((meters -1691.73) (meters 690.94) (meters -1685.32) (meters 660.06))
+  :fwd (checkpt "mount-checkpoint4" #f)
+  :bwd (checkpt "mount-checkpoint4" #f))
+
+(static-load-boundary :flags (player)
+  :top (meters 76.82)
+  :bot (meters 46.54)
+  :points ( (meters -1870.32) (meters 103.96) (meters -1850.40) (meters 104.18) )
+  :fwd (checkpt "preundg-checkpoint1" #f)
+  :bwd (checkpt "preundg-checkpoint1" #f)
+)                                       
+(static-load-boundary :flags (player)
+  :top (meters 82.67)
+  :bot (meters 42.66)
+  :points ( (meters -1795.41) (meters 16.73) (meters -1775.14) (meters 17.31) )
+  :fwd (checkpt "preundg-checkpoint2" #f)
+  :bwd (checkpt "preundg-checkpoint2" #f)
+)                                       
+(static-load-boundary :flags (player)
+  :top (meters 63.83)
+  :bot (meters 33.83)
+  :points ( (meters -1800.24) (meters -138.43) (meters -1770.96) (meters -138.09) )
+  :fwd (checkpt "preundg-checkpoint3" #f)
+  :bwd (checkpt "preundg-checkpoint3" #f)
+)
+
+(static-load-boundary :flags (player)
+  :top (meters 160.83)
+  :bot (meters 140.83)
+  :points ( (meters -1540.42) (meters -41.59) (meters -1510.41) (meters -41.59) )
+  :fwd (checkpt "preundg-checkpoint4" #f)
+  :bwd (checkpt "preundg-checkpoint4" #f)
+)
+
+
+(static-load-boundary
+  :flags (closed player)
+  :top (meters 126.15)
+  :bot (meters 0.0)
+  :points
+   ( (meters -1864.9) (meters 146.73)   ; P0
+     (meters -1852.9) (meters 146.73)   ; P1
+     (meters -1852.9) (meters 134.73)   ; P2
+     (meters -1864.9) (meters 134.73) ) ; P3
+  :bwd (load abandon brume)
+  :fwd (display preundg brume))
+
+
+  (static-load-boundary
+  :flags (closed player)
+  :top (meters 166.15)
+  :bot (meters 0.0)
+  :points
+   ( (meters -1864.9) (meters 146.73)   ; P0
+     (meters -1852.9) (meters 146.73)   ; P1
+     (meters -1852.9) (meters 134.73)   ; P2
+     (meters -1864.9) (meters 134.73) ) ; P3
+  :bwd (display abandon brume )
+  :fwd (load preundg brume))
+
+  (static-load-boundary
+  :flags (closed player)
+  :top (meters 166.15)
+  :bot (meters 0.0)
+  :points
+   ( (meters -1864.9) (meters 146.73)   ; P0
+     (meters -1852.9) (meters 146.73)   ; P1
+     (meters -1852.9) (meters 134.73)   ; P2
+     (meters -1864.9) (meters 134.73) ) ; P3
+  :bwd (checkpt "brume-start" #f))
+
+                                        ))
 
 (doarray (i *static-load-boundary-list*) (load-boundary-from-template (the-as (array object) i)))

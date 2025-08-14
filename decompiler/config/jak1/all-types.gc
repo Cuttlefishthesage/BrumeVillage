@@ -876,8 +876,49 @@
   (plunger-lurker-hit 113)
   (leaving-misty 114)
   (assistant-village3 115)
-  (max 116)
-  )
+  ;; BRUME ;;
+
+  (brume-buzzer 116)
+  (brume-muse-hide-1 117)
+  (brume-muse-hide-2 118)
+  (brume-muse-hide-3 119)
+  (brume-oracle-1 120)
+  (brume-oracle-2 121)
+  (brume-findcell-1 122)
+  (brume-restore-power 123)
+
+  ;; ABANDON ;;
+
+  (abandon-buzzer 124)
+  (abandon-findcell-1 125)
+  (abandon-findcell-2 126)
+  (abandon-findcell-3 127)
+  (abandon-drillers 128)
+  (abandon-rock 129)
+
+  ;;MOUNT ;;
+
+  (mount-buzzer 130)
+  (mount-findcell-1 131)
+  (mount-findcell-waterfall 132)
+  (mount-zoomer 133)
+  (mount-towertop 134)
+  (mount-ringrace 135)
+  (mount-platformbutton 136)
+
+  ;; PREUNDG ;;
+
+  (preundg-buzzer 137)
+  (preundg-spireclimb 138)
+  (preundg-battlearena 139)
+  (preundg-fluthalls 140)
+  (preundg-switchroom 141)
+  (preundg-slideclimb 142)
+
+  ;;WARP;;
+
+  (brume-warp 143)
+  (max 144))
 
 (defenum text-id
   :type uint32
@@ -885,6 +926,7 @@
 ;; GAME-TEXT-ID ENUM BEGINS
   (zero 0)
   (one 1)
+  (press-hide-seek #x102)
   (confirm #x103)
   (press-to-talk #x104)
   (press-to-use #x105)
@@ -1698,8 +1740,51 @@
   (input-opts-binds-unknown #x1615)
   (progress-no-other-resolution-options #x1616)
   (input-opts-controller-led-reflect-heat #x1617)
-  (input-opts-controller-pressure-sensitivity #x1618)
-  (input-opts-analog-sensitivity #x1619)
+  (input-opts-analog-sensitivity #x1617)
+  (input-opts-controller-pressure-sensitivity #x1617)
+
+  ;;BRUME;;
+
+  (brume #x1618)
+  (brume-buzzer #x1619)
+  (brume-muse-hide-3 #x1620)
+  (brume-oracle-1 #x1621)
+  (brume-oracle-2 #x1622)
+  (brume-findcell-1 #x1623)
+  (brume-restore-power #x1624)
+
+  ;;ABANDON;;
+
+  (abandon #x1625)
+  (abandon-buzzer #x1626)
+  (abandon-findcell-1 #x1627)
+  (abandon-findcell-2 #x1628)
+  (abandon-findcell-3 #x1629)
+  (abandon-drillers #x1630)
+  (abandon-rock #x1631)
+
+  ;;MOUNT;;
+
+  (mount #x1632)
+  (mount-buzzer #x1633)
+  (mount-findcell-1 #x1634)
+  (mount-findcell-waterfall #x1635)
+  (mount-zoomer #x1636)
+  (mount-towertop #x1637)
+  (mount-ringrace #x1638)
+
+  ;;PREUNDG;;
+
+  (preundg #x1639)
+  (preundg-buzzer #x1640)
+  (preundg-spireclimb #x1641)
+  (preundg-battlearena #x1642)
+  (preundg-fluthalls #x1643)
+  (preundg-switchroom #x1644)
+  (preundg-slideclimb #x1645)
+
+  ;; WELCOME SCREEN ;;
+  (welcome-brume #x1646)
 ;; GAME-TEXT-ID ENUM ENDS
   )
 

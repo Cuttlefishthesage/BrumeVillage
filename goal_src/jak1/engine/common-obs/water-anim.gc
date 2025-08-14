@@ -17,105 +17,105 @@
   water-anim-sunken-dark-eco-qbert-lod0-jg
   -1
   ((water-anim-sunken-dark-eco-qbert-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 40))
+  :bounds (static-spherem 0 0 0 400))
 
 (defskelgroup *water-anim-sunken-dark-eco-platform-room-sg*
   water-anim-sunken-dark-eco
   water-anim-sunken-dark-eco-platform-room-lod0-jg
   -1
   ((water-anim-sunken-dark-eco-platform-room-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 22))
+  :bounds (static-spherem 0 0 0 220))
 
 (defskelgroup *water-anim-sunken-dark-eco-helix-room-sg*
   water-anim-sunken-dark-eco
   water-anim-sunken-dark-eco-helix-room-lod0-jg
   -1
   ((water-anim-sunken-dark-eco-helix-room-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 21))
+  :bounds (static-spherem 0 0 0 210))
 
 (defskelgroup *water-anim-sunken-big-room-sg*
   water-anim-sunken
   water-anim-sunken-big-room-lod0-jg
   -1
   ((water-anim-sunken-big-room-lod0-mg (meters 999999)))
-  :bounds (static-spherem 15 0 -36 70))
+  :bounds (static-spherem 15 0 -36 700))
 
 (defskelgroup *water-anim-sunken-first-room-from-entrance-sg*
   water-anim-sunken
   water-anim-sunken-first-room-from-entrance-lod0-jg
   -1
   ((water-anim-sunken-first-room-from-entrance-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 50))
+  :bounds (static-spherem 0 0 0 500))
 
 (defskelgroup *water-anim-sunken-qbert-room-sg*
   water-anim-sunken
   water-anim-sunken-qbert-room-lod0-jg
   -1
   ((water-anim-sunken-qbert-room-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 48))
+  :bounds (static-spherem 0 0 0 480))
 
 (defskelgroup *water-anim-sunken-first-right-branch-sg*
   water-anim-sunken
   water-anim-sunken-first-right-branch-lod0-jg
   -1
   ((water-anim-sunken-first-right-branch-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 30))
+  :bounds (static-spherem 0 0 0 300))
 
 (defskelgroup *water-anim-sunken-circular-with-bullys-sg*
   water-anim-sunken
   water-anim-sunken-circular-with-bullys-lod0-jg
   -1
   ((water-anim-sunken-circular-with-bullys-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 15))
+  :bounds (static-spherem 0 0 0 150))
 
 (defskelgroup *water-anim-sunken-hall-with-one-whirlpool-sg*
   water-anim-sunken
   water-anim-sunken-hall-with-one-whirlpool-lod0-jg
   -1
   ((water-anim-sunken-hall-with-one-whirlpool-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 27))
+  :bounds (static-spherem 0 0 0 270))
 
 (defskelgroup *water-anim-sunken-hall-with-three-whirlpools-sg*
   water-anim-sunken
   water-anim-sunken-hall-with-three-whirlpools-lod0-jg
   -1
   ((water-anim-sunken-hall-with-three-whirlpools-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 26))
+  :bounds (static-spherem 0 0 0 260))
 
 (defskelgroup *water-anim-sunken-start-of-helix-slide-sg*
   water-anim-sunken
   water-anim-sunken-start-of-helix-slide-lod0-jg
   -1
   ((water-anim-sunken-start-of-helix-slide-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 25))
+  :bounds (static-spherem 0 0 0 250))
 
 (defskelgroup *water-anim-sunken-room-above-exit-chamber-sg*
   water-anim-sunken
   water-anim-sunken-room-above-exit-chamber-lod0-jg
   -1
   ((water-anim-sunken-room-above-exit-chamber-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 45))
+  :bounds (static-spherem 0 0 0 450))
 
 (defskelgroup *water-anim-sunken-hall-before-big-room-sg*
   water-anim-sunken
   water-anim-sunken-hall-before-big-room-lod0-jg
   -1
   ((water-anim-sunken-hall-before-big-room-lod0-mg (meters 999999)))
-  :bounds (static-spherem 5 0 -3 24))
+  :bounds (static-spherem 5 0 -3 240))
 
 (defskelgroup *water-anim-sunken-short-piece-sg*
   water-anim-sunken
   water-anim-sunken-short-piece-lod0-jg
   -1
   ((water-anim-sunken-short-piece-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 20))
+  :bounds (static-spherem 0 0 0 200))
 
 (defskelgroup *water-anim-sunken-big-room-upper-water-sg*
   water-anim-sunken
   water-anim-sunken-big-room-upper-water-lod0-jg
   -1
   ((water-anim-sunken-big-room-upper-water-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 27))
+  :bounds (static-spherem 0 0 0 270))
 
 (defskelgroup *water-anim-maincave-center-pool-sg*
   water-anim-maincave

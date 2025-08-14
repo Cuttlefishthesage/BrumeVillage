@@ -18,6 +18,13 @@
   ((oracle-lod0-mg (meters 999999)))
   :bounds (static-spherem 0 0 0 4))
 
+(defskelgroup *village2cam-sg*
+  village2cam
+  village2cam-lod0-jg
+  -1
+  ((village2cam-lod0-mg (meters 999999)))
+  :bounds (static-spherem 0 0 0 10))
+
 (defmethod play-anim! ((this oracle) (arg0 symbol))
   (set! (-> this talk-message) (text-id press-to-talk))
   (case (current-status (-> this tasks))
@@ -27,7 +34,8 @@
        (close-specific-task! (the-as game-task (-> this second-task)) (task-status need-introduction)))
      (case (-> (level-get-target-inside *level*) name)
        (('village1) (new 'static 'spool-anim :name "oracle-intro-1" :index 9 :parts 5 :command-list '()))
-       (('village2)
+       (('brume) (new 'static 'spool-anim :name "oracle-intro-1" :index 9 :parts 5 :command-list '()))
+       (('village2) 
         (new 'static
              'spool-anim
              :name "oracle-intro-2"
@@ -122,7 +130,8 @@
      (case (-> (level-get-target-inside *level*) name)
        (('village1) (new 'static 'spool-anim :name "oracle-reminder-1" :index 10 :parts 4 :command-list '()))
        (('village2) (new 'static 'spool-anim :name "oracle-reminder-2" :index 12 :parts 2 :command-list '()))
-       (('village3) (new 'static 'spool-anim :name "oracle-reminder-3" :index 14 :parts 2 :command-list '()))))
+       (('village3) (new 'static 'spool-anim :name "oracle-reminder-3" :index 14 :parts 2 :command-list '()))
+       (('brume) (new 'static 'spool-anim :name "oracle-reminder-1" :index 10 :parts 4 :command-list '() ))))
     (((task-status need-reward-speech))
      (cond
        (arg0
@@ -139,12 +148,14 @@
         (case (-> (level-get-target-inside *level*) name)
           (('village1) (new 'static 'spool-anim :name "oracle-right-eye-1" :index 3 :parts 2 :command-list '()))
           (('village2) (new 'static 'spool-anim :name "oracle-right-eye-2" :index 5 :parts 2 :command-list '()))
-          (('village3) (new 'static 'spool-anim :name "oracle-right-eye-3" :index 7 :parts 2 :command-list '()))))
+          (('village3) (new 'static 'spool-anim :name "oracle-right-eye-3" :index 7 :parts 2 :command-list '()))
+          (('brume) (new 'static 'spool-anim :name "oracle-right-eye-1" :index 3 :parts 2 :command-list '()))))
        (else
         (case (-> (level-get-target-inside *level*) name)
           (('village1) (new 'static 'spool-anim :name "oracle-left-eye-1" :index 4 :parts 2 :command-list '()))
           (('village2) (new 'static 'spool-anim :name "oracle-left-eye-2" :index 6 :parts 2 :command-list '()))
-          (('village3) (new 'static 'spool-anim :name "oracle-left-eye-3" :index 8 :parts 2 :command-list '()))))))
+          (('village3) (new 'static 'spool-anim :name "oracle-left-eye-3" :index 8 :parts 2 :command-list '()))
+          (('brume) (new 'static 'spool-anim  :name "oracle-left-eye-1" :index 4 :parts 2 :command-list '()))))))
     (else
      (if arg0
        (format 0

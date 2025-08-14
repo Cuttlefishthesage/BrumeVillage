@@ -293,7 +293,7 @@
   (none))
 
 (define *warp-info*
-  (new 'static 'boxed-array :type string "training-warp" "village1-warp" "village2-warp" "village3-warp" "citadel-warp"))
+  (new 'static 'boxed-array :type string "training-warp" "village1-warp" "village2-warp" "village3-warp" "citadel-warp" "brume-warp"))
 
 (deftype warp-gate (process-drawable)
   ((level      symbol)
@@ -337,7 +337,7 @@
       ;; we add "training" to the list here so that the training warp gate waits until it's safe to
       ;; dispose the old code from memory.
       (case (-> self level)
-        (('citadel 'lavatube 'training)
+        (('citadel 'lavatube 'training 'brume)
          (while (and *target* (not (logtest? (-> *target* draw status) (draw-status hidden))))
            (suspend)))
         (else

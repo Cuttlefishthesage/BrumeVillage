@@ -140,7 +140,7 @@
   ;; disgusting hack to let us overflow the collide cache up to 5k triangles
   (malloc 'global (* (size-of collide-cache-tri) BIG_COLLIDE_CACHE_SIZE))
   ;; but start it at the default.
-  (define *collide-cache-max-tris* 460)
+  (define *collide-cache-max-tris* BIG_COLLIDE_CACHE_SIZE)
   (defmacro activate-big-collide-cache! ()
     `(set! *collide-cache-max-tris* BIG_COLLIDE_CACHE_SIZE)))
 

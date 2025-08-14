@@ -500,9 +500,92 @@
   0
   (none))
 
-(defmethod relocate ((this game-count-info) (arg0 int))
+(defmethod relocate ((this game-count-info) (arg0 int)) ;;this took hours. stupid stacktrace pointed me to rigid body defmethods for fisherman boat. turns out it was cause of the game count data index hitting 18, so this solution was needed. extra mem was needed too in game-info
+
   "Load in the game-count-info. This is a bit of a hack."
-  (set! *game-counts* this)
+
+  (set! (-> *game-counts* data 0 money-count) 50)
+
+  (set! (-> *game-counts* data 0 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 1 money-count) 50)
+
+  (set! (-> *game-counts* data 1 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 2 money-count) 150)
+
+  (set! (-> *game-counts* data 2 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 3 money-count) 150)
+
+  (set! (-> *game-counts* data 3 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 4 money-count) 150)
+
+  (set! (-> *game-counts* data 4 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 5 money-count) 50)
+
+  (set! (-> *game-counts* data 5 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 6 money-count) 50)
+
+  (set! (-> *game-counts* data 6 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 7 money-count) 200)
+
+  (set! (-> *game-counts* data 7 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 8 money-count) 200)
+
+  (set! (-> *game-counts* data 8 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 9 money-count) 200)
+
+  (set! (-> *game-counts* data 9 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 10 money-count) 50)
+
+  (set! (-> *game-counts* data 10 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 11 money-count) 50)
+
+  (set! (-> *game-counts* data 11 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 12 money-count) 200)
+
+  (set! (-> *game-counts* data 12 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 13 money-count) 200)
+
+  (set! (-> *game-counts* data 13 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 14 money-count) 50)
+
+  (set! (-> *game-counts* data 14 buzzer-count) 7)
+
+  (set! (-> *game-counts* data 15 money-count) 200)
+
+  (set! (-> *game-counts* data 15 buzzer-count) 7)
+
+  ;; custom level
+
+  (set! (-> *game-counts* data 16 money-count) (the-as int 113)) ;; number after data is the level count found in progress-static
+
+  (set! (-> *game-counts* data 16 buzzer-count) (the-as int 7))
+
+  (set! (-> *game-counts* data 17 money-count) (the-as int 199)) ;; number after data is the level count found in progress-static
+
+  (set! (-> *game-counts* data 17 buzzer-count) (the-as int 7))
+
+  (set! (-> *game-counts* data 18 money-count) (the-as int 215)) ;; number after data is the level count found in progress-static
+
+  (set! (-> *game-counts* data 18 buzzer-count) (the-as int 7))
+
+  (set! (-> *game-counts* data 19 money-count) (the-as int 211)) ;; number after data is the level count found in progress-static
+
+  (set! (-> *game-counts* data 19 buzzer-count) (the-as int 7))
+
   this)
 
 (defmethod relocate ((this progress) (arg0 int))
@@ -753,7 +836,7 @@
               (sound-play "starts-options")
               (sound-volume-off)
               (set! (-> *game-info* mode) 'play)
-              (initialize! *game-info* 'game (the-as game-save #f) "intro-start")
+              (initialize! *game-info* 'game (the-as game-save #f) "brume-warp")
               (set-master-mode 'game))
              (else (sound-play "cursor-options") (set! (-> this next-display-state) (progress-screen invalid)))))
           (((progress-screen memcard-insert))
@@ -779,7 +862,7 @@
               (sound-play "cursor-options")
               (sound-volume-off)
               (set! (-> *game-info* mode) 'play)
-              (initialize! *game-info* 'game (the-as game-save #f) "intro-start")
+              (initialize! *game-info* 'game (the-as game-save #f) "brume-warp")
               (set-master-mode 'game))
              (else (sound-play "cursor-options") (set! (-> this next-display-state) (progress-screen invalid)))))
           (((progress-screen memcard-no-space) (progress-screen memcard-not-inserted) (progress-screen memcard-not-formatted))
@@ -788,7 +871,7 @@
               (sound-play "start-options")
               (sound-volume-off)
               (set! (-> *game-info* mode) 'play)
-              (initialize! *game-info* 'game (the-as game-save #f) "intro-start")
+              (initialize! *game-info* 'game (the-as game-save #f) "brume-warp")
               (set-master-mode 'game))
              ((nonzero? (-> this display-state-stack 0)) (sound-play "start-options") (set-master-mode 'game))
              (else (sound-play "cursor-options") (set! (-> this next-display-state) (progress-screen invalid)))))
@@ -842,7 +925,7 @@
               (sound-play "start-options")
               (sound-volume-off)
               (set! (-> *game-info* mode) 'play)
-              (initialize! *game-info* 'game (the-as game-save #f) "intro-start")
+              (initialize! *game-info* 'game (the-as game-save #f) "brume-warp")
               (set-master-mode 'game))
              (else (sound-play "cursor-options") (set! (-> this next-display-state) (progress-screen invalid)))))))))
   0
@@ -1179,7 +1262,7 @@
                       ((= (-> *pc-settings* speedrunner-mode?) #t) (speedrun-start-full-game-run))
                       ;; start the game normally
                       (else
-                       (initialize! *game-info* 'game (the-as game-save #f) "intro-start")
+                       (initialize! *game-info* 'game (the-as game-save #f) "brume-warp")
                        (set! (-> *setting-control* default auto-save) gp-1))))
                   (set-master-mode 'game))
                  (else (set! v0-0 -1) (set! (-> self next-display-state) (the-as progress-screen v0-0)) v0-0)))

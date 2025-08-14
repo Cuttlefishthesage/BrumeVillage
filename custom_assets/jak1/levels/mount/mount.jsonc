@@ -1,0 +1,5333 @@
+{
+    // The "in-game" name of the level. Should be lower case, with dashes (GOAL symbol name)
+    // the name of this file, and the folder this file is in must have the same name.
+    "long_name": "mount",
+    // The file name, should be upper case and 8 characters or less.
+    "iso_name": "MOUNT",
+    // The nickname, should be exactly 3 characters
+    "nickname": "mou", // 3 char name, all lowercase
+    // Background mesh file.
+    // Must have vertex colors. Use the blender cycles renderer, bake, diffuse, uncheck color,
+    // and bake to vertex colors. For now, only the first vertex color group is used, so make sure you
+    // only have 1.
+    "gltf_file": "custom_assets/jak1/levels/mount/mountain.glb",
+  
+    // automatically set wall vs. ground based on angle. Useful if you don't want to assign this yourself
+    "automatic_wall_detection": true,
+    "automatic_wall_angle": 45.0,
+  
+    // if your mesh has triangles with incorrect orientation, set this to make all collision mesh triangles double sided
+    // this makes collision 2x slower and bigger, so only use if really needed
+    "double_sided_collide": false,
+  
+    // available res-lump tag types:
+    // integer types: int32, uint32, enum-int32, enum-uint32
+    // float types: float, meters (1 meter = 4096.0 units), degrees (65536.0 = 360°)
+    // vector types: vector (normal floats), vector4m (meters), vector3m (meters with w set to 1.0), vector-vol (normal floats with w in meters), movie-pos (meters with w in degrees)
+    // special types: symbol, type, string, eco-info, cell-info, buzzer-info, water-height
+    //
+    // examples:
+    //
+    // adds a float tag 'spring-height' with value of 200 meters (1 meter = 4096.0 units):
+    // "spring-height": ["meters", 200.0]
+    //
+    // adds a degrees tag 'rotoffset':
+    // "rotoffset": ["degrees", -45.0]
+    //
+    // adds a movie-pos tag:
+    // "movie-pos": ["movie-pos", [100.22, -25.3, 99.5, 180.0]]
+    //
+    // adds an enum tag 'options':
+    // "options": ["enum-int32", "(fact-options large)"]
+    //
+    // adds a water-height tag:
+    // "water-height": ["water-height", 25.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"]
+    //
+    // adds an eco-info tag:
+    // "eco-info": ["eco-info", "(pickup-type health)", 2]
+    //
+    // adds a cell-info tag:
+    // "eco-info": ["cell-info", "(game-task training-gimmie)"]
+    //
+    // adds a buzzer-info tag:
+    // "eco-info": ["buzzer-info", "(game-task training-buzzer)", 5]
+    //
+    // adds a 'symbol' tag (using the 'type' and 'string' lump types works the same way):
+    // "symbol-list": ["symbol", "sym-1", "sym-2"]
+  
+    // The base actor id for your custom level. If you have multiple levels, this should be unique!
+    "base_id": 80000,
+  
+    // All art groups you want to use in your custom level. Will add their models and corresponding textures to the FR3 file.
+    // Note: You will still have to add them to your level's .gd file.
+     "art_groups": ["plat-ag","racer-ag","water-anim-sunken-ag","ropebridge-70-ag","citb-exit-plat-ag","jng-iris-door-ag","maindoor-ag","basebutton-ag","plat-button-ag","generic-button-ag","trainingcam-ag", "babak-ag", "puffer-ag", "race-ring-ag"],
+  
+    // If you have any custom models in the "custom_assets/jak1/models/custom_levels" folder that you want to use in your level, add them to this list.
+    // Note: Like with art groups, these should also be added to your level's .gd file.
+    "custom_models": [],
+  
+  // Any textures you want to include in your custom level. This is mainly useful for things such as the zoomer HUD,
+  // sky textures and cases where you want to use objects drawn with the generic renderer,
+  // which also requires you to set a texture remap table and a list of tpages.
+  // To get a list of all the textures, you can extract all of the game's textures
+  // by setting "save_texture_pngs" to true in the decompiler config.
+  // The format is ["tpage-name", "texture-name1", "texture-name2", ...].
+  // If you want all textures from a tpage, you can just do ["tpage-name"].
+  "textures": [
+    ["zoomerhud"],
+    ["village1-vis-alpha"]
+  ],
+
+  // Which vanilla level's texture remap table to use.
+  // This is needed if you want to have proper textures for objects that are drawn using generic, such as
+  // dark eco pools or dying enemies. If you choose to use this,
+  // the order of art groups and tpages in your level's .gd MUST match the vanilla level's for the textures to work.
+  "tex_remap": "village1",
+
+  // Which sky to use for your custom level. This needs to be the name of a vanilla level with sky textures.
+  // Your level's mood update needs to be set up to copy the sky texture (update-mood-default already handles this as an example).
+  // You also need to add a specific tpage to your level .gd depending on the level you chose:
+  // training:   tpage-1308.go
+  // village1:   tpage-401.go
+  // beach:      tpage-215.go
+  // jungle:     tpage-388.go
+  // misty:      tpage-520.go
+  // firecanyon: tpage-1123.go
+  // village2:   tpage-921.go
+  // rolling:    tpage-925.go
+  // sunkenb:    tpage-162.go
+  // swamp:      tpage-630.go
+  // ogre:       tpage-1117.go
+  // village3:   tpage-1194.go
+  // snow:       tpage-712.go
+  // finalboss:  tpage-1418.go
+  // The tpage you choose also has to be in the alpha (4th) slot in the "tpages" list below.
+  "sky": "village1",
+
+    // Any texture pages that are added to the level's "texture-ids" array.
+    // These will be logged in and linked as part of level loading.
+    // There are five tpage categories, in this order:
+    // - tfrag
+    // - pris
+    // - shrub
+    // - alpha
+    // - water
+    // This is also (with the exception of levels that use the zoomer) the order that the tpages are listed in in the vanilla .gd files.
+    // You need to also add these to your level .gd as well.
+    // Sky textures use the alpha slot.
+    // If this is empty and "tex_remap" and "sky" are the same level, this will be auto-filled with the tpages from the
+    // corresponding level (check its .gd file for the art group/tpage order to copy over).
+    "tpages": [],
+  
+    // Ambients you want to use in your custom level. Ambients can be used for various things like changing the music variation (flava),
+    // adding ambient sounds, level name hints, etc.
+    "ambients": [
+      {
+  "trans": [ -1659.54, 205.89, 815.26, 50.0 ],
+  "bsphere": [ -1659.54, 205.89, 815.26, 50.0 ],
+  "lump": {
+    "name": "ambient-chirp-mount-1",
+    "type": "'sound",
+    "effect-name": "'bird-4",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1608.91, 204.40, 891.18, 50.0 ],
+  "bsphere": [ -1608.91, 204.40, 891.18, 50.0 ],
+  "lump": {
+    "name": "ambient-chirp-mount-2",
+    "type": "'sound",
+    "effect-name": "'bird-4",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1642.59, 218.08, 976.03, 50.0 ],
+  "bsphere": [ -1642.59, 218.08, 976.03, 50.0 ],
+  "lump": {
+    "name": "ambient-chirp-mount-3",
+    "type": "'sound",
+    "effect-name": "'bird-4",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1450.62, 251.84, 1009.85, 50.0 ],
+  "bsphere": [ -1450.62, 251.84, 1009.85, 50.0 ],
+  "lump": {
+    "name": "ambient-chirp-mount-4",
+    "type": "'sound",
+    "effect-name": "'bird-4",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1450.72, 196.01, 897.18, 50.0 ],
+  "bsphere": [ -1450.72, 196.01, 897.18, 50.0 ],
+  "lump": {
+    "name": "ambient-chirp-mount-5",
+    "type": "'sound",
+    "effect-name": "'bird-4",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1484.50, 196.33, 768.89, 50.0 ],
+  "bsphere": [ -1484.50, 196.33, 768.89, 50.0 ],
+  "lump": {
+    "name": "ambient-chirp-mount-6",
+    "type": "'sound",
+    "effect-name": "'bird-4",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1522.06, 203.63, 656.77, 50.0 ],
+  "bsphere": [ -1522.06, 203.63, 656.77, 50.0 ],
+  "lump": {
+    "name": "ambient-chirp-mount-7",
+    "type": "'sound",
+    "effect-name": "'bird-4",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1488.15, 222.40, 523.92, 50.0 ],
+  "bsphere": [ -1488.15, 222.40, 523.92, 50.0 ],
+  "lump": {
+    "name": "ambient-chirp-mount-8",
+    "type": "'sound",
+    "effect-name": "'bird-4",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1363.80, 204.26, 431.76, 50.0 ],
+  "bsphere": [ -1363.80, 204.26, 431.76, 50.0 ],
+  "lump": {
+    "name": "ambient-chirp-mount-9",
+    "type": "'sound",
+    "effect-name": "'bird-4",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1405.36, 193.66, 533.34, 50.0 ],
+  "bsphere": [ -1405.36, 193.66, 533.34, 50.0 ],
+  "lump": {
+    "name": "ambient-chirp-mount-10",
+    "type": "'sound",
+    "effect-name": "'bird-4",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+}
+
+    ],
+  
+    "actors" : [
+      {
+        "trans": [ -1656.40, 217.87, 704.30 ], // translation
+        "etype": "racer", // actor type
+        "game_task": "(game-task none)", // associated game task (for powercells, etc)
+        "quat": [ 0, 0, 0, 1 ], // quaternion
+        "bsphere": [ -1656.40, 214.87, 704.30, 10 ], // bounding sphere
+        "lump": {
+          "name": "mountainrange-racer"
+        }
+      },
+      {
+        "trans": [ -1886.5, 238, 918.46 ], // translation
+        "etype": "racer", // actor type
+        "game_task": "(game-task none)", // associated game task (for powercells, etc)
+        "quat": [ 0, 0, 0, 1 ], // quaternion
+        "bsphere": [ -1656.40, 214.87, 704.30, 10 ], // bounding sphere
+        "lump": {
+          "name": "mountainrange-racer-end"
+        }
+      },
+      {
+        "trans": [ -1876.98, 180.97000, 720.25 ], // translation
+        "etype": "mount-part", // actor type
+        "game_task": "(game-task none)", // associated game task (for powercells, etc)
+        "quat": [ 0, 0, 0, 1 ], // quaternion
+        "bsphere": [ -1939.98, 7.97, 207.25, 10 ], // bounding sphere
+        "lump": {
+          "name": "mount-fog1",
+          "art-name": "group-mount-fog-cloud",
+          "effect-name": "'fog",
+          "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+          "cycle-speed": [ "float", -1.0, 0.0 ],
+          "vis-dist": [ "meters", 200.0 ]
+        }
+      },
+
+      //money//
+      {
+  "trans": [ -1656.27, 228.96, 525.48 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1656.27, 228.96, 525.48, 10 ],
+  "lump": {
+    "name": "abandon-money-01"
+  }
+},
+{
+  "trans": [ -1659.83, 230.00, 538.60 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1659.83, 230.00, 538.60, 10 ],
+  "lump": {
+    "name": "abandon-money-02"
+  }
+},
+{
+  "trans": [ -1656.86, 227.35, 554.02 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1656.86, 227.35, 554.02, 10 ],
+  "lump": {
+    "name": "abandon-money-03"
+  }
+},
+{
+  "trans": [ -1636.63, 226.03, 577.15 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1636.63, 226.03, 577.15, 10 ],
+  "lump": {
+    "name": "abandon-money-04"
+  }
+},
+{
+  "trans": [ -1634.20, 227.68, 591.46 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1634.20, 227.68, 591.46, 10 ],
+  "lump": {
+    "name": "abandon-money-05"
+  }
+},
+{
+  "trans": [ -1633.93, 228.10, 605.83 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1633.93, 228.10, 605.83, 10 ],
+  "lump": {
+    "name": "abandon-money-06"
+  }
+},
+{
+  "trans": [ -1632.59, 220.44, 637.84 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1632.59, 220.44, 637.84, 10 ],
+  "lump": {
+    "name": "abandon-money-07"
+  }
+},
+{
+  "trans": [ -1623.54, 215.51, 638.09 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1623.54, 215.51, 638.09, 10 ],
+  "lump": {
+    "name": "abandon-money-08"
+  }
+},
+{
+  "trans": [ -1630.13, 214.04, 667.54 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1630.13, 214.04, 667.54, 10 ],
+  "lump": {
+    "name": "abandon-money-09"
+  }
+},
+{
+  "trans": [ -1636.04, 214.67, 681.95 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1636.04, 214.67, 681.95, 10 ],
+  "lump": {
+    "name": "abandon-money-10"
+  }
+},
+{
+  "trans": [ -1625.29, 212.87, 694.44 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1625.29, 212.87, 694.44, 10 ],
+  "lump": {
+    "name": "abandon-money-11"
+  }
+},
+{
+  "trans": [ -1657.84, 205.10, 755.48 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1657.84, 205.10, 755.48, 10 ],
+  "lump": {
+    "name": "abandon-money-12"
+  }
+},
+{
+  "trans": [ -1669.27, 205.53, 768.76 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1669.27, 205.53, 768.76, 10 ],
+  "lump": {
+    "name": "abandon-money-13"
+  }
+},
+{
+  "trans": [ -1673.79, 207.68, 784.59 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1673.79, 207.68, 784.59, 10 ],
+  "lump": {
+    "name": "abandon-money-14"
+  }
+},
+{
+  "trans": [ -1642.27, 208.32, 822.53 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1642.27, 208.32, 822.53, 10 ],
+  "lump": {
+    "name": "abandon-money-15"
+  }
+},
+{
+  "trans": [ -1629.05, 208.84, 828.44 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1629.05, 208.84, 828.44, 10 ],
+  "lump": {
+    "name": "abandon-money-16"
+  }
+},
+{
+  "trans": [ -1615.95, 206.51, 835.91 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1615.95, 206.51, 835.91, 10 ],
+  "lump": {
+    "name": "abandon-money-17"
+  }
+},
+{
+  "trans": [ -1604.88, 205.29, 841.91 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1604.88, 205.29, 841.91, 10 ],
+  "lump": {
+    "name": "abandon-money-18"
+  }
+},
+{
+  "trans": [ -1593.84, 207.06, 849.63 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1593.84, 207.06, 849.63, 10 ],
+  "lump": {
+    "name": "abandon-money-19"
+  }
+},
+{
+  "trans": [ -1590.50, 208.42, 862.34 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1590.50, 208.42, 862.34, 10 ],
+  "lump": {
+    "name": "abandon-money-20"
+  }
+},
+{
+  "trans": [ -1626.91, 213.99, 919.99 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1626.91, 213.99, 919.99, 10 ],
+  "lump": {
+    "name": "abandon-money-21"
+  }
+},
+{
+  "trans": [ -1630.93, 217.78, 925.20 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1630.93, 217.78, 925.20, 10 ],
+  "lump": {
+    "name": "abandon-money-22"
+  }
+},
+{
+  "trans": [ -1637.49, 217.08, 934.12 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1637.49, 217.08, 934.12, 10 ],
+  "lump": {
+    "name": "abandon-money-23"
+  }
+},
+{
+  "trans": [ -1590.83, 222.21, 1011.19 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1590.83, 222.21, 1011.19, 10 ],
+  "lump": {
+    "name": "abandon-money-24"
+  }
+},
+{
+  "trans": [ -1579.79, 226.40, 1018.39 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1579.79, 226.40, 1018.39, 10 ],
+  "lump": {
+    "name": "abandon-money-25"
+  }
+},
+{
+  "trans": [ -1566.09, 231.55, 1026.57 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1566.09, 231.55, 1026.57, 10 ],
+  "lump": {
+    "name": "abandon-money-26"
+  }
+},
+{
+  "trans": [ -1555.55, 235.89, 1029.52 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1555.55, 235.89, 1029.52, 10 ],
+  "lump": {
+    "name": "abandon-money-27"
+  }
+},
+{
+  "trans": [ -1542.26, 240.14, 1031.68 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1542.26, 240.14, 1031.68, 10 ],
+  "lump": {
+    "name": "abandon-money-28"
+  }
+},
+{
+  "trans": [ -1529.30, 244.79, 1033.70 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1529.30, 244.79, 1033.70, 10 ],
+  "lump": {
+    "name": "abandon-money-29"
+  }
+},
+{
+  "trans": [ -1454.38, 253.53, 1011.26 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1444.66, 254.32, 1043.27, 10 ],
+  "lump": {
+    "name": "abandon-money-30"
+  }
+},
+{
+  "trans": [ -1454.52, 253.62, 1003.31 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1460.90, 254.28, 1020.76, 10 ],
+  "lump": {
+    "name": "abandon-money-31"
+  }
+},
+{
+  "trans": [ -1454.75, 253.67, 996.69 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1447.67, 253.61, 997.22, 10 ],
+  "lump": {
+    "name": "abandon-money-32"
+  }
+},
+{
+  "trans": [ -1455.08, 253.71, 987.62 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1454.73, 252.15, 976.99, 10 ],
+  "lump": {
+    "name": "abandon-money-33"
+  }
+},
+{
+  "trans": [ -1462.32, 198.96, 909.33 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1462.32, 198.96, 909.33, 10 ],
+  "lump": {
+    "name": "abandon-money-34"
+  }
+},
+{
+  "trans": [ -1472.75, 200.08, 900.54 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1472.75, 200.08, 900.54, 10 ],
+  "lump": {
+    "name": "abandon-money-35"
+  }
+},
+{
+  "trans": [ -1482.75, 204.19, 889.61 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1482.75, 204.19, 889.61, 10 ],
+  "lump": {
+    "name": "abandon-money-36"
+  }
+},
+{
+  "trans": [ -1479.78, 211.94, 835.80 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1479.78, 211.94, 835.80, 10 ],
+  "lump": {
+    "name": "abandon-money-37"
+  }
+},
+{
+  "trans": [ -1477.58, 210.25, 825.62 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1477.58, 210.25, 825.62, 10 ],
+  "lump": {
+    "name": "abandon-money-38"
+  }
+},
+{
+  "trans": [ -1474.01, 202.26, 814.86 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1474.01, 202.26, 814.86, 10 ],
+  "lump": {
+    "name": "abandon-money-39"
+  }
+},
+{
+  "trans": [ -1506.83, 199.62, 753.01 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1506.83, 199.62, 753.01, 10 ],
+  "lump": {
+    "name": "abandon-money-40"
+  }
+},
+{
+  "trans": [ -1513.84, 203.04, 736.18 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.84, 203.04, 736.18, 10 ],
+  "lump": {
+    "name": "abandon-money-41"
+  }
+},
+{
+  "trans": [ -1518.58, 204.83, 719.09 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1518.58, 204.83, 719.09, 10 ],
+  "lump": {
+    "name": "abandon-money-42"
+  }
+},
+{
+  "trans": [ -1512.86, 204.00, 701.07 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1512.86, 204.00, 701.07, 10 ],
+  "lump": {
+    "name": "abandon-money-43"
+  }
+},
+{
+  "trans": [ -1505.01, 203.54, 686.93 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1505.01, 203.54, 686.93, 10 ],
+  "lump": {
+    "name": "abandon-money-44"
+  }
+},
+{
+  "trans": [ -1504.38, 204.20, 669.80 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1504.38, 204.20, 669.80, 10 ],
+  "lump": {
+    "name": "abandon-money-45"
+  }
+},
+{
+  "trans": [ -1525.07, 212.65, 615.14 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1525.07, 212.65, 615.14, 10 ],
+  "lump": {
+    "name": "abandon-money-46"
+  }
+},
+{
+  "trans": [ -1526.63, 215.70, 605.21 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1526.63, 212.70, 605.21, 10 ],
+  "lump": {
+    "name": "abandon-money-47"
+  }
+},
+{
+  "trans": [ -1527.51, 215.39, 597.01 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1527.51, 215.39, 597.01, 10 ],
+  "lump": {
+    "name": "abandon-money-48"
+  }
+},
+{
+  "trans": [ -1493.71, 223.09, 531.01 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1493.71, 223.09, 531.01, 10 ],
+  "lump": {
+    "name": "abandon-money-49"
+  }
+},
+{
+  "trans": [ -1481.24, 223.71, 521.49 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1481.24, 223.71, 521.49, 10 ],
+  "lump": {
+    "name": "abandon-money-50"
+  }
+},
+{
+  "trans": [ -1463.30, 225.18, 517.80 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1463.30, 225.18, 517.80, 10 ],
+  "lump": {
+    "name": "abandon-money-51"
+  }
+},
+{
+  "trans": [ -1419.44, 236.32, 516.71 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1419.44, 236.32, 516.71, 10 ],
+  "lump": {
+    "name": "abandon-money-52"
+  }
+},
+{
+  "trans": [ -1404.79, 239.59, 516.95 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1404.79, 239.59, 516.95, 10 ],
+  "lump": {
+    "name": "abandon-money-53"
+  }
+},
+{
+  "trans": [ -1390.55, 240.95, 516.28 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1390.55, 240.95, 516.28, 10 ],
+  "lump": {
+    "name": "abandon-money-54"
+  }
+},
+{
+  "trans": [ -1353.56, 247.90, 511.46 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1353.56, 247.90, 511.46, 10 ],
+  "lump": {
+    "name": "abandon-money-55"
+  }
+},
+{
+  "trans": [ -1343.89, 243.39, 508.77 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1343.89, 243.39, 508.77, 10 ],
+  "lump": {
+    "name": "abandon-money-56"
+  }
+},
+{
+  "trans": [ -1335.20, 240.44, 506.83 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1335.20, 240.44, 506.83, 10 ],
+  "lump": {
+    "name": "abandon-money-57"
+  }
+},
+{
+  "trans": [ -1307.84, 233.66, 511.67 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1307.84, 233.66, 511.67, 10 ],
+  "lump": {
+    "name": "abandon-money-58"
+  }
+},
+{
+  "trans": [ -1298.77, 230.10, 512.58 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1298.77, 230.10, 512.58, 10 ],
+  "lump": {
+    "name": "abandon-money-59"
+  }
+},
+{
+  "trans": [ -1292.93, 223.99, 514.82 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1292.93, 223.99, 514.82, 10 ],
+  "lump": {
+    "name": "abandon-money-60"
+  }
+},
+{
+  "trans": [ -1219.00, 219.21, 517.75 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1219.00, 219.21, 517.75, 10 ],
+  "lump": {
+    "name": "abandon-money-61"
+  }
+},
+{
+  "trans": [ -1206.68, 217.65, 506.42 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1206.68, 217.65, 506.42, 10 ],
+  "lump": {
+    "name": "abandon-money-62"
+  }
+},
+{
+  "trans": [ -1194.56, 215.67, 495.72 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1194.56, 215.67, 495.72, 10 ],
+  "lump": {
+    "name": "abandon-money-63"
+  }
+},
+{
+  "trans": [ -1408.96, 205.30, 743.67 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1408.96, 205.30, 743.67, 10 ],
+  "lump": {
+    "name": "abandon-money-64"
+  }
+},
+{
+  "trans": [ -1408.99, 208.16, 723.74 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1408.99, 208.16, 723.74, 10 ],
+  "lump": {
+    "name": "abandon-money-65"
+  }
+},
+{
+  "trans": [ -1410.52, 210.09, 706.72 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1410.52, 210.09, 706.72, 10 ],
+  "lump": {
+    "name": "abandon-money-66"
+  }
+},
+{
+  "trans": [ -1411.57, 208.77, 692.61 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1411.57, 208.77, 692.61, 10 ],
+  "lump": {
+    "name": "abandon-money-67"
+  }
+},
+{
+  "trans": [ -1412.41, 207.89, 680.52 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1412.41, 207.89, 680.52, 10 ],
+  "lump": {
+    "name": "abandon-money-68"
+  }
+},
+{
+  "trans": [ -1412.94, 207.64, 665.50 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1412.94, 207.64, 665.50, 10 ],
+  "lump": {
+    "name": "abandon-money-69"
+  }
+},
+{
+  "trans": [ -1409.86, 200.67, 589.37 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1409.86, 200.67, 589.37, 10 ],
+  "lump": {
+    "name": "abandon-money-70"
+  }
+},
+{
+  "trans": [ -1415.21, 197.76, 576.26 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1415.21, 197.76, 576.26, 10 ],
+  "lump": {
+    "name": "abandon-money-71"
+  }
+},
+{
+  "trans": [ -1412.51, 196.29, 561.10 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1412.51, 196.29, 561.10, 10 ],
+  "lump": {
+    "name": "abandon-money-72"
+  }
+},
+{
+  "trans": [ -1397.13, 195.39, 478.37 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1397.13, 195.39, 478.37, 10 ],
+  "lump": {
+    "name": "abandon-money-73"
+  }
+},
+{
+  "trans": [ -1393.54, 195.35, 462.33 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1393.54, 195.35, 462.33, 10 ],
+  "lump": {
+    "name": "abandon-money-74"
+  }
+},
+{
+  "trans": [ -1387.49, 197.30, 448.26 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1387.49, 197.30, 448.26, 10 ],
+  "lump": {
+    "name": "abandon-money-75"
+  }
+},
+{
+  "trans": [ -1358.74, 207.00, 429.40 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1358.74, 207.00, 429.40, 10 ],
+  "lump": {
+    "name": "abandon-money-76"
+  }
+},
+{
+  "trans": [ -1347.00, 208.74, 426.85 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1347.00, 208.74, 426.85, 10 ],
+  "lump": {
+    "name": "abandon-money-77"
+  }
+},
+{
+  "trans": [ -1331.61, 209.16, 423.82 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1331.61, 209.16, 423.82, 10 ],
+  "lump": {
+    "name": "abandon-money-78"
+  }
+},
+{
+  "trans": [ -1229.49, 210.39, 415.98 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1229.49, 210.39, 415.98, 10 ],
+  "lump": {
+    "name": "abandon-money-79"
+  }
+},
+{
+  "trans": [ -1221.19, 210.29, 418.68 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1221.19, 210.29, 418.68, 10 ],
+  "lump": {
+    "name": "abandon-money-80"
+  }
+},
+{
+  "trans": [ -1206.35, 208.1, 424.60 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1210.84, 207.95, 423.13, 10 ],
+  "lump": {
+    "name": "abandon-money-81"
+  }
+},
+{
+  "trans": [ -1144.86, 210.51, 477.40 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1144.86, 210.51, 477.40, 10 ],
+  "lump": {
+    "name": "abandon-money-82"
+  }
+},
+{
+  "trans": [ -1132.07, 209.68, 485.84 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1132.07, 209.68, 485.84, 10 ],
+  "lump": {
+    "name": "abandon-money-83"
+  }
+},
+{
+  "trans": [ -1119.20, 208.55, 492.32 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1119.20, 208.55, 492.32, 10 ],
+  "lump": {
+    "name": "abandon-money-84"
+  }
+},
+{
+  "trans": [ -1132.44, 214.93, 439.49 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1132.44, 214.93, 439.49, 10 ],
+  "lump": {
+    "name": "abandon-money-85"
+  }
+},
+{
+  "trans": [ -1122.06, 216.90, 437.07 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1122.06, 216.90, 437.07, 10 ],
+  "lump": {
+    "name": "abandon-money-86"
+  }
+},
+{
+  "trans": [ -1109.91, 217.98, 437.95 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1109.91, 217.98, 437.95, 10 ],
+  "lump": {
+    "name": "abandon-money-87"
+  }
+},
+{
+  "trans": [ -1098.08, 216.43, 444.35 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1098.08, 216.43, 444.35, 10 ],
+  "lump": {
+    "name": "abandon-money-88"
+  }
+},
+{
+  "trans": [ -1090.41, 212.48, 454.50 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1090.41, 212.48, 454.50, 10 ],
+  "lump": {
+    "name": "abandon-money-89"
+  }
+},
+{
+  "trans": [ -1089.46, 208.29, 468.49 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1089.46, 208.29, 468.49, 10 ],
+  "lump": {
+    "name": "abandon-money-90"
+  }
+},
+{
+  "trans": [ -1102.19, 216.86, 520.49 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1102.19, 216.86, 520.49, 10 ],
+  "lump": {
+    "name": "abandon-money-91"
+  }
+},
+{
+  "trans": [ -1101.73, 217.56, 531.34 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1101.73, 215.56, 531.34, 10 ],
+  "lump": {
+    "name": "abandon-money-92"
+  }
+},
+{
+  "trans": [ -1101.92, 218.60, 537.91 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1101.92, 209.60, 537.91, 10 ],
+  "lump": {
+    "name": "abandon-money-93"
+  }
+},
+{
+  "trans": [ -1104.68, 210.45, 574.56 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1104.68, 210.45, 574.56, 10 ],
+  "lump": {
+    "name": "abandon-money-94"
+  }
+},
+{
+  "trans": [ -1112.02, 211.74, 595.56 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1112.02, 211.74, 595.56, 10 ],
+  "lump": {
+    "name": "abandon-money-95"
+  }
+},
+{
+  "trans": [ -1118.55, 211.99, 609.25 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1118.55, 211.99, 609.25, 10 ],
+  "lump": {
+    "name": "abandon-money-96"
+  }
+},
+{
+  "trans": [ -1131.60, 212.52, 617.77 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1131.60, 212.52, 617.77, 10 ],
+  "lump": {
+    "name": "abandon-money-97"
+  }
+},
+{
+  "trans": [ -1146.60, 214.27, 617.69 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1146.60, 214.27, 617.69, 10 ],
+  "lump": {
+    "name": "abandon-money-98"
+  }
+},
+{
+  "trans": [ -1161.47, 216.02, 620.14 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1161.47, 216.02, 620.14, 10 ],
+  "lump": {
+    "name": "abandon-money-99"
+  }
+},
+{
+  "trans": [ -1205.09, 213.88, 672.48 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1205.09, 213.88, 672.48, 10 ],
+  "lump": {
+    "name": "abandon-money-100"
+  }
+},
+{
+  "trans": [ -1206.38, 216.52, 686.53 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1206.38, 216.52, 686.53, 10 ],
+  "lump": {
+    "name": "abandon-money-101"
+  }
+},
+{
+  "trans": [ -1207.23, 218.53, 700.36 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1207.23, 218.53, 700.36, 10 ],
+  "lump": {
+    "name": "abandon-money-102"
+  }
+},
+{
+  "trans": [ -1208.36, 217.97, 717.16 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1208.36, 217.97, 717.16, 10 ],
+  "lump": {
+    "name": "abandon-money-103"
+  }
+},
+{
+  "trans": [ -1208.37, 215.20, 733.31 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1208.37, 215.20, 733.31, 10 ],
+  "lump": {
+    "name": "abandon-money-104"
+  }
+},
+{
+  "trans": [ -1206.94, 211.16, 749.77 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1206.94, 211.16, 749.77, 10 ],
+  "lump": {
+    "name": "abandon-money-105"
+  }
+},
+{
+  "trans": [ -1155.20, 217.97, 841.22 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1155.20, 217.97, 841.22, 10 ],
+  "lump": {
+    "name": "abandon-money-106"
+  }
+},
+{
+  "trans": [ -1151.17, 220.04, 855.14 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1151.17, 220.04, 855.14, 10 ],
+  "lump": {
+    "name": "abandon-money-107"
+  }
+},
+{
+  "trans": [ -1153.59, 221.09, 871.03 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1153.59, 221.09, 871.03, 10 ],
+  "lump": {
+    "name": "abandon-money-108"
+  }
+},
+{
+  "trans": [ -1220.74, 212.03, 936.91 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1220.74, 212.03, 936.91, 10 ],
+  "lump": {
+    "name": "abandon-money-109"
+  }
+},
+{
+  "trans": [ -1237.13, 213.00, 936.87 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1237.13, 213.00, 936.87, 10 ],
+  "lump": {
+    "name": "abandon-money-110"
+  }
+},
+{
+  "trans": [ -1252.75, 214.17, 949.26 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1252.75, 214.17, 949.26, 10 ],
+  "lump": {
+    "name": "abandon-money-111"
+  }
+},
+{
+  "trans": [ -1254.85, 215.92, 981.99 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1254.85, 215.92, 981.99, 10 ],
+  "lump": {
+    "name": "abandon-money-112"
+  }
+},
+{
+  "trans": [ -1257.40, 217.90, 995.94 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1257.40, 217.90, 995.94, 10 ],
+  "lump": {
+    "name": "abandon-money-113"
+  }
+},
+{
+  "trans": [ -1261.22, 220.33, 1011.52 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1261.22, 220.33, 1011.52, 10 ],
+  "lump": {
+    "name": "abandon-money-114"
+  }
+},
+{
+  "trans": [ -1272.48, 218.37, 1092.21 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1272.48, 218.37, 1092.21, 10 ],
+  "lump": {
+    "name": "abandon-money-115"
+  }
+},
+{
+  "trans": [ -1268.68, 218.88, 1109.03 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1268.68, 218.88, 1109.03, 10 ],
+  "lump": {
+    "name": "abandon-money-116"
+  }
+},
+{
+  "trans": [ -1275.12, 220.37, 1124.86 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1275.12, 220.37, 1124.86, 10 ],
+  "lump": {
+    "name": "abandon-money-117"
+  }
+},
+{
+  "trans": [ -1387.36, 217.08, 1129.28 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1387.36, 217.08, 1129.28, 10 ],
+  "lump": {
+    "name": "abandon-money-118"
+  }
+},
+{
+  "trans": [ -1406.67, 213.98, 1130.42 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1406.67, 213.98, 1130.42, 10 ],
+  "lump": {
+    "name": "abandon-money-119"
+  }
+},
+{
+  "trans": [ -1426.56, 212.49, 1131.39 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1426.56, 212.49, 1131.39, 10 ],
+  "lump": {
+    "name": "abandon-money-120"
+  }
+},
+{
+  "trans": [ -1465.81, 213.96, 1136.91 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1465.81, 213.96, 1136.91, 10 ],
+  "lump": {
+    "name": "abandon-money-121"
+  }
+},
+{
+  "trans": [ -1478.35, 218.24, 1141.18 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1478.35, 218.24, 1141.18, 10 ],
+  "lump": {
+    "name": "abandon-money-122"
+  }
+},
+{
+  "trans": [ -1490.34, 223.35, 1147.08 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1490.34, 223.35, 1147.08, 10 ],
+  "lump": {
+    "name": "abandon-money-123"
+  }
+},
+{
+  "trans": [ -1323.10, 235.34, 1176.88 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1323.10, 235.34, 1176.88, 10 ],
+  "lump": {
+    "name": "abandon-money-124"
+  }
+},
+{
+  "trans": [ -1328.24, 240.10, 1189.80 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1328.24, 240.10, 1189.80, 10 ],
+  "lump": {
+    "name": "abandon-money-125"
+  }
+},
+{
+  "trans": [ -1342.37, 243.56, 1198.66 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1342.37, 243.56, 1198.66, 10 ],
+  "lump": {
+    "name": "abandon-money-126"
+  }
+},
+{
+  "trans": [ -1390.77, 252.65, 1222.18 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1390.77, 252.65, 1222.18, 10 ],
+  "lump": {
+    "name": "abandon-money-127"
+  }
+},
+{
+  "trans": [ -1409.26, 252.18, 1224.40 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1409.26, 252.18, 1224.40, 10 ],
+  "lump": {
+    "name": "abandon-money-128"
+  }
+},
+{
+  "trans": [ -1425.89, 249.18, 1216.19 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1425.89, 249.18, 1216.19, 10 ],
+  "lump": {
+    "name": "abandon-money-129"
+  }
+},
+{
+  "trans": [ -1483.45, 241.84, 1207.74 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1483.45, 241.84, 1207.74, 10 ],
+  "lump": {
+    "name": "abandon-money-130"
+  }
+},
+{
+  "trans": [ -1497.88, 240.49, 1201.94 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1497.88, 240.49, 1201.94, 10 ],
+  "lump": {
+    "name": "abandon-money-131"
+  }
+},
+{
+  "trans": [ -1509.65, 236.63, 1188.10 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1509.65, 236.63, 1188.10, 10 ],
+  "lump": {
+    "name": "abandon-money-132"
+  }
+},
+{
+  "trans": [ -1653.93, 226.76, 1131.92 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1653.93, 226.76, 1131.92, 10 ],
+  "lump": {
+    "name": "abandon-money-133"
+  }
+},
+{
+  "trans": [ -1671.94, 229.38, 1130.26 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1671.94, 229.38, 1130.26, 10 ],
+  "lump": {
+    "name": "abandon-money-134"
+  }
+},
+{
+  "trans": [ -1691.93, 232.43, 1122.23 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1691.93, 232.43, 1122.23, 10 ],
+  "lump": {
+    "name": "abandon-money-135"
+  }
+},
+{
+  "trans": [ -1804.72, 228.21, 1019.06 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1804.72, 228.21, 1019.06, 10 ],
+  "lump": {
+    "name": "abandon-money-136"
+  }
+},
+{
+  "trans": [ -1825.20, 229.98, 1022.89 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1825.20, 229.98, 1022.89, 10 ],
+  "lump": {
+    "name": "abandon-money-137"
+  }
+},
+{
+  "trans": [ -1847.50, 228.74, 1027.83 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1847.50, 228.74, 1027.83, 10 ],
+  "lump": {
+    "name": "abandon-money-138"
+  }
+},
+{
+  "trans": [ -1874.42, 233.44, 890.82 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1874.42, 233.44, 890.82, 10 ],
+  "lump": {
+    "name": "abandon-money-139"
+  }
+},
+{
+  "trans": [ -1874.45, 232.44, 882.55 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1874.45, 233.44, 882.55, 10 ],
+  "lump": {
+    "name": "abandon-money-140"
+  }
+},
+{
+  "trans": [ -1874.22, 231.32, 868.36 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1874.22, 232.32, 868.36, 10 ],
+  "lump": {
+    "name": "abandon-money-141"
+  }
+},
+{
+  "trans": [ -1874.29, 231.93, 860.77 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1874.29, 232.93, 860.77, 10 ],
+  "lump": {
+    "name": "abandon-money-142"
+  }
+},
+{
+  "trans": [ -1874.17, 232.46, 854.18 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1874.17, 233.46, 854.18, 10 ],
+  "lump": {
+    "name": "abandon-money-143"
+  }
+},
+{
+  "trans": [ -1874.28, 232.41, 844.09 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1874.28, 233.41, 844.09, 10 ],
+  "lump": {
+    "name": "abandon-money-144"
+  }
+},
+{
+  "trans": [ -1874.46, 232.41, 832.99 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1874.46, 233.41, 832.99, 10 ],
+  "lump": {
+    "name": "abandon-money-145"
+  }
+},
+{
+  "trans": [ -1901.38, 234.91, 770.85 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1901.38, 234.91, 770.85, 10 ],
+  "lump": {
+    "name": "abandon-money-146"
+  }
+},
+{
+  "trans": [ -1914.07, 234.91, 763.10 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1914.07, 234.91, 763.10, 10 ],
+  "lump": {
+    "name": "abandon-money-147"
+  }
+},
+{
+  "trans": [ -1925.29, 234.91, 753.39 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1925.29, 234.91, 753.39, 10 ],
+  "lump": {
+    "name": "abandon-money-148"
+  }
+},
+{
+  "trans": [ -1937.45, 237.01, 732.80 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1937.45, 237.01, 732.80, 10 ],
+  "lump": {
+    "name": "abandon-money-149"
+  }
+},
+{
+  "trans": [ -1939.45, 237.01, 726.15 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1939.45, 237.01, 726.15, 10 ],
+  "lump": {
+    "name": "abandon-money-150"
+  }
+},
+{
+  "trans": [ -1940.94, 239.74, 719.63 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1940.94, 239.74, 719.63, 10 ],
+  "lump": {
+    "name": "abandon-money-151"
+  }
+},
+{
+  "trans": [ -1941.48, 239.74, 711.93 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1941.48, 239.74, 711.93, 10 ],
+  "lump": {
+    "name": "abandon-money-152"
+  }
+},
+{
+  "trans": [ -1940.80, 242.11, 700.66 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1940.80, 242.11, 700.66, 10 ],
+  "lump": {
+    "name": "abandon-money-153"
+  }
+},
+{
+  "trans": [ -1938.42, 242.11, 689.82 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1938.42, 242.11, 689.82, 10 ],
+  "lump": {
+    "name": "abandon-money-154"
+  }
+},
+{
+  "trans": [ -1934.13, 242.11, 678.65 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1934.13, 242.11, 678.65, 10 ],
+  "lump": {
+    "name": "abandon-money-155"
+  }
+},
+{
+  "trans": [ -1897.24, 254.52, 646.36 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1897.24, 254.52, 646.36, 10 ],
+  "lump": {
+    "name": "abandon-money-156"
+  }
+},
+{
+  "trans": [ -1890.66, 254.52, 644.08 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1890.66, 254.52, 644.08, 10 ],
+  "lump": {
+    "name": "abandon-money-157"
+  }
+},
+{
+  "trans": [ -1894.40, 263.83, 663.71 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1894.40, 263.83, 663.71, 10 ],
+  "lump": {
+    "name": "abandon-money-158"
+  }
+},
+{
+  "trans": [ -1904.77, 263.83, 670.40 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1904.77, 263.83, 670.40, 10 ],
+  "lump": {
+    "name": "abandon-money-159"
+  }
+},
+{
+  "trans": [ -1913.95, 263.83, 680.71 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1913.95, 263.83, 680.71, 10 ],
+  "lump": {
+    "name": "abandon-money-160"
+  }
+},
+{
+  "trans": [ -1924.21, 263.83, 707.96 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1924.21, 263.83, 707.96, 10 ],
+  "lump": {
+    "name": "abandon-money-161"
+  }
+},
+{
+  "trans": [ -1922.93, 263.83, 720.61 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1922.93, 263.83, 720.61, 10 ],
+  "lump": {
+    "name": "abandon-money-162"
+  }
+},
+{
+  "trans": [ -1917.37, 263.83, 734.12 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1917.37, 263.83, 734.12, 10 ],
+  "lump": {
+    "name": "abandon-money-163"
+  }
+},
+{
+  "trans": [ -1906.31, 325.45, 711.38 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1906.31, 325.45, 711.38, 10 ],
+  "lump": {
+    "name": "abandon-money-164"
+  }
+},
+{
+  "trans": [ -1904.92, 325.44, 701.80 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1904.92, 325.44, 701.80, 10 ],
+  "lump": {
+    "name": "abandon-money-165"
+  }
+},
+{
+  "trans": [ -1898.76, 325.39, 685.82 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1898.76, 325.39, 685.82, 10 ],
+  "lump": {
+    "name": "abandon-money-166"
+  }
+},
+{
+  "trans": [ -1888.21, 325.38, 678.55 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1888.21, 325.38, 678.55, 10 ],
+  "lump": {
+    "name": "abandon-money-167"
+  }
+},
+{
+  "trans": [ -1867.90, 330.24, 673.72 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1867.90, 330.24, 673.72, 10 ],
+  "lump": {
+    "name": "abandon-money-168"
+  }
+},
+{
+  "trans": [ -1858.59, 330.24, 676.49 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1858.59, 330.24, 676.49, 10 ],
+  "lump": {
+    "name": "abandon-money-169"
+  }
+},
+{
+  "trans": [ -1844.98, 332.56, 687.08 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1844.98, 332.56, 687.08, 10 ],
+  "lump": {
+    "name": "abandon-money-170"
+  }
+},
+{
+  "trans": [ -1839.84, 332.56, 697.36 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1839.84, 332.56, 697.36, 10 ],
+  "lump": {
+    "name": "abandon-money-171"
+  }
+},
+{
+  "trans": [ -1844.27, 340.24, 726.95 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1844.27, 340.24, 726.95, 10 ],
+  "lump": {
+    "name": "abandon-money-172"
+  }
+},
+{
+  "trans": [ -1850.60, 340.24, 734.66 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1850.60, 340.24, 734.66, 10 ],
+  "lump": {
+    "name": "abandon-money-173"
+  }
+},
+{
+  "trans": [ -1869.72, 247.97, 685.85 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1869.72, 247.97, 685.85, 10 ],
+  "lump": {
+    "name": "abandon-money-174"
+  }
+},
+{
+  "trans": [ -1867.69, 247.93, 675.28 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1867.69, 247.93, 675.28, 10 ],
+  "lump": {
+    "name": "abandon-money-175"
+  }
+},
+{
+  "trans": [ -1865.10, 247.96, 665.13 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1865.10, 247.96, 665.13, 10 ],
+  "lump": {
+    "name": "abandon-money-176"
+  }
+},
+{
+  "trans": [ -1862.75, 247.95, 654.58 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1862.75, 247.95, 654.58, 10 ],
+  "lump": {
+    "name": "abandon-money-177"
+  }
+},
+{
+  "trans": [ -1860.47, 247.93, 643.17 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1860.47, 247.93, 643.17, 10 ],
+  "lump": {
+    "name": "abandon-money-178"
+  }
+},
+{
+  "trans": [ -1857.46, 247.96, 631.69 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1857.46, 247.96, 631.69, 10 ],
+  "lump": {
+    "name": "abandon-money-179"
+  }
+},
+{
+  "trans": [ -1827.53, 237.72, 610.34 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1827.53, 237.72, 610.34, 10 ],
+  "lump": {
+    "name": "abandon-money-180"
+  }
+},
+{
+  "trans": [ -1821.20, 236.72, 610.29 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1821.20, 237.72, 610.29, 10 ],
+  "lump": {
+    "name": "abandon-money-181"
+  }
+},
+{
+  "trans": [ -1812.74, 236.62, 610.17 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1812.74, 237.62, 610.17, 10 ],
+  "lump": {
+    "name": "abandon-money-182"
+  }
+},
+{
+  "trans": [ -1802.99, 236.69, 610.15 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1802.99, 237.69, 610.15, 10 ],
+  "lump": {
+    "name": "abandon-money-183"
+  }
+},
+{
+  "trans": [ -1796.59, 238.80, 609.97 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1796.59, 239.80, 609.97, 10 ],
+  "lump": {
+    "name": "abandon-money-184"
+  }
+},
+{
+  "trans": [ -1790.91, 236.67, 610.10 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1790.91, 237.67, 610.10, 10 ],
+  "lump": {
+    "name": "abandon-money-185"
+  }
+},
+{
+  "trans": [ -1784.66, 236.74, 609.99 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1784.66, 237.74, 609.99, 10 ],
+  "lump": {
+    "name": "abandon-money-186"
+  }
+},
+{
+  "trans": [ -1775.72, 236.66, 610.15 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1775.72, 237.66, 610.15, 10 ],
+  "lump": {
+    "name": "abandon-money-187"
+  }
+},
+{
+  "trans": [ -1770.59, 236.71, 610.15 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1770.59, 237.71, 610.15, 10 ],
+  "lump": {
+    "name": "abandon-money-188"
+  }
+},
+{
+  "trans": [ -1762.88, 237.64, 610.38 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1762.88, 237.64, 610.38, 10 ],
+  "lump": {
+    "name": "abandon-money-189"
+  }
+},
+{
+  "trans": [ -1737.01, 236.50, 624.08 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1737.01, 236.50, 624.08, 10 ],
+  "lump": {
+    "name": "abandon-money-190"
+  }
+},
+{
+  "trans": [ -1731.80, 237.83, 629.27 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1731.80, 238.83, 629.27, 10 ],
+  "lump": {
+    "name": "abandon-money-191"
+  }
+},
+{
+  "trans": [ -1728.64, 235.44, 632.30 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1728.64, 236.44, 632.30, 10 ],
+  "lump": {
+    "name": "abandon-money-192"
+  }
+},
+{
+  "trans": [ -1721.60, 235.49, 639.38 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1721.60, 236.49, 639.38, 10 ],
+  "lump": {
+    "name": "abandon-money-193"
+  }
+},
+{
+  "trans": [ -1718.29, 238.35, 643.27 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1718.29, 239.35, 643.27, 10 ],
+  "lump": {
+    "name": "abandon-money-194"
+  }
+},
+{
+  "trans": [ -1714.77, 236.59, 646.28 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1714.77, 237.59, 646.28, 10 ],
+  "lump": {
+    "name": "abandon-money-195"
+  }
+},
+{
+  "trans": [ -1702.35, 235.48, 658.94 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1702.35, 236.48, 658.94, 10 ],
+  "lump": {
+    "name": "abandon-money-196"
+  }
+},
+{
+  "trans": [ -1696.26, 236.46, 664.59 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1696.26, 236.46, 664.59, 10 ],
+  "lump": {
+    "name": "abandon-money-197"
+  }
+},
+  {
+  "trans": [ -1819.28, 314.65, 691.73 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1819.28, 314.65, 691.73, 10 ],
+  "lump": {
+    "name": "mount-money-additional-1"
+  }
+},
+{
+  "trans": [ -1818.19, 315.69, 696.47 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1818.19, 315.69, 696.47, 10 ],
+  "lump": {
+    "name": "mount-money-additional-2"
+  }
+},
+{
+  "trans": [ -1818.33, 317.20, 703.01 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1818.33, 317.20, 703.01, 10 ],
+  "lump": {
+    "name": "mount-money-additional-3"
+  }
+},
+{
+  "trans": [ -1824.25, 321.94, 709.43 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1824.25, 321.94, 709.43, 10 ],
+  "lump": {
+    "name": "mount-money-additional-4"
+  }
+},
+{
+  "trans": [ -1825.00, 323.11, 716.08 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1825.00, 323.11, 716.08, 10 ],
+  "lump": {
+    "name": "mount-money-additional-5"
+  }
+},
+{
+  "trans": [ -1823.76, 324.41, 723.58 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1823.76, 324.41, 723.58, 10 ],
+  "lump": {
+    "name": "mount-money-additional-6"
+  }
+},
+{
+  "trans": [ -1829.46, 324.46, 752.56 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1829.46, 324.46, 752.56, 10 ],
+  "lump": {
+    "name": "mount-money-additional-7"
+  }
+},
+{
+  "trans": [ -1833.63, 323.55, 754.27 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1833.63, 323.55, 754.27, 10 ],
+  "lump": {
+    "name": "mount-money-additional-8"
+  }
+},
+{
+  "trans": [ -1842.69, 321.56, 755.39 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1842.69, 321.56, 755.39, 10 ],
+  "lump": {
+    "name": "mount-money-additional-9"
+  }
+},
+{
+  "trans": [ -1848.73, 318.65, 747.87 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1848.73, 318.65, 747.87, 10 ],
+  "lump": {
+    "name": "mount-money-additional-10"
+  }
+},
+{
+  "trans": [ -1856.15, 317.55, 749.52 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1856.15, 317.55, 749.52, 10 ],
+  "lump": {
+    "name": "mount-money-additional-11"
+  }
+},
+{
+  "trans": [ -1862.19, 316.60, 752.86 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1862.19, 316.60, 752.86, 10 ],
+  "lump": {
+    "name": "mount-money-additional-12"
+  }
+},
+{
+  "trans": [ -1891.46, 316.22, 757.21 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1891.46, 316.22, 757.21, 10 ],
+  "lump": {
+    "name": "mount-money-additional-13"
+  }
+},
+{
+  "trans": [ -1897.11, 318.10, 747.28 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1897.11, 318.10, 747.28, 10 ],
+  "lump": {
+    "name": "mount-money-additional-14"
+  }
+},
+{
+  "trans": [ -1907.29, 320.44, 745.37 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1907.29, 320.44, 745.37, 10 ],
+  "lump": {
+    "name": "mount-money-additional-15"
+  }
+},
+{
+  "trans": [ -1917.60, 320.44, 740.86 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1917.60, 320.44, 740.86, 10 ],
+  "lump": {
+    "name": "mount-money-additional-16"
+  }
+},
+{
+  "trans": [ -1917.71, 321.70, 731.32 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1917.71, 321.70, 731.32, 10 ],
+  "lump": {
+    "name": "mount-money-additional-17"
+  }
+},
+{
+  "trans": [ -1919.61, 324.17, 722.07 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1919.61, 324.17, 722.07, 10 ],
+  "lump": {
+    "name": "mount-money-additional-18"
+  }
+},
+
+///scoutfly//
+
+{
+  "trans": [ -1656.97, 214.53, 669.97 ],
+  "etype": "crate",
+  "game_task": "(game-task mount-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1656.97, 214.53, 669.97, 10 ],
+  "lump": {
+    "name": "mount-fly1",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task mount-buzzer)", 0 ],
+    "movie-pos": ["movie-pos", [ -1656.97, 214.53, 669.97, -10.0 ]]
+  }
+},
+{
+  "trans": [ -1652.90, 207.81, 904.61 ],
+  "etype": "crate",
+  "game_task": "(game-task mount-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1652.90, 207.81, 904.61, 10 ],
+  "lump": {
+    "name": "mount-fly2",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task mount-buzzer)", 1 ],
+    "movie-pos": ["movie-pos", [ -1652.90, 207.81, 904.61, -10.0 ]]
+  }
+},
+{
+  "trans": [ -1456.11, 200.72, 863.62 ],
+  "etype": "crate",
+  "game_task": "(game-task mount-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1456.11, 200.72, 863.62, 10 ],
+  "lump": {
+    "name": "mount-fly3",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task mount-buzzer)", 2 ],
+    "movie-pos": ["movie-pos", [ -1456.11, 200.72, 863.62, -10.0 ]]
+  }
+},
+{
+  "trans": [ -1899.3, 367.76, 709.06 ],
+  "etype": "crate",
+  "game_task": "(game-task mount-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1093.70, 212.97, 592.14, 10 ],
+  "lump": {
+    "name": "mount-fly4",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task mount-buzzer)", 3 ],
+    "movie-pos": ["movie-pos", [ -1093.70, 212.97, 592.14, -10.0 ]]
+  }
+},
+{
+  "trans": [ -1174.17, 214.19, 906.33 ],
+  "etype": "crate",
+  "game_task": "(game-task mount-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1174.17, 214.19, 906.33, 10 ],
+  "lump": {
+    "name": "mount-fly5",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task mount-buzzer)", 4 ],
+    "movie-pos": ["movie-pos", [ -1174.17, 214.19, 906.33, -10.0 ]]
+  }
+},
+{
+  "trans": [ -1448.05, 249.56, 1228.12 ],
+  "etype": "crate",
+  "game_task": "(game-task mount-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1448.05, 249.56, 1228.12, 10 ],
+  "lump": {
+    "name": "mount-fly6",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task mount-buzzer)", 5 ],
+    "movie-pos": ["movie-pos", [ -1448.05, 249.56, 1228.12, -10.0 ]]
+  }
+},
+{
+  "trans": [ -1908.60, 262.33, 745.82 ],
+  "etype": "crate",
+  "game_task": "(game-task mount-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1908.60, 262.33, 745.82, 10 ],
+  "lump": {
+    "name": "mount-fly7",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task mount-buzzer)", 6 ],
+    "movie-pos": ["movie-pos", [ -1908.60, 262.33, 745.82, -10.0 ]]
+  }
+},
+
+// fuel cell //
+
+{
+  "trans": [ -1466.99, 194.97, 678.88 ],
+  "etype": "fuel-cell",
+  "game_task": "(game-task mount-findcell-1)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1466.99, 190.97, 678.88, 10 ],
+  "lump": {
+    "name": "mount-fuel-cell-01",
+    "eco-info": [ "int32", 6, 131 ],
+    "movie-pos": ["movie-pos", [ -1466.99, 192.97, 678.88, 1.255 ]]
+  }
+},
+
+{
+  "trans": [ -1453.84, 198.42, 971.48 ],
+  "etype": "fuel-cell",
+  "game_task": "(game-task mount-findcell-waterfall)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1466.99, 190.97, 678.88, 10 ],
+  "lump": {
+    "name": "mount-fuel-cell-waterfall",
+    "eco-info": [ "int32", 6, 132 ],
+    "movie-pos": ["movie-pos", [ -1453.84, 196.42, 971.48, 1.255 ]]
+  }
+},
+
+{
+  "trans": [ -1876.45, 239.23, 937.46 ],
+  "etype": "fuel-cell",
+  "game_task": "(game-task mount-zoomer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1885.15, 233.47, 919.96, 10 ],
+  "lump": {
+    "name": "mount-fuel-cell-02",
+    "eco-info": [ "int32", 6, 133 ],
+    "movie-pos": ["movie-pos", [ -1876.45, 239.23, 937.46, 1.255 ]]
+  }
+},
+{
+  "trans": [ -1874.50, 369.79 ,685.25 ],
+  "etype": "fuel-cell",
+  "game_task": "(game-task mount-towertop)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1874.17, 365.23, 723.97, 10 ],
+  "lump": {
+    "name": "mount-fuel-cell-03",
+    "eco-info": [ "int32", 6, 134 ],
+    "movie-pos": ["movie-pos", [ -1874.28, 367.78, 685.21, 135.255 ]]
+  }
+},
+
+// butterflies //
+{
+  "trans": [ -1632.96, 228.42, 510.69 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1632.96, 228.42, 510.69, 50 ],
+  "lump": {
+    "name": "brumebutterflies1",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1664.60, 228.67, 534.81 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1664.60, 228.67, 534.81, 50 ],
+  "lump": {
+    "name": "brumebutterflies2",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1634.18, 226.27, 593.69 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1634.18, 226.27, 593.69, 50 ],
+  "lump": {
+    "name": "brumebutterflies3",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1620.21, 210.61, 683.18 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1620.21, 210.61, 683.18, 50 ],
+  "lump": {
+    "name": "brumebutterflies4",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1668.54, 203.99, 760.24 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1668.54, 203.99, 760.24, 50 ],
+  "lump": {
+    "name": "brumebutterflies5",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1652.00, 206.19, 819.06 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1652.00, 206.19, 819.06, 50 ],
+  "lump": {
+    "name": "brumebutterflies6",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1586.91, 207.02, 883.73 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1586.91, 207.02, 883.73, 50 ],
+  "lump": {
+    "name": "brumebutterflies7",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1634.68, 207.57, 901.65 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1634.68, 207.57, 901.65, 50 ],
+  "lump": {
+    "name": "brumebutterflies8",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1663.31, 215.97, 937.12 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1663.31, 215.97, 937.12, 50 ],
+  "lump": {
+    "name": "brumebutterflies9",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1660.29, 218.52, 980.99 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1660.29, 218.52, 980.99, 50 ],
+  "lump": {
+    "name": "brumebutterflies10",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1622.11, 215.61, 989.19 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1622.11, 215.61, 989.19, 50 ],
+  "lump": {
+    "name": "brumebutterflies11",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1437.47, 257.04, 1005.35 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1437.47, 257.04, 1005.35, 50 ],
+  "lump": {
+    "name": "brumebutterflies12",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1435.48, 255.35, 1041.17 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1435.48, 255.35, 1041.17, 50 ],
+  "lump": {
+    "name": "brumebutterflies13",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1469.27, 256.05, 997.56 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1469.27, 256.05, 997.56, 50 ],
+  "lump": {
+    "name": "brumebutterflies14",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1479.54, 196.33, 949.22 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1479.54, 196.33, 949.22, 50 ],
+  "lump": {
+    "name": "brumebutterflies15",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1446.17, 196.14, 891.37 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1446.17, 196.14, 891.37, 50 ],
+  "lump": {
+    "name": "brumebutterflies16",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1463.10, 199.64, 868.89 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1463.10, 199.64, 868.89, 50 ],
+  "lump": {
+    "name": "brumebutterflies17",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1484.06, 209.83, 849.51 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1484.06, 209.83, 849.51, 50 ],
+  "lump": {
+    "name": "brumebutterflies18",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1419.91, 205.34, 887.58 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1419.91, 205.34, 887.58, 50 ],
+  "lump": {
+    "name": "brumebutterflies19",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1446.52, 194.61, 799.22 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1446.52, 194.61, 799.22, 50 ],
+  "lump": {
+    "name": "brumebutterflies20",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1481.67, 193.02, 732.86 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1481.67, 193.02, 732.86, 50 ],
+  "lump": {
+    "name": "brumebutterflies21",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1457.70, 193.92, 703.42 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1457.70, 193.92, 703.42, 50 ],
+  "lump": {
+    "name": "brumebutterflies22",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1509.07, 202.71, 683.73 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1509.07, 202.71, 683.73, 50 ],
+  "lump": {
+    "name": "brumebutterflies23",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1530.69, 204.39, 652.31 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1530.69, 204.39, 652.31, 50 ],
+  "lump": {
+    "name": "brumebutterflies24",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1530.85, 208.49, 597.00 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1530.85, 208.49, 597.00, 50 ],
+  "lump": {
+    "name": "brumebutterflies25",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1550.81, 219.92, 568.18 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1550.81, 219.92, 568.18, 50 ],
+  "lump": {
+    "name": "brumebutterflies26",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1525.55, 221.80, 550.88 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1525.55, 221.80, 550.88, 50 ],
+  "lump": {
+    "name": "brumebutterflies27",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1471.39, 221.32, 526.06 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1471.39, 221.32, 526.06, 50 ],
+  "lump": {
+    "name": "brumebutterflies28",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1432.09, 232.55, 510.65 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1432.09, 232.55, 510.65, 50 ],
+  "lump": {
+    "name": "brumebutterflies29",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1400.15, 237.08, 524.44 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1400.15, 237.08, 524.44, 50 ],
+  "lump": {
+    "name": "brumebutterflies30",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1325.05, 232.02, 505.81 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1325.05, 232.02, 505.81, 50 ],
+  "lump": {
+    "name": "brumebutterflies31",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1284.30, 220.43, 518.27 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1284.30, 220.43, 518.27, 50 ],
+  "lump": {
+    "name": "brumebutterflies32",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1218.06, 214.96, 502.90 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1218.06, 214.96, 502.90, 50 ],
+  "lump": {
+    "name": "brumebutterflies33",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1179.72, 213.05, 486.56 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1179.72, 213.05, 486.56, 50 ],
+  "lump": {
+    "name": "brumebutterflies34",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1200.48, 206.73, 426.75 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1200.48, 206.73, 426.75, 50 ],
+  "lump": {
+    "name": "brumebutterflies35",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1251.32, 200.25, 406.58 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1251.32, 200.25, 406.58, 50 ],
+  "lump": {
+    "name": "brumebutterflies36",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1345.60, 206.21, 434.97 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1345.60, 206.21, 434.97, 50 ],
+  "lump": {
+    "name": "brumebutterflies37",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1392.87, 195.44, 439.68 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1392.87, 195.44, 439.68, 50 ],
+  "lump": {
+    "name": "brumebutterflies38",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1397.47, 194.41, 488.23 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1397.47, 194.41, 488.23, 50 ],
+  "lump": {
+    "name": "brumebutterflies39",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1413.34, 193.60, 535.65 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1413.34, 193.60, 535.65, 50 ],
+  "lump": {
+    "name": "brumebutterflies40",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1401.38, 196.77, 570.68 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1401.38, 196.77, 570.68, 50 ],
+  "lump": {
+    "name": "brumebutterflies41",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1418.91, 199.24, 607.35 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1418.91, 199.24, 607.35, 50 ],
+  "lump": {
+    "name": "brumebutterflies42",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1405.26, 206.60, 638.21 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1405.26, 206.60, 638.21, 50 ],
+  "lump": {
+    "name": "brumebutterflies43",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1420.61, 207.81, 703.53 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1420.61, 207.81, 703.53, 50 ],
+  "lump": {
+    "name": "brumebutterflies44",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1398.68, 205.23, 744.32 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1398.68, 205.23, 744.32, 50 ],
+  "lump": {
+    "name": "brumebutterflies45",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1118.64, 215.74, 437.56 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1118.64, 215.74, 437.56, 50 ],
+  "lump": {
+    "name": "brumebutterflies46",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1110.16, 206.23, 492.10 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1110.16, 206.23, 492.10, 50 ],
+  "lump": {
+    "name": "brumebutterflies47",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1100.62, 209.24, 571.00 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1100.62, 209.24, 571.00, 50 ],
+  "lump": {
+    "name": "brumebutterflies48",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1149.76, 214.88, 636.16 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1149.76, 214.88, 636.16, 50 ],
+  "lump": {
+    "name": "brumebutterflies49",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1214.32, 208.89, 654.59 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1214.32, 208.89, 654.59, 50 ],
+  "lump": {
+    "name": "brumebutterflies50",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1415.54, 211.33, 1134.11 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1415.54, 211.33, 1134.11, 50 ],
+  "lump": {
+    "name": "brumebutterflies61",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1593.97, 228.12, 1123.23 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1593.97, 228.12, 1123.23, 50 ],
+  "lump": {
+    "name": "brumebutterflies62",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1670.67, 228.20, 1134.09 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1670.67, 228.20, 1134.09, 50 ],
+  "lump": {
+    "name": "brumebutterflies63",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1766.39, 228.96, 1085.24 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1766.39, 228.96, 1085.24, 50 ],
+  "lump": {
+    "name": "brumebutterflies64",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1841.20, 227.77, 1036.49 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1841.20, 227.77, 1036.49, 50 ],
+  "lump": {
+    "name": "brumebutterflies65",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1876.87, 227.37, 989.84 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1876.87, 227.37, 989.84, 50 ],
+  "lump": {
+    "name": "brumebutterflies66",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1865.25, 237.08, 942.85 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1865.25, 237.08, 942.85, 50 ],
+  "lump": {
+    "name": "brumebutterflies67",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1878.70, 236.79, 925.93 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1878.70, 236.79, 925.93, 50 ],
+  "lump": {
+    "name": "brumebutterflies68",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1853.51, 238.86, 910.24 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1853.51, 238.86, 910.24, 50 ],
+  "lump": {
+    "name": "brumebutterflies69",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1752.22, 236.19, 609.44 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1752.22, 236.19, 609.44, 50 ],
+  "lump": {
+    "name": "brumebutterflies70",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1684.06, 235.25, 674.27 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1684.06, 235.25, 674.27, 50 ],
+  "lump": {
+    "name": "brumebutterflies71",
+    "art-name": "group-mount-butterflies"
+  }
+},
+{
+  "trans": [ -1629.32, 213.15, 723.95 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1629.32, 213.15, 723.95, 50 ],
+  "lump": {
+    "name": "mountfliessitting2",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1650.06, 208.99, 829.01 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1650.06, 208.99, 829.01, 50 ],
+  "lump": {
+    "name": "mountfliessitting3",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1679.31, 219.29, 943.24 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1679.31, 219.29, 943.24, 50 ],
+  "lump": {
+    "name": "mountfliessitting4",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1437.31, 256.95, 1003.87 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1437.31, 256.95, 1003.87, 50 ],
+  "lump": {
+    "name": "mountfliessitting5",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1443.81, 198.80, 888.33 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1443.81, 198.80, 888.33, 50 ],
+  "lump": {
+    "name": "mountfliessitting6",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1492.96, 203.62, 667.94 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1492.96, 203.62, 667.94, 50 ],
+  "lump": {
+    "name": "mountfliessitting7",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1205.00, 207.71, 413.43 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1205.00, 207.71, 413.43, 50 ],
+  "lump": {
+    "name": "mountfliessitting8",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1105.47, 208.34, 491.28 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1105.47, 208.34, 491.28, 50 ],
+  "lump": {
+    "name": "mountfliessitting9",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1104.25, 207.69, 488.19 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1104.25, 207.69, 488.19, 50 ],
+  "lump": {
+    "name": "mountfliessitting10",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1150.11, 214.81, 638.14 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1150.11, 214.81, 638.14, 50 ],
+  "lump": {
+    "name": "mountfliessitting11",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1223.09, 214.13, 782.06 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1223.09, 214.13, 782.06, 50 ],
+  "lump": {
+    "name": "mountfliessitting12",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1142.94, 214.07, 934.41 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1142.94, 214.07, 934.41, 50 ],
+  "lump": {
+    "name": "mountfliessitting13",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1284.42, 224.30, 1148.49 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1284.42, 224.30, 1148.49, 50 ],
+  "lump": {
+    "name": "mountfliessitting14",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1591.98, 227.90, 1124.70 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1591.98, 227.90, 1124.70, 50 ],
+  "lump": {
+    "name": "mountfliessitting15",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1765.05, 228.93, 1086.39 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1765.05, 228.93, 1086.39, 50 ],
+  "lump": {
+    "name": "mountfliessitting16",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+{
+  "trans": [ -1854.03, 238.60, 908.70 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1854.03, 238.60, 908.70, 50 ],
+  "lump": {
+    "name": "mountfliessitting17",
+    "art-name": "group-mount-butterfly-sitting"
+  }
+},
+//birbs//
+{
+  "trans": [ -1625.77, 211.98, 677.86 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1625.77, 211.98, 677.86, 50 ],
+  "lump": {
+    "name": "mountbirb2",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1622.90, 211.53, 691.36 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1622.90, 211.53, 691.36, 50 ],
+  "lump": {
+    "name": "mountbirb3",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1649.73, 203.88, 771.52 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1649.73, 203.88, 771.52, 50 ],
+  "lump": {
+    "name": "mountbirb4",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1663.86, 206.70, 795.59 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1663.86, 206.70, 795.59, 50 ],
+  "lump": {
+    "name": "mountbirb5",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1578.19, 212.42, 862.72 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1578.19, 212.42, 862.72, 50 ],
+  "lump": {
+    "name": "mountbirb6",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1437.96, 254.18, 1010.24 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1437.96, 254.18, 1010.24, 50 ],
+  "lump": {
+    "name": "mountbirb7",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1467.18, 255.58, 994.28 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1467.18, 255.58, 994.28, 50 ],
+  "lump": {
+    "name": "mountbirb8",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1445.16, 209.46, 843.98 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1445.16, 209.46, 843.98, 50 ],
+  "lump": {
+    "name": "mountbirb9",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1431.26, 199.32, 788.38 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1431.26, 199.32, 788.38, 50 ],
+  "lump": {
+    "name": "mountbirb10",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1450.30, 198.63, 769.51 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1450.30, 198.63, 769.51, 50 ],
+  "lump": {
+    "name": "mountbirb11",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1401.12, 210.05, 662.01 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1401.12, 210.05, 662.01, 50 ],
+  "lump": {
+    "name": "mountbirb12",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1512.33, 203.52, 621.34 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1512.33, 203.52, 621.34, 50 ],
+  "lump": {
+    "name": "mountbirb13",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1234.43, 204.68, 430.01 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1234.43, 204.68, 430.01, 50 ],
+  "lump": {
+    "name": "mountbirb14",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1115.60, 212.01, 518.06 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1115.60, 212.01, 518.06, 50 ],
+  "lump": {
+    "name": "mountbirb15",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1092.43, 209.24, 516.71 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1092.43, 209.24, 516.71, 50 ],
+  "lump": {
+    "name": "mountbirb16",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1127.34, 211.71, 605.10 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1127.34, 211.71, 605.10, 50 ],
+  "lump": {
+    "name": "mountbirb17",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1112.62, 205.36, 853.81 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1112.62, 205.36, 853.81, 50 ],
+  "lump": {
+    "name": "mountbirb18",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1117.25, 206.26, 912.36 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1117.25, 206.26, 912.36, 50 ],
+  "lump": {
+    "name": "mountbirb19",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1254.03, 223.76, 1034.98 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1254.03, 223.76, 1034.98, 50 ],
+  "lump": {
+    "name": "mountbirb20",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1278.63, 222.05, 1030.98 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1278.63, 222.05, 1030.98, 50 ],
+  "lump": {
+    "name": "mountbirb21",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1290.67, 223.56, 1123.62 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1290.67, 223.56, 1123.62, 50 ],
+  "lump": {
+    "name": "mountbirb22",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1515.43, 227.70, 1147.85 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1515.43, 227.70, 1147.85, 50 ],
+  "lump": {
+    "name": "mountbirb23",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+{
+  "trans": [ -1733.70, 234.48, 1095.35 ],
+  "etype": "mount-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1733.70, 234.48, 1095.35, 50 ],
+  "lump": {
+    "name": "mountbirb24",
+    "art-name": "group-mount-hummingbird"
+  }
+},
+// floating eco //
+{
+  "trans": [ -1668.20, 204.51, 778.53 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1668.20, 204.51, 778.53, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-2"
+  }
+},
+{
+  "trans": [ -1617.69, 205.62, 833.55 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1617.69, 205.62, 833.55, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-3"
+  }
+},
+{
+  "trans": [ -1612.60, 205.00, 899.36 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1612.60, 205.00, 899.36, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-4"
+  }
+},
+{
+  "trans": [ -1654.29, 218.84, 962.65 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1654.29, 218.84, 962.65, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-5"
+  }
+},
+{
+  "trans": [ -1578.93, 225.35, 1018.09 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1578.93, 225.35, 1018.09, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-6"
+  }
+},
+{
+  "trans": [ -1486.47, 256.03, 1034.89 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1486.47, 256.03, 1034.89, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-7"
+  }
+},
+{
+  "trans": [ -1457.39, 197.38, 909.81 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1457.39, 197.38, 909.81, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-8"
+  }
+},
+{
+  "trans": [ -1454.63, 195.47, 792.14 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1454.63, 195.47, 792.14, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-9"
+  }
+},
+{
+  "trans": [ -1466.99, 192.18, 722.20 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1466.99, 192.18, 722.20, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-10"
+  }
+},
+{
+  "trans": [ -1521.75, 203.59, 656.62 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1521.75, 203.59, 656.62, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-11"
+  }
+},
+{
+  "trans": [ -1494.04, 222.81, 525.77 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1494.04, 222.81, 525.77, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-12"
+  }
+},
+{
+  "trans": [ -1357.94, 205.26, 431.99 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1357.94, 205.26, 431.99, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-13"
+  }
+},
+{
+  "trans": [ -1399.39, 194.71, 495.26 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1399.39, 194.71, 495.26, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-14"
+  }
+},
+{
+  "trans": [ -1416.75, 203.24, 631.43 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1416.75, 203.24, 631.43, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-15"
+  }
+},
+{
+  "trans": [ -1411.66, 207.79, 716.32 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1411.66, 207.79, 716.32, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-16"
+  }
+},
+{
+  "trans": [ -1322.06, 232.06, 505.51 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1322.06, 232.06, 505.51, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-17"
+  }
+},
+{
+  "trans": [ -1287.35, 220.50, 518.36 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1287.35, 220.50, 518.36, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-18"
+  }
+},
+{
+  "trans": [ -1227.54, 217.22, 514.94 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1227.54, 217.22, 514.94, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-19"
+  }
+},
+{
+  "trans": [ -1179.89, 211.78, 466.04 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1179.89, 211.78, 466.04, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-20"
+  }
+},
+{
+  "trans": [ -1256.93, 199.30, 414.01 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1256.93, 199.30, 414.01, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-21"
+  }
+},
+{
+  "trans": [ -1120.14, 210.57, 463.26 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1120.14, 210.57, 463.26, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-22"
+  }
+},
+{
+  "trans": [ -1102.75, 207.56, 561.32 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1102.75, 207.56, 561.32, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-23"
+  }
+},
+{
+  "trans": [ -1188.44, 211.96, 645.29 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1188.44, 211.96, 645.29, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-24"
+  }
+},
+{
+  "trans": [ -1174.54, 211.27, 796.68 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1174.54, 211.27, 796.68, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-25"
+  }
+},
+{
+  "trans": [ -1142.69, 207.06, 906.57 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1142.69, 207.06, 906.57, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-26"
+  }
+},
+{
+  "trans": [ -1247.98, 212.24, 952.66 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1247.98, 212.24, 952.66, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-27"
+  }
+},
+{
+  "trans": [ -1276.11, 217.66, 1096.60 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1276.11, 217.66, 1096.60, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-28"
+  }
+},
+{
+  "trans": [ -1371.51, 247.35, 1210.92 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1371.51, 247.35, 1210.92, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-29"
+  }
+},
+{
+  "trans": [ -1442.73, 210.72, 1129.35 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1442.73, 210.72, 1129.35, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-30"
+  }
+},
+{
+  "trans": [ -1569.49, 223.82, 1151.44 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1569.49, 223.82, 1151.44, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-31"
+  }
+},
+{
+  "trans": [ -1714.02, 232.45, 1098.04 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1714.02, 232.45, 1098.04, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-32"
+  }
+},
+{
+  "trans": [ -1793.46, 224.48, 1029.08 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1793.46, 224.48, 1029.08, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-33"
+  }
+},
+{
+  "trans": [ -1875.66, 236.73, 945.41 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1875.66, 236.73, 945.41, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-34"
+  }
+},
+{
+  "trans": [ -1905.13, 233.41, 767.42 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1905.13, 233.41, 767.42, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-35"
+  }
+},
+{
+  "trans": [ -1938.70, 240.61, 690.46 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1938.70, 240.61, 690.46, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-36"
+  }
+},
+{
+  "trans": [ -1865.21, 261.68, 650.47 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1865.21, 261.68, 650.47, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-37"
+  }
+},
+{
+  "trans": [ -1754.69, 235.81, 612.20 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1754.69, 235.81, 612.20, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-38"
+  }
+},
+{
+  "trans": [ -1682.68, 234.99, 676.50 ],
+  "etype": "mount-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1682.68, 234.99, 676.50, 10 ],
+  "lump": {
+    "art-name": "group-mount-dapple-light-1",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "mount-eco-39"
+  }
+},
+
+//water//
+{
+  "trans": [ -1620.25, 211.24, 683.72 ],
+  "etype": "jungle-water",
+  "game_task": 0,
+  "quat": [ 0.0, 0.0, -0.0, 1.0 ],
+  "bsphere": [ -1620.25, 211.24, 683.72, 10 ],
+  "lump": {
+    "name": "WaterShape-08",
+    "scale": [ "float", 0.25 ],
+    "look": [ "int32", 8 ],
+    "vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, 1628.766],
+    [0.000, 0.000, -1.000, -675.536],
+    [1.000, 0.000, -0.000, -1611.197],
+    [0.000, 0.000, 1.000, 690.917],
+    [0.000, -1.000, -0.000, -209.993],
+    [0.008, 1.000, 0.009, 204.278]
+  ],
+  "water-height": [ "float", 869431.04, 2048, 8192, 1048588.0 ] // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+  }
+},
+{
+  "trans": [ -1645.42, 204.99, 791.73 ],
+  "etype": "jungle-water",
+  "game_task": 0,
+  "quat": [ -0.003483, -0.001265, 0.005496, 0.999978 ],
+  "bsphere": [ -1645.42, 204.99, 791.73, 10 ],
+  "lump": {
+    "name": "WaterShape-08.001",
+    "scale": [ "float", 0.6 ],
+    "look": [ "int32", 8 ],
+    "vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, 1664.755],
+    [0.000, 0.000, -1.000, -770.988],
+    [1.000, 0.000, -0.000, -1635.909],
+    [0.000, 0.000, 1.000, 813.725],
+    [0.000, -1.000, -0.000, -201.838],
+    [0.000, 1.000, -0.000, 205.723]
+  ],
+  "water-height": [ "float", 843831.04, 2048, 8192, 1048588.0 ] // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+  }
+},
+{
+  "trans": [ -1454.93, 197.76, 956.75 ],
+  "etype": "jungle-water",
+  "game_task": 0,
+  "quat": [ 0.0, 0.0, -0.0, 1.0 ],
+  "bsphere": [ -1454.93, 197.76, 956.75, 10 ],
+  "lump": {
+    "name": "WaterShape-08.002",
+    "scale": [ "float", 1.1 ],
+    "look": [ "int32", 8 ],
+    "vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, 1499.323],
+    [0.000, 0.000, -1.000, -920.674],
+    [1.000, 0.000, -0.000, -1412.858],
+    [0.000, 0.000, 1.000, 993.108],
+    [0.000, -1.000, -0.000, -195.955],
+    [0.000, 1.000, -0.000, 197.955]
+  ],
+  "water-height": [ "float", 814216.96, 2048, 8192, 1048588.0 ] // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+  }
+  },
+{
+  "trans": [ -1209.11, 200.96, 712.15 ],
+  "etype": "jungle-water",
+  "game_task": 0,
+  "quat": [ 0.0, 0.0, -0.0, 1.0 ],
+  "bsphere": [ -1209.11, 200.96, 712.15, 10 ],
+  "lump": {
+    "name": "WaterShape-08.003",
+    "scale": [ "float", 2 ],
+    "look": [ "int32", 8 ],
+    "vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, 1266.428],
+    [0.000, 0.000, -1.000, -640.565],
+    [1.000, 0.000, -0.000, -1127.087],
+    [0.000, 0.000, 1.000, 761.397],
+    [0.000, -1.000, -0.000, -178.569],
+    [0.000, 1.000, -0.000, 201.182]
+  ],
+  "water-height": [ "float", 827324.16, 2048, 8192, 1048588.0 ] // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+  }
+},
+{
+  "trans": [ -1067.09, 203.61, 890.21 ],
+  "etype": "jungle-water",
+  "game_task": 0,
+  "quat": [ 0.0, 0.0, -0.0, 1.0 ],
+  "bsphere": [ -1067.09, 203.61, 890.21, 10 ],
+  "lump": {
+    "name": "WaterShape-08.004",
+    "scale": [ "float", 2 ],
+    "look": [ "int32", 8 ],
+    "vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, 1123.655],
+    [0.000, 0.000, -1.000, -835.039],
+    [1.000, 0.000, -0.000, -1042.467],
+    [0.000, 0.000, 1.000, 934.736],
+    [0.000, -1.000, -0.000, -196.081],
+    [0.000, 1.000, -0.000, 203.982]
+  ],
+  "water-height": [ "float", 838178.56, 2048, 8192, 1048588.0 ] // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+  }
+},
+{
+  "trans": [ -1453.98, 253.97, 1026.87 ],
+  "etype": "jungle-water",
+  "game_task": 0,
+  "quat": [ -0.009604, 0.0, -0.0, 0.999954 ],
+  "bsphere": [ -1453.98, 253.97, 1026.87, 10 ],
+  "lump": {
+    "name": "WaterShape-12",
+    "scale": [ "float", 2.3 ],
+    "look": [ "int32", 12 ],
+    "vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, 1467.505],
+    [0.000, 0.000, -1.000, -975.187],
+    [1.000, 0.000, -0.000, -1440.458],
+    [0.000, 0.000, 1.000, 1082.217],
+    [0.000, -1.000, -0.000, -246.923],
+    [0.000, 1.000, -0.000, 253.97]
+  ],
+  "water-height": [ "float", 1044453.12, 2048, 8192, 1048588.0 ] // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+  }
+},
+//waterfall//
+ {
+      "trans": [ -1456.49, 205.60, 961.15 ], // translation -1196.41 354.36 178.98
+      "etype": "mount-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, 0.0, 0.0, 1.0 ], // quaternion
+      "bsphere": [ -1456.31, 196.32, 967.98, 50 ], // bounding sphere
+      "lump": {
+        "name": "mount-waterfall-01",
+        "effect-name": "'waterfall",
+        "art-name": "group-mount-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+//bridges//
+{
+      "trans": [ -1874.44, 232.21, 860.61 ], // translation
+      "etype": "ropebridge", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.000000, 0.000000, -0.000000, 1.000000 ], // quaternion
+      "bsphere": [ 630.31, 37.75, 820.36, 50 ], // bounding sphere
+      "lump": {
+        "name": "mountropebridge1",
+        "art-name": "ropebridge-70"
+
+      }
+    },
+
+{
+      "trans": [ -1796.78, 236.47, 610.09 ], // translation
+      "etype": "ropebridge", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.000000, 0.707107, -0.000000, 0.707107 ], // quaternion
+      "bsphere": [ 630.31, 37.75, 820.36, 50 ], // bounding sphere
+      "lump": {
+        "name": "mountropebridge2",
+        "art-name": "ropebridge-70"
+
+      }
+    },
+
+{
+      "trans": [ -1717.27, 235.28, 643.78 ], // translation
+      "etype": "ropebridge", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.000000, 0.382683, -0.000000, 0.923880 ], // quaternion
+      "bsphere": [ 630.31, 37.75, 820.36, 50 ], // bounding sphere
+      "lump": {
+        "name": "mountropebridge3",
+        "art-name": "ropebridge-70"
+
+      }
+    },
+
+    //launcher//
+    {
+      "trans": [-1852.9, 261.8, 655.86],
+      "etype": "launcher",
+      "game_task": 0,
+      "quat": [ 0, 0, 0, 1 ],
+      "bsphere": [-1852.9, 261.8, 655.86, 10 ],
+      "lump": {
+        "name": "mount-launcher-1",
+        "spring-height": [ "meters", 100.0 ],
+        "vis-dist": [ "meters", 200.0 ],
+        "alt-vector": ["vector3m", [-1821.59, 314.18, 675.46]]
+      }
+    },
+
+    //eco for launcher//
+    {
+      "trans": [-1882.56, 261.68, 651.25],
+      "etype": "eco-blue",
+      "game_task": 0,
+      "quat": [ 0, 0, 0, 1 ],
+      "bsphere": [-1852.9, 261.8, 655.86, 10 ],
+      "lump": {
+        "name": "mount-eco-1"
+      }
+    },
+
+    //elevator//
+    {
+      "trans": [-1874.3, 366.7, 708.75], // translation
+      "etype": "mount-exit-plat", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [  0, 0, 0, 1], // quaternion
+      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
+      "lump": {
+       "name": "mount-elevator",
+       "scale": ["float", 0.4],
+       "path": ["vector3m", // I am pretty sure game will crash if there is no path for an enemy. So just add one. You can use "path-actor" if you want to use another actor's path.
+            [-1874.3, 366.7, 708.75],
+	    [-1874.3, 245.83, 708.75]
+          ],
+      "bidirectional": [ "int32", 1 ]
+     }
+    },
+
+    //door//
+    {
+      "trans": [ -1856.12, 253.82, 624.72 ],
+      "etype": "mount-maindoor",
+      "game_task": 0,
+      "quat": [ 0.000000, 0.608482, -0.000000, 0.793568 ],
+      "bsphere": [ -1856.42, 254.00, 624.41, 10 ],
+      "lump": {
+        "name": "mount-irisdoor1",
+        "scale": [ "float", 1.3]
+      }
+    },
+
+{
+      "trans": [ -1874.30, 246.59, 790.98 ],
+      "etype": "mount-maindoor",
+      "game_task": 0,
+      "quat": [ 0.000000, -0.707013, -0.000000, -0.707200 ],
+      "bsphere": [ -1872.47, 254.00, 695.95, 10 ],
+      "lump": {
+        "name": "mount-irisdoor3",
+        "scale": [ "float", 1.3]
+      }
+    },
+
+//plats//
+{
+      "trans": [-1827.74, 312.26, 683.96],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1827.74, 312.26, 683.96, 10],
+      "lump": {
+        "name": "NurbsCurve-0",
+        "path": ["vector4m",
+          [-1827.7374, 312.2613, 683.9561, 1.0],
+          [-1817.7374, 312.2613, 688.9561, 1.0],
+          [-1817.7375, 317.3081, 708.9561, 1.0],
+          [-1827.7375, 317.3081, 713.9561, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+     {
+      "trans": [-1815.61, 323.57, 730.91],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1815.61, 323.57, 730.91, 10],
+      "lump": {
+        "name": "NurbsCurve.001-0",
+        "path": ["vector4m",
+          [-1815.606, 323.5704, 730.9073, 1.0],
+          [-1825.606, 323.5704, 725.9073, 1.0],
+          [-1825.606, 319.4811, 704.8252, 1.0],
+          [-1815.606, 319.4811, 699.8252, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+    {
+      "trans": [-1823.4, 323.41, 743.16],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1823.4, 323.41, 743.16, 10],
+      "lump": {
+        "name": "NurbsCurve.003-0",
+        "path": ["vector4m",
+          [-1823.3982, 323.4098, 743.163, 1.0],
+          [-1826.6658, 323.9218, 753.8429, 1.0],
+          [-1847.8496, 318.5053, 757.2709, 1.0],
+          [-1854.33, 319.5208, 748.217, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+    {
+      "trans": [-1867.62, 314.92, 762.77],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1867.62, 314.92, 762.77, 10],
+      "lump": {
+        "name": "NurbsCurve.002-0",
+        "path": ["vector4m",
+          [-1867.6245, 314.9248, 762.7675, 1.0],
+          [-1864.3569, 314.4128, 752.0875, 1.0],
+          [-1846.3107, 317.8414, 745.5172, 1.0],
+          [-1839.8302, 316.826, 754.5711, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+    {
+      "trans": [-1845.55, 329.93, 695.16],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1845.55, 329.93, 695.16, 10],
+      "lump": {
+        "name": "NurbsCurve.004-0",
+        "path": ["vector4m",
+          [-1845.5461, 329.926, 695.1586, 1.0],
+          [-1835.5461, 329.926, 700.1586, 1.0],
+          [-1837.5803, 338.937, 726.3611, 1.0],
+          [-1847.5803, 338.937, 731.3611, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+    
+     {
+      "trans": [-1874.61, 385.11, 710.09],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1874.61, 385.11, 710.09, 10],
+      "lump": {
+        "name": "NurbsCurve.005-0",
+        "path": ["vector4m",
+          [-1874.6147, 385.1115, 710.0939, 1.0],
+          [-1874.6147, 370.1115, 740.0939, 1.0],
+          [-1874.6147, 335.6755, 766.6478, 1.0],
+          [-1874.6147, 320.6755, 736.6478, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+{
+      "trans": [ -1891.64, 314.68, 757.14 ],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1845.55, 329.93, 695.16, 10],
+      "lump": {
+        "name": "staticplat",
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+    {
+      "trans": [ -1897.16, 316.55, 747.29 ],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1845.55, 329.93, 695.16, 10],
+      "lump": {
+        "name": "staticplat",
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+    {
+      "trans": [ -1907.60, 318.91, 745.14 ],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1845.55, 329.93, 695.16, 10],
+      "lump": {
+        "name": "staticplat",
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+    {
+      "trans": [ -1917.94, 318.91, 740.67 ],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1845.55, 329.93, 695.16, 10],
+      "lump": {
+        "name": "staticplat",
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+    {
+      "trans": [ -1917.94, 320.17, 730.98 ],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1845.55, 329.93, 695.16, 10],
+      "lump": {
+        "name": "staticplat",
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+    {
+      "trans": [ -1919.73, 322.65, 721.54 ],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1845.55, 329.93, 695.16, 10],
+      "lump": {
+        "name": "staticplat",
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+    {
+      "trans": [ -1860.05, 337.15, 743.32 ],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1845.55, 329.93, 695.16, 10],
+      "lump": {
+        "name": "staticplat",
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+{
+    "trans": [ -1849.4, 367.85, 709.1 ],
+    "etype": "mount-switch",
+    "game_task": "(game-task mount-platformbutton)",
+    "quat": [ 0, 0, 0, 1 ],
+    "bsphere": [ 1203.86,  39.31,  14.06, 10 ],
+    "lump": {
+      "name": "mount-plat-switch",
+      "scale": ["float", 0.7]
+    }
+  },
+
+//enemies//
+{
+  "aid": 80500,
+  "trans": [-1647.93, 206.53, 821.69],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1647.93, 206.53, 821.69, 10],
+  "lump": {
+    "name": "mount-babak-1",
+    "path": ["vector3m", [-1647.93, 206.53, 821.69],
+    [-1653.00, 206.76, 816.95],
+    [-1651.97, 206.44, 825.17]
+  
+  ]
+  }
+},
+{
+  "aid": 80501,
+  "trans": [-1647.85, 216.69, 942.66],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1647.85, 216.69, 942.66, 10],
+  "lump": {
+    "name": "mount-babak-2",
+    "path": ["vector3m", [-1647.85, 216.69, 942.66],
+    [-1644.03, 216.14, 939.05],
+    [-1649.20, 217.16, 946.16]
+  ]
+  }
+},
+
+{
+  "aid": 80503,
+  "trans": [-1480.59, 196.78, 777.24],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1480.59, 196.78, 777.24, 10],
+  "lump": {
+    "name": "mount-babak-4",
+    "path": ["vector3m", [-1480.59, 196.78, 777.24],
+    [-1475.98, 196.36, 782.20],
+    [-1483.04, 196.68, 775.08]]
+  }
+},
+{
+  "aid": 80504,
+  "trans": [-1408.68, 205.29, 735.07],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1408.68, 205.29, 735.07, 10],
+  "lump": {
+    "name": "mount-babak-5",
+    "path": ["vector3m", [-1408.68, 205.29, 735.07],
+  [-1412.25, 205.24, 731.12],
+  [-1405.78, 205.04, 739.04]
+]
+  }
+},
+
+{
+  "aid": 80507,
+  "trans": [-1179.19, 211.09, 457.99],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1179.19, 211.09, 457.99, 10],
+  "lump": {
+    "name": "mount-babak-8",
+    "path": ["vector3m", [-1179.19, 211.09, 457.99],
+    [-1176.24, 210.84, 453.98],
+    [-1180.76, 211.20, 459.73]]
+  }
+},
+{
+  "aid": 80508,
+  "trans": [-1100.33, 211.00, 584.86],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1100.33, 211.00, 584.86, 10],
+  "lump": {
+    "name": "mount-babak-9",
+    "path": ["vector3m", [-1100.33, 211.00, 584.86],
+  [-1096.43, 211.22, 580.44],
+  [-1104.38, 210.44, 586.21]
+]
+  }
+},
+{
+  "aid": 80509,
+  "trans": [-1203.45, 217.12, 709.06],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1203.45, 217.12, 709.06, 10],
+  "lump": {
+    "name": "mount-babak-10",
+    "path": ["vector3m", [-1203.45, 217.12, 709.06],
+  [-1199.22, 218.36, 705.12],
+  [-1206.57, 216.87, 713.06]]
+  }
+},
+{
+  "aid": 80510,
+  "trans": [-1138.53, 209.84, 923.91],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1138.53, 209.84, 923.91, 10],
+  "lump": {
+    "name": "mount-babak-11",
+    "path": ["vector3m", [-1138.53, 209.84, 923.91],
+  [-1142.62, 210.39, 926.02],
+  [-1134.49, 209.11, 921.39]]
+  }
+},
+{
+  "aid": 80511,
+  "trans": [-1254.22, 217.43, 1004.15],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1254.22, 217.43, 1004.15, 10],
+  "lump": {
+    "name": "mount-babak-12",
+    "path": ["vector3m", [-1254.22, 217.43, 1004.15],
+  [-1249.75, 216.40, 999.38],
+  [-1256.49, 217.19, 1001.61]]
+  }
+},
+{
+  "aid": 80512,
+  "trans": [-1379.70, 250.85, 1220.83],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1379.70, 250.85, 1220.83, 10],
+  "lump": {
+    "name": "mount-babak-13",
+    "path": ["vector3m", [-1379.70, 250.85, 1220.83],
+  [-1375.89, 249.57, 1217.17],
+  [-1383.36, 251.51, 1223.06]]
+  }
+},
+{
+  "aid": 80513,
+  "trans": [-1476.34, 214.83, 1135.44],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1476.34, 214.83, 1135.44, 10],
+  "lump": {
+    "name": "mount-babak-14",
+    "path": ["vector3m", [-1476.34, 214.83, 1135.44],
+  [-1473.03, 213.49, 1131.48],
+  [-1477.63, 216.11, 1139.30]]
+  }
+},
+
+{
+  "aid": 80515,
+  "trans": [-1911.90, 233.41, 765.36],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1911.90, 233.41, 765.36, 10],
+  "lump": {
+    "name": "mount-babak-16",
+    "path": ["vector3m", [-1911.90, 233.41, 765.36],
+  [-1899.93, 233.41, 771.75],
+  [-1888.64, 233.41, 773.50]],
+    "nav-mesh-sphere": ["vector4m",
+          [-1918.13, 235.91, 748.24, 4.0],
+          [-1931.67, 235.91, 762.7, 4.0],
+          [-1893.27, 235.91, 765.12, 4.0],
+          [-1899.23, 235.91, 783.77, 4.0]]
+  }
+},
+{
+  "aid": 80516,
+  "trans": [-1941.22, 240.62, 702.72],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1941.22, 240.62, 702.72, 10],
+  "lump": {
+    "name": "mount-babak-17",
+    "path": ["vector3m", [-1941.22, 240.62, 702.72],
+    [-1939.96, 240.61, 690.07],
+    [-1936.34, 240.61, 677.24]]
+  }
+},
+{
+  "aid": 80517,
+  "trans": [-1874.44, 261.69, 654.57],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1874.44, 261.69, 654.57, 10],
+  "lump": {
+    "name": "mount-babak-18",
+    "path": ["vector3m", [-1874.44, 261.69, 654.57],
+    [-1878.11, 261.68, 662.01],
+    [-1870.65, 261.68, 654.75]]
+  }
+},
+{
+  "aid": 80518,
+  "trans": [-1853.36, 261.69, 640.59],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1853.36, 261.69, 640.59, 10],
+  "lump": {
+    "name": "mount-babak-19",
+    "path": ["vector3m", [-1853.36, 261.69, 640.59],
+  [-1870.46, 261.68, 633.51],
+  [-1853.77, 261.68, 636.48]],
+    "nav-mesh-actor": [ "uint32", 80517 ]
+  }
+},
+{
+  "aid": 80519,
+  "trans": [-1590.35, 205.79, 884.19],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1590.35, 205.79, 884.19, 10],
+  "lump": {
+    "name": "mount-puffer-1",
+    "path": ["vector3m", [-1590.35, 205.79, 884.19],
+            [-1601.18, 202.49, 871.75],
+            [-1605.15, 202.39, 854.34]]
+  }
+},
+//{
+ // "aid": 80520,
+  //"trans": [-1453.98, 253.97, 1026.87],
+  //"etype": "babak",
+  //"game_task": "(game-task none)",
+  //"quat": [0,0,0,1],
+  //"bsphere": [-1453.98, 253.97, 1026.87, 10],
+  //"lump": {
+  //  "name": "mount-puffer-2",
+  //  "path": ["vector3m", [-1453.98, 253.97, 1026.87]]
+ // }
+//},
+{
+  "aid": 80521,
+  "trans": [-1450.74, 196.01, 888.90],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1450.74, 196.01, 888.90, 10],
+  "lump": {
+    "name": "mount-puffer-3",
+    "path": ["vector3m", [-1450.74, 196.01, 888.90],
+  [-1450.96, 197.22, 906.53],
+  [-1465.94, 198.34, 916.55]]
+  }
+},
+{
+  "aid": 80522,
+  "trans": [-1235.83, 216.69, 516.51],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1235.83, 216.69, 516.51, 10],
+  "lump": {
+    "name": "mount-puffer-4",
+    "path": ["vector3m", [-1235.83, 216.69, 516.51],
+  [-1247.25, 217.08, 525.43],
+  [-1208.94, 216.37, 507.93]
+]
+  }
+},
+{
+  "aid": 80523,
+  "trans": [-1623.35, 223.77, 1126.73],
+  "etype": "babak",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1623.35, 223.77, 1126.73, 10],
+  "lump": {
+    "name": "mount-puffer-5",
+    "path": ["vector3m", [-1623.35, 223.77, 1126.73],
+  [-1618.41, 222.99, 1141.04],
+  [-1602.75, 225.35, 1123.32],
+  [-1592.92, 223.39, 1145.55]]
+  }
+},
+{
+  "aid": 80524,
+  "trans": [-1821.89, 314.18, 675.22],
+  "etype": "puffer",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1821.89, 314.18, 675.22, 10],
+  "lump": {
+    "name": "mount-puffer-6",
+    "path": ["vector3m", [-1821.89, 314.18, 675.22],
+            [-1831.89, 314.18, 675.22],
+            [-1821.89, 314.18, 675.22]]
+  }
+},
+{
+  "aid": 80525,
+  "trans": [-1819.90, 324.24, 739.68],
+  "etype": "puffer",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1819.90, 324.24, 739.68, 10],
+  "lump": {
+    "name": "mount-puffer-7",
+    "path": ["vector3m", [-1819.90, 324.24, 739.68],
+  [-1829.90, 324.24, 739.68],
+  [-1819.90, 324.24, 739.68]]
+  }
+},
+{
+  "aid": 80526,
+  "trans": [-1874.44, 316.31, 760.95],
+  "etype": "puffer",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1874.44, 316.31, 760.95, 10],
+  "lump": {
+    "name": "mount-puffer-8",
+    "path": ["vector3m", [-1874.44, 316.31, 760.95],
+  [-1884.44, 316.31, 760.95],
+[-1874.44, 316.31, 760.95]]
+  }
+},
+{
+  "aid": 80527,
+  "trans": [ -1927.71, 324.75, 709.18 ],
+  "etype": "puffer",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-1874.44, 316.31, 760.95, 10],
+  "lump": {
+    "name": "mount-puffer-9",
+    "path": ["vector3m", [ -1927.71, 324.75, 709.18 ],
+  [ -1937.71, 324.75, 709.18 ],
+  [ -1927.71, 324.75, 709.18 ]]
+  }
+},
+
+//RINGS//
+{
+  "trans": [ -1437.59, 215.06, 843.03 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1437.59, 215.06, 843.03, 10 ],
+  "lump": {
+    "name": "race-ring-01-start",
+    "timeout": [ "float", 0.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "next-actor": "race-ring-02-go"
+  }
+},
+
+{
+  "trans": [ -1509.69, 207.61, 661.65 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1509.69, 207.61, 661.65, 10 ],
+  "lump": {
+    "name": "race-ring-02-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-01-start",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-03-go"
+  }
+},
+
+{
+  "trans": [ -1445.98, 232.73, 515.58 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1445.98, 232.73, 515.58, 10 ],
+  "lump": {
+    "name": "race-ring-03-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-02-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-04-go"
+  }
+},
+
+{
+  "trans": [ -1354.49, 250.18, 510.08 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1354.49, 250.18, 510.08, 10 ],
+  "lump": {
+    "name": "race-ring-04-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-03-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-05-go"
+  }
+},
+
+{
+  "trans": [ -1310.12, 238.08, 510.43 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1310.12, 238.08, 510.43, 10 ],
+  "lump": {
+    "name": "race-ring-05-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-04-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-06-go"
+  }
+},
+
+{
+  "trans": [ -1262.31, 227.96, 515.14 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1262.31, 227.96, 515.14, 10 ],
+  "lump": {
+    "name": "race-ring-06-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-05-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-07-go"
+  }
+},
+
+{
+  "trans": [ -1139.44, 216.08, 442.96 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1139.44, 216.08, 442.96, 10 ],
+  "lump": {
+    "name": "race-ring-07-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-06-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-08-go"
+  }
+},
+
+{
+  "trans": [ -1098.08, 219.97, 444.36 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1098.08, 219.97, 444.36, 10 ],
+  "lump": {
+    "name": "race-ring-08-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-07-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-09-go"
+  }
+},
+
+{
+  "trans": [ -1099.01, 212.49, 503.03 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1099.01, 212.49, 503.03, 10 ],
+  "lump": {
+    "name": "race-ring-09-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-08-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-10-go"
+  }
+},
+
+{
+  "trans": [ -1149.58, 226.89, 613.20 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1149.58, 226.89, 613.20, 10 ],
+  "lump": {
+    "name": "race-ring-10-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-09-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-11-go"
+  }
+},
+
+{
+  "trans": [ -1165.74, 217.93, 661.68 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1197.02, 222.10, 697.60, 10 ],
+  "lump": {
+    "name": "race-ring-11-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 1.2298 ], // 45° more rotation
+    "prev-actor": "race-ring-10-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-12-go"
+  }
+},
+
+{
+  "trans": [ -1203.90, 205.61, 705.98 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1203.90, 205.61, 705.98, 10 ],
+  "lump": {
+    "name": "race-ring-12-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-11-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-13-go"
+  }
+},
+
+{
+  "trans": [ -1233.21, 212.75, 658.39 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1233.21, 212.75, 658.39, 10 ],
+  "lump": {
+    "name": "race-ring-13-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-12-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-14-go"
+  }
+},
+
+{
+  "trans": [ -1162.70, 215.27, 801.76 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1162.70, 215.27, 801.76, 10 ],
+  "lump": {
+    "name": "race-ring-14-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-13-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-15-go"
+  }
+},
+
+{
+  "trans": [ -1140.58, 211.33, 902.98 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1140.58, 211.33, 902.98, 10 ],
+  "lump": {
+    "name": "race-ring-15-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-14-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-16-go"
+  }
+},
+
+{
+  "trans": [ -1207.98, 215.70, 936.83 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1207.98, 215.70, 936.83, 10 ],
+  "lump": {
+    "name": "race-ring-16-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-15-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-17-go"
+  }
+},
+
+{
+  "trans": [ -1267.23, 237.30, 1047.91 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1267.23, 237.30, 1047.91, 10 ],
+  "lump": {
+    "name": "race-ring-17-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-16-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-18-go"
+  }
+},
+
+{
+  "trans": [ -1353.81, 249.67, 1205.47 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1353.81, 249.67, 1205.47, 10 ],
+  "lump": {
+    "name": "race-ring-18-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-17-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-19-go"
+  }
+},
+
+{
+  "trans": [ -1448.88, 250.14, 1214.10 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1448.88, 250.14, 1214.10, 10 ],
+  "lump": {
+    "name": "race-ring-19-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-18-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-20-go"
+  }
+},
+
+{
+  "trans": [ -1539.57, 234.09, 1168.56 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1539.57, 234.09, 1168.56, 10 ],
+  "lump": {
+    "name": "race-ring-20-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-19-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-21-go"
+  }
+},
+
+{
+  "trans": [ -1627.84, 230.58, 1094.79 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1627.84, 230.58, 1094.79, 10 ],
+  "lump": {
+    "name": "race-ring-21-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-20-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-22-go"
+  }
+},
+
+{
+  "trans": [ -1699.88, 233.48, 1081.57 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1699.88, 233.48, 1081.57, 10 ],
+  "lump": {
+    "name": "race-ring-22-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-21-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-23-go"
+  }
+},
+
+{
+  "trans": [ -1776.84, 228.55, 1043.38 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1776.84, 228.55, 1043.38, 10 ],
+  "lump": {
+    "name": "race-ring-23-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-22-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-24-finale"
+  }
+},
+
+{
+  "trans": [ -1883.00, 236.91, 982.90 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1883.00, 236.91, 982.90, 10 ],
+  "lump": {
+    "name": "race-ring-24-finale",
+    "timeout": [ "float", 10.0 ],
+    "rot-z": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-23-go",
+    "alt-actor": "race-ring-01-start",
+    "movie-pos": [ "meters", -1865.42, 237.92, 951.14 ],
+    "eco-info": [ "int32", 6, 135 ]
+  }
+}
+
+
+
+
+    ]
+  }

@@ -56,16 +56,16 @@
   // "symbol-list": ["symbol", "sym-1", "sym-2"]
 
   // The base actor id for your custom level. If you have multiple levels, this should be unique!
-  "base_id": 10000,
+  "base_id": 50000,
 
   // All art groups you want to use in your custom level. Will add their models and corresponding textures to the FR3 file.
   // Note: You will still have to add them to your level's .gd file.
   // "art_groups": ["plat-ag"],
-  "art_groups": ["babak-ag", "plat-ag", "plat-eco-ag"],
+  "art_groups": ["plat-ag", "plat-eco-ag", "hutlamp-ag","lavayellowtarp-ag", "oracle-ag", "steam-cap-ag", "sunken-elevator-ag", "village2cam-ag", "fisher-ag", "muse-ag", "shortcut-boulder-ag"],
 
   // If you have any custom models in the "custom_assets/jak1/models/custom_levels" folder that you want to use in your level, add them to this list.
   // Note: Like with art groups, these should also be added to your level's .gd file.
-  "custom_models": ["test-actor"],
+  "custom_models": ["test-actor", "test-actor2"],
 
   // Any textures you want to include in your custom level. This is mainly useful for things such as the zoomer HUD,
   // sky textures and cases where you want to use objects drawn with the generic renderer,
@@ -138,195 +138,1473 @@
   ],
 
   "actors": [
+////////////////////////ORACLE////////////////////////////////////
     {
-      "trans": [-21.6238, 20.0496, 17.1191], // translation
-      "etype": "fuel-cell", // actor type
-      "game_task": "(game-task none)", // associated game task (for powercells, etc)
-      "quat": [0, 0, 0, 1], // quaternion
+      "trans": [-1873.26, 229.92300, 445.29], // translation -1705.26, 50.923, 333.48
+      "etype": "oracle", // actor type
+      "game_task": "(game-task village1-oracle-money1)", // associated game task (for powercells, etc)
+      "quat": [  0.0392, 0.0479, -0.0393, 0.9980], // quaternion
       "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
       "lump": {
-        "name": "test-fuel-cell",
-        "eco-info": ["cell-info", "(game-task none)"]
-      }
+       "name": "v4-oracle"
+     }
     },
 
+    ///////////////////FISHERMAN///////////////////
     {
-      "trans": [-15.2818, 15.2461, 17.136], // translation
-      "etype": "crate", // actor type
-      "game_task": "(game-task none)", // associated game task (for powercells, etc)
-      "quat": [0, 0, 0, 1], // quaternion
-      "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+      "trans": [-1709.26, 201.02300, 339.48], // translation
+      "etype": "fisher", // actor type
+      "game_task": "(game-task complete)", // associated game task (for powercells, etc)
+      "quat": [ 0.0118, -0.8212, 0.0206, -0.5701], // quaternion
+      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
       "lump": {
-        "name": "test-crate",
-        "crate-type": "'steel",
-        "eco-info": ["eco-info", "(pickup-type money)", 10]
-      }
-    },
-
-    {
-      "trans": [-5.463, 17.4553, 1.6169], // translation
-      "etype": "eco-yellow", // actor type
-      "game_task": "(game-task none)", // associated game task (for powercells, etc)
-      "quat": [0, 0, 0, 1], // quaternion
-      "bsphere": [-5.463, 17.4553, 1.6169, 10], // bounding sphere
-      "lump": {
-        "name": "test-eco"
-      }
-    },
-    {
-      "trans": [-7.3159, 1.0468, 20.3499],
-      "etype": "babak",
-      "game_task": 0,
-      "quat" : [0, 0, 0, 1],
-      "bsphere": [-7.3159, 1.0468, 20.3499, 10],
-      "lump": {
-        "name": "test-babak",
-        "vis-dist": ["meters", 200.0],
-        "cam-notice-dist": ["meters", 30.0],
-        "idle-distance": ["meters", 50.0],
-        "cam-vert": ["meters", 8.0],
-        "cam-horz": ["meters", 20.0],
-        "path": ["vector3m", // I am pretty sure game will crash if there is no path for an enemy. So just add one. You can use "path-actor" if you want to use another actor's path.
+       "name": "v4-fisherman",
+       "path": ["vector3m", // I am pretty sure game will crash if there is no path for an enemy. So just add one. You can use "path-actor" if you want to use another actor's path.
             [-7.3159, 1.0468, 20.3499],
             [-2.3607, 1.0468, 12.8255],
             [-9.7266, 1.0468, 14.4445],
             [-7.3159, 1.0468, 20.3499]
-          ],
-        "nav-mesh-sphere": ["vector4m", // You can define spheres that will be added to the navmesh of the enemy. Enemies of the navmesh will avoid these spheres - like they avoid each other.
-          [-5.3159, 1.0468, 16.3499, 1.0]
           ]
+     }
+    },
+    /////////////////////////MUSES/////////////////////
+    {
+      "trans": [-1710.9, 203.42300, 301.78], // translation -1705.26, 50.923, 333.48
+      "etype": "muse-v4", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ -0.0026, -0.9967, 0.0383, 0.0702], // quaternion
+      "bsphere": [-1711.21, 203.02, 301.97, 100], // bounding sphere
+      "lump": {
+       "name": "v4-muse",
+       "path": ["vector3m", // I am pretty sure game will crash if there is no path for an enemy. So just add one. You can use "path-actor" if you want to use another actor's path.
+            [-1710.9, 203.02300, 301.78],
+            [-1712.26, 203.18, 312.65],
+            [-1714.76, 203.54, 325.03],
+            [-1728.87, 203.73, 330.89],
+            [-1742.22, 203.34, 323.66],
+            [-1755.78, 200.65, 320.70]
+          ],
+        "alt-actor": [ "string", "v4-muse-catchable", "v4-muse-catchable2", "v4-muse-catchable3"]
+     }
+    },
+    {
+      "trans": [-1781.79, 213.99, 450.44], // translation -1705.26, 50.923, 333.48
+      "etype": "muse-v4-catchable", // actor type
+      "game_task": "(game-task rolling-race)", // associated game task (for powercells, etc)
+      "quat": [ -0.0026, -0.9967, 0.0383, 0.0702], // quaternion
+      "bsphere": [-1781.79, 213.99, 450.44, 100], // bounding sphere
+      "lump": {
+       "name": "v4-muse-catchable",
+       "path": ["vector3m", // I am pretty sure game will crash if there is no path for an enemy. So just add one. You can use "path-actor" if you want to use another actor's path.
+          [-1781.79, 213.99, 450.44],
+           [-1783.65, 213.61, 429.61],
+           [-1793.97, 208.20, 417.78],
+           [-1816.48, 200.49, 406.12],
+           [-1840.89, 196.07, 400.14],
+           [-1854.91, 199.25, 391.65],
+           [-1848.46, 199.33, 375.74],
+           [-1842.16, 201.03, 351.39],
+           [-1853.69, 196.07, 316.32],
+           [-1845.04, 189.79, 298.83],
+           [-1829.21, 190.24, 304.18],
+           [-1804.30, 188.64, 286.59],
+          [-1780.08, 191.59, 278.92],
+          [-1755.41, 199.62, 319.76],
+           [-1722.95, 202.12, 308.92]
+          ],
+        "alt-actor": [ "string", "v4-muse"]
+     }
+    },
+    {
+      "trans": [-1556.00, 170.43, 377.49], // translation -1705.26, 50.923, 333.48
+      "etype": "muse-v4-catchable", // actor type
+      "game_task": "(game-task village2-warrior-money)", // associated game task (for powercells, etc)
+      "quat": [ -0.0026, -0.9967, 0.0383, 0.0702], // quaternion
+      "bsphere": [-1711.21, 203.02, 301.97, 100], // bounding sphere
+      "lump": {
+       "name": "v4-muse-catchable2",
+       "path": ["vector3m", // I am pretty sure game will crash if there is no path for an enemy. So just add one. You can use "path-actor" if you want to use another actor's path.
+            [-1556.00, 170.43, 377.49],
+            [-1558.51, 171.03, 362.03],
+            [-1558.76, 175.86, 328.25],
+            [-1554.81, 178.54, 306.30],
+            [-1562.47, 176.31, 282.73],
+            [-1616.76, 186.16, 284.72],
+            [-1649.45, 191.81, 292.95],
+            [-1669.24, 195.18, 299.71],
+            [-1687.18, 199.30, 304.98],
+            [-1703.81, 202.52, 316.95]
+          ],
+        "alt-actor": [ "string", "v4-muse"]
+     }
+    },
+    {
+      "trans": [-1811.52, 180.48, 214.33], // translation -1705.26, 50.923, 333.48
+      "etype": "muse-v4-catchable", // actor type
+      "game_task": "(game-task village2-geologist-money)", // associated game task (for powercells, etc)
+      "quat": [ -0.0026, -0.9967, 0.0383, 0.0702], // quaternion
+      "bsphere": [-1711.21, 203.02, 301.97, 100], // bounding sphere
+      "lump": {
+       "name": "v4-muse-catchable3",
+       "path": ["vector3m", // I am pretty sure game will crash if there is no path for an enemy. So just add one. You can use "path-actor" if you want to use another actor's path.
+            [-1811.52, 180.48, 214.33],
+            [-1732.12, 202.27, 313.24],
+            [-1756.57, 199.71, 317.33],
+            [-1771.55, 191.65, 288.00],
+            [-1798.53, 189.98, 268.03],
+            [-1833.68, 188.06, 261.60],
+            [-1848.50, 184.43, 244.76],
+            [-1824.07, 181.68, 223.80]
+          ],
+        "alt-actor": [ "string", "v4-muse"]
+     }
+    },
+    ////////////////BOULDER///////////////////////////
+    
+    ///////////////////WATERFALL//////////////////////
+    {
+      "trans": [ -1851, 150.07000, 75.16 ], // translation -1196.41 354.36 178.98
+      "etype": "v4-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, 0.0, 0.0, 1.0 ], // quaternion
+      "bsphere": [ -1169.40, 354.28, 194.49, 50 ], // bounding sphere
+      "lump": {
+        "name": "v4-waterfall-01",
+        "effect-name": "'waterfall",
+        "art-name": "group-v4-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
       }
     },
     {
-      "trans": [-5.41, 3.5, 28.42], // translation
-      "etype": "test-actor", // actor type
+      "trans": [ -1886, 150.07000, 70.16 ], // translation -1196.41 354.36 178.98
+      "etype": "v4-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, 0.0, 0.0, 1.0 ], // quaternion
+      "bsphere": [ -1169.40, 354.28, 194.49, 50 ], // bounding sphere
+      "lump": {
+        "name": "v4-waterfall-02",
+        "effect-name": "'waterfall",
+        "art-name": "group-v4-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+    {
+      "trans": [ -1631, 141.49300, 155.16 ], // translation -1196.41 354.36 178.98
+      "etype": "v4-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, 0.0, 0.0, 1.0 ], // quaternion
+      "bsphere": [ -1169.40, 354.28, 194.49, 50 ], // bounding sphere
+      "lump": {
+        "name": "v4-waterfall-03",
+        "effect-name": "'waterfall",
+        "art-name": "group-v4-waterfall-1-small",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [-2017.5, 224.51500, 203.74], // translation
+      "etype": "test-actor2", // actor type
       "game_task": 0, // associated game task (for powercells, etc)
       "quat": [0, 0, 0, 1], // quaternion
       "bsphere": [-7.41, 3.5, 28.42, 10], // bounding sphere
       "lump": {
-        "name": "test-actor"
+        "name": "yellowsage-spinner1"
+      }
+    },
+    {
+      "trans": [-1931.3, 203.99800, 341.32], // translation
+      "etype": "test-actor2", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [0, 0, 0, 1], // quaternion
+      "bsphere": [-7.41, 3.5, 28.42, 10], // bounding sphere
+      "lump": {
+        "name": "hut1-spinner1",
+        "scale": ["float", 0.5]
+      }
+    },
+    {
+      "trans": [-1872, 222.22000, 401.73], // translation
+      "etype": "test-actor2", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [0, 0, 0, 1], // quaternion
+      "bsphere": [-7.41, 3.5, 28.42, 10], // bounding sphere
+      "lump": {
+        "name": "hut1-spinner2",
+        "scale": ["float", 0.5]
       }
     },
 
     {
-      "trans": [0.0, 50.0, 10.0],
-      "etype": "linear-plat",
-      "game_task": 0,
-      "quat": [0, 0, 0, 1],
-      "bsphere": [0.0, 50.0, 10.0, 10],
+      "trans": [-2020.3,  234.86000, 203.62],
+      "etype": "ecovent",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
       "lump": {
-        "name": "linear-plat-0",
-        "path": ["vector4m",
-          [0.0, 50.0, 10.0, 1.0],
-          [0.0, 50.0, 10.0, 1.0],
-          [0.0, 60.0, 10.0, 1.0],
-          [0.0, 50.0, 10.0, 1.0],
-          [0.0, 50.0, 10.0, 1.0],
-          [0.0, 60.0, 10.0, 1.0],
-          [0.0, 50.0, 10.0, 1.0]
-          ],
-        "timings": ["float",
-          0.0, // offset before starting
-          2.0, // down to up (out)
-          2.0, // up to down (out)
-          6.0, // stay down
-          2.0, // down to up (back)
-          2.0, // up to down (back)
-          0.0 // immediately start back up
-          ],
-        "sync": ["float", 14, 0.0]
+        "name": "v4-vent-01",
+        "eco-info": ["int32", 1, 1],
+        "scale": ["float", 2.0]
       }
-    },
+  },
 
-    {
-      "trans": [0.0, 50.0, 17.0],
-      "etype": "linear-plat",
-      "game_task": 0,
-      "quat": [0, 0, 0, 1],
-      "bsphere": [0.0, 50.0, 17.0, 10],
-      "lump": {
-        "name": "linear-plat-1",
-        "path": ["vector4m",
-          [0.0, 50.0, 17.0, 1.0],
-          [0.0, 50.0, 17.0, 1.0],
-          [0.0, 60.0, 17.0, 1.0],
-          [0.0, 50.0, 17.0, 1.0],
-          [0.0, 50.0, 17.0, 1.0],
-          [0.0, 60.0, 17.0, 1.0],
-          [0.0, 50.0, 17.0, 1.0]
-        ],
-        "timings": ["float",
-          1.0, // offset before starting
-          2.0, // down to up (out)
-          2.0, // up to down (out)
-          4.0, // stay down
-          2.0, // down to up (back)
-          2.0, // up to down (back)
-          1.0 // immediately start back up
-          ],
-        "sync": ["float", 14, 0.0]
-      }
-    },
-
-    {
-      "trans": [0.0, 50.0, 24.0],
-      "etype": "linear-plat",
-      "game_task": 0,
-      "quat": [0, 0, 0, 1],
-      "bsphere": [0.0, 50.0, 24.0, 10],
-      "lump": {
-        "name": "linear-plat-2",
-        "path": ["vector4m",
-          [0.0, 50.0, 24.0, 1.0],
-          [0.0, 50.0, 24.0, 1.0],
-          [0.0, 60.0, 24.0, 1.0],
-          [0.0, 50.0, 24.0, 1.0],
-          [0.0, 50.0, 24.0, 1.0],
-          [0.0, 60.0, 24.0, 1.0],
-          [0.0, 50.0, 24.0, 1.0]
-          ],
-        "timings": ["float",
-          2.0, // offset before starting
-          2.0, // down to up (out)
-          2.0, // up to down (out)
-          2.0, // stay down
-          2.0, // down to up (back)
-          2.0, // up to down (back)
-          2.0 // immediately start back up
-          ],
-        "sync": ["float", 14, 0.0]
-      }
-    },
-
-    {
-      "trans": [0.0, 50.0, 31.0],
-      "etype": "linear-plat",
-      "game_task": 0,
-      "quat": [0, 0, 0, 1],
-      "bsphere": [0.0, 50.0, 31.0, 10],
-      "lump": {
-        "name": "linear-plat-3",
-        "path": ["vector4m",
-          [0.0, 50.0, 31.0, 1.0],
-          [0.0, 50.0, 31.0, 1.0],
-          [0.0, 60.0, 31.0, 1.0],
-          [0.0, 50.0, 31.0, 1.0],
-          [0.0, 50.0, 31.0, 1.0],
-          [0.0, 60.0, 31.0, 1.0],
-          [0.0, 50.0, 31.0, 1.0]
-        ],
-        "timings": ["float",
-          3.0, // offset before starting
-          2.0, // down to up (out)
-          2.0, // up to down (out)
-          0.0, // stay down
-          2.0, // down to up (back)
-          2.0, // up to down (back)
-          0.0 // immediately start back up
-          ],
-        "sync": ["float", 14, 0.0]
-      }
+  {
+    "trans": [-2017.6,  234.86000, 206.1],
+    "etype": "ecovent",
+    "game_task": "(game-task none)",
+    "quat": [0,0,0,1],
+    "bsphere": [-3.25,  62.37, 365.87, 10],
+    "lump": {
+      "name": "v4-vent-01",
+      "eco-info": ["int32", 1, 1],
+      "scale": ["float", 2.0]
     }
+},
 
+{
+  "trans": [-2017.6,  234.86000, 201.11],
+  "etype": "ecovent",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-3.25,  62.37, 365.87, 10],
+  "lump": {
+    "name": "v4-vent-01",
+    "eco-info": ["int32", 1, 1],
+    "scale": ["float", 2.0]
+  }
+},
+
+{
+  "trans": [-2017.6,  234.86000, 203.62],
+  "etype": "ecovent",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-3.25,  62.37, 365.87, 10],
+  "lump": {
+    "name": "v4-vent-01",
+    "eco-info": ["int32", 1, 1],
+    "scale": ["float", 2.0]
+  }
+},
+
+{
+  "trans": [-2014.9,  234.86000, 203.62],
+  "etype": "ecovent",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-3.25,  62.37, 365.87, 10],
+  "lump": {
+    "name": "v4-vent-01",
+    "eco-info": ["int32", 1, 1],
+    "scale": ["float", 2.0]
+  }
+},
+{
+  "trans": [-1931,  211.68700, 341.2],
+  "etype": "ecovent",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-3.25,  62.37, 365.87, 10],
+  "lump": {
+    "name": "hut1-vent-01",
+    "eco-info": ["int32", 1, 1],
+    "scale": ["float", 2.0]
+  }
+},
+{
+  "trans": [-1871.9, 229.45000, 401.74],
+  "etype": "ecovent",
+  "game_task": "(game-task none)",
+  "quat": [0,0,0,1],
+  "bsphere": [-3.25,  62.37, 365.87, 10],
+  "lump": {
+    "name": "hut1-vent-01",
+    "eco-info": ["int32", 1, 1],
+    "scale": ["float", 2.0]
+  }
+},
+    {
+      "trans": [-2002.3, 184.35400, 209.91],
+      "etype": "hutlamp",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [0.059383, 11.738, 382.047, 10],
+      "lump": {
+        "name": "hutlamp-01"
+      }
+    },
+    {
+      "trans": [-2002.3,  184.30900, 197.27],
+      "etype": "hutlamp",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-6.51471,  12.124, -382.22, 10],
+      "lump": {
+        "name": "hutlamp-02"
+      }
+    },
+    {
+      "trans": [-2024,  184.61100, 219.32],
+      "etype": "hutlamp",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "name": "hutlamp-03"
+      }
+    },
+    {
+      "trans": [-2023.9,  184.34900, 188.42],
+      "etype": "hutlamp",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "name": "hutlamp-04"
+      }
+    },
+    {
+      "trans": [-2034,  184.62000, 200.34],
+      "etype": "hutlamp",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "name": "hutlamp-05"
+      }
+    },
+    {
+      "trans": [-2033.9,  184.23400, 206.92],
+      "etype": "hutlamp",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "name": "hutlamp-06"
+      }
+    },
+    {
+      "trans": [-2020.5,  179.72700, 196.29],
+      "etype": "villagea-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village1-mayor-fire",
+        "cycle-speed": [ "float",
+          -1.0,
+          0.0
+        ],
+        "effect-name": "'fire-loop",
+        "effect-param": [ "float",
+          3.0,
+          90.0,
+          12.0,
+          40.0
+        ],
+        "name": "v4-fire-1"
+      }
+    },
+    {
+      "trans": [-1933,  177.72700, 348.1],
+      "etype": "villagea-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village1-mayor-fire",
+        "cycle-speed": [ "float",
+          -1.0,
+          0.0
+        ],
+        "effect-name": "'fire-loop",
+        "effect-param": [ "float",
+          3.0,
+          90.0,
+          12.0,
+          40.0
+        ],
+        "name": "v4-fire-2"
+      }
+    },
+    {
+      "trans": [-1873.2, 200.60000, 409.61],
+      "etype": "villagea-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village1-mayor-fire",
+        "cycle-speed": [ "float",
+          -1.0,
+          0.0
+        ],
+        "effect-name": "'fire-loop",
+        "effect-param": [ "float",
+          3.0,
+          90.0,
+          12.0,
+          40.0
+        ],
+        "name": "v4-fire-3"
+      }
+    },
+    {
+      "trans": [-1721.8, 204.90000, 320.21],
+      "etype": "villageb-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village2-flamepot-half",
+        "cycle-speed": [ "float",
+          -1.0,
+          0.0
+        ],
+        "effect-name": "'fire-loop",
+        "effect-param": [ "float",
+          3.0,
+          90.0,
+          12.0,
+          40.0
+        ],
+        "name": "v4-fire-4"
+      }
+    },
+    {
+      "trans": [-1725.1, 204.80000, 317.2],
+      "etype": "villageb-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village2-flamepot-half",
+        "cycle-speed": [ "float",
+          -1.0,
+          0.0
+        ],
+        "effect-name": "'fire-loop",
+        "effect-param": [ "float",
+          3.0,
+          90.0,
+          12.0,
+          40.0
+        ],
+        "name": "v4-fire-5"
+      }
+    },
+    {
+      "trans": [-1725.1, 205.60000, 325.4],
+      "etype": "villageb-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village2-flamepot-half",
+        "cycle-speed": [ "float",
+          -1.0,
+          0.0
+        ],
+        "effect-name": "'fire-loop",
+        "effect-param": [ "float",
+          3.0,
+          90.0,
+          12.0,
+          40.0
+        ],
+        "name": "v4-fire-6"
+      }
+    },
+    {
+      "trans": [-1729.4, 205.19300, 320.15],
+      "etype": "villageb-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village2-flamepot-half",
+        "cycle-speed": [ "float",
+          -1.0,
+          0.0
+        ],
+        "effect-name": "'fire-loop",
+        "effect-param": [ "float",
+          3.0,
+          90.0,
+          12.0,
+          40.0
+        ],
+        "name": "v4-fire-7"
+      }
+    },
+    {
+      "trans": [-1743.1, 205.74000, 335.8],
+      "etype": "villageb-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village2-flamepot-half",
+        "cycle-speed": [ "float",
+          -1.0,
+          0.0
+        ],
+        "effect-name": "'fire-loop",
+        "effect-param": [ "float",
+          3.0,
+          90.0,
+          12.0,
+          40.0
+        ],
+        "name": "v4-fire-8"
+      }
+    },
+    {
+      "trans": [-1706.3, 205.51800, 335.99],
+      "etype": "villageb-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village2-flamepot-half",
+        "cycle-speed": [ "float",
+          -1.0,
+          0.0
+        ],
+        "effect-name": "'fire-loop",
+        "effect-param": [ "float",
+          3.0,
+          90.0,
+          12.0,
+          40.0
+        ],
+        "name": "v4-fire-9"
+      }
+    },
+    {
+      "trans": [-1743.2, 205.31200, 305.92],
+      "etype": "villageb-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village2-flamepot-half",
+        "cycle-speed": [ "float",
+          -1.0,
+          0.0
+        ],
+        "effect-name": "'fire-loop",
+        "effect-param": [ "float",
+          3.0,
+          90.0,
+          12.0,
+          40.0
+        ],
+        "name": "v4-fire-10"
+      }
+    },
+    {
+      "trans": [-1706.3, 205.31200, 305.92],
+      "etype": "villageb-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village2-flamepot-half",
+        "cycle-speed": [ "float",
+          -1.0,
+          0.0
+        ],
+        "effect-name": "'fire-loop",
+        "effect-param": [ "float",
+          3.0,
+          90.0,
+          12.0,
+          40.0
+        ],
+        "name": "v4-fire-11"
+      }
+    },
+    {
+      "trans": [-2033.2, 180.09500, 210.38],
+      "etype": "villagec-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village3-sagehut-steam",
+        "cycle-speed": [ "float",
+          2.0,
+          8.0
+        ],
+        "effect-name": "'steam-small",
+        "effect-param": [ "float",
+          11.0,
+          10.0,
+          12.0,
+          20.0
+        ],
+        "name": "v4-steam-1"
+      }
+    },
+    {
+      "trans": [-2030.5, 180.09500, 214.45],
+      "etype": "villagec-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village3-sagehut-steam",
+        "cycle-speed": [ "float",
+          2.0,
+          8.0
+        ],
+        "effect-name": "'steam-medium",
+        "effect-param": [ "float",
+          11.0,
+          10.0,
+          12.0,
+          20.0
+        ],
+        "name": "v4-steam-2"
+      }
+    },
+    {
+      "trans": [-2027.9, 185.06000, 217.14],
+      "etype": "villagec-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village3-sagehut-steam",
+        "cycle-speed": [ "float",
+          2.0,
+          8.0
+        ],
+        "effect-name": "'steam-small",
+        "effect-param": [ "float",
+          11.0,
+          10.0,
+          12.0,
+          20.0
+        ],
+        "name": "v4-steam-3"
+      }
+    },
+    {
+      "trans": [-2019.6, 188.43900, 218.86],
+      "etype": "villagec-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village3-sagehut-steam",
+        "cycle-speed": [ "float",
+          2.0,
+          8.0
+        ],
+        "effect-name": "'steam-medium",
+        "effect-param": [ "float",
+          11.0,
+          10.0,
+          12.0,
+          20.0
+        ],
+        "name": "v4-steam-4"
+      }
+    },
+    {
+      "trans": [-2029.7, 189.56300, 205.87],
+      "etype": "villagec-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village3-steam-puff-22",
+        "cycle-speed": [ "float",
+          2.0,
+          8.0
+        ],
+        "effect-name": "'steam-small",
+        "effect-param": [ "float",
+          11.0,
+          10.0,
+          12.0,
+          20.0
+        ],
+        "name": "v4-steam-5"
+      }
+    },
+    {
+      "trans": [-2026.6, 190.01500, 198.76],
+      "etype": "villagec-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village3-steam-puff-22",
+        "cycle-speed": [ "float",
+          2.0,
+          8.0
+        ],
+        "effect-name": "'steam-medium",
+        "effect-param": [ "float",
+          11.0,
+          10.0,
+          12.0,
+          20.0
+        ],
+        "name": "v4-steam-6"
+      }
+    },
+    {
+      "trans": [-2005.1, 189.28500, 195.68],
+      "etype": "villagec-part",
+      "game_task": "(game-task none)",
+      "quat": [0,0,0,1],
+      "bsphere": [-3.25,  62.37, 365.87, 10],
+      "lump": {
+        "art-name": "group-village3-steam-puff-22",
+        "cycle-speed": [ "float",
+          2.0,
+          8.0
+        ],
+        "effect-name": "'steam-small",
+        "effect-param": [ "float",
+          11.0,
+          10.0,
+          12.0,
+          20.0
+        ],
+        "name": "v4-steam-7"
+      }
+    },
+    //////////////////////STEAMCAPS/////////////////////////
+    {
+      "trans": [-1939.4, 175.89200, 199.1], // translation
+      "etype": "steam-cap", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [  0, 0, 0, 1], // quaternion
+      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
+      "lump": {
+       "name": "v4-steamcap1",
+       "scale": ["float", 0.5]
+     }
+    },
+    {
+      "trans": [-1928.9, 173.93900, 306.45], // translation
+      "etype": "steam-cap", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [  0, 0, 0, 1], // quaternion
+      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
+      "lump": {
+       "name": "v4-steamcap2",
+       "scale": ["float", 0.5]
+     }
+    },
+    {
+      "trans": [-1861.6, 188.04600, 296.83], // translation
+      "etype": "steam-cap", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [  0, 0, 0, 1], // quaternion
+      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
+      "lump": {
+       "name": "v4-steamcap3",
+       "scale": ["float", 0.5]
+     }
+    },
+    {
+      "trans": [-1851.3, 193.76800, 364.64], // translation
+      "etype": "steam-cap", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [  0, 0, 0, 1], // quaternion
+      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
+      "lump": {
+       "name": "v4-steamcap4",
+       "scale": ["float", 0.5]
+     }
+    },
+    {
+      "trans": [-1802.6, 184.44400, 272.5], // translation
+      "etype": "steam-cap", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [  0, 0, 0, 1], // quaternion
+      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
+      "lump": {
+       "name": "v4-steamcap5",
+       "scale": ["float", 0.5]
+     }
+    },
+    {
+      "trans": [-1635.5, 195.82300, 418.51], // translation
+      "etype": "steam-cap", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [  0, 0, 0, 1], // quaternion
+      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
+      "lump": {
+       "name": "v4-steamcap6",
+       "scale": ["float", 0.5]
+     }
+    },
+    {
+      "trans": [-1637.7, 201.85100, 434.38], // translation
+      "etype": "steam-cap", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [  0, 0, 0, 1], // quaternion
+      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
+      "lump": {
+       "name": "v4-steamcap7",
+       "scale": ["float", 0.5]
+     }
+    },
+    {
+      "trans": [-1642.2, 207.68100, 437.86], // translation
+      "etype": "steam-cap", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [  0, 0, 0, 1], // quaternion
+      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
+      "lump": {
+       "name": "v4-steamcap8",
+       "scale": ["float", 0.5]
+     }
+    },
+    {
+      "trans": [-1637.8, 214.98800, 444.08], // translation
+      "etype": "steam-cap", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [  0, 0, 0, 1], // quaternion
+      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
+      "lump": {
+       "name": "v4-steamcap9",
+       "scale": ["float", 0.5]
+     }
+    },
+
+    //////////////////ELEVATOR////////////////////
+    {
+      "trans": [-1858.9, 179.71500, 140.73], // translation
+      "etype": "sunken-elevator", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [  0, 0, 0, 1], // quaternion
+      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
+      "lump": {
+       "name": "v4-elevator"
+     }
+    },
+    ///////FOG////////////
+
+    {
+      "trans": [ -1939.98, 160.97000, 207.25 ], // translation
+      "etype": "v4-part", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ -1939.98, 7.97, 207.25, 10 ], // bounding sphere
+      "lump": {
+        "name": "v4-fog1",
+        "art-name": "group-v4-fog-cloud",
+        "effect-name": "'fog",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+  
+    {
+      "trans": [ -1625.98, 160.97000, 311.25 ], // translation
+      "etype": "v4-part", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ -1939.98, 7.97, 207.25, 10 ], // bounding sphere
+      "lump": {
+        "name": "v4-fog1",
+        "art-name": "group-v4-fog-cloud",
+        "effect-name": "'fog",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+{
+  "trans": [ -1960.7, 155.28400, 201.41 ], // translation
+  "etype": "lavayellowtarp", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ -2050.62, 2.01, 203.01, 10 ], // bounding sphere
+  "lump": {
+    "name": "v4-tarp1"
+  }
+},
+{
+  "trans": [ -1956.5, 166.49700, 204.63 ], // translation
+  "etype": "lavayellowtarp", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ -2050.62, 2.01, 203.01, 10 ], // bounding sphere
+  "lump": {
+    "name": "v4-tarp2"
+  }
+},
+{
+  "trans": [ -1929.2, 165.64300, 210.0 ], // translation
+  "etype": "lavayellowtarp", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ -2050.62, 2.01, 203.01, 10 ], // bounding sphere
+  "lump": {
+    "name": "v4-tarp3"
+  }
+},
+{
+  "trans": [ -1920.3, 159.40000, 216.96 ], // translation
+  "etype": "lavayellowtarp", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ -2050.62, 2.01, 203.01, 10 ], // bounding sphere
+  "lump": {
+    "name": "v4-tarp4"
+  }
+},
+{
+  "trans": [ -1915.8, 172.06000, 227.95 ], // translation
+  "etype": "lavayellowtarp", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ -2050.62, 2.01, 203.01, 10 ], // bounding sphere
+  "lump": {
+    "name": "v4-tarp1"
+  }
+},
+
+{
+  "trans": [-1927, 177.26200, 349.6], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel1",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1928, 177.26200, 349.1], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel2",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1927, 177.26200, 347.4], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel3",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1938, 177.26200, 346.4], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel4",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1939, 177.26200, 344.4], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel5",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1937, 177.26200, 345.4], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel6",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1937, 177.26200, 334.4], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel7",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1935, 177.26200, 333.4], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel8",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1865.5, 200.00000, 407.93], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel9",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1867, 200.00000, 409.31], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel10",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1878.7, 200.00000, 407.31], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel11",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1877.8, 200.00000, 405.51], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel12",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1879.6, 200.00000, 404.94], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel13",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1867.1, 200.00000, 393.52], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel14",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1865.2, 200.00000, 394.75], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [0, 0, 0, 1], // quaternion
+  "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
+  "lump": {
+    "name": "v4-barrel15",
+    "crate-type": "'barrel"
+  }
+},
+{
+  "trans": [-1752.3, 209.41000, 298.85],
+  "etype": "hutlamp",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-3.25, 62.37, 365.87, 10],
+  "lump": {
+    "name": "hutlamp-01"
+  }
+},
+
+{
+  "trans": [-1752.2, 209.41000, 343.08],
+  "etype": "hutlamp",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-3.25, 62.37, 365.87, 10],
+  "lump": {
+    "name": "hutlamp-02"
+  }
+},
+
+{
+  "trans": [-1699.7, 209.68000, 298.85],
+  "etype": "hutlamp",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-3.25, 62.37, 365.87, 10],
+  "lump": {
+    "name": "hutlamp-03"
+  }
+},
+
+{
+  "trans": [-1700.7, 209.08000, 341.29],
+  "etype": "hutlamp",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-3.25, 62.37, 365.87, 10],
+  "lump": {
+    "name": "hutlamp-04"
+  }
+},
+
+{
+  "trans": [-1539.1, 197.98000, 277.37],
+  "etype": "hutlamp",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-3.25, 62.37, 365.87, 10],
+  "lump": {
+    "name": "hutlamp-05"
+  }
+},
+
+{
+  "trans": [-1538.2, 188.18000, 289.22],
+  "etype": "hutlamp",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-3.25, 62.37, 365.87, 10],
+  "lump": {
+    "name": "hutlamp-06"
+  }
+},
+
+{
+  "trans": [-1545.5, 182.91000, 362.49],
+  "etype": "hutlamp",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-3.25, 62.37, 365.87, 10],
+  "lump": {
+    "name": "hutlamp-07"
+  }
+},
+
+{
+  "trans": [-1544.6, 182.72000, 374.33],
+  "etype": "hutlamp",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-3.25, 62.37, 365.87, 10],
+  "lump": {
+    "name": "hutlamp-08"
+  }
+},
+
+{
+  "trans": [-1794.1, 183.25000, 227.86],
+  "etype": "villagea-part",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-3.25, 62.37, 365.87, 10],
+  "lump": {
+    "art-name": "group-village1-mayor-fire",
+    "cycle-speed": ["float", -1.0, 0.0],
+    "effect-name": "'fire-loop",
+    "effect-param": ["float", 3.0, 90.0, 12.0, 40.0],
+    "name": "v4-fire-1"
+  }
+},
+
+{
+  "trans": [-1756.8, 212.79000, 407.94],
+  "etype": "villagea-part",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-3.25, 62.37, 365.87, 10],
+  "lump": {
+    "art-name": "group-village1-mayor-fire",
+    "cycle-speed": ["float", -1.0, 0.0],
+    "effect-name": "'fire-loop",
+    "effect-param": ["float", 3.0, 90.0, 12.0, 40.0],
+    "name": "v4-fire-2"
+  }
+},
+
+{
+  "trans": [-1665.5, 179.74000, 182.57],
+  "etype": "villagea-part",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-3.25, 62.37, 365.87, 10],
+  "lump": {
+    "art-name": "group-village1-mayor-fire",
+    "cycle-speed": ["float", -1.0, 0.0],
+    "effect-name": "'fire-loop",
+    "effect-param": ["float", 3.0, 90.0, 12.0, 40.0],
+    "name": "v4-fire-3"
+  }
+},
+
+{
+  "trans": [-1761.1, 212.22000, 410.3],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel1",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1759.1, 212.22000, 396.3],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel2",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1753.0, 212.22000, 401.89],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel3",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1753.0, 212.22000, 404.86],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel4",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1801.9, 183.03000, 229.17],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel5",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1799.5, 183.03000, 229.17],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel6",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1799.5, 183.03000, 231.0],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel7",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1797.4, 183.03000, 230.76],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel8",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1672.0, 179.19000, 186.13],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel9",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1670.1, 179.19000, 184.81],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel10",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1749.2, 200.04000, 332.59],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel11",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1745.8, 200.14000, 332.33],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel12",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1748.3, 199.67000, 309.39],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel13",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1745.4, 199.67000, 307.77],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel14",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1739.9, 200.02000, 304.45],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel15",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1737.7, 199.83000, 301.91],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel16",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1713.0, 199.96000, 301.78],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel17",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1703.2, 200.15000, 312.26],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel18",
+    "crate-type": "'barrel"
+  }
+},
+
+{
+  "trans": [-1703.1, 200.28000, 329.51],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-15.2818, 15.2461, 17.136, 10],
+  "lump": {
+    "name": "v4-barrel19",
+    "crate-type": "'barrel"
+  }
+}
   ]
 }

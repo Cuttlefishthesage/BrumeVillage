@@ -613,7 +613,7 @@
     (mark-speedrun-started))
   ;; if we're a new game, set our checkpoint.
   (when (nonzero? (-> save new-game))
-    (set-continue! this "game-start")
+    (set-continue! this "brume-warp")
     (set! save save)
     (goto cfg-134))
   ;; loop over all tags

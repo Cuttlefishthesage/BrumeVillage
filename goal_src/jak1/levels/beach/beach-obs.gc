@@ -544,7 +544,7 @@
 
 (defmethod init-from-entity! ((this ecoventrock) (arg0 entity-actor))
   (logior! (-> this mask) (process-mask enemy))
-  (let ((s4-0 (new 'process 'collide-shape this (collide-list-enum hit-by-player))))
+  (let ((s4-0 (new 'process 'collide-shape this (collide-list-enum hit-by-others)))) ;; changed hit-by-player to -others to allow yellow eco to break rock
     (let ((s3-0 (new 'process 'collide-shape-prim-mesh s4-0 (the-as uint 0) (the-as uint 0))))
       (set! (-> s3-0 prim-core collide-as) (collide-kind enemy))
       (set! (-> s3-0 collide-with) (collide-kind target))

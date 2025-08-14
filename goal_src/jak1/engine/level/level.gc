@@ -857,7 +857,7 @@
 (#cond
   (PC_PORT
    (defconstant LEVEL_HEAP_SIZE (* 10416 1024)) ;; 10.416K
-   (defconstant LEVEL_HEAP_SIZE_DEBUG (* 11000 1024)))
+   (defconstant LEVEL_HEAP_SIZE_DEBUG (* 11000 1024 4)))
   (#t
    (defconstant LEVEL_HEAP_SIZE (* 10416 1024)) ;; 10.416K
    (defconstant LEVEL_HEAP_SIZE_DEBUG (* 25600 1024)) ;; 25.600K
@@ -1061,9 +1061,34 @@
                  (if (and *debug-segment* (nonzero? *debug-continue-point*)) *debug-continue-point* (the string #f))))
   0)
 
+(define *soundbank-hack-happened* #f)
+
 (defun update-sound-banks ()
   (if (nonzero? (rpc-busy? RPC-SOUND-LOADER)) (return 0))
-  (let ((gp-0 #f)
+  (when (not *soundbank-hack-happened*)
+    (sound-bank-load (static-sound-name "beach"))
+    (sound-bank-load (static-sound-name "citadel"))
+    (sound-bank-load (static-sound-name "darkcave"))
+    (sound-bank-load (static-sound-name "finalbos"))
+    (sound-bank-load (static-sound-name "firecany"))
+    (sound-bank-load (static-sound-name "jungle"))
+    (sound-bank-load (static-sound-name "jungleb"))
+    (sound-bank-load (static-sound-name "lavatube"))
+    (sound-bank-load (static-sound-name "maincave"))
+    (sound-bank-load (static-sound-name "misty"))
+    (sound-bank-load (static-sound-name "ogre"))
+    (sound-bank-load (static-sound-name "robocave"))
+    (sound-bank-load (static-sound-name "rolling"))
+    (sound-bank-load (static-sound-name "snow"))
+    (sound-bank-load (static-sound-name "sunken"))
+    (sound-bank-load (static-sound-name "swamp"))
+    (sound-bank-load (static-sound-name "training"))
+    (sound-bank-load (static-sound-name "village1"))
+    (sound-bank-load (static-sound-name "village2"))
+    (sound-bank-load (static-sound-name "village3"))
+    (set! *soundbank-hack-happened* #t)
+  )
+  #|(let ((gp-0 #f)
         (s5-0 #f))
     (dotimes (s4-0 (-> *level* length))
       (let ((v1-5 (-> *level* level s4-0)))
@@ -1119,7 +1144,7 @@
         (format 0 "Unload soundbank ~A~%" *sound-bank-2*)
         (sound-bank-unload (string->sound-name (symbol->string *sound-bank-2*)))
         (set! *sound-bank-2* #f)
-        (return 0))))
+        (return 0)))|#
   0)
 
 (defmethod update! ((this load-state))

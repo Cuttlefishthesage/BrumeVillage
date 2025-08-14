@@ -95,7 +95,8 @@
                        (else #t))
                      (time-elapsed? (-> self state-time) (seconds 0.1)))
             (if (and (cpad-pressed? 0 circle) (process-grab? *target*)) (go-virtual active))
-            (if (and *cheat-mode* (cpad-pressed? 0 l3)) (set! (-> self max-slot) 4))
+            (if (and *cheat-mode* (cpad-pressed? 0 l3)) (set! (-> self max-slot) (- (-> *warp-info* length) 1)) ;; This gets overwritten due to the changes we made elsewhere. Not a huge problem though.
+            )
             (let ((gp-0 (new 'stack 'font-context *font-default-matrix* 32 160 0.0 (font-color default) (font-flags shadow kerning))))
               (let ((v1-53 gp-0)) (set! (-> v1-53 width) (the float 440)))
               (let ((v1-54 gp-0)) (set! (-> v1-54 height) (the float 80)))
@@ -119,10 +120,15 @@
     v0-0))
 
 (defun print-level-name ((arg0 int) (arg1 font-context) (arg2 int) (arg3 int))
-  (let ((s5-0 (if arg3 arg2 (- arg2))))
+  (let ((s5-0 (if arg3 arg2 (- arg2)))
+  (level-text-id (if (= arg0 5)
+                  #x1646
+                  (+ arg0 286)
+                  )
+              ))
     (+! (-> arg1 origin x) (the float s5-0))
     (let ((f30-0 (- 1.0 (* 0.0033333334 (the float arg2)))))
-      (print-game-text-scaled (lookup-text! *common-text* (the-as text-id (+ arg0 286)) #f)
+      (print-game-text-scaled (lookup-text! *common-text* (the-as text-id level-text-id) #f)
                               f30-0
                               arg1
                               (the int (* 128.0 f30-0))))
@@ -154,7 +160,33 @@
             (send-event *target* 'rotate-y-angle (fmax (fmin f0-0 (* 65536.0 (seconds-per-frame))) (* -65536.0 (seconds-per-frame))))))))
   :code
     (behavior ()
-      (local-vars (sv-112 int) (sv-128 int) (sv-144 int))
+      #|
+    Had to move this here, because if you make all actors always visible (like in a custom level), and you load saved game into such a level, the warp gate is initialized before the task statuses are loaded.
+    So we instead set the "max-slot" when a warp gate's menu is activated by the player. By this time, the task statuses are surely loaded.
+    |#
+    (set! (-> self max-slot) (cond
+                            ((or (task-closed? (game-task finalboss-movies) (task-status need-reminder)) (task-closed? (game-task brume-warp) (task-status need-hint)))
+                            5
+                            )
+                            ((task-closed? (game-task village4-button) (task-status need-hint))
+                            4
+                            )
+                            ((task-closed? (game-task village3-button) (task-status need-hint))
+                            3
+                            )
+                            ((task-closed? (game-task village2-levitator) (task-status need-hint))
+                            2
+                            )
+                            (else
+                              1
+                              )
+                            )
+          )
+    (if (= *cheat-mode* 'debug)
+          (set! (-> self max-slot) (- (-> *warp-info* length) 1)) ;; We still want to have a way to show all options, so we just let it happen if cheat mode is set to debug
+        )
+    (format 0 "SELF MAX-SLOT: ~D~%" (-> self max-slot))
+    (local-vars (sv-112 int) (sv-128 int) (sv-144 int))
       (let ((gp-0 (get-next-slot-up self (+ (-> self level-slot) -1))))
         0
         (let ((s5-0 #f)
@@ -256,7 +288,11 @@
             ((= v1-11 'village2) 2)
             ((= v1-11 'village3) 3)
             ((or (= v1-11 'citadel) (= v1-11 'lavatube)) 4)
-            (else -1))))
+            ((= v1-11 'brume) ;; added for warpgate functionality in brume level
+                                  5
+                                  )
+            (else -1)))
+            (format 0 "SELF LEVEL-SLOT: ~D~%" (-> self level-slot)))
   (set! (-> self max-slot)
         (cond
           ((task-closed? (game-task village4-button) (task-status need-hint)) 4)

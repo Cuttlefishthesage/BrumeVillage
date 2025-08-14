@@ -142,6 +142,8 @@
   "Get the permanent storage for a game-task"
   (-> this task-perm-list data arg0))
 
+(define *game-counts* (the game-count-info (malloc 'global 10000)))
+
 (defmethod initialize! ((this game-info) (cause symbol) (save-to-load game-save) (continue-point-override string))
   "Initialize the game-info.
     The cause can be 'dead if you die, or 'game to reset everything.
@@ -182,7 +184,7 @@
                     (cond
                       (continue-point-override (empty) continue-point-override)
                       ((!= *kernel-boot-message* 'play) "demo-start")
-                      (*debug-segment* "village1-hut")
+                      (*debug-segment* "brume-warp")
                       (else "title-start")))
      (set! (-> this auto-save-count) 0)
      (set! (-> *setting-control* default auto-save) #f)
