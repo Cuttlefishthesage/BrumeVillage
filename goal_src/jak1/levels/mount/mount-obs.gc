@@ -187,7 +187,7 @@
    (:rotate-y (degrees 90))))
 ;;elevator;;
 
-(defskelgroup *citb-exit-plat-sg*
+(defskelgroup *mount-exit-plat-sg*
   citb-exit-plat
   citb-exit-plat-lod0-jg
   citb-exit-plat-idle-ja
@@ -203,6 +203,9 @@
   (:states
    mount-exit-plat-idle
    mount-exit-plat-rise))
+
+(defmethod can-activate? ((this mount-exit-plat))
+  (and ((method-of-type plat-button can-activate?) this) (task-complete? *game-info* (game-task mount-platformbutton))))
 
 (defmethod should-teleport? ((this mount-exit-plat))
   (let ((f0-0 (-> (camera-pos) y)))
@@ -280,7 +283,7 @@
 
 
 (defmethod plat-button-method-31 ((this mount-exit-plat))
-  (initialize-skeleton this *citb-exit-plat-sg* '())
+  (initialize-skeleton this *mount-exit-plat-sg* '())
   (none))
 
 (defmethod plat-button-method-32 ((this mount-exit-plat))
@@ -348,7 +351,7 @@
    (mount-maindoor-open symbol)))
 
 
-(defskelgroup *maindoor-sg*
+(defskelgroup *mount-maindoor-sg*
   maindoor
   maindoor-lod0-jg
   maindoor-idle-ja
@@ -409,7 +412,7 @@
     (backup-collide-with-as s4-0)
     (set! (-> this root) s4-0))
   (process-drawable-from-entity! this arg0)
-  (initialize-skeleton this *maindoor-sg* '())
+  (initialize-skeleton this *mount-maindoor-sg* '())
   (update-transforms! (-> this root))
   (set! (-> this thresh w) 61440.0)
   (if (or (and (-> this entity) (logtest? (-> this entity extra perm status) (entity-perm-status complete)))

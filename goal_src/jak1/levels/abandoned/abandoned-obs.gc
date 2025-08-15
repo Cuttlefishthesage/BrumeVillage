@@ -138,75 +138,6 @@
 
 
 
-;;////////boulder/////////;;
-
-(defskelgroup *snow-ball-sg*
-  snow-ball
-  snow-ball-lod0-jg
-  snow-ball-idle-ja
-  ((snow-ball-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 3))
-
-(deftype snow-ball-simple (process-drawable)
-  ((root collide-shape-moving :override)
-   (path-index float)
-   (path-u float)
-   (path-speed float))
-   (:methods
-   (snow-ball-skeleton (_type_) float))
-  (:states snow-ball-simple-idle))
-
-
-(defmethod snow-ball-skeleton ((this snow-ball-simple))
-  (let ((s4-0 (new 'process 'collide-shape-moving this (collide-list-enum usually-hit-by-player))))
-    (set! (-> s4-0 dynam) (copy *standard-dynamics* 'process))
-    (set! (-> s4-0 reaction) default-collision-reaction)
-    (set! (-> s4-0 no-reaction) (the-as (function collide-shape-moving collide-shape-intersect vector vector none) nothing))
-    (alloc-riders s4-0 1)
-    (let ((s3-0 (new 'process 'collide-shape-prim-mesh s4-0 (the-as uint 0) (the-as uint 0))))
-      (set! (-> s3-0 prim-core collide-as) (collide-kind ground-object))
-      (set! (-> s3-0 collide-with) (collide-kind target))
-      (set! (-> s3-0 prim-core action) (collide-action solid rider-plat-sticky))
-      (set! (-> s3-0 prim-core offense) (collide-offense indestructible))
-      (set! (-> s3-0 transform-index) 0)
-      (set-vector! (-> s3-0 local-sphere) 0.0 4915.2 0.0 13107.2)
-      (set-root-prim! s4-0 s3-0))
-    (set! (-> s4-0 nav-radius) (* 0.75 (-> s4-0 root-prim local-sphere w)))
-    (backup-collide-with-as s4-0)
-    (set! (-> this root) s4-0))
-  (process-drawable-from-entity! this (-> this entity))
-  (logclear! (-> this mask) (process-mask actor-pause))
-  (quaternion-identity! (-> this root quat))
-  (initialize-skeleton this *snow-ball-sg* '())
-  (update-transforms! (-> this root))
-  0.0)
-
-
-(defstate snow-ball-simple-idle (snow-ball-simple)
-  :code
-  (behavior ()
-    (loop
-      ;; Yield early in case of invalid path
-      (when (and (-> self path)
-                 (>= (-> self path curve num-cverts) 2))
-        (let ((out (new 'stack-no-clear 'vector)))
-          (eval-path-curve-div! (-> self path) out (-> self path-index) 'interp)
-          (move-to-point! (-> self root) out)
-          (+! (-> self path-index) (* (-> self path-speed) (seconds-per-frame)))))
-      ;; Always suspend or you'll hardlock the main thread
-      (suspend))))
-
-(defmethod init-from-entity! ((this snow-ball-simple) (arg0 entity-actor))
-  (snow-ball-skeleton this)
-  (logclear! (-> this mask) (process-mask actor-pause))
-  ;; Setup path-following
-  (set! (-> this path) (new 'process 'curve-control this 'path 0.0))
-  (set! (-> this path-index) 0.0)
-  (set! (-> this path-speed) 0.25)
-  ;; Start idle behavior
-  (go snow-ball-simple-idle)
-  (none))
-
 
   ;;eggtop yellow new
   (deftype cave-eggtop (process-drawable)
@@ -219,7 +150,7 @@
    cave-eggtop-idle-up))
 
 
-(defskelgroup *eggtop-sg*
+(defskelgroup *preundg-eggtop-sg*
   eggtop
   eggtop-lod0-jg
   eggtop-idle-ja
@@ -230,19 +161,19 @@
   :id 510
   :bounds (static-bspherem 0 -6 0 8)
   :parts
-  ((sp-item 1990 :fade-after (meters 110))
-   (sp-item 1991 :fade-after (meters 110))
-   (sp-item 1992 :fade-after (meters 110))
-   (sp-item 1993 :fade-after (meters 110))
-   (sp-item 1994 :fade-after (meters 110))))
+  ((sp-item 3990 :fade-after (meters 110))
+   (sp-item 3991 :fade-after (meters 110))
+   (sp-item 3992 :fade-after (meters 110))
+   (sp-item 3993 :fade-after (meters 110))
+   (sp-item 3994 :fade-after (meters 110))))
 
 (defpartgroup group-cave-yellow-eco-room-activate
   :id 511
   :duration (seconds 3)
   :bounds (static-bspherem 0 -6 0 8)
-  :parts ((sp-item 1994) (sp-item 1994) (sp-item 1995 :flags (bit1) :period (seconds 4) :length (seconds 0.05))))
+  :parts ((sp-item 3994) (sp-item 3994) (sp-item 3995 :flags (bit1) :period (seconds 4) :length (seconds 0.05))))
 
-(defpart 1995
+(defpart 3995
   :init-specs
   ((:texture (flare effects))
    (:num 30.0)
@@ -260,15 +191,15 @@
    (:timer (seconds 2))
    (:flags (bit2 bit3 left-multiply-quat))
    (:next-time (seconds 0.25))
-   (:next-launcher 1996)))
+   (:next-launcher 3996)))
 
-(defpart 1996
-  :init-specs ((:fade-a 0.0) (:next-time (seconds 0.75)) (:next-launcher 1997)))
+(defpart 3996
+  :init-specs ((:fade-a 0.0) (:next-time (seconds 0.75)) (:next-launcher 3997)))
 
-(defpart 1997
+(defpart 3997
   :init-specs ((:fade-a -0.14222223)))
 
-(defpart 1990
+(defpart 3990
   :init-specs
   ((:texture (hotdot effects))
    (:num 1.0)
@@ -282,7 +213,7 @@
    (:timer (seconds 0.017))
    (:flags (bit2 bit3))))
 
-(defpart 1991
+(defpart 3991
   :init-specs
   ((:texture (hotdot effects))
    (:num 1.0)
@@ -296,7 +227,7 @@
    (:timer (seconds 0.017))
    (:flags (bit2 bit3))))
 
-(defpart 1992
+(defpart 3992
   :init-specs
   ((:texture (lightning effects))
    (:num 0.5 1.0)
@@ -313,12 +244,12 @@
    (:timer (seconds 0.3))
    (:flags (bit2 bit3))
    (:next-time (seconds 0.035))
-   (:next-launcher 1998)))
+   (:next-launcher 3998)))
 
-(defpart 1998
+(defpart 3998
   :init-specs ((:r 64.0) (:g 64.0) (:fade-r -1.0) (:fade-g -1.0) (:fade-a -2.0)))
 
-(defpart 1993
+(defpart 3993
   :init-specs
   ((:texture (lightning effects))
    (:num 0.5 1.0)
@@ -335,9 +266,9 @@
    (:timer (seconds 0.3))
    (:flags (bit2 bit3))
    (:next-time (seconds 0.035))
-   (:next-launcher 1998)))
+   (:next-launcher 3998)))
 
-(defpart 1994
+(defpart 3994
   :init-specs
   ((:texture (lightning effects))
    (:num 1.0 1.0)
@@ -354,7 +285,7 @@
    (:timer (seconds 0.3))
    (:flags (bit2 bit3))
    (:next-time (seconds 0.035))
-   (:next-launcher 1998)
+   (:next-launcher 3998)
    (:conerot-x (degrees 90))
    (:conerot-y (degrees 80) (degrees 200.00002))
    (:conerot-radius (meters 4))))
@@ -465,7 +396,7 @@
     (backup-collide-with-as s4-0)
     (set! (-> this root) s4-0))
   (process-drawable-from-entity! this arg0)
-  (initialize-skeleton this *eggtop-sg* '())
+  (initialize-skeleton this *preundg-eggtop-sg* '())
   (logior! (-> this skel status) (janim-status inited))
   (set! (-> this spawn-trans quad) (-> this root trans quad))
   (+! (-> this root trans y) -2662.4)
@@ -493,7 +424,7 @@
 (deftype abandon-part (part-spawner) ())
 
 (defpartgroup group-abandon-candle
-  :id 476
+  :id 776
   :bounds (static-bspherem 0 10 0 12)
   :parts
   ((sp-item 1797 :fade-after (meters 60) :falloff-to (meters 60))
@@ -683,7 +614,7 @@
    abandon-driller-lurker-patrol-pause))
 
 
-(defskelgroup *driller-lurker-sg*
+(defskelgroup *abandon-driller-lurker-sg*
   driller-lurker
   driller-lurker-lod0-jg
   -1
@@ -708,7 +639,7 @@
             :fade-dist 245760.0)))
 
 (defpartgroup group-driller-lurker-drilling-debris
-  :id 331
+  :id 731
   :flags (use-local-clock)
   :bounds (static-bspherem 0 0 0 8)
   :parts
@@ -1354,7 +1285,7 @@
     (backup-collide-with-as s4-0)
     (set! (-> this root-overeride) s4-0))
   (process-drawable-from-entity! this arg0)
-  (initialize-skeleton this *driller-lurker-sg* '())
+  (initialize-skeleton this *abandon-driller-lurker-sg* '())
   (set! (-> this path) (new 'process 'curve-control this 'path -1000000000.0))
   (logior! (-> this path flags) (path-control-flag display draw-line draw-point draw-text))
   (if (< (-> this path curve num-cverts) 2) (go process-drawable-art-error "bad path"))
@@ -1364,7 +1295,7 @@
         (new 'process 'ambient-sound (static-sound-spec "drill-idle" :fo-max 40) (-> this root-overeride trans)))
   (set! (-> this sound2)
         (new 'process 'ambient-sound (static-sound-spec "drill-idle2" :fo-max 60) (-> this root-overeride trans)))
-  (set! (-> this part) (create-launch-control (-> *part-group-id-table* 331) this))
+  (set! (-> this part) (create-launch-control (-> *part-group-id-table* 731) this))
   (let ((f0-34 (path-distance (-> this path)))) (set! (-> this path-units-per-meter) (/ 4096.0 f0-34)))
   (set! (-> this path-dir) 1.0)
   (set! (-> this path-u) 0.0)

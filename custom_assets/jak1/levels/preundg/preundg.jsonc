@@ -127,51 +127,7 @@
   ],
 
   "actors": [
-    {
-      "trans": [-21.6238, 20.0496, 17.1191], // translation
-      "etype": "fuel-cell", // actor type
-      "game_task": "(game-task none)", // associated game task (for powercells, etc)
-      "quat": [0, 0, 0, 1], // quaternion
-      "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
-      "lump": {
-        "name": "test-fuel-cell",
-        "eco-info": ["cell-info", "(game-task none)"]
-      }
-    },
-
-    {
-      "trans": [-15.2818, 15.2461, 17.136], // translation
-      "etype": "crate", // actor type
-      "game_task": "(game-task none)", // associated game task (for powercells, etc)
-      "quat": [0, 0, 0, 1], // quaternion
-      "bsphere": [-15.2818, 15.2461, 17.136, 10], // bounding sphere
-      "lump": {
-        "name": "test-crate",
-        "crate-type": "'steel",
-        "eco-info": ["eco-info", "(pickup-type money)", 10]
-      }
-    },
-
-    {
-      "trans": [-5.463, 17.4553, 1.6169], // translation
-      "etype": "eco-yellow", // actor type
-      "game_task": "(game-task none)", // associated game task (for powercells, etc)
-      "quat": [0, 0, 0, 1], // quaternion
-      "bsphere": [-5.463, 17.4553, 1.6169, 10], // bounding sphere
-      "lump": {
-        "name": "test-eco"
-      }
-    },
-    {
-      "trans": [-5.41, 3.5, 28.42], // translation
-      "etype": "test-actor", // actor type
-      "game_task": 0, // associated game task (for powercells, etc)
-      "quat": [0, 0, 0, 1], // quaternion
-      "bsphere": [-7.41, 3.5, 28.42, 10], // bounding sphere
-      "lump": {
-        "name": "test-actor"
-      }
-    },
+    
     //plats//
       {
       "trans": [-1786.1, 33.01, -61.27],
@@ -1030,11 +986,12 @@
     {
       "trans": [ -1746.2, 21.164, -155.77 ], // translation
       "etype": "flutflut", // actor type
-      "game_task": 0, // associated game task (for powercells, etc)
+      "game_task": "(game-task preundg-fluthalls)", // associated game task (for powercells, etc)
       "quat": [ 0, 0, 0, 1 ], // quaternion
       "bsphere": [-7.41, 3.5, 28.42, 10], // bounding sphere
       "lump": {
-        "name": "birb"
+        "name": "birb1",
+        "index": ["int32", 3]
       }
     },
 
@@ -1353,17 +1310,7 @@
     "eco-info": ["cell-info", "(game-task preundg-spireclimb)"]
   }
 },
-{
-  "trans": [-1745.58, 22.4, -141.0],
-  "etype": "fuel-cell",
-  "game_task": "(game-task preundg-fluthalls)",
-  "quat": [0, 0, 0, 1],
-  "bsphere": [-1745.58, 22.4, -141.0, 10],
-  "lump": {
-    "name": "preundg-fuel-cell-2",
-    "eco-info": ["cell-info", "(game-task preundg-fluthalls)"]
-  }
-},
+
 {
   "trans": [-1621.4, 37.52, -153.13],
   "etype": "fuel-cell",

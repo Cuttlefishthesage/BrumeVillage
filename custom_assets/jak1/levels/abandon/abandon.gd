@@ -32,6 +32,11 @@
  ;;"driller-lurker.o" using custom driller now
  "swamp-rat.o"
  "swamp-rat-nest.o"
+ "tpage-398.go" ;; moved tpages to appropriate spot 
+ "tpage-400.go"
+ "tpage-399.go"
+ "tpage-401.go"
+ "tpage-1470.go"
  "plat-ag.go"
  "swamp-rat-ag.go"
  "swamp-rat-nest-ag.go"
@@ -48,10 +53,5 @@
  "kickrock-ag.go"
  "eichar-ice+0-ag.go"
  "minecartsteel-ag.go"
- "tpage-398.go"
- "tpage-400.go"
- "tpage-399.go"
- "tpage-401.go"
- "tpage-1470.go"
  "abandon.go"
  ))

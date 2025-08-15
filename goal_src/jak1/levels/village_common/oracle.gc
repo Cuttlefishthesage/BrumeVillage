@@ -18,12 +18,6 @@
   ((oracle-lod0-mg (meters 999999)))
   :bounds (static-spherem 0 0 0 4))
 
-(defskelgroup *village2cam-sg*
-  village2cam
-  village2cam-lod0-jg
-  -1
-  ((village2cam-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 0 0 10))
 
 (defmethod play-anim! ((this oracle) (arg0 symbol))
   (set! (-> this talk-message) (text-id press-to-talk))

@@ -72,23 +72,7 @@
         (suspend)))
   :post ja-post)
 
-(defbehavior misty-camera-view silostep ()
-  (set! (-> self cam-tracker)
-        (ppointer->handle (process-spawn camera-tracker
-                                         :init
-                                         camera-tracker-init
-                                         (lambda :behavior camera-tracker ()
-                                           (while (not (process-grab? *target*))
-                                             (suspend))
-                                           (camera-change-to "camera-160" 150 #f)
-                                           (suspend-for (seconds 3))
-                                           (while (not (process-release? (handle->process (-> self grab-target))))
-                                             (suspend))
-                                           (camera-change-to (the-as string 'base) 150 #f)
-                                           (none))
-                                         :to
-                                         self)))
-  (none))
+
 
 (defstate preundg-silostep-camera (preundg-silostep)
   :code
@@ -482,7 +466,6 @@
 
 (defmethod init-from-entity! ((this small-swingpole) (arg0 entity-actor))
   "Copy defaults from the entity."
-   "Copy defaults from the entity."
   (stack-size-set! (-> this main-thread) 128)
   (logior! (-> this mask) (process-mask actor-pause))
   (set! (-> this root) (new 'process 'trsq))
@@ -552,7 +535,7 @@
 
 
   ;; battle controller ;;
-  (defskelgroup *swampcam-sg*
+  (defskelgroup *preundgcam-sg*
   swampcam
   swampcam-lod0-jg
   swampcam-anim-ja
@@ -565,86 +548,13 @@
   :virtual #t
   :code
     (behavior ()
-    (let ((gp-1 (ppointer->handle (process-spawn pov-camera (static-vectorm -1972.65 48.16 -41.40) *swampcam-sg* "swamp-ambush" 0 #f '() :to self))))
+    (let ((gp-1 (ppointer->handle (process-spawn pov-camera (static-vectorm -1972.65 48.16 -41.40) *preundgcam-sg* "swamp-ambush" 0 #f '() :to self))))
         (while (handle->process (the-as handle gp-1))
           (suspend)))
       (go-virtual battlecontroller-active)))
 
 
-;;battlecontroller door;;
-(deftype preundg-ambush-door (process-drawable)
-  ((root collide-shape :override))
-  (:states
-   preundg-ambush-door-close
-   preundg-ambush-door-idle-closed
-   preundg-ambush-door-idle-open))
 
-
-(defskelgroup *helix-slide-door-sg*
-  helix-slide-door
-  helix-slide-door-lod0-jg
-  helix-slide-door-idle-ja
-  ((helix-slide-door-lod0-mg (meters 999999)))
-  :bounds (static-spherem 0 12 0 18))
-
-(defstate preundg-ambush-door-idle-open (preundg-ambush-door)
-  :enter (behavior ()
-           (ja-no-eval :group! helix-slide-door-idle-ja :num! 0 :frame-num 0.0)
-           
-           (ja-post) (transform-post))
-  :event
-    (behavior ((proc process) (argc int) (message symbol) (block event-message-block))
-      (case message
-        (('preundgdoor) (go preundg-ambush-door-close))))
-  :code
-    (behavior ()
-      (loop
-        (suspend))))
-
-(defstate preundg-ambush-door-close (preundg-ambush-door)
-  :code
-    (behavior ()
-      (ja-no-eval :group! helix-slide-door-idle-ja :num! (seek!) :frame-num 0.0)
-      (until (ja-done? 0)
-        (suspend)
-        (ja :num! (seek!)))
-      (transform-post)
-      (go preundg-ambush-door-idle-closed))
-  :post transform-post)
-
-(defstate preundg-ambush-door-idle-closed (preundg-ambush-door)
-  :event (behavior ((proc process) (argc int) (message symbol) (block event-message-block))
-      (case message
-        (('trigger) (format 0 "door should be open") (go preundg-ambush-door-idle-open))))
-  :code
-    (behavior ()
-      (loop
-        (suspend))))
-
-(defmethod init-from-entity! ((this preundg-ambush-door) (arg0 entity-actor))
-  (let ((s4-0 (new 'process 'collide-shape this (collide-list-enum hit-by-others))))
-    (let ((s3-0 (new 'process 'collide-shape-prim-mesh s4-0 (the-as uint 0) (the-as uint 0))))
-      (set! (-> s3-0 prim-core collide-as) (collide-kind wall-object))
-      (set! (-> s3-0 collide-with) (collide-kind target))
-      (set! (-> s3-0 prim-core action) (collide-action solid rider-plat-sticky))
-      (set! (-> s3-0 prim-core offense) (collide-offense indestructible))
-      (set! (-> s3-0 transform-index) 3)
-      (set-vector! (-> s3-0 local-sphere) 0.0 22528.0 0.0 53248.0)
-      (set-root-prim! s4-0 s3-0))
-    (set! (-> s4-0 nav-radius) (* 0.75 (-> s4-0 root-prim local-sphere w)))
-    (backup-collide-with-as s4-0)
-    (set! (-> this root) s4-0))
-  (process-drawable-from-entity! this arg0)
-  (initialize-skeleton this *helix-slide-door-sg* '())
-  (logior! (-> this skel status) (janim-status inited))
-  (ja-channel-set! 1)
-  (let ((s5-1 (-> this skel root-channel 0)))
-    (joint-control-channel-group-eval! s5-1 (the-as art-joint-anim (-> this draw art-group data 2)) num-func-identity)
-    (set! (-> s5-1 frame-num) 0.0))
-  (ja-post)
-  (update-transforms! (-> this root))
-  (go preundg-ambush-door-idle-open)
-  (none))
 
 
 ;;custom ambush door;;
@@ -662,7 +572,6 @@
 
 (defstate open-door (ambushdoor)
   :enter (behavior ()
-           ;; Move up 5 units
            )
   :event
     (behavior ((proc process) (argc int) (message symbol) (block event-message-block))

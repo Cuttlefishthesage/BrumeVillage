@@ -126,16 +126,6 @@
   // adding ambient sounds, level name hints, etc.
   "ambients": [
     {
-      "trans": [-21.6238, 20.0496, 17.1191, 10.0],
-      "bsphere": [-21.6238, 20.0496, 17.1191, 15.0],
-      "lump": {
-        "name": "test-ambient",
-        "type": "'hint",
-        "text-id": ["enum-uint32", "(text-id fuel-cell)"], // text id for the "POWER CELL" text
-        "play-mode": "'notice"
-      }
-    },
-    {
   "trans": [-1957.84, 174.71, 203.63, 50.0], // translation
   "bsphere": [-1957.84, 174.71, 203.63, 50.0], // bounding sphere
   "lump": {
@@ -515,17 +505,11 @@
     {
       "trans": [-1709.26, 201.02300, 339.48], // translation
       "etype": "fisherman-v4", // actor type
-      "game_task": "(game-task complete)", // associated game task (for powercells, etc)
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
       "quat": [ 0.0118, -0.8212, 0.0206, -0.5701], // quaternion
       "bsphere": [-21.6238, 19.3496, 17.1191, 10], // bounding sphere
       "lump": {
-       "name": "v4-fisherman",
-       "path": ["vector3m", // I am pretty sure game will crash if there is no path for an enemy. So just add one. You can use "path-actor" if you want to use another actor's path.
-            [-7.3159, 1.0468, 20.3499],
-            [-2.3607, 1.0468, 12.8255],
-            [-9.7266, 1.0468, 14.4445],
-            [-7.3159, 1.0468, 20.3499]
-          ]
+       "name": "v4-fisherman"
      }
     },
     /////////////////////////YELLOWSAGE///////////////////////
@@ -3166,8 +3150,8 @@
   "bsphere": [ -1613.62, 186.92, 243.53, 10 ], // bounding sphere
   "lump": {
     "name": "brume-fuel-cell-01",
-    "eco-info": [ "int32", 6, 122 ],
-    "movie-pos": ["movie-pos", [-1613.62, 188.92, 243.53, 1.255]]
+    "eco-info": ["cell-info", "(game-task brume-findcell-1)"],
+    "movie-pos": ["movie-pos", [-1613.62, 186.92, 243.53, 1.255]]
   }
 },
 {

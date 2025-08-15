@@ -1426,133 +1426,71 @@
  ;;BRUME;;                     
 
  (new 'static 'level-tasks-info
-
               :level-name-id (text-id brume)
-
-              :text-group-index 16
-
+              :text-group-index 3
               :nb-of-tasks 6
-
-              :buzzer-task-index 5
-
+              :buzzer-task-index 0
               :task-info
-
               (new 'static 'array task-info-data 8
-
                    (new 'static 'task-info-data
-
                         :task-id (game-task brume-buzzer)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id brume-buzzer)
-
                              (text-id brume-buzzer)
-
                              (text-id brume-buzzer)
-
                              (text-id zero)
-
                              )
-
                         )
 
                    (new 'static 'task-info-data
-
                         :task-id (game-task brume-muse-hide-3)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id brume-muse-hide-3)
-
                              (text-id brume-muse-hide-3)
-
                              (text-id brume-muse-hide-3)
-
                              (text-id zero)
-
                              )
-
                         )
 
                    (new 'static 'task-info-data
-
                         :task-id (game-task brume-oracle-1)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id brume-oracle-1)
-
                              (text-id brume-oracle-1)
-
                              (text-id brume-oracle-1)
-
                              (text-id zero)
-
                              )
-
                         )
-
                     (new 'static 'task-info-data
-
                         :task-id (game-task brume-oracle-2)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id brume-oracle-2)
-
                              (text-id brume-oracle-2)
-
                              (text-id brume-oracle-2)
-
                              (text-id zero)
-
                              )
-
                         )
-
                     (new 'static 'task-info-data
-
                         :task-id (game-task brume-findcell-1)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id brume-findcell-1)
-
                              (text-id brume-findcell-1)
-
                              (text-id brume-findcell-1)
-
                              (text-id zero)
-
                              )
-
                         )
-
                     (new 'static 'task-info-data
-
                         :task-id (game-task brume-restore-power)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id brume-restore-power)
-
                              (text-id brume-restore-power)
-
                              (text-id brume-restore-power)
-
                              (text-id zero)
 
                              )
@@ -1570,133 +1508,71 @@
 
 
 (new 'static 'level-tasks-info
-
               :level-name-id (text-id abandon)
-
-              :text-group-index 16
-
+              :text-group-index 3
               :nb-of-tasks 6
-
-              :buzzer-task-index 5
-
+              :buzzer-task-index 0
               :task-info
-
               (new 'static 'array task-info-data 8
-
                    (new 'static 'task-info-data
-
                         :task-id (game-task abandon-buzzer)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id brume-buzzer)
-
                              (text-id brume-buzzer)
-
                              (text-id brume-buzzer)
-
                              (text-id zero)
-
                              )
-
                         )
-
                    (new 'static 'task-info-data
-
                         :task-id (game-task abandon-findcell-1)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id abandon-findcell-1)
-
                              (text-id abandon-findcell-1)
-
                              (text-id abandon-findcell-1)
-
                              (text-id zero)
-
                              )
-
                         )
-
                    (new 'static 'task-info-data
-
                         :task-id (game-task abandon-findcell-2)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id abandon-findcell-2)
-
                              (text-id abandon-findcell-2)
-
                              (text-id abandon-findcell-2)
-
                              (text-id zero)
-
                              )
-
                         )
 
                     (new 'static 'task-info-data
-
                         :task-id (game-task abandon-findcell-3)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id abandon-findcell-3)
-
                              (text-id abandon-findcell-3)
-
                              (text-id abandon-findcell-3)
-
                              (text-id zero)
-
                              )
-
                         )
 
                     (new 'static 'task-info-data
-
                         :task-id (game-task abandon-drillers)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id abandon-drillers)
-
                              (text-id abandon-drillers)
-
                              (text-id abandon-drillers)
-
                              (text-id zero)
-
                              )
-
                         )
-
                     (new 'static 'task-info-data
-
                         :task-id (game-task abandon-rock)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id abandon-rock)
-
                              (text-id abandon-rock)
-
                              (text-id abandon-rock)
-
                              (text-id zero)
 
                              )
@@ -1714,285 +1590,150 @@
 
 
 (new 'static 'level-tasks-info
-
               :level-name-id (text-id mount)
-
-              :text-group-index 16
-
+              :text-group-index 3
               :nb-of-tasks 6
-
-              :buzzer-task-index 5
-
+              :buzzer-task-index 0
               :task-info
-
               (new 'static 'array task-info-data 8
-
                    (new 'static 'task-info-data
-
                         :task-id (game-task mount-buzzer)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id mount-buzzer)
-
                              (text-id mount-buzzer)
-
                              (text-id mount-buzzer)
-
                              (text-id zero)
-
                              )
-
                         )
 
                    (new 'static 'task-info-data
-
                         :task-id (game-task mount-findcell-1)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id mount-findcell-1)
-
                              (text-id mount-findcell-1)
-
                              (text-id mount-findcell-1)
-
                              (text-id zero)
-
                              )
-
                         )
-
                    (new 'static 'task-info-data
-
                         :task-id (game-task mount-findcell-waterfall)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id mount-findcell-waterfall)
-
                              (text-id mount-findcell-waterfall)
-
                              (text-id mount-findcell-waterfall)
-
                              (text-id zero)
-
                              )
-
                         )
-
                     (new 'static 'task-info-data
-
                         :task-id (game-task mount-zoomer)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id mount-zoomer)
-
                              (text-id mount-zoomer)
-
                              (text-id mount-zoomer)
-
                              (text-id zero)
-
                              )
-
                         )
-
                     (new 'static 'task-info-data
-
                         :task-id (game-task mount-towertop)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id mount-towertop)
-
                              (text-id mount-towertop)
-
                              (text-id mount-towertop)
-
                              (text-id zero)
-
                              )
-
                         )
-
                     (new 'static 'task-info-data
-
                         :task-id (game-task mount-ringrace)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id mount-ringrace)
-
                              (text-id mount-ringrace)
-
                              (text-id mount-ringrace)
-
                              (text-id zero)
-
                              )
-
                         )
-
                    )
-
               )
 
 
 
 ;;PREUNDG;;
 
-
-
 (new 'static 'level-tasks-info
-
               :level-name-id (text-id preundg)
-
-              :text-group-index 16
-
+              :text-group-index 3
               :nb-of-tasks 6
-
-              :buzzer-task-index 5
-
+              :buzzer-task-index 0
               :task-info
-
               (new 'static 'array task-info-data 8
-
                    (new 'static 'task-info-data
-
                         :task-id (game-task preundg-buzzer)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id preundg-buzzer)
-
                              (text-id preundg-buzzer)
-
                              (text-id preundg-buzzer)
-
                              (text-id zero)
-
                              )
-
                         )
-
                    (new 'static 'task-info-data
-
                         :task-id (game-task preundg-spireclimb)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id preundg-spireclimb)
-
                              (text-id preundg-spireclimb)
-
                              (text-id preundg-spireclimb)
-
                              (text-id zero)
-
                              )
-
                         )
-
                    (new 'static 'task-info-data
-
                         :task-id (game-task preundg-battlearena)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id preundg-battlearena)
-
                              (text-id preundg-battlearena)
-
                              (text-id preundg-battlearena)
-
                              (text-id zero)
-
                              )
-
                         )
 
                     (new 'static 'task-info-data
-
                         :task-id (game-task preundg-fluthalls)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id preundg-fluthalls)
-
                              (text-id preundg-fluthalls)
-
                              (text-id preundg-fluthalls)
-
                              (text-id zero)
-
                              )
-
                         )
-
                     (new 'static 'task-info-data
-
                         :task-id (game-task preundg-switchroom)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id preundg-switchroom)
-
                              (text-id preundg-switchroom)
-
                              (text-id preundg-switchroom)
-
                              (text-id zero)
-
                              )
-
                         )
 
                     (new 'static 'task-info-data
-
                         :task-id (game-task preundg-slideclimb)
-
                         :task-name
-
                         (new 'static 'array text-id 4
-
                              (text-id preundg-slideclimb)
-
                              (text-id preundg-slideclimb)
-
                              (text-id preundg-slideclimb)
-
                              (text-id zero)
-
                              )
-
                         )
-
                    )
-
               )
 
                       ))
@@ -2000,4 +1741,4 @@
 ;; goes down by 24 or 23 every time
 (define *task-egg-starting-x* (new 'static 'boxed-array :type int32 218 194 171 147 124 100 77 53 30))
 
-;;(define *game-counts* (the-as game-count-info #f))
+(define *game-counts* (the game-count-info (malloc 'global 10000)))

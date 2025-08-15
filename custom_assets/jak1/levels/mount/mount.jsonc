@@ -249,11 +249,12 @@
       {
         "trans": [ -1886.5, 238, 918.46 ], // translation
         "etype": "racer", // actor type
-        "game_task": "(game-task none)", // associated game task (for powercells, etc)
+        "game_task": "(game-task mount-zoomer)", // associated game task (for powercells, etc)
         "quat": [ 0, 0, 0, 1 ], // quaternion
         "bsphere": [ -1656.40, 214.87, 704.30, 10 ], // bounding sphere
         "lump": {
-          "name": "mountainrange-racer-end"
+          "name": "mountainrange-racer-end",
+          "index": ["int32", 3]
         }
       },
       {
@@ -280,7 +281,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1656.27, 228.96, 525.48, 10 ],
   "lump": {
-    "name": "abandon-money-01"
+    "name": "mount-money-01"
   }
 },
 {
@@ -290,7 +291,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1659.83, 230.00, 538.60, 10 ],
   "lump": {
-    "name": "abandon-money-02"
+    "name": "mount-money-02"
   }
 },
 {
@@ -300,7 +301,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1656.86, 227.35, 554.02, 10 ],
   "lump": {
-    "name": "abandon-money-03"
+    "name": "mount-money-03"
   }
 },
 {
@@ -310,7 +311,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1636.63, 226.03, 577.15, 10 ],
   "lump": {
-    "name": "abandon-money-04"
+    "name": "mount-money-04"
   }
 },
 {
@@ -320,7 +321,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1634.20, 227.68, 591.46, 10 ],
   "lump": {
-    "name": "abandon-money-05"
+    "name": "mount-money-05"
   }
 },
 {
@@ -330,7 +331,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1633.93, 228.10, 605.83, 10 ],
   "lump": {
-    "name": "abandon-money-06"
+    "name": "mount-money-06"
   }
 },
 {
@@ -340,7 +341,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1632.59, 220.44, 637.84, 10 ],
   "lump": {
-    "name": "abandon-money-07"
+    "name": "mount-money-07"
   }
 },
 {
@@ -350,7 +351,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1623.54, 215.51, 638.09, 10 ],
   "lump": {
-    "name": "abandon-money-08"
+    "name": "mount-money-08"
   }
 },
 {
@@ -360,7 +361,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1630.13, 214.04, 667.54, 10 ],
   "lump": {
-    "name": "abandon-money-09"
+    "name": "mount-money-09"
   }
 },
 {
@@ -370,7 +371,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1636.04, 214.67, 681.95, 10 ],
   "lump": {
-    "name": "abandon-money-10"
+    "name": "mount-money-10"
   }
 },
 {
@@ -380,7 +381,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1625.29, 212.87, 694.44, 10 ],
   "lump": {
-    "name": "abandon-money-11"
+    "name": "mount-money-11"
   }
 },
 {
@@ -390,7 +391,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1657.84, 205.10, 755.48, 10 ],
   "lump": {
-    "name": "abandon-money-12"
+    "name": "mount-money-12"
   }
 },
 {
@@ -400,7 +401,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1669.27, 205.53, 768.76, 10 ],
   "lump": {
-    "name": "abandon-money-13"
+    "name": "mount-money-13"
   }
 },
 {
@@ -410,7 +411,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1673.79, 207.68, 784.59, 10 ],
   "lump": {
-    "name": "abandon-money-14"
+    "name": "mount-money-14"
   }
 },
 {
@@ -420,7 +421,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1642.27, 208.32, 822.53, 10 ],
   "lump": {
-    "name": "abandon-money-15"
+    "name": "mount-money-15"
   }
 },
 {
@@ -430,7 +431,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1629.05, 208.84, 828.44, 10 ],
   "lump": {
-    "name": "abandon-money-16"
+    "name": "mount-money-16"
   }
 },
 {
@@ -440,7 +441,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1615.95, 206.51, 835.91, 10 ],
   "lump": {
-    "name": "abandon-money-17"
+    "name": "mount-money-17"
   }
 },
 {
@@ -450,7 +451,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1604.88, 205.29, 841.91, 10 ],
   "lump": {
-    "name": "abandon-money-18"
+    "name": "mount-money-18"
   }
 },
 {
@@ -460,7 +461,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1593.84, 207.06, 849.63, 10 ],
   "lump": {
-    "name": "abandon-money-19"
+    "name": "mount-money-19"
   }
 },
 {
@@ -470,7 +471,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1590.50, 208.42, 862.34, 10 ],
   "lump": {
-    "name": "abandon-money-20"
+    "name": "mount-money-20"
   }
 },
 {
@@ -480,7 +481,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1626.91, 213.99, 919.99, 10 ],
   "lump": {
-    "name": "abandon-money-21"
+    "name": "mount-money-21"
   }
 },
 {
@@ -490,7 +491,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1630.93, 217.78, 925.20, 10 ],
   "lump": {
-    "name": "abandon-money-22"
+    "name": "mount-money-22"
   }
 },
 {
@@ -500,7 +501,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1637.49, 217.08, 934.12, 10 ],
   "lump": {
-    "name": "abandon-money-23"
+    "name": "mount-money-23"
   }
 },
 {
@@ -510,7 +511,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1590.83, 222.21, 1011.19, 10 ],
   "lump": {
-    "name": "abandon-money-24"
+    "name": "mount-money-24"
   }
 },
 {
@@ -520,7 +521,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1579.79, 226.40, 1018.39, 10 ],
   "lump": {
-    "name": "abandon-money-25"
+    "name": "mount-money-25"
   }
 },
 {
@@ -530,7 +531,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1566.09, 231.55, 1026.57, 10 ],
   "lump": {
-    "name": "abandon-money-26"
+    "name": "mount-money-26"
   }
 },
 {
@@ -540,7 +541,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1555.55, 235.89, 1029.52, 10 ],
   "lump": {
-    "name": "abandon-money-27"
+    "name": "mount-money-27"
   }
 },
 {
@@ -550,7 +551,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1542.26, 240.14, 1031.68, 10 ],
   "lump": {
-    "name": "abandon-money-28"
+    "name": "mount-money-28"
   }
 },
 {
@@ -560,7 +561,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1529.30, 244.79, 1033.70, 10 ],
   "lump": {
-    "name": "abandon-money-29"
+    "name": "mount-money-29"
   }
 },
 {
@@ -570,7 +571,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1444.66, 254.32, 1043.27, 10 ],
   "lump": {
-    "name": "abandon-money-30"
+    "name": "mount-money-30"
   }
 },
 {
@@ -580,7 +581,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1460.90, 254.28, 1020.76, 10 ],
   "lump": {
-    "name": "abandon-money-31"
+    "name": "mount-money-31"
   }
 },
 {
@@ -590,7 +591,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1447.67, 253.61, 997.22, 10 ],
   "lump": {
-    "name": "abandon-money-32"
+    "name": "mount-money-32"
   }
 },
 {
@@ -600,7 +601,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1454.73, 252.15, 976.99, 10 ],
   "lump": {
-    "name": "abandon-money-33"
+    "name": "mount-money-33"
   }
 },
 {
@@ -610,7 +611,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1462.32, 198.96, 909.33, 10 ],
   "lump": {
-    "name": "abandon-money-34"
+    "name": "mount-money-34"
   }
 },
 {
@@ -620,7 +621,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1472.75, 200.08, 900.54, 10 ],
   "lump": {
-    "name": "abandon-money-35"
+    "name": "mount-money-35"
   }
 },
 {
@@ -630,7 +631,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1482.75, 204.19, 889.61, 10 ],
   "lump": {
-    "name": "abandon-money-36"
+    "name": "mount-money-36"
   }
 },
 {
@@ -640,7 +641,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1479.78, 211.94, 835.80, 10 ],
   "lump": {
-    "name": "abandon-money-37"
+    "name": "mount-money-37"
   }
 },
 {
@@ -650,7 +651,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1477.58, 210.25, 825.62, 10 ],
   "lump": {
-    "name": "abandon-money-38"
+    "name": "mount-money-38"
   }
 },
 {
@@ -660,7 +661,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1474.01, 202.26, 814.86, 10 ],
   "lump": {
-    "name": "abandon-money-39"
+    "name": "mount-money-39"
   }
 },
 {
@@ -670,7 +671,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1506.83, 199.62, 753.01, 10 ],
   "lump": {
-    "name": "abandon-money-40"
+    "name": "mount-money-40"
   }
 },
 {
@@ -680,7 +681,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1513.84, 203.04, 736.18, 10 ],
   "lump": {
-    "name": "abandon-money-41"
+    "name": "mount-money-41"
   }
 },
 {
@@ -690,7 +691,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1518.58, 204.83, 719.09, 10 ],
   "lump": {
-    "name": "abandon-money-42"
+    "name": "mount-money-42"
   }
 },
 {
@@ -700,7 +701,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1512.86, 204.00, 701.07, 10 ],
   "lump": {
-    "name": "abandon-money-43"
+    "name": "mount-money-43"
   }
 },
 {
@@ -710,7 +711,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1505.01, 203.54, 686.93, 10 ],
   "lump": {
-    "name": "abandon-money-44"
+    "name": "mount-money-44"
   }
 },
 {
@@ -720,7 +721,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1504.38, 204.20, 669.80, 10 ],
   "lump": {
-    "name": "abandon-money-45"
+    "name": "mount-money-45"
   }
 },
 {
@@ -730,7 +731,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1525.07, 212.65, 615.14, 10 ],
   "lump": {
-    "name": "abandon-money-46"
+    "name": "mount-money-46"
   }
 },
 {
@@ -740,7 +741,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1526.63, 212.70, 605.21, 10 ],
   "lump": {
-    "name": "abandon-money-47"
+    "name": "mount-money-47"
   }
 },
 {
@@ -750,7 +751,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1527.51, 215.39, 597.01, 10 ],
   "lump": {
-    "name": "abandon-money-48"
+    "name": "mount-money-48"
   }
 },
 {
@@ -760,7 +761,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1493.71, 223.09, 531.01, 10 ],
   "lump": {
-    "name": "abandon-money-49"
+    "name": "mount-money-49"
   }
 },
 {
@@ -770,7 +771,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1481.24, 223.71, 521.49, 10 ],
   "lump": {
-    "name": "abandon-money-50"
+    "name": "mount-money-50"
   }
 },
 {
@@ -780,7 +781,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1463.30, 225.18, 517.80, 10 ],
   "lump": {
-    "name": "abandon-money-51"
+    "name": "mount-money-51"
   }
 },
 {
@@ -790,7 +791,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1419.44, 236.32, 516.71, 10 ],
   "lump": {
-    "name": "abandon-money-52"
+    "name": "mount-money-52"
   }
 },
 {
@@ -800,7 +801,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1404.79, 239.59, 516.95, 10 ],
   "lump": {
-    "name": "abandon-money-53"
+    "name": "mount-money-53"
   }
 },
 {
@@ -810,7 +811,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1390.55, 240.95, 516.28, 10 ],
   "lump": {
-    "name": "abandon-money-54"
+    "name": "mount-money-54"
   }
 },
 {
@@ -820,7 +821,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1353.56, 247.90, 511.46, 10 ],
   "lump": {
-    "name": "abandon-money-55"
+    "name": "mount-money-55"
   }
 },
 {
@@ -830,7 +831,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1343.89, 243.39, 508.77, 10 ],
   "lump": {
-    "name": "abandon-money-56"
+    "name": "mount-money-56"
   }
 },
 {
@@ -840,7 +841,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1335.20, 240.44, 506.83, 10 ],
   "lump": {
-    "name": "abandon-money-57"
+    "name": "mount-money-57"
   }
 },
 {
@@ -850,7 +851,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1307.84, 233.66, 511.67, 10 ],
   "lump": {
-    "name": "abandon-money-58"
+    "name": "mount-money-58"
   }
 },
 {
@@ -860,7 +861,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1298.77, 230.10, 512.58, 10 ],
   "lump": {
-    "name": "abandon-money-59"
+    "name": "mount-money-59"
   }
 },
 {
@@ -870,7 +871,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1292.93, 223.99, 514.82, 10 ],
   "lump": {
-    "name": "abandon-money-60"
+    "name": "mount-money-60"
   }
 },
 {
@@ -880,7 +881,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1219.00, 219.21, 517.75, 10 ],
   "lump": {
-    "name": "abandon-money-61"
+    "name": "mount-money-61"
   }
 },
 {
@@ -890,7 +891,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1206.68, 217.65, 506.42, 10 ],
   "lump": {
-    "name": "abandon-money-62"
+    "name": "mount-money-62"
   }
 },
 {
@@ -900,7 +901,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1194.56, 215.67, 495.72, 10 ],
   "lump": {
-    "name": "abandon-money-63"
+    "name": "mount-money-63"
   }
 },
 {
@@ -910,7 +911,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1408.96, 205.30, 743.67, 10 ],
   "lump": {
-    "name": "abandon-money-64"
+    "name": "mount-money-64"
   }
 },
 {
@@ -920,7 +921,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1408.99, 208.16, 723.74, 10 ],
   "lump": {
-    "name": "abandon-money-65"
+    "name": "mount-money-65"
   }
 },
 {
@@ -930,7 +931,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1410.52, 210.09, 706.72, 10 ],
   "lump": {
-    "name": "abandon-money-66"
+    "name": "mount-money-66"
   }
 },
 {
@@ -940,7 +941,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1411.57, 208.77, 692.61, 10 ],
   "lump": {
-    "name": "abandon-money-67"
+    "name": "mount-money-67"
   }
 },
 {
@@ -950,7 +951,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1412.41, 207.89, 680.52, 10 ],
   "lump": {
-    "name": "abandon-money-68"
+    "name": "mount-money-68"
   }
 },
 {
@@ -960,7 +961,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1412.94, 207.64, 665.50, 10 ],
   "lump": {
-    "name": "abandon-money-69"
+    "name": "mount-money-69"
   }
 },
 {
@@ -970,7 +971,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1409.86, 200.67, 589.37, 10 ],
   "lump": {
-    "name": "abandon-money-70"
+    "name": "mount-money-70"
   }
 },
 {
@@ -980,7 +981,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1415.21, 197.76, 576.26, 10 ],
   "lump": {
-    "name": "abandon-money-71"
+    "name": "mount-money-71"
   }
 },
 {
@@ -990,7 +991,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1412.51, 196.29, 561.10, 10 ],
   "lump": {
-    "name": "abandon-money-72"
+    "name": "mount-money-72"
   }
 },
 {
@@ -1000,7 +1001,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1397.13, 195.39, 478.37, 10 ],
   "lump": {
-    "name": "abandon-money-73"
+    "name": "mount-money-73"
   }
 },
 {
@@ -1010,7 +1011,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1393.54, 195.35, 462.33, 10 ],
   "lump": {
-    "name": "abandon-money-74"
+    "name": "mount-money-74"
   }
 },
 {
@@ -1020,7 +1021,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1387.49, 197.30, 448.26, 10 ],
   "lump": {
-    "name": "abandon-money-75"
+    "name": "mount-money-75"
   }
 },
 {
@@ -1030,7 +1031,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1358.74, 207.00, 429.40, 10 ],
   "lump": {
-    "name": "abandon-money-76"
+    "name": "mount-money-76"
   }
 },
 {
@@ -1040,7 +1041,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1347.00, 208.74, 426.85, 10 ],
   "lump": {
-    "name": "abandon-money-77"
+    "name": "mount-money-77"
   }
 },
 {
@@ -1050,7 +1051,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1331.61, 209.16, 423.82, 10 ],
   "lump": {
-    "name": "abandon-money-78"
+    "name": "mount-money-78"
   }
 },
 {
@@ -1060,7 +1061,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1229.49, 210.39, 415.98, 10 ],
   "lump": {
-    "name": "abandon-money-79"
+    "name": "mount-money-79"
   }
 },
 {
@@ -1070,7 +1071,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1221.19, 210.29, 418.68, 10 ],
   "lump": {
-    "name": "abandon-money-80"
+    "name": "mount-money-80"
   }
 },
 {
@@ -1080,7 +1081,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1210.84, 207.95, 423.13, 10 ],
   "lump": {
-    "name": "abandon-money-81"
+    "name": "mount-money-81"
   }
 },
 {
@@ -1090,7 +1091,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1144.86, 210.51, 477.40, 10 ],
   "lump": {
-    "name": "abandon-money-82"
+    "name": "mount-money-82"
   }
 },
 {
@@ -1100,7 +1101,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1132.07, 209.68, 485.84, 10 ],
   "lump": {
-    "name": "abandon-money-83"
+    "name": "mount-money-83"
   }
 },
 {
@@ -1110,7 +1111,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1119.20, 208.55, 492.32, 10 ],
   "lump": {
-    "name": "abandon-money-84"
+    "name": "mount-money-84"
   }
 },
 {
@@ -1120,7 +1121,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1132.44, 214.93, 439.49, 10 ],
   "lump": {
-    "name": "abandon-money-85"
+    "name": "mount-money-85"
   }
 },
 {
@@ -1130,7 +1131,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1122.06, 216.90, 437.07, 10 ],
   "lump": {
-    "name": "abandon-money-86"
+    "name": "mount-money-86"
   }
 },
 {
@@ -1140,7 +1141,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1109.91, 217.98, 437.95, 10 ],
   "lump": {
-    "name": "abandon-money-87"
+    "name": "mount-money-87"
   }
 },
 {
@@ -1150,7 +1151,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1098.08, 216.43, 444.35, 10 ],
   "lump": {
-    "name": "abandon-money-88"
+    "name": "mount-money-88"
   }
 },
 {
@@ -1160,7 +1161,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1090.41, 212.48, 454.50, 10 ],
   "lump": {
-    "name": "abandon-money-89"
+    "name": "mount-money-89"
   }
 },
 {
@@ -1170,7 +1171,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1089.46, 208.29, 468.49, 10 ],
   "lump": {
-    "name": "abandon-money-90"
+    "name": "mount-money-90"
   }
 },
 {
@@ -1180,7 +1181,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1102.19, 216.86, 520.49, 10 ],
   "lump": {
-    "name": "abandon-money-91"
+    "name": "mount-money-91"
   }
 },
 {
@@ -1190,7 +1191,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1101.73, 215.56, 531.34, 10 ],
   "lump": {
-    "name": "abandon-money-92"
+    "name": "mount-money-92"
   }
 },
 {
@@ -1200,7 +1201,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1101.92, 209.60, 537.91, 10 ],
   "lump": {
-    "name": "abandon-money-93"
+    "name": "mount-money-93"
   }
 },
 {
@@ -1210,7 +1211,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1104.68, 210.45, 574.56, 10 ],
   "lump": {
-    "name": "abandon-money-94"
+    "name": "mount-money-94"
   }
 },
 {
@@ -1220,7 +1221,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1112.02, 211.74, 595.56, 10 ],
   "lump": {
-    "name": "abandon-money-95"
+    "name": "mount-money-95"
   }
 },
 {
@@ -1230,7 +1231,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1118.55, 211.99, 609.25, 10 ],
   "lump": {
-    "name": "abandon-money-96"
+    "name": "mount-money-96"
   }
 },
 {
@@ -1240,7 +1241,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1131.60, 212.52, 617.77, 10 ],
   "lump": {
-    "name": "abandon-money-97"
+    "name": "mount-money-97"
   }
 },
 {
@@ -1250,7 +1251,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1146.60, 214.27, 617.69, 10 ],
   "lump": {
-    "name": "abandon-money-98"
+    "name": "mount-money-98"
   }
 },
 {
@@ -1260,7 +1261,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1161.47, 216.02, 620.14, 10 ],
   "lump": {
-    "name": "abandon-money-99"
+    "name": "mount-money-99"
   }
 },
 {
@@ -1270,7 +1271,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1205.09, 213.88, 672.48, 10 ],
   "lump": {
-    "name": "abandon-money-100"
+    "name": "mount-money-100"
   }
 },
 {
@@ -1280,7 +1281,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1206.38, 216.52, 686.53, 10 ],
   "lump": {
-    "name": "abandon-money-101"
+    "name": "mount-money-101"
   }
 },
 {
@@ -1290,7 +1291,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1207.23, 218.53, 700.36, 10 ],
   "lump": {
-    "name": "abandon-money-102"
+    "name": "mount-money-102"
   }
 },
 {
@@ -1300,7 +1301,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1208.36, 217.97, 717.16, 10 ],
   "lump": {
-    "name": "abandon-money-103"
+    "name": "mount-money-103"
   }
 },
 {
@@ -1310,7 +1311,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1208.37, 215.20, 733.31, 10 ],
   "lump": {
-    "name": "abandon-money-104"
+    "name": "mount-money-104"
   }
 },
 {
@@ -1320,7 +1321,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1206.94, 211.16, 749.77, 10 ],
   "lump": {
-    "name": "abandon-money-105"
+    "name": "mount-money-105"
   }
 },
 {
@@ -1330,7 +1331,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1155.20, 217.97, 841.22, 10 ],
   "lump": {
-    "name": "abandon-money-106"
+    "name": "mount-money-106"
   }
 },
 {
@@ -1340,7 +1341,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1151.17, 220.04, 855.14, 10 ],
   "lump": {
-    "name": "abandon-money-107"
+    "name": "mount-money-107"
   }
 },
 {
@@ -1350,7 +1351,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1153.59, 221.09, 871.03, 10 ],
   "lump": {
-    "name": "abandon-money-108"
+    "name": "mount-money-108"
   }
 },
 {
@@ -1360,7 +1361,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1220.74, 212.03, 936.91, 10 ],
   "lump": {
-    "name": "abandon-money-109"
+    "name": "mount-money-109"
   }
 },
 {
@@ -1370,7 +1371,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1237.13, 213.00, 936.87, 10 ],
   "lump": {
-    "name": "abandon-money-110"
+    "name": "mount-money-110"
   }
 },
 {
@@ -1380,7 +1381,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1252.75, 214.17, 949.26, 10 ],
   "lump": {
-    "name": "abandon-money-111"
+    "name": "mount-money-111"
   }
 },
 {
@@ -1390,7 +1391,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1254.85, 215.92, 981.99, 10 ],
   "lump": {
-    "name": "abandon-money-112"
+    "name": "mount-money-112"
   }
 },
 {
@@ -1400,7 +1401,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1257.40, 217.90, 995.94, 10 ],
   "lump": {
-    "name": "abandon-money-113"
+    "name": "mount-money-113"
   }
 },
 {
@@ -1410,7 +1411,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1261.22, 220.33, 1011.52, 10 ],
   "lump": {
-    "name": "abandon-money-114"
+    "name": "mount-money-114"
   }
 },
 {
@@ -1420,7 +1421,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1272.48, 218.37, 1092.21, 10 ],
   "lump": {
-    "name": "abandon-money-115"
+    "name": "mount-money-115"
   }
 },
 {
@@ -1430,7 +1431,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1268.68, 218.88, 1109.03, 10 ],
   "lump": {
-    "name": "abandon-money-116"
+    "name": "mount-money-116"
   }
 },
 {
@@ -1440,7 +1441,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1275.12, 220.37, 1124.86, 10 ],
   "lump": {
-    "name": "abandon-money-117"
+    "name": "mount-money-117"
   }
 },
 {
@@ -1450,7 +1451,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1387.36, 217.08, 1129.28, 10 ],
   "lump": {
-    "name": "abandon-money-118"
+    "name": "mount-money-118"
   }
 },
 {
@@ -1460,7 +1461,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1406.67, 213.98, 1130.42, 10 ],
   "lump": {
-    "name": "abandon-money-119"
+    "name": "mount-money-119"
   }
 },
 {
@@ -1470,7 +1471,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1426.56, 212.49, 1131.39, 10 ],
   "lump": {
-    "name": "abandon-money-120"
+    "name": "mount-money-120"
   }
 },
 {
@@ -1480,7 +1481,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1465.81, 213.96, 1136.91, 10 ],
   "lump": {
-    "name": "abandon-money-121"
+    "name": "mount-money-121"
   }
 },
 {
@@ -1490,7 +1491,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1478.35, 218.24, 1141.18, 10 ],
   "lump": {
-    "name": "abandon-money-122"
+    "name": "mount-money-122"
   }
 },
 {
@@ -1500,7 +1501,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1490.34, 223.35, 1147.08, 10 ],
   "lump": {
-    "name": "abandon-money-123"
+    "name": "mount-money-123"
   }
 },
 {
@@ -1510,7 +1511,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1323.10, 235.34, 1176.88, 10 ],
   "lump": {
-    "name": "abandon-money-124"
+    "name": "mount-money-124"
   }
 },
 {
@@ -1520,7 +1521,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1328.24, 240.10, 1189.80, 10 ],
   "lump": {
-    "name": "abandon-money-125"
+    "name": "mount-money-125"
   }
 },
 {
@@ -1530,7 +1531,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1342.37, 243.56, 1198.66, 10 ],
   "lump": {
-    "name": "abandon-money-126"
+    "name": "mount-money-126"
   }
 },
 {
@@ -1540,7 +1541,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1390.77, 252.65, 1222.18, 10 ],
   "lump": {
-    "name": "abandon-money-127"
+    "name": "mount-money-127"
   }
 },
 {
@@ -1550,7 +1551,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1409.26, 252.18, 1224.40, 10 ],
   "lump": {
-    "name": "abandon-money-128"
+    "name": "mount-money-128"
   }
 },
 {
@@ -1560,7 +1561,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1425.89, 249.18, 1216.19, 10 ],
   "lump": {
-    "name": "abandon-money-129"
+    "name": "mount-money-129"
   }
 },
 {
@@ -1570,7 +1571,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1483.45, 241.84, 1207.74, 10 ],
   "lump": {
-    "name": "abandon-money-130"
+    "name": "mount-money-130"
   }
 },
 {
@@ -1580,7 +1581,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1497.88, 240.49, 1201.94, 10 ],
   "lump": {
-    "name": "abandon-money-131"
+    "name": "mount-money-131"
   }
 },
 {
@@ -1590,7 +1591,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1509.65, 236.63, 1188.10, 10 ],
   "lump": {
-    "name": "abandon-money-132"
+    "name": "mount-money-132"
   }
 },
 {
@@ -1600,7 +1601,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1653.93, 226.76, 1131.92, 10 ],
   "lump": {
-    "name": "abandon-money-133"
+    "name": "mount-money-133"
   }
 },
 {
@@ -1610,7 +1611,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1671.94, 229.38, 1130.26, 10 ],
   "lump": {
-    "name": "abandon-money-134"
+    "name": "mount-money-134"
   }
 },
 {
@@ -1620,7 +1621,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1691.93, 232.43, 1122.23, 10 ],
   "lump": {
-    "name": "abandon-money-135"
+    "name": "mount-money-135"
   }
 },
 {
@@ -1630,7 +1631,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1804.72, 228.21, 1019.06, 10 ],
   "lump": {
-    "name": "abandon-money-136"
+    "name": "mount-money-136"
   }
 },
 {
@@ -1640,7 +1641,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1825.20, 229.98, 1022.89, 10 ],
   "lump": {
-    "name": "abandon-money-137"
+    "name": "mount-money-137"
   }
 },
 {
@@ -1650,7 +1651,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1847.50, 228.74, 1027.83, 10 ],
   "lump": {
-    "name": "abandon-money-138"
+    "name": "mount-money-138"
   }
 },
 {
@@ -1660,7 +1661,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1874.42, 233.44, 890.82, 10 ],
   "lump": {
-    "name": "abandon-money-139"
+    "name": "mount-money-139"
   }
 },
 {
@@ -1670,7 +1671,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1874.45, 233.44, 882.55, 10 ],
   "lump": {
-    "name": "abandon-money-140"
+    "name": "mount-money-140"
   }
 },
 {
@@ -1680,7 +1681,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1874.22, 232.32, 868.36, 10 ],
   "lump": {
-    "name": "abandon-money-141"
+    "name": "mount-money-141"
   }
 },
 {
@@ -1690,7 +1691,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1874.29, 232.93, 860.77, 10 ],
   "lump": {
-    "name": "abandon-money-142"
+    "name": "mount-money-142"
   }
 },
 {
@@ -1700,7 +1701,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1874.17, 233.46, 854.18, 10 ],
   "lump": {
-    "name": "abandon-money-143"
+    "name": "mount-money-143"
   }
 },
 {
@@ -1710,7 +1711,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1874.28, 233.41, 844.09, 10 ],
   "lump": {
-    "name": "abandon-money-144"
+    "name": "mount-money-144"
   }
 },
 {
@@ -1720,7 +1721,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1874.46, 233.41, 832.99, 10 ],
   "lump": {
-    "name": "abandon-money-145"
+    "name": "mount-money-145"
   }
 },
 {
@@ -1730,7 +1731,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1901.38, 234.91, 770.85, 10 ],
   "lump": {
-    "name": "abandon-money-146"
+    "name": "mount-money-146"
   }
 },
 {
@@ -1740,7 +1741,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1914.07, 234.91, 763.10, 10 ],
   "lump": {
-    "name": "abandon-money-147"
+    "name": "mount-money-147"
   }
 },
 {
@@ -1750,7 +1751,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1925.29, 234.91, 753.39, 10 ],
   "lump": {
-    "name": "abandon-money-148"
+    "name": "mount-money-148"
   }
 },
 {
@@ -1760,7 +1761,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1937.45, 237.01, 732.80, 10 ],
   "lump": {
-    "name": "abandon-money-149"
+    "name": "mount-money-149"
   }
 },
 {
@@ -1770,7 +1771,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1939.45, 237.01, 726.15, 10 ],
   "lump": {
-    "name": "abandon-money-150"
+    "name": "mount-money-150"
   }
 },
 {
@@ -1780,7 +1781,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1940.94, 239.74, 719.63, 10 ],
   "lump": {
-    "name": "abandon-money-151"
+    "name": "mount-money-151"
   }
 },
 {
@@ -1790,7 +1791,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1941.48, 239.74, 711.93, 10 ],
   "lump": {
-    "name": "abandon-money-152"
+    "name": "mount-money-152"
   }
 },
 {
@@ -1800,7 +1801,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1940.80, 242.11, 700.66, 10 ],
   "lump": {
-    "name": "abandon-money-153"
+    "name": "mount-money-153"
   }
 },
 {
@@ -1810,7 +1811,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1938.42, 242.11, 689.82, 10 ],
   "lump": {
-    "name": "abandon-money-154"
+    "name": "mount-money-154"
   }
 },
 {
@@ -1820,7 +1821,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1934.13, 242.11, 678.65, 10 ],
   "lump": {
-    "name": "abandon-money-155"
+    "name": "mount-money-155"
   }
 },
 {
@@ -1830,7 +1831,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1897.24, 254.52, 646.36, 10 ],
   "lump": {
-    "name": "abandon-money-156"
+    "name": "mount-money-156"
   }
 },
 {
@@ -1840,7 +1841,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1890.66, 254.52, 644.08, 10 ],
   "lump": {
-    "name": "abandon-money-157"
+    "name": "mount-money-157"
   }
 },
 {
@@ -1850,7 +1851,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1894.40, 263.83, 663.71, 10 ],
   "lump": {
-    "name": "abandon-money-158"
+    "name": "mount-money-158"
   }
 },
 {
@@ -1860,7 +1861,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1904.77, 263.83, 670.40, 10 ],
   "lump": {
-    "name": "abandon-money-159"
+    "name": "mount-money-159"
   }
 },
 {
@@ -1870,7 +1871,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1913.95, 263.83, 680.71, 10 ],
   "lump": {
-    "name": "abandon-money-160"
+    "name": "mount-money-160"
   }
 },
 {
@@ -1880,7 +1881,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1924.21, 263.83, 707.96, 10 ],
   "lump": {
-    "name": "abandon-money-161"
+    "name": "mount-money-161"
   }
 },
 {
@@ -1890,7 +1891,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1922.93, 263.83, 720.61, 10 ],
   "lump": {
-    "name": "abandon-money-162"
+    "name": "mount-money-162"
   }
 },
 {
@@ -1900,7 +1901,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1917.37, 263.83, 734.12, 10 ],
   "lump": {
-    "name": "abandon-money-163"
+    "name": "mount-money-163"
   }
 },
 {
@@ -1910,7 +1911,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1906.31, 325.45, 711.38, 10 ],
   "lump": {
-    "name": "abandon-money-164"
+    "name": "mount-money-164"
   }
 },
 {
@@ -1920,7 +1921,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1904.92, 325.44, 701.80, 10 ],
   "lump": {
-    "name": "abandon-money-165"
+    "name": "mount-money-165"
   }
 },
 {
@@ -1930,7 +1931,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1898.76, 325.39, 685.82, 10 ],
   "lump": {
-    "name": "abandon-money-166"
+    "name": "mount-money-166"
   }
 },
 {
@@ -1940,7 +1941,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1888.21, 325.38, 678.55, 10 ],
   "lump": {
-    "name": "abandon-money-167"
+    "name": "mount-money-167"
   }
 },
 {
@@ -1950,7 +1951,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1867.90, 330.24, 673.72, 10 ],
   "lump": {
-    "name": "abandon-money-168"
+    "name": "mount-money-168"
   }
 },
 {
@@ -1960,7 +1961,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1858.59, 330.24, 676.49, 10 ],
   "lump": {
-    "name": "abandon-money-169"
+    "name": "mount-money-169"
   }
 },
 {
@@ -1970,7 +1971,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1844.98, 332.56, 687.08, 10 ],
   "lump": {
-    "name": "abandon-money-170"
+    "name": "mount-money-170"
   }
 },
 {
@@ -1980,7 +1981,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1839.84, 332.56, 697.36, 10 ],
   "lump": {
-    "name": "abandon-money-171"
+    "name": "mount-money-171"
   }
 },
 {
@@ -1990,7 +1991,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1844.27, 340.24, 726.95, 10 ],
   "lump": {
-    "name": "abandon-money-172"
+    "name": "mount-money-172"
   }
 },
 {
@@ -2000,7 +2001,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1850.60, 340.24, 734.66, 10 ],
   "lump": {
-    "name": "abandon-money-173"
+    "name": "mount-money-173"
   }
 },
 {
@@ -2010,7 +2011,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1869.72, 247.97, 685.85, 10 ],
   "lump": {
-    "name": "abandon-money-174"
+    "name": "mount-money-174"
   }
 },
 {
@@ -2020,7 +2021,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1867.69, 247.93, 675.28, 10 ],
   "lump": {
-    "name": "abandon-money-175"
+    "name": "mount-money-175"
   }
 },
 {
@@ -2030,7 +2031,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1865.10, 247.96, 665.13, 10 ],
   "lump": {
-    "name": "abandon-money-176"
+    "name": "mount-money-176"
   }
 },
 {
@@ -2040,7 +2041,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1862.75, 247.95, 654.58, 10 ],
   "lump": {
-    "name": "abandon-money-177"
+    "name": "mount-money-177"
   }
 },
 {
@@ -2050,7 +2051,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1860.47, 247.93, 643.17, 10 ],
   "lump": {
-    "name": "abandon-money-178"
+    "name": "mount-money-178"
   }
 },
 {
@@ -2060,7 +2061,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1857.46, 247.96, 631.69, 10 ],
   "lump": {
-    "name": "abandon-money-179"
+    "name": "mount-money-179"
   }
 },
 {
@@ -2070,7 +2071,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1827.53, 237.72, 610.34, 10 ],
   "lump": {
-    "name": "abandon-money-180"
+    "name": "mount-money-180"
   }
 },
 {
@@ -2080,7 +2081,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1821.20, 237.72, 610.29, 10 ],
   "lump": {
-    "name": "abandon-money-181"
+    "name": "mount-money-181"
   }
 },
 {
@@ -2090,7 +2091,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1812.74, 237.62, 610.17, 10 ],
   "lump": {
-    "name": "abandon-money-182"
+    "name": "mount-money-182"
   }
 },
 {
@@ -2100,7 +2101,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1802.99, 237.69, 610.15, 10 ],
   "lump": {
-    "name": "abandon-money-183"
+    "name": "mount-money-183"
   }
 },
 {
@@ -2110,7 +2111,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1796.59, 239.80, 609.97, 10 ],
   "lump": {
-    "name": "abandon-money-184"
+    "name": "mount-money-184"
   }
 },
 {
@@ -2120,7 +2121,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1790.91, 237.67, 610.10, 10 ],
   "lump": {
-    "name": "abandon-money-185"
+    "name": "mount-money-185"
   }
 },
 {
@@ -2130,7 +2131,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1784.66, 237.74, 609.99, 10 ],
   "lump": {
-    "name": "abandon-money-186"
+    "name": "mount-money-186"
   }
 },
 {
@@ -2140,7 +2141,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1775.72, 237.66, 610.15, 10 ],
   "lump": {
-    "name": "abandon-money-187"
+    "name": "mount-money-187"
   }
 },
 {
@@ -2150,7 +2151,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1770.59, 237.71, 610.15, 10 ],
   "lump": {
-    "name": "abandon-money-188"
+    "name": "mount-money-188"
   }
 },
 {
@@ -2160,7 +2161,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1762.88, 237.64, 610.38, 10 ],
   "lump": {
-    "name": "abandon-money-189"
+    "name": "mount-money-189"
   }
 },
 {
@@ -2170,7 +2171,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1737.01, 236.50, 624.08, 10 ],
   "lump": {
-    "name": "abandon-money-190"
+    "name": "mount-money-190"
   }
 },
 {
@@ -2180,7 +2181,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1731.80, 238.83, 629.27, 10 ],
   "lump": {
-    "name": "abandon-money-191"
+    "name": "mount-money-191"
   }
 },
 {
@@ -2190,7 +2191,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1728.64, 236.44, 632.30, 10 ],
   "lump": {
-    "name": "abandon-money-192"
+    "name": "mount-money-192"
   }
 },
 {
@@ -2200,7 +2201,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1721.60, 236.49, 639.38, 10 ],
   "lump": {
-    "name": "abandon-money-193"
+    "name": "mount-money-193"
   }
 },
 {
@@ -2210,7 +2211,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1718.29, 239.35, 643.27, 10 ],
   "lump": {
-    "name": "abandon-money-194"
+    "name": "mount-money-194"
   }
 },
 {
@@ -2220,7 +2221,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1714.77, 237.59, 646.28, 10 ],
   "lump": {
-    "name": "abandon-money-195"
+    "name": "mount-money-195"
   }
 },
 {
@@ -2230,7 +2231,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1702.35, 236.48, 658.94, 10 ],
   "lump": {
-    "name": "abandon-money-196"
+    "name": "mount-money-196"
   }
 },
 {
@@ -2240,7 +2241,7 @@
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1696.26, 236.46, 664.59, 10 ],
   "lump": {
-    "name": "abandon-money-197"
+    "name": "mount-money-197"
   }
 },
   {
@@ -2528,7 +2529,7 @@
   "bsphere": [ -1466.99, 190.97, 678.88, 10 ],
   "lump": {
     "name": "mount-fuel-cell-01",
-    "eco-info": [ "int32", 6, 131 ],
+    "eco-info": ["cell-info", "(game-task mount-findcell-1)"],
     "movie-pos": ["movie-pos", [ -1466.99, 192.97, 678.88, 1.255 ]]
   }
 },
@@ -2541,23 +2542,12 @@
   "bsphere": [ -1466.99, 190.97, 678.88, 10 ],
   "lump": {
     "name": "mount-fuel-cell-waterfall",
-    "eco-info": [ "int32", 6, 132 ],
+    "eco-info": ["cell-info", "(game-task mount-findcell-waterfall)"],
     "movie-pos": ["movie-pos", [ -1453.84, 196.42, 971.48, 1.255 ]]
   }
 },
 
-{
-  "trans": [ -1876.45, 239.23, 937.46 ],
-  "etype": "fuel-cell",
-  "game_task": "(game-task mount-zoomer)",
-  "quat": [ 0, 0, 0, 1 ],
-  "bsphere": [ -1885.15, 233.47, 919.96, 10 ],
-  "lump": {
-    "name": "mount-fuel-cell-02",
-    "eco-info": [ "int32", 6, 133 ],
-    "movie-pos": ["movie-pos", [ -1876.45, 239.23, 937.46, 1.255 ]]
-  }
-},
+
 {
   "trans": [ -1874.50, 369.79 ,685.25 ],
   "etype": "fuel-cell",
@@ -2566,7 +2556,7 @@
   "bsphere": [ -1874.17, 365.23, 723.97, 10 ],
   "lump": {
     "name": "mount-fuel-cell-03",
-    "eco-info": [ "int32", 6, 134 ],
+    "eco-info": ["cell-info", "(game-task mount-towertop)"],
     "movie-pos": ["movie-pos", [ -1874.28, 367.78, 685.21, 135.255 ]]
   }
 },
@@ -4339,6 +4329,17 @@
       "bsphere": [-1852.9, 261.8, 655.86, 10 ],
       "lump": {
         "name": "mount-eco-1"
+      }
+    },
+    // return ramp blue eco//
+    {
+      "trans": [-1281.84, 198.67, 413.79],
+      "etype": "eco-blue",
+      "game_task": 0,
+      "quat": [ 0, 0, 0, 1 ],
+      "bsphere": [-1852.9, 261.8, 655.86, 10 ],
+      "lump": {
+        "name": "mount-eco-2"
       }
     },
 

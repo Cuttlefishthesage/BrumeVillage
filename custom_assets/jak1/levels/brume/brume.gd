@@ -4,7 +4,7 @@
 ;; the actual file name still needs to be 8.3
 ("BRU.DGO"
  (
-  "test-zone-obs.o"
+  "brume-obs.o"
   "oracle.o"
   "linear-plat.o"
   "village-obs.o"
@@ -24,6 +24,11 @@
   ;;"fisher.o"
   ;;"sculptor.o"
   ;;"ogre-obs.o"
+  "tpage-398.go" 
+  "tpage-400.go"
+  "tpage-399.go"
+  "tpage-401.go"
+  "tpage-1470.go" ;; moved tpages to more appropriate location
   "sunkencam-ag.go"
   "village2cam-ag.go"
   "junglecam-ag.go"
@@ -44,11 +49,6 @@
   "ecovalve-ag.go"
   "warpgate-ag.go" 
   "warp-gate-switch-ag.go"
-  "tpage-398.go" 
-  "tpage-400.go"
-  "tpage-399.go"
-  "tpage-401.go"
-  "tpage-1470.go"
   "brume.go"
   )
  )

@@ -448,7 +448,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1078.77, 176.02, 261.99, 10],
   "lump": {
-    "name": "pathcart1",
+    "name": "pathcart2",
     "path": ["vector4m", 
       [-1078.77, 176.02, 261.99, 1.0],
       [-1044.57, 168.06, 262.41, 1.0]
@@ -465,7 +465,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1043.71, 177.27, 273.98, 10],
   "lump": {
-    "name": "pathcart2",
+    "name": "pathcart3",
     "path": ["vector4m", 
       [-1043.71, 177.27, 273.98, 1.0],
       [-1080.31, 169.98, 273.55, 1.0]
@@ -481,7 +481,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1043.71, 177.27, 273.98, 10],
   "lump": {
-    "name": "pathcart2",
+    "name": "pathcart4",
     "path": ["vector4m", 
       [-1043.71, 177.27, 273.98, 1.0],
       [-1080.31, 169.98, 273.55, 1.0]
@@ -498,7 +498,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1081.46, 180.36, 288.87, 10],
   "lump": {
-    "name": "pathcart3",
+    "name": "pathcart5",
     "path": ["vector4m", 
       [-1081.46, 180.36, 288.87, 1.0],
       [-1046.83, 170.62, 287.23, 1.0]
@@ -514,7 +514,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1081.46, 180.36, 288.87, 10],
   "lump": {
-    "name": "pathcart3",
+    "name": "pathcart6",
     "path": ["vector4m", 
       [-1081.46, 180.36, 288.87, 1.0],
       [-1046.83, 170.62, 287.23, 1.0]
@@ -531,7 +531,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1041.04, 185.58, 301.18, 10],
   "lump": {
-    "name": "pathcart4",
+    "name": "pathcart7",
     "path": ["vector4m", 
       [-1041.04, 185.58, 301.18, 1.0],
       [-1080.59, 174.71, 300.56, 1.0]
@@ -547,7 +547,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1041.04, 185.58, 301.18, 10],
   "lump": {
-    "name": "pathcart4",
+    "name": "pathcart8",
     "path": ["vector4m", 
       [-1041.04, 185.58, 301.18, 1.0],
       [-1080.59, 174.71, 300.56, 1.0]
@@ -564,7 +564,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1078.24, 175.75, 313.98, 10],
   "lump": {
-    "name": "pathcart5",
+    "name": "pathcart9",
     "path": ["vector4m", 
       [-1078.24, 175.75, 313.98, 1.0],
       [-1043.02, 176.23, 313.80, 1.0]
@@ -580,7 +580,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1078.24, 175.75, 313.98, 10],
   "lump": {
-    "name": "pathcart5",
+    "name": "pathcart10",
     "path": ["vector4m", 
       [-1078.24, 175.75, 313.98, 1.0],
       [-1043.02, 176.23, 313.80, 1.0]
@@ -597,7 +597,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1042.94, 179.83, 324.29, 10],
   "lump": {
-    "name": "pathcart6",
+    "name": "pathcart11",
     "path": ["vector4m", 
       [-1042.94, 179.83, 324.29, 1.0],
       [-1078.12, 180.14, 323.01, 1.0]
@@ -613,7 +613,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1042.94, 179.83, 324.29, 10],
   "lump": {
-    "name": "pathcart6",
+    "name": "pathcart12",
     "path": ["vector4m", 
       [-1042.94, 179.83, 324.29, 1.0],
       [-1078.12, 180.14, 323.01, 1.0]
@@ -630,7 +630,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1048.94, 179.88, 324.07, 10],
   "lump": {
-    "name": "pathcart7",
+    "name": "pathcart13",
     "path": ["vector4m", 
       [-1048.94, 179.88, 324.07, 1.0],
       [-1072.12, 180.09, 323.23, 1.0]
@@ -646,7 +646,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1048.94, 179.88, 324.07, 10],
   "lump": {
-    "name": "pathcart8",
+    "name": "pathcart14",
     "path": ["vector4m", 
       [-1048.94, 179.88, 324.07, 1.0],
       [-1072.12, 180.09, 323.23, 1.0]
@@ -662,7 +662,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1048.94, 179.88, 324.07, 10],
   "lump": {
-    "name": "pathcart9",
+    "name": "pathcart15",
     "path": ["vector4m", 
       [-1048.94, 179.88, 324.07, 1.0],
       [-1072.12, 180.09, 323.23, 1.0]
@@ -678,7 +678,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1048.94, 179.88, 324.07, 10],
   "lump": {
-    "name": "pathcart10",
+    "name": "pathcart16",
     "path": ["vector4m", 
       [-1048.94, 179.88, 324.07, 1.0],
       [-1072.12, 180.09, 323.23, 1.0]
@@ -694,7 +694,7 @@
   "quat": [0, 0, 0, 1],
   "bsphere": [-1048.94, 179.88, 324.07, 10],
   "lump": {
-    "name": "pathcart11",
+    "name": "pathcart17",
     "path": ["vector4m", 
       [-1048.94, 179.88, 324.07, 1.0],
       [-1072.12, 180.09, 323.23, 1.0]
@@ -2801,7 +2801,7 @@
   "bsphere": [ -1470.74, 184.33, 36.12, 10 ],
   "lump": {
     "name": "abandon-fuel-cell-01",
-    "eco-info": [ "int32", 6, 125 ],
+    "eco-info": ["cell-info", "(game-task abandon-findcell-1)"],
     "movie-pos": [ "movie-pos", [ -1279.56, 191.64, 489.88, 1.255 ] ]
   }
 },
@@ -2814,7 +2814,7 @@
   "bsphere": [ -1309.39, 192.17, 623.76, 10 ],
   "lump": {
     "name": "abandon-fuel-cell-02",
-    "eco-info": [ "int32", 6, 126 ],
+    "eco-info": ["cell-info", "(game-task abandon-findcell-2)"],
     "movie-pos": [ "movie-pos", [ -1309.39, 190.67, 623.76, 1.255 ] ]
   }
 },
@@ -2826,7 +2826,7 @@
   "bsphere": [ -1309.39, 192.17, 623.76, 10 ],
   "lump": {
     "name": "abandon-fuel-cell-03",
-    "eco-info": [ "int32", 6, 127 ],
+    "eco-info": ["cell-info", "(game-task abandon-findcell-3)"],
     "movie-pos": [ "movie-pos", [ -1434.61, 118.64, 811.79, 1.255 ] ]
   }
 },
@@ -2838,7 +2838,7 @@
   "bsphere": [ -1309.39, 192.17, 623.76, 10 ],
   "lump": {
     "name": "abandon-fuel-cell-04",
-    "eco-info": [ "int32", 6, 129 ],
+    "eco-info": ["cell-info", "(game-task abandon-rock)"],
     "movie-pos": [ "movie-pos", [ -1486.96, 167.24, 421.24, 1.255 ] ]
   }
 },
@@ -3911,7 +3911,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-2"
   }
 },
 {
@@ -3928,7 +3928,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-3"
   }
 },
 {
@@ -3945,7 +3945,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-4"
   }
 },
 {
@@ -3962,7 +3962,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-5"
   }
 },
 {
@@ -3979,7 +3979,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-6"
   }
 },
 {
@@ -3996,7 +3996,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-7"
   }
 },
 {
@@ -4013,7 +4013,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-8"
   }
 },
 {
@@ -4030,7 +4030,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-9"
   }
 },
 {
@@ -4047,7 +4047,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-10"
   }
 },
 {
@@ -4064,7 +4064,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-11"
   }
 },
 {
@@ -4081,7 +4081,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-12"
   }
 },
 {
@@ -4098,7 +4098,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-13"
   }
 },
 {
@@ -4115,7 +4115,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-14"
   }
 },
 {
@@ -4132,7 +4132,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-15"
   }
 },
 {
@@ -4149,7 +4149,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-16"
   }
 },
 {
@@ -4166,7 +4166,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-17"
   }
 },
 {
@@ -4183,7 +4183,7 @@
         30.0
       ],
     "cycle-speed": [ "float", -1.0, 0.0 ],
-    "name": "abandon-firefly-1"
+    "name": "abandon-firefly-18"
   }
 },
 
@@ -5907,9 +5907,7 @@
       [-1438.22, 179.01, 140.28],
       [-1452.17, 178.48, 137.30],
       [-1470.63, 176.59, 136.50]
-    ],
-  "nav-mesh-sphere": ["vector4m",
-          [-1456.47, 184.24, 158.66, 4.49]]
+    ]
   }
 },
 {
@@ -6539,7 +6537,7 @@
 },
 {
   "aid": 70530,
-  "trans": [ -1392.25, 178.16, 143.40 ],
+  "trans": [ -1392.25, 177.5, 143.40 ],
   "etype": "swamp-rat-nest",
   "game_task": 0,
   "quat": [ 0, 0, 0, 1 ],
@@ -6555,7 +6553,7 @@
 },
 {
   "aid": 70531,
-  "trans": [ -1257.04, 174.40, 156.36 ],
+  "trans": [ -1257.04, 173.60, 156.36 ],
   "etype": "swamp-rat-nest",
   "game_task": 0,
   "quat": [ 0, 0, 0, 1 ],
@@ -6647,7 +6645,7 @@
 },
 {
   "aid": 70536,
-  "trans": [ -1481.91, 124.02, 719.73 ],
+  "trans": [ -1481.91, 123.50, 719.73 ],
   "etype": "swamp-rat-nest",
   "game_task": 0,
   "quat": [ 0, 0, 0, 1 ],

@@ -17,6 +17,11 @@
  ;;"sunken-water.o" crashes coming from vil2
  "jungle-obs.o"
  "puffer.o"
+ "tpage-398.go"
+ "tpage-400.go"
+ "tpage-399.go"
+ "tpage-401.go"
+ "tpage-1470.go" ;; moved tpages to better location
  "plat-ag.go"
  "race-ring-ag.go"
  "puffer-ag.go"
@@ -36,10 +41,5 @@
  "eichar-racer+0-ag.go" 
  "ef-plane-ag.go"       
  "racer-ag.go"          
- "tpage-398.go"
- "tpage-400.go"
- "tpage-399.go"
- "tpage-401.go"
- "tpage-1470.go"
  "mount.go"
  ))

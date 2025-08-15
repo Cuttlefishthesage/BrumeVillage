@@ -142,7 +142,7 @@
   "Get the permanent storage for a game-task"
   (-> this task-perm-list data arg0))
 
-(define *game-counts* (the game-count-info (malloc 'global 10000)))
+;;(define *game-counts* (the game-count-info (malloc 'global 10000)))
 
 (defmethod initialize! ((this game-info) (cause symbol) (save-to-load game-save) (continue-point-override string))
   "Initialize the game-info.
