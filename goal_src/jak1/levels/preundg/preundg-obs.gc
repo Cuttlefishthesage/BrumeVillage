@@ -3,7 +3,7 @@
 (deftype preundg-maindoor (eco-door) ())
 
 
-(defskelgroup *jng-iris-door-sg*
+(defskelgroup *preundg-iris-door-sg*
   jng-iris-door
   jng-iris-door-lod0-jg
   jng-iris-door-idle-ja
@@ -27,7 +27,7 @@
   (none))
 
 (defmethod eco-door-method-25 ((this preundg-maindoor))
-  (initialize-skeleton this *jng-iris-door-sg* '())
+  (initialize-skeleton this *preundg-iris-door-sg* '())
   (set! (-> this open-distance) 22768.0)
   (set! (-> this close-distance) 23920.0)
   (set! (-> this auto-close) #t)
@@ -51,7 +51,7 @@
    (preundg-silostep-rise symbol)))
 
 
-(defskelgroup *silostep-sg*
+(defskelgroup *preundg-silostep-sg*
   silostep
   silostep-lod0-jg
   silostep-idle-ja
@@ -125,7 +125,7 @@
     (backup-collide-with-as s4-0)
     (set! (-> this root) s4-0))
   (process-drawable-from-entity! this arg0)
-  (initialize-skeleton this *silostep-sg* '())
+  (initialize-skeleton this *preundg-silostep-sg* '())
   (set! (-> this anim-limit)
         (* (res-lump-float arg0 'distance :default 1.0)
            (the float (+ (-> (the-as art-joint-anim (-> this draw art-group data 2)) data 0 length) -1))))

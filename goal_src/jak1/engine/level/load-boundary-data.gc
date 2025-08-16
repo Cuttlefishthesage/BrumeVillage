@@ -1619,6 +1619,13 @@
   :fwd (checkpt "preundg-checkpoint3" #f)
   :bwd (checkpt "preundg-checkpoint3" #f)
 )
+(static-load-boundary :flags (player)
+  :top (meters 66.83)
+  :bot (meters 20.83)
+  :points ( (meters -1754.24) (meters -161.43) (meters -1719.96) (meters -161.43) )
+  :fwd (checkpt "preundg-checkpoint3.5" #f)
+  :bwd (checkpt "preundg-checkpoint3.5" #f)
+)
 
 (static-load-boundary :flags (player)
   :top (meters 160.83)

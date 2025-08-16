@@ -980,7 +980,10 @@
       "quat": [ 0, 0, 0, 1 ], // quaternion
       "bsphere": [-7.41, 3.5, 28.42, 10], // bounding sphere
       "lump": {
-        "name": "birb"
+        "name": "birb",
+        "path": ["vector3m", [-1795.24,  33.83, -134.01],
+[-1775.96,  33.83, -134.04]],
+"use-default-keyframe": ["symbol", "#t"]
       }
     },
     {

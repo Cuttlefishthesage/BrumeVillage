@@ -4959,11 +4959,11 @@
 },
 
 {
-  "trans": [ -1509.69, 207.61, 661.65 ],
+  "trans": [ -1494.44, 200.65, 762.53 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1509.69, 207.61, 661.65, 10 ],
+  "bsphere": [ -1494.44, 200.65, 762.53, 10 ],
   "lump": {
     "name": "race-ring-02-go",
     "timeout": [ "float", 10.0 ],
@@ -4975,11 +4975,11 @@
 },
 
 {
-  "trans": [ -1445.98, 232.73, 515.58 ],
+  "trans": [ -1509.69, 207.61, 661.65 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1445.98, 232.73, 515.58, 10 ],
+  "bsphere": [ -1509.69, 207.61, 661.65, 10 ],
   "lump": {
     "name": "race-ring-03-go",
     "timeout": [ "float", 10.0 ],
@@ -4991,11 +4991,11 @@
 },
 
 {
-  "trans": [ -1354.49, 250.18, 510.08 ],
+  "trans": [ -1445.98, 232.73, 515.58 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1354.49, 250.18, 510.08, 10 ],
+  "bsphere": [ -1445.98, 232.73, 515.58, 10 ],
   "lump": {
     "name": "race-ring-04-go",
     "timeout": [ "float", 10.0 ],
@@ -5007,11 +5007,11 @@
 },
 
 {
-  "trans": [ -1310.12, 238.08, 510.43 ],
+  "trans": [ -1354.49, 250.18, 510.08 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1310.12, 238.08, 510.43, 10 ],
+  "bsphere": [ -1354.49, 250.18, 510.08, 10 ],
   "lump": {
     "name": "race-ring-05-go",
     "timeout": [ "float", 10.0 ],
@@ -5023,11 +5023,11 @@
 },
 
 {
-  "trans": [ -1262.31, 227.96, 515.14 ],
+  "trans": [ -1310.12, 238.08, 510.43 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1262.31, 227.96, 515.14, 10 ],
+  "bsphere": [ -1310.12, 238.08, 510.43, 10 ],
   "lump": {
     "name": "race-ring-06-go",
     "timeout": [ "float", 10.0 ],
@@ -5039,11 +5039,11 @@
 },
 
 {
-  "trans": [ -1139.44, 216.08, 442.96 ],
+  "trans": [ -1262.31, 227.96, 515.14 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1139.44, 216.08, 442.96, 10 ],
+  "bsphere": [ -1262.31, 227.96, 515.14, 10 ],
   "lump": {
     "name": "race-ring-07-go",
     "timeout": [ "float", 10.0 ],
@@ -5055,11 +5055,11 @@
 },
 
 {
-  "trans": [ -1098.08, 219.97, 444.36 ],
+  "trans": [ -1139.44, 216.08, 442.96 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1098.08, 219.97, 444.36, 10 ],
+  "bsphere": [ -1139.44, 216.08, 442.96, 10 ],
   "lump": {
     "name": "race-ring-08-go",
     "timeout": [ "float", 10.0 ],
@@ -5071,11 +5071,11 @@
 },
 
 {
-  "trans": [ -1099.01, 212.49, 503.03 ],
+  "trans": [ -1098.08, 219.97, 444.36 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1099.01, 212.49, 503.03, 10 ],
+  "bsphere": [ -1098.08, 219.97, 444.36, 10 ],
   "lump": {
     "name": "race-ring-09-go",
     "timeout": [ "float", 10.0 ],
@@ -5087,11 +5087,11 @@
 },
 
 {
-  "trans": [ -1149.58, 226.89, 613.20 ],
+  "trans": [ -1099.01, 212.49, 503.03 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1149.58, 226.89, 613.20, 10 ],
+  "bsphere": [ -1099.01, 212.49, 503.03, 10 ],
   "lump": {
     "name": "race-ring-10-go",
     "timeout": [ "float", 10.0 ],
@@ -5103,18 +5103,34 @@
 },
 
 {
+  "trans": [ -1149.58, 225.89, 613.20 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1149.58, 226.89, 613.20, 10 ],
+  "lump": {
+    "name": "race-ring-11-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-10-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-12-go"
+  }
+},
+
+{
   "trans": [ -1165.74, 217.93, 661.68 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
   "bsphere": [ -1197.02, 222.10, 697.60, 10 ],
   "lump": {
-    "name": "race-ring-11-go",
+    "name": "race-ring-12-go",
     "timeout": [ "float", 10.0 ],
     "rot-y": [ "meters", 1.2298 ], // 45° more rotation
-    "prev-actor": "race-ring-10-go",
+    "prev-actor": "race-ring-11-go",
     "alt-actor": "race-ring-01-start",
-    "next-actor": "race-ring-12-go"
+    "next-actor": "race-ring-13-go"
   }
 },
 
@@ -5124,22 +5140,6 @@
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
   "bsphere": [ -1203.90, 205.61, 705.98, 10 ],
-  "lump": {
-    "name": "race-ring-12-go",
-    "timeout": [ "float", 10.0 ],
-    "rot-y": [ "meters", 0.4444 ],
-    "prev-actor": "race-ring-11-go",
-    "alt-actor": "race-ring-01-start",
-    "next-actor": "race-ring-13-go"
-  }
-},
-
-{
-  "trans": [ -1233.21, 212.75, 658.39 ],
-  "etype": "race-ring",
-  "game_task": "(game-task mount-ringrace)",
-  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1233.21, 212.75, 658.39, 10 ],
   "lump": {
     "name": "race-ring-13-go",
     "timeout": [ "float", 10.0 ],
@@ -5151,11 +5151,11 @@
 },
 
 {
-  "trans": [ -1162.70, 215.27, 801.76 ],
+  "trans": [ -1233.21, 212.75, 658.39 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1162.70, 215.27, 801.76, 10 ],
+  "bsphere": [ -1233.21, 212.75, 658.39, 10 ],
   "lump": {
     "name": "race-ring-14-go",
     "timeout": [ "float", 10.0 ],
@@ -5167,11 +5167,11 @@
 },
 
 {
-  "trans": [ -1140.58, 211.33, 902.98 ],
+  "trans": [ -1209.15, 220.98, 705.54 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1140.58, 211.33, 902.98, 10 ],
+  "bsphere": [ -1209.15, 220.98, 705.54, 10 ],
   "lump": {
     "name": "race-ring-15-go",
     "timeout": [ "float", 10.0 ],
@@ -5183,11 +5183,11 @@
 },
 
 {
-  "trans": [ -1207.98, 215.70, 936.83 ],
+  "trans": [ -1162.70, 215.27, 801.76 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1207.98, 215.70, 936.83, 10 ],
+  "bsphere": [ -1162.70, 215.27, 801.76, 10 ],
   "lump": {
     "name": "race-ring-16-go",
     "timeout": [ "float", 10.0 ],
@@ -5199,11 +5199,11 @@
 },
 
 {
-  "trans": [ -1267.23, 237.30, 1047.91 ],
+  "trans": [ -1153.56, 224.56, 870.41 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1267.23, 237.30, 1047.91, 10 ],
+  "bsphere": [ -1140.58, 211.33, 902.98, 10 ],
   "lump": {
     "name": "race-ring-17-go",
     "timeout": [ "float", 10.0 ],
@@ -5215,11 +5215,11 @@
 },
 
 {
-  "trans": [ -1353.81, 249.67, 1205.47 ],
+  "trans": [ -1207.98, 215.70, 936.83 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1353.81, 249.67, 1205.47, 10 ],
+  "bsphere": [ -1207.98, 215.70, 936.83, 10 ],
   "lump": {
     "name": "race-ring-18-go",
     "timeout": [ "float", 10.0 ],
@@ -5231,11 +5231,11 @@
 },
 
 {
-  "trans": [ -1448.88, 250.14, 1214.10 ],
+  "trans": [ -1267.23, 235.50, 1047.91 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1448.88, 250.14, 1214.10, 10 ],
+  "bsphere": [ -1267.23, 237.30, 1047.91, 10 ],
   "lump": {
     "name": "race-ring-19-go",
     "timeout": [ "float", 10.0 ],
@@ -5247,11 +5247,11 @@
 },
 
 {
-  "trans": [ -1539.57, 234.09, 1168.56 ],
+  "trans": [ -1353.81, 249.67, 1205.47 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1539.57, 234.09, 1168.56, 10 ],
+  "bsphere": [ -1353.81, 249.67, 1205.47, 10 ],
   "lump": {
     "name": "race-ring-20-go",
     "timeout": [ "float", 10.0 ],
@@ -5263,11 +5263,11 @@
 },
 
 {
-  "trans": [ -1627.84, 230.58, 1094.79 ],
+  "trans": [ -1448.88, 250.14, 1214.10 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1627.84, 230.58, 1094.79, 10 ],
+  "bsphere": [ -1448.88, 250.14, 1214.10, 10 ],
   "lump": {
     "name": "race-ring-21-go",
     "timeout": [ "float", 10.0 ],
@@ -5279,11 +5279,11 @@
 },
 
 {
-  "trans": [ -1699.88, 233.48, 1081.57 ],
+  "trans": [ -1539.57, 234.09, 1168.56 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1699.88, 233.48, 1081.57, 10 ],
+  "bsphere": [ -1539.57, 234.09, 1168.56, 10 ],
   "lump": {
     "name": "race-ring-22-go",
     "timeout": [ "float", 10.0 ],
@@ -5295,18 +5295,66 @@
 },
 
 {
-  "trans": [ -1776.84, 228.55, 1043.38 ],
+  "trans": [ -1627.84, 230.58, 1094.79 ],
   "etype": "race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
-  "bsphere": [ -1776.84, 228.55, 1043.38, 10 ],
+  "bsphere": [ -1627.84, 230.58, 1094.79, 10 ],
   "lump": {
     "name": "race-ring-23-go",
     "timeout": [ "float", 10.0 ],
     "rot-y": [ "meters", 0.4444 ],
     "prev-actor": "race-ring-22-go",
     "alt-actor": "race-ring-01-start",
-    "next-actor": "race-ring-24-finale"
+    "next-actor": "race-ring-24-go"
+  }
+},
+
+{
+  "trans": [ -1699.88, 233.48, 1081.57 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1699.88, 233.48, 1081.57, 10 ],
+  "lump": {
+    "name": "race-ring-24-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-23-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-25-go"
+  }
+},
+
+{
+  "trans": [ -1776.84, 228.55, 1043.38 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1776.84, 228.55, 1043.38, 10 ],
+  "lump": {
+    "name": "race-ring-25-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-24-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-26-go"
+  }
+},
+
+{
+  "trans": [ -1840.64, 231.47, 1027.84 ],
+  "etype": "race-ring",
+  "game_task": "(game-task mount-ringrace)",
+  "quat": [ 0.000, 0.000, 0.000, 1.000 ],
+  "bsphere": [ -1776.84, 228.55, 1043.38, 10 ],
+  "lump": {
+    "name": "race-ring-26-go",
+    "timeout": [ "float", 10.0 ],
+    "rot-y": [ "meters", 0.4444 ],
+    "prev-actor": "race-ring-25-go",
+    "alt-actor": "race-ring-01-start",
+    "next-actor": "race-ring-27-finale"
   }
 },
 
@@ -5317,13 +5365,148 @@
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
   "bsphere": [ -1883.00, 236.91, 982.90, 10 ],
   "lump": {
-    "name": "race-ring-24-finale",
+    "name": "race-ring-27-finale",
     "timeout": [ "float", 10.0 ],
-    "rot-z": [ "meters", 0.4444 ],
-    "prev-actor": "race-ring-23-go",
+    "rotoffset": [ "meters", 180.4444 ],
+    "prev-actor": "race-ring-26-go",
     "alt-actor": "race-ring-01-start",
     "movie-pos": [ "meters", -1865.42, 237.92, 951.14 ],
     "eco-info": [ "int32", 6, 135 ]
+  }
+},
+
+
+//darkecobox//
+{
+  "trans": [ -1480.34, 192.30, 708.72 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ 0.000000, 0.378171, -0.000000, 0.925736 ],
+  "bsphere": [ -1480.34, 194.30, 708.72, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-1",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1477.04, 192.02, 713.60 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ 0.000000, 0.174545, -0.000000, 0.984649 ],
+  "bsphere": [ -1477.04, 194.02, 713.60, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-2",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1458.51, 192.43, 728.97 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ -0.053232, 0.174290, -0.009436, 0.983209 ],
+  "bsphere": [ -1458.51, 194.43, 728.97, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-3",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1453.99, 192.93, 728.97 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ 0.003081, 0.157347, 0.122895, 0.979862 ],
+  "bsphere": [ -1453.99, 194.93, 728.97, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-4",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1463.09, 192.77, 701.36 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ 0.003081, 0.157347, 0.122895, 0.979862 ],
+  "bsphere": [ -1463.09, 194.77, 701.36, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-5",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1459.42, 193.01, 708.38 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ -0.066482, 0.676488, 0.113181, 0.724662 ],
+  "bsphere": [ -1459.42, 195.01, 708.38, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-6",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1472.91, 193.33, 686.31 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ -0.035170, 0.678990, -0.031687, 0.732619 ],
+  "bsphere": [ -1472.91, 195.33, 686.31, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-7",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1470.32, 193.33, 690.74 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ -0.019058, 0.318316, -0.043334, 0.946802 ],
+  "bsphere": [ -1470.32, 195.33, 690.74, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-8",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1467.65, 193.33, 684.75 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ -0.042749, 0.859799, -0.020335, 0.508433 ],
+  "bsphere": [ -1467.65, 195.33, 684.75, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-9",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1480.43, 192.62, 730.19 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ -0.042749, 0.859799, -0.020335, 0.508433 ],
+  "bsphere": [ -1480.43, 194.62, 730.19, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-10",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1481.57, 192.62, 736.76 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ 0.112193, 0.968709, -0.042220, 0.217331 ],
+  "bsphere": [ -1481.57, 194.62, 736.76, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-11",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1477.99, 192.07, 733.55 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ -0.052742, 0.957523, 0.069387, 0.274869 ],
+  "bsphere": [ -1477.99, 194.07, 733.55, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-12",
+    "crate-type": "'darkeco"
   }
 }
 

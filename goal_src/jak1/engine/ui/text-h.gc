@@ -796,48 +796,49 @@
   (input-opts-controller-led-reflect-heat #x1617)
   (input-opts-analog-sensitivity #x1618)
   (input-opts-controller-pressure-sensitivity #x1619)
+
   ;;BRUME;;
-  (brume #x1647)
-  (brume-buzzer #x1648)
-  (brume-muse-hide-3 #x1620)
-  (brume-oracle-1 #x1621)
-  (brume-oracle-2 #x1622)
-  (brume-findcell-1 #x1623)
-  (brume-restore-power #x1624)
+  (brume #x4647)
+  (brume-buzzer #x4648)
+  (brume-muse-hide-3 #x4620)
+  (brume-oracle-1 #x4621)
+  (brume-oracle-2 #x4622)
+  (brume-findcell-1 #x4623)
+  (brume-restore-power #x4624)
 
   ;;ABANDON;;
 
-  (abandon #x1625)
-  (abandon-buzzer #x1626)
-  (abandon-findcell-1 #x1627)
-  (abandon-findcell-2 #x1628)
-  (abandon-findcell-3 #x1629)
-  (abandon-drillers #x1630)
-  (abandon-rock #x1631)
+  (abandon #x4625)
+  (abandon-buzzer #x4626)
+  (abandon-findcell-1 #x4627)
+  (abandon-findcell-2 #x4628)
+  (abandon-findcell-3 #x4629)
+  (abandon-drillers #x4630)
+  (abandon-rock #x4631)
 
   ;;MOUNT;;
 
-  (mount #x1632)
-  (mount-buzzer #x1633)
-  (mount-findcell-1 #x1634)
-  (mount-findcell-waterfall #x1635)
-  (mount-zoomer #x1636)
-  (mount-towertop #x1637)
-  (mount-ringrace #x1638)
+  (mount #x4632)
+  (mount-buzzer #x4633)
+  (mount-findcell-1 #x4634)
+  (mount-findcell-waterfall #x4635)
+  (mount-zoomer #x4636)
+  (mount-towertop #x4637)
+  (mount-ringrace #x4638)
 
   ;;PREUNDG;;
 
-  (preundg #x1639)
-  (preundg-buzzer #x1640)
-  (preundg-spireclimb #x1641)
-  (preundg-battlearena #x1642)
-  (preundg-fluthalls #x1643)
-  (preundg-switchroom #x1644)
-  (preundg-slideclimb #x1645)
+  (preundg #x4639)
+  (preundg-buzzer #x4640)
+  (preundg-spireclimb #x4641)
+  (preundg-battlearena #x4642)
+  (preundg-fluthalls #x4643)
+  (preundg-switchroom #x4644)
+  (preundg-slideclimb #x4645)
 
   ;; WELCOME SCREEN ;;
 
-  (welcome-brume #x1646)
+  (welcome-brume #x4646)
   ;; mod text mod-base-change
   (pad-triangle #x2000)
   (pad-circle #x2001)

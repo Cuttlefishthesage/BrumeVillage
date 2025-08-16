@@ -2926,6 +2926,21 @@
   :disp1 'display
 )
 (new 'static 'continue-point
+  :name "preundg-checkpoint3.5"
+  :level 'preundg
+  :trans (new 'static 'vector :x (meters -1739.45) :y (meters 20.40) :z (meters -142.71) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1739.45) :y (meters 20.40) :z (meters -142.71) :w 1.0)
+  :camera-rot
+    (new 'static 'array float 9 -0.9956 0.0000 -0.0932 0.0110 0.9929 -0.1176 0.0925 -0.1181 -0.9886)
+  :load-commands '()
+  
+  :lev0 'preundg
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display
+)
+(new 'static 'continue-point
   :name "preundg-checkpoint4"
   :level 'preundg
   :trans (new 'static 'vector :x (meters -1525.75) :y (meters 143.60) :z (meters -38.18) :w 1.0)
