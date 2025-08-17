@@ -1648,6 +1648,17 @@
   :bwd (load abandon brume)
   :fwd (display preundg brume))
 
+(static-load-boundary
+  :flags (closed player)
+  :top (meters 126.15)
+  :bot (meters 0.0)
+  :points
+   ( (meters -1864.9) (meters 146.73)   ; P0
+     (meters -1852.9) (meters 146.73)   ; P1
+     (meters -1852.9) (meters 134.73)   ; P2
+     (meters -1864.9) (meters 134.73) ) ; P3
+  :fwd (checkpt "preundg-checkpoint1" #f))
+
 
   (static-load-boundary
   :flags (closed player)

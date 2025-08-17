@@ -539,13 +539,13 @@
 
   ;; custom level
 
-  (set! (-> *game-counts* data 16 money-count) 113) ;; number after data is the level count found in progress-static ;; changed from my usual the-as int
+  (set! (-> *game-counts* data 16 money-count) 115) ;; number after data is the level count found in progress-static ;; changed from my usual the-as int
   (set! (-> *game-counts* data 16 buzzer-count) 7)
-  (set! (-> *game-counts* data 17 money-count) 199) ;; number after data is the level count found in progress-static
+  (set! (-> *game-counts* data 17 money-count) 200) ;; number after data is the level count found in progress-static
   (set! (-> *game-counts* data 17 buzzer-count) 7)
   (set! (-> *game-counts* data 18 money-count)  215) ;; number after data is the level count found in progress-static
   (set! (-> *game-counts* data 18 buzzer-count) 7)
-  (set! (-> *game-counts* data 19 money-count) 211) ;; number after data is the level count found in progress-static
+  (set! (-> *game-counts* data 19 money-count) 215) ;; number after data is the level count found in progress-static
   (set! (-> *game-counts* data 19 buzzer-count) 7)
 
   this)

@@ -1347,7 +1347,8 @@
     "name": "preundg-fly1",
     "crate-type": "'iron",
     "eco-info": ["buzzer-info", "(game-task preundg-buzzer)", 0],
-    "movie-pos": ["movie-pos", [-1750.95, 28.30, -47.85, -10.0]]
+    "movie-pos": ["movie-pos", [-1750.95, 28.30, -47.85, -10.0]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -1360,7 +1361,8 @@
     "name": "preundg-fly2",
     "crate-type": "'iron",
     "eco-info": ["buzzer-info", "(game-task preundg-buzzer)", 1],
-    "movie-pos": ["movie-pos", [-1928.59, 44.44, 9.90, -10.0]]
+    "movie-pos": ["movie-pos", [-1928.59, 44.44, 9.90, 30.0]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -1373,7 +1375,8 @@
     "name": "preundg-fly3",
     "crate-type": "'iron",
     "eco-info": ["buzzer-info", "(game-task preundg-buzzer)", 2],
-    "movie-pos": ["movie-pos", [-1785.93, 39.60, -40.11, -10.0]]
+    "movie-pos": ["movie-pos", [-1785.93, 39.60, -40.11, -10.0]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -1399,7 +1402,8 @@
     "name": "preundg-fly5",
     "crate-type": "'iron",
     "eco-info": ["buzzer-info", "(game-task preundg-buzzer)", 4],
-    "movie-pos": ["movie-pos", [-1612.42, 30.37, -200.84, -10.0]]
+    "movie-pos": ["movie-pos", [-1612.42, 30.37, -200.84, -10.0]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -1412,7 +1416,8 @@
     "name": "preundg-fly6",
     "crate-type": "'iron",
     "eco-info": ["buzzer-info", "(game-task preundg-buzzer)", 5],
-    "movie-pos": ["movie-pos", [-1707.00, 75.11, -64.54, -10.0]]
+    "movie-pos": ["movie-pos", [-1707.00, 75.11, -64.54, -10.0]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -1425,7 +1430,8 @@
     "name": "preundg-fly7",
     "crate-type": "'iron",
     "eco-info": ["buzzer-info", "(game-task preundg-buzzer)", 6],
-    "movie-pos": ["movie-pos", [-1691.30, 50.69, -35.39, -10.0]]
+    "movie-pos": ["movie-pos", [-1691.30, 50.69, -35.39, -10.0]],
+    "movie-mask": ["int32", 495]
   }
 },
 //blueeco//
@@ -3961,6 +3967,46 @@
   "bsphere": [-1861.14, 85.18, -64.69, 10],
   "lump": {
     "name": "preundg-money-171"
+  }
+},
+{
+  "trans": [-1841.25, 39.90, 147.66],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1861.14, 85.18, -64.69, 10],
+  "lump": {
+    "name": "preundg-money-additional1"
+  }
+},
+{
+  "trans": [-1851.96, 39.90, 157.79],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1861.14, 85.18, -64.69, 10],
+  "lump": {
+    "name": "preundg-money-additional2"
+  }
+},
+{
+  "trans": [-1865.65, 39.90, 157.53],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1861.14, 85.18, -64.69, 10],
+  "lump": {
+    "name": "preundg-money-additional3"
+  }
+},
+{
+  "trans": [-1875.28, 39.90, 146.89],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1861.14, 85.18, -64.69, 10],
+  "lump": {
+    "name": "preundg-money-additional4"
   }
 },
 

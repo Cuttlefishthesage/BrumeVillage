@@ -2536,11 +2536,11 @@
   }
 },
 {
-  "trans": [ -1487.48, 168.71, 420.75 ],
+  "trans": [ -1489.41, 168.5, 413.32 ],
   "etype": "money",
   "game_task": "(game-task none)",
   "quat": [ 0, 0, 0, 1 ],
-  "bsphere": [ -1487.48, 168.71, 420.75, 10 ],
+  "bsphere": [ 1489.41, 168.5, 413.32, 10 ],
   "lump": {
     "name": "abandon-money-184"
   }
@@ -2696,6 +2696,16 @@
     "name": "abandon-money-additional14"
   }
 },
+{
+  "trans": [ -1478.99, 120.0, 910.29 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1098.20, 194.64, 372.68, 10 ],
+  "lump": {
+    "name": "abandon-money-additional15"
+  }
+},
 
 //////scoutflies////
 
@@ -2709,7 +2719,8 @@
     "name": "abandon-fly1",
     "crate-type": "'iron",
     "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 0 ],
-    "movie-pos": ["movie-pos", [ -1425.91, 178.76, 152.38, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1425.91, 178.76, 152.38, -70.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -2722,7 +2733,8 @@
     "name": "abandon-fly2",
     "crate-type": "'iron",
     "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 1 ],
-    "movie-pos": ["movie-pos", [ -1397.78, 178.67, 144.51, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1397.78, 178.67, 144.51, -10.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -2735,7 +2747,8 @@
     "name": "abandon-fly3",
     "crate-type": "'iron",
     "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 2 ],
-    "movie-pos": ["movie-pos", [ -1183.47, 173.36, 123.50, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1183.47, 173.36, 123.50, -10.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -2748,7 +2761,8 @@
     "name": "abandon-fly4",
     "crate-type": "'iron",
     "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 3 ],
-    "movie-pos": ["movie-pos", [ -1470.49, 182.88, 34.73, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1470.49, 182.88, 34.73, -10.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -2761,7 +2775,8 @@
     "name": "abandon-fly5",
     "crate-type": "'iron",
     "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 4 ],
-    "movie-pos": ["movie-pos", [ -1317.59, 170.02, 635.47, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1317.59, 170.02, 635.47, -10.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -2774,7 +2789,8 @@
     "name": "abandon-fly6",
     "crate-type": "'iron",
     "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 5 ],
-    "movie-pos": ["movie-pos", [ -1511.59, 121.02, 858.26, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1511.59, 121.02, 858.26, -10.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -2787,7 +2803,8 @@
     "name": "abandon-fly7",
     "crate-type": "'iron",
     "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 6 ],
-    "movie-pos": ["movie-pos", [ -1126.75, 189.46, 324.72, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1126.75, 189.46, 324.72, -80.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 
@@ -2827,7 +2844,7 @@
   "lump": {
     "name": "abandon-fuel-cell-03",
     "eco-info": ["cell-info", "(game-task abandon-findcell-3)"],
-    "movie-pos": [ "movie-pos", [ -1434.61, 118.64, 811.79, 1.255 ] ]
+    "movie-pos": [ "movie-pos", [ -1434.61, 118.59, 811.79, 1.255 ] ]
   }
 },
 {
@@ -2839,7 +2856,8 @@
   "lump": {
     "name": "abandon-fuel-cell-04",
     "eco-info": ["cell-info", "(game-task abandon-rock)"],
-    "movie-pos": [ "movie-pos", [ -1486.96, 167.24, 421.24, 1.255 ] ]
+    "movie-pos": [ "movie-pos", [ -1486.96, 167.24, 421.24, 1.255 ] ],
+    "movie-mask": ["int32", 495]
   }
 },
 
@@ -4963,14 +4981,14 @@
     // shortcutboulder //
 
   {
-  "trans": [ -1486.96, 166.24, 421.24 ],
+  "trans": [ -1486.4, 166.24, 421.24 ],
   "etype": "shortcut-boulder",
   "game_task": "(game-task none)",
   "quat": [ 0, 0, 0, 1 ],
   "bsphere": [ -1452.24, 117.51, 762.94, 10 ],
   "lump": {
     "name": "abandon-boulder",
-    "scale": ["float", 1.9]
+    "scale": ["float", 1.7]
   }
 },
 

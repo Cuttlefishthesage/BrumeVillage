@@ -1434,6 +1434,8 @@
        "name": "v4-elevator",
        "path": ["vector3m", // I am pretty sure game will crash if there is no path for an enemy. So just add one. You can use "path-actor" if you want to use another actor's path.
             [-1858.9, 179.71500, 140.73],
+            [-1858.9, 140.71500, 140.73],
+            [-1858.9, 100.71500, 140.73],
             [-1858.9, 41.25, 140.73]
           ],
        "bidirectional": [ "int32", 1 ]
@@ -1442,7 +1444,7 @@
     ///////FOG////////////
 
     {
-      "trans": [ -1939.98, 160.97000, 207.25 ], // translation
+      "trans": [ -1939.98, 155.97000, 207.25 ], // translation
       "etype": "v4-part", // actor type
       "game_task": "(game-task none)", // associated game task (for powercells, etc)
       "quat": [ 0, 0, 0, 1 ], // quaternion
@@ -1458,7 +1460,7 @@
     },
   
     {
-      "trans": [ -1625.98, 160.97000, 311.25 ], // translation
+      "trans": [ -1625.98, 155.97000, 311.25 ], // translation
       "etype": "v4-part", // actor type
       "game_task": "(game-task none)", // associated game task (for powercells, etc)
       "quat": [ 0, 0, 0, 1 ], // quaternion
@@ -3143,6 +3145,26 @@
   }
 },
 {
+  "trans": [ -1857.26, 186.60, 257.70 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1851.44, 210.66, 364.62, 10 ],
+  "lump": {
+    "name": "brume-money-additional11"
+  }
+},
+{
+  "trans": [ -1848.84, 187.2, 258.89 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1851.44, 210.66, 364.62, 10 ],
+  "lump": {
+    "name": "brume-money-additional12"
+  }
+},
+{
   "trans": [ -1613.62, 188.92, 243.53 ], // translation
   "etype": "fuel-cell", // actor type
   "game_task": "(game-task brume-findcell-1)", // associated game task
@@ -3166,7 +3188,8 @@
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task brume-buzzer)", 0 ],
     // "movie-pos": [ "meters", -1933.52, 177.26, 339.14 ],
-    "movie-pos": ["movie-pos", [ -1933.52, 177.26, 339.14, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1933.52, 177.26, 339.14, -10.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -3181,7 +3204,8 @@
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task brume-buzzer)", 1 ],
     // "movie-pos": [ "meters", -1799.05, 182.98, 222.74 ],
-    "movie-pos": ["movie-pos", [ -1799.05, 182.98, 222.74, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1799.05, 182.98, 222.74, 10.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -3196,7 +3220,8 @@
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task brume-buzzer)", 2 ],
     // "movie-pos": [ "meters", -1866.26, 200.04, 398.52 ],
-    "movie-pos": ["movie-pos", [ -1866.26, 200.04, 398.52, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1866.26, 200.04, 398.52, -10.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -3211,7 +3236,8 @@
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task brume-buzzer)", 3 ],
     // "movie-pos": [ "meters", -1867.14, 229.96, 449.13 ],
-    "movie-pos": ["movie-pos", [ -1867.14, 229.96, 449.13, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1867.14, 229.96, 449.13, 180.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -3226,7 +3252,8 @@
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task brume-buzzer)", 4 ],
     // "movie-pos": [ "meters", -1760.27, 212.4, 401.65 ],
-    "movie-pos": ["movie-pos", [ -1760.27, 212.4, 401.65, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1760.27, 212.4, 401.65, -10.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -3241,7 +3268,8 @@
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task brume-buzzer)", 5 ],
     // "movie-pos": [ "meters", -1666.49, 179.37, 193.11 ],
-    "movie-pos": ["movie-pos", [ -1666.49, 179.37, 193.11, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1666.49, 179.37, 193.11, -10.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -3256,7 +3284,8 @@
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task brume-buzzer)", 6 ],
     // "movie-pos": [ "meters", -1569.13, 169.64, 367.88 ],
-    "movie-pos": ["movie-pos", [ -1569.13, 169.64, 367.88, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1569.13, 169.64, 367.88, -10.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {

@@ -258,7 +258,7 @@
         }
       },
       {
-        "trans": [ -1876.98, 180.97000, 720.25 ], // translation
+        "trans": [ -1876.98, 177.97000, 720.25 ], // translation
         "etype": "mount-part", // actor type
         "game_task": "(game-task none)", // associated game task (for powercells, etc)
         "quat": [ 0, 0, 0, 1 ], // quaternion
@@ -2437,7 +2437,8 @@
     "name": "mount-fly1",
     "crate-type": "'iron",
     "eco-info": [ "buzzer-info", "(game-task mount-buzzer)", 0 ],
-    "movie-pos": ["movie-pos", [ -1656.97, 214.53, 669.97, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1656.97, 214.53, 669.97, -10.0 ]],
+    "movie-mask": ["int32", 495]
   }
 },
 {
@@ -2476,7 +2477,7 @@
     "name": "mount-fly4",
     "crate-type": "'iron",
     "eco-info": [ "buzzer-info", "(game-task mount-buzzer)", 3 ],
-    "movie-pos": ["movie-pos", [ -1093.70, 212.97, 592.14, -10.0 ]]
+    "movie-pos": ["movie-pos", [ -1899.3, 367.76, 709.06, -10.0 ]]
   }
 },
 {

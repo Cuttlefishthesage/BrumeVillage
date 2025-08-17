@@ -252,9 +252,9 @@
 (defpart 972
   :init-specs
   ((:texture (middot effects))
-   (:num 4.0 4.0)
+   (:num 1.0 1.0)
    (:y (meters 0.5) (meters 2))
-   (:scale-x (meters 16))
+   (:scale-x (meters 32))
    (:rot-z (degrees 0) (degrees 360))
    (:scale-y :copy scale-x)
    (:r 192.0)
