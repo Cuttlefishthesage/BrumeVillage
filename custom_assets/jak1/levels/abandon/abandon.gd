@@ -6,6 +6,7 @@
 (
  "static-screen.o"
  "abandoned-obs.o"
+ "pathing-minecart.o"
  "minecart.o"
  ;;"snow-ball.o"
  ;;"village-obs.o" TESTING CRASH

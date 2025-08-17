@@ -427,7 +427,7 @@
       
        {
   "trans": [-1078.77, 176.02, 261.99],
-  "etype": "ll-pathing-minecart",
+  "etype": "pathing-minecart",
   "game_task": "(game-task none)",
   "quat": [0, 0, 0, 1],
   "bsphere": [-1078.77, 176.02, 261.99, 10],
@@ -443,7 +443,7 @@
 },
 {
   "trans": [-1078.77, 176.02, 261.99],
-  "etype": "ll-pathing-minecart",
+  "etype": "pathing-minecart",
   "game_task": "(game-task none)",
   "quat": [0, 0, 0, 1],
   "bsphere": [-1078.77, 176.02, 261.99, 10],
@@ -460,7 +460,7 @@
 
 {
   "trans": [-1043.71, 177.27, 273.98],
-  "etype": "ll-pathing-minecart",
+  "etype": "pathing-minecart",
   "game_task": "(game-task none)",
   "quat": [0, 0, 0, 1],
   "bsphere": [-1043.71, 177.27, 273.98, 10],
@@ -476,7 +476,7 @@
 },
 {
   "trans": [-1043.71, 177.27, 273.98],
-  "etype": "ll-pathing-minecart",
+  "etype": "pathing-minecart",
   "game_task": "(game-task none)",
   "quat": [0, 0, 0, 1],
   "bsphere": [-1043.71, 177.27, 273.98, 10],
@@ -493,7 +493,7 @@
 
 {
   "trans": [-1081.46, 180.36, 288.87],
-  "etype": "ll-pathing-minecart",
+  "etype": "pathing-minecart",
   "game_task": "(game-task none)",
   "quat": [0, 0, 0, 1],
   "bsphere": [-1081.46, 180.36, 288.87, 10],
@@ -509,7 +509,7 @@
 },
 {
   "trans": [-1081.46, 180.36, 288.87],
-  "etype": "ll-pathing-minecart",
+  "etype": "pathing-minecart",
   "game_task": "(game-task none)",
   "quat": [0, 0, 0, 1],
   "bsphere": [-1081.46, 180.36, 288.87, 10],
@@ -526,7 +526,7 @@
 
 {
   "trans": [-1041.04, 185.58, 301.18],
-  "etype": "ll-pathing-minecart",
+  "etype": "pathing-minecart",
   "game_task": "(game-task none)",
   "quat": [0, 0, 0, 1],
   "bsphere": [-1041.04, 185.58, 301.18, 10],
@@ -542,7 +542,7 @@
 },
 {
   "trans": [-1041.04, 185.58, 301.18],
-  "etype": "ll-pathing-minecart",
+  "etype": "pathing-minecart",
   "game_task": "(game-task none)",
   "quat": [0, 0, 0, 1],
   "bsphere": [-1041.04, 185.58, 301.18, 10],
@@ -559,7 +559,7 @@
 
 {
   "trans": [-1078.24, 175.75, 313.98],
-  "etype": "ll-pathing-minecart",
+  "etype": "pathing-minecart",
   "game_task": "(game-task none)",
   "quat": [0, 0, 0, 1],
   "bsphere": [-1078.24, 175.75, 313.98, 10],
@@ -575,7 +575,7 @@
 },
 {
   "trans": [-1078.24, 175.75, 313.98],
-  "etype": "ll-pathing-minecart",
+  "etype": "pathing-minecart",
   "game_task": "(game-task none)",
   "quat": [0, 0, 0, 1],
   "bsphere": [-1078.24, 175.75, 313.98, 10],
@@ -592,7 +592,7 @@
 
 {
   "trans": [-1042.94, 179.83, 324.29],
-  "etype": "ll-pathing-minecart",
+  "etype": "pathing-minecart",
   "game_task": "(game-task none)",
   "quat": [0, 0, 0, 1],
   "bsphere": [-1042.94, 179.83, 324.29, 10],
@@ -608,7 +608,7 @@
 },
 {
   "trans": [-1042.94, 179.83, 324.29],
-  "etype": "ll-pathing-minecart",
+  "etype": "pathing-minecart",
   "game_task": "(game-task none)",
   "quat": [0, 0, 0, 1],
   "bsphere": [-1042.94, 179.83, 324.29, 10],

@@ -1,0 +1,162 @@
+;;-*-Lisp-*-
+(in-package goal)
+(require "engine/common-obs/generic-obs.gc")
+(require "engine/util/sync-info.gc")
+(require "engine/common-obs/path.gc")
+
+#|
+A new type of minecart that mimics the behaviour of the minecarts in Volcanic Crater.
+But those use pre-made animations, while this one does not use any pre-made animations - it follows a path instead.
+
+You need to give it a 'path', which can be simple or curved. You can also use 'wrap-phase' if you want. The 'sync' property is also required.
+Basically, in this regard, it works just like a moving platform.
+
+The front and rear axles are animated using the joint mod system. Rotation speed is estimated based on path length and the period.
+I saw there was something called 'joint-mod-wheel', but it wasn't used anywhere, so I didn't try to use it.
+I suspect it was used for the cut Lurker Forklift in Misty Island. At least I don't think anything else ever had wheels in this game.
+Except the cannon, but idk how it rotates its wheels, it is probably not decompiled to a human-readable state.
+So anyway I just used 'joint-mod' with the 'rotate' mode, which seems to work fine.
+
+This type uses the original minecart art group (minecartsteel-ag), which seems to be rotated 90 degrees in the Y axis.
+My code accounts for this so it will work fine.
+The model will always rotate to look forward on the path. It can rotate left, right, up, and down.
+
+It also has a sound effect, which is the same as the one used by the minecart in Volcanic Crater.
+
+Due to the code structure it should be easy to create a child type and just override what you want.
+Don't necessarily have to copy-paste the whole thing.
+
+
+-- Luminar Light
+|#
+
+(defskelgroup *pathing-minecart-sg*
+  minecartsteel
+  minecartsteel-lod0-jg
+  minecartsteel-idle-ja
+  ((minecartsteel-lod0-mg (meters 20)) (minecartsteel-lod1-mg (meters 40)) (minecartsteel-lod2-mg (meters 999999)))
+  :bounds (static-spherem 0 0 0 4))
+
+(deftype pathing-minecart (process-drawable)
+  ((root                   collide-shape-moving :override)
+   (axle-front             joint-mod)
+   (rot-front              float)
+   (axle-rear              joint-mod)
+   (rot-rear               float)
+   (sync                   sync-info-eased :inline)
+   (facing-rot             vector :inline))
+  (:methods
+   (pathing-minecart-init-skeleton (_type_) float)
+   (pathing-minecart-rotate-axle (_type_ joint-mod float) float))
+  (:states
+   pathing-minecart-idle))
+
+
+(defmethod relocate ((this pathing-minecart) (offset int))
+  (if (nonzero? (-> this axle-front)) (&+! (-> this axle-front) offset))
+  (if (nonzero? (-> this axle-rear)) (&+! (-> this axle-rear) offset))
+  (call-parent-method this offset))
+
+(defstate pathing-minecart-idle (pathing-minecart)
+  :event
+    (behavior ((proc process) (argc int) (message symbol) (block event-message-block))
+      (case message
+        (('touch 'attack)
+         (when (= (-> proc type) target)
+           (let ((a2-1 (new 'stack 'collide-overlap-result)))
+             (if (not (on-platform (-> self root) (-> *target* control) a2-1)) (send-event proc 'no-look-around (seconds 1.5)))))
+         #f)))
+  :trans rider-trans
+  :code
+  (behavior ()
+    (until #f
+      (ja :num-func num-func-identity :frame-num 0.0)
+      (let ((f30-1 (if (logtest? (-> self fact options) (fact-options wrap-phase))
+                    (get-current-phase (-> self sync))
+                    (get-current-phase-with-mirror (-> self sync)))))
+
+        (eval-path-curve! (-> self path) (-> self root trans) f30-1 'interp)
+        (let ((gp-0 (path-control-method-14 (-> self path) (new 'stack-no-clear 'vector) f30-1))
+              (s5-0 (new 'stack-no-clear 'vector)))
+          (vector-normalize! gp-0 1.0)
+
+          (set-vector! s5-0 0.0 (- (vector-y-angle gp-0) (degrees 90.0)) (+ (vector-x-angle gp-0)) 1.0)
+          (set! (-> self facing-rot y) (deg-seek-smooth (-> self facing-rot y) (-> s5-0 y) (* (meters 8) (seconds-per-frame)) 0.1))
+          (set! (-> self facing-rot z) (deg-seek-smooth (-> self facing-rot z) (-> s5-0 z) (* (meters 4) (seconds-per-frame)) 0.1))
+
+          (quaternion-zxy! (-> self root quat) (-> self facing-rot))
+          )
+        )
+
+      ;; (joint-mod-debug-draw (-> self axle-front))
+      ;; (joint-mod-debug-draw (-> self axle-rear))
+      (set! (-> self rot-front) (pathing-minecart-rotate-axle self (-> self axle-front) (-> self rot-front)))
+      (set! (-> self rot-rear) (pathing-minecart-rotate-axle self (-> self axle-rear) (-> self rot-rear)))
+
+      (update-trans! (-> self sound) (-> self root trans))
+      (update! (-> self sound))
+      (suspend)
+      )
+    #f
+    )
+  :post
+    (behavior ()
+      (rider-post)
+      (transform-post)
+      (ja-post)))
+
+(defmethod pathing-minecart-rotate-axle ((this pathing-minecart) (axle joint-mod) (axle-rot float))
+  (-! axle-rot
+    (* 360.0
+      (/ (path-distance (-> this path)) (-> this sync period))
+      (seconds-per-frame)))
+  (set-twist! axle (the-as float #f) (the-as float #f) axle-rot)
+  axle-rot)
+
+(defmethod pathing-minecart-init-skeleton ((this pathing-minecart))
+  (let ((s4-0 (new 'process 'collide-shape-moving this (collide-list-enum usually-hit-by-player))))
+    (set! (-> s4-0 dynam) (copy *standard-dynamics* 'process))
+    (set! (-> s4-0 reaction) default-collision-reaction)
+    (set! (-> s4-0 no-reaction) (the-as (function collide-shape-moving collide-shape-intersect vector vector none) nothing))
+    (alloc-riders s4-0 1)
+    (let ((s3-0 (new 'process 'collide-shape-prim-mesh s4-0 (the-as uint 0) (the-as uint 0))))
+      (set! (-> s3-0 prim-core collide-as) (collide-kind ground-object))
+      (set! (-> s3-0 collide-with) (collide-kind target))
+      (set! (-> s3-0 prim-core action) (collide-action solid rider-plat-sticky rider-plat)) ;; CUTTLEFISH ~ "needs rider-plat so that Jak doesnt go through collision"
+      (set! (-> s3-0 prim-core offense) (collide-offense indestructible))
+      (set! (-> s3-0 transform-index) 4)
+      (set-vector! (-> s3-0 local-sphere) 0.0 4915.2 0.0 13107.2)
+      (set-root-prim! s4-0 s3-0))
+    (set! (-> s4-0 nav-radius) (* 0.75 (-> s4-0 root-prim local-sphere w)))
+    (backup-collide-with-as s4-0)
+    (set! (-> this root) s4-0))
+  (process-drawable-from-entity! this (-> this entity))
+  (logclear! (-> this mask) (process-mask actor-pause))
+  (quaternion-identity! (-> this root quat))
+  (initialize-skeleton this *pathing-minecart-sg* '())
+  (update-transforms! (-> this root))
+
+  (set! (-> this draw origin-joint-index) (the-as uint 3))
+  (logior! (-> this skel status) (janim-status inited))
+
+  (set! (-> this axle-front) (new 'process 'joint-mod (joint-mod-handler-mode rotate) this 6))
+  (set! (-> this axle-rear) (new 'process 'joint-mod (joint-mod-handler-mode rotate) this 5))
+
+  0.0)
+
+(defmethod init-from-entity! ((this pathing-minecart) (arg0 entity-actor))
+  (pathing-minecart-init-skeleton this)
+
+  (logclear! (-> this mask) (process-mask actor-pause))
+
+  (load-params! (-> this sync) this (the-as uint 0) 0.0 0.15 0.15)
+  (set! (-> this fact) (new 'process 'fact-info this (pickup-type eco-pill-random) (-> *FACT-bank* default-pill-inc)))
+  (set! (-> this path) (new 'process 'curve-control this 'path -1000000000.0))
+  (logior! (-> this path flags) (path-control-flag display draw-line draw-point draw-text))
+
+  (if (< (-> this path curve num-cverts) 2) (go process-drawable-art-error "bad path"))
+
+  (set! (-> this sound) (new 'process 'ambient-sound (static-sound-spec "v3-cartride" :fo-max 30) (-> this root trans)))
+
+  (go pathing-minecart-idle)
+  (none))

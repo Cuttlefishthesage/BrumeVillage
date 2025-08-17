@@ -509,7 +509,7 @@
 
 
 ;; RACE RING ;;
-(deftype race-ring (process-drawable)
+(deftype mount-race-ring (process-drawable)
   ((rot-y                  float)
    (face-vec               vector         :inline)
    (part-track             handle)
@@ -521,15 +521,15 @@
    (old-hips               vector         :inline)
    )
   (:states
-    race-ring-active
-    race-ring-idle
-    race-ring-wait
+    mount-race-ring-active
+    mount-race-ring-idle
+    mount-race-ring-wait
     )
   )
 
 
-(defpartgroup group-rolling-ring
-  :id 457
+(defpartgroup mount-group-rolling-ring
+  :id 857
   :linger-duration (seconds 0)
   :bounds (static-bspherem 0 0 0 8)
   :parts ((sp-item 1773 :fade-after (meters 100) :falloff-to (meters 100))
@@ -614,8 +614,8 @@
     )
   )
 
-(defpartgroup group-rolling-spawn-ring
-  :id 458
+(defpartgroup mount-group-rolling-spawn-ring
+  :id 858
   :duration (seconds 0.017)
   :linger-duration (seconds 0.47)
   :bounds (static-bspherem 0 0 0 8)
@@ -719,8 +719,8 @@
     )
   )
 
-(defpartgroup group-rolling-explode-ring
-  :id 459
+(defpartgroup mount-group-rolling-explode-ring
+  :id 859
   :duration (seconds 0.017)
   :linger-duration (seconds 0.5)
   :bounds (static-bspherem 0 0 0 8)
@@ -769,8 +769,8 @@
     )
   )
 
-(defun race-ring-set-particle-rotation-callback ((arg0 part-tracker))
-  (let ((f0-0 (-> (the-as (pointer race-ring) (-> arg0 userdata)) 0 rot-y)))
+(defun mount-race-ring-set-particle-rotation-callback ((arg0 part-tracker))
+  (let ((f0-0 (-> (the-as (pointer mount-race-ring) (-> arg0 userdata)) 0 rot-y)))
     (set! (-> *part-id-table* 1773 init-specs 15 initial-valuef) f0-0)
     (set! (-> *part-id-table* 1774 init-specs 15 initial-valuef) f0-0)
     (set! (-> *part-id-table* 1775 init-specs 4 initial-valuef) (+ -182.04445 f0-0))
@@ -785,8 +785,8 @@
   (none)
   )
 
-(defpartgroup group-rolling-ring-blue
-  :id 460
+(defpartgroup mount-group-rolling-ring-blue
+  :id 860
   :linger-duration (seconds 0)
   :bounds (static-bspherem 0 0 0 8)
   :parts ((sp-item 1785 :fade-after (meters 100) :falloff-to (meters 100))
@@ -871,8 +871,8 @@
     )
   )
 
-(defpartgroup group-rolling-spawn-ring-blue
-  :id 461
+(defpartgroup mount-group-rolling-spawn-ring-blue
+  :id 861
   :duration (seconds 0.017)
   :linger-duration (seconds 0.47)
   :bounds (static-bspherem 0 0 0 8)
@@ -976,8 +976,8 @@
     )
   )
 
-(defpartgroup group-rolling-explode-ring-blue
-  :id 462
+(defpartgroup mount-group-rolling-explode-ring-blue
+  :id 862
   :duration (seconds 0.017)
   :linger-duration (seconds 0.5)
   :bounds (static-bspherem 0 0 0 8)
@@ -1026,8 +1026,8 @@
     )
   )
 
-(defun race-ring-blue-set-particle-rotation-callback ((arg0 part-tracker))
-  (let ((f0-0 (-> (the-as (pointer race-ring) (-> arg0 userdata)) 0 rot-y)))
+(defun mount-race-ring-blue-set-particle-rotation-callback ((arg0 part-tracker))
+  (let ((f0-0 (-> (the-as (pointer mount-race-ring) (-> arg0 userdata)) 0 rot-y)))
     (set! (-> *part-id-table* 1785 init-specs 15 initial-valuef) f0-0)
     (set! (-> *part-id-table* 1786 init-specs 15 initial-valuef) f0-0)
     (set! (-> *part-id-table* 1787 init-specs 4 initial-valuef) (+ -182.04445 f0-0))
@@ -1042,20 +1042,20 @@
   (none)
   )
 
-(defskelgroup *race-ring-sg* race-ring race-ring-lod0-jg race-ring-race-ring-idle-ja
+(defskelgroup *mount-race-ring-sg* race-ring race-ring-lod0-jg race-ring-race-ring-idle-ja
               ((race-ring-lod0-mg (meters 999999)))
               :bounds (static-spherem 0 0 0 4)
               )
 
-(defun first-ring? ((arg0 race-ring))
+(defun mount-first-ring? ((arg0 mount-race-ring))
   (not (-> arg0 alt-actor))
   )
 
-(defun last-ring? ((arg0 race-ring))
+(defun mount-last-ring? ((arg0 mount-race-ring))
   (not (-> arg0 link next))
   )
 
-(defstate race-ring-active (race-ring)
+(defstate mount-race-ring-active (mount-race-ring)
   :event (behavior ((proc process) (argc int) (message symbol) (block event-message-block))
     (local-vars (v0-0 symbol))
     (case message
@@ -1066,9 +1066,9 @@
             (set! (-> self part-track) (ppointer->handle (process-spawn
                                                            part-tracker
                                                            :init part-tracker-init
-                                                           (-> *part-group-id-table* 460)
+                                                           (-> *part-group-id-table* 860)
                                                            -1
-                                                           race-ring-blue-set-particle-rotation-callback
+                                                           mount-race-ring-blue-set-particle-rotation-callback
                                                            (-> self ppointer)
                                                            #f
                                                            (-> self root trans)
@@ -1083,9 +1083,9 @@
              (set! (-> self part-track) (ppointer->handle (process-spawn
                                                             part-tracker
                                                             :init part-tracker-init
-                                                            (-> *part-group-id-table* 457)
+                                                            (-> *part-group-id-table* 857)
                                                             -1
-                                                            race-ring-set-particle-rotation-callback
+                                                            mount-race-ring-set-particle-rotation-callback
                                                             (-> self ppointer)
                                                             #f
                                                             (-> self root trans)
@@ -1104,7 +1104,7 @@
     )
   :enter (behavior ()
     (cond
-      ((first-ring? self)
+      ((mount-first-ring? self)
        (logior! (-> self mask) (process-mask actor-pause))
        (process-entity-status! self (entity-perm-status bit-3) #f)
        )
@@ -1118,9 +1118,9 @@
         (set! (-> self part-track) (ppointer->handle (process-spawn
                                                        part-tracker
                                                        :init part-tracker-init
-                                                       (-> *part-group-id-table* 461)
+                                                       (-> *part-group-id-table* 861)
                                                        -1
-                                                       race-ring-blue-set-particle-rotation-callback
+                                                       mount-race-ring-blue-set-particle-rotation-callback
                                                        (-> self ppointer)
                                                        #f
                                                        (-> self root trans)
@@ -1131,9 +1131,9 @@
         (set! (-> self part-track) (ppointer->handle (process-spawn
                                                        part-tracker
                                                        :init part-tracker-init
-                                                       (-> *part-group-id-table* 458)
+                                                       (-> *part-group-id-table* 858)
                                                        -1
-                                                       race-ring-set-particle-rotation-callback
+                                                       mount-race-ring-set-particle-rotation-callback
                                                        (-> self ppointer)
                                                        #f
                                                        (-> self root trans)
@@ -1157,9 +1157,9 @@
         (set! (-> self part-track) (ppointer->handle (process-spawn
                                                        part-tracker
                                                        :init part-tracker-init
-                                                       (-> *part-group-id-table* 462)
+                                                       (-> *part-group-id-table* 862)
                                                        -1
-                                                       race-ring-blue-set-particle-rotation-callback
+                                                       mount-race-ring-blue-set-particle-rotation-callback
                                                        (-> self ppointer)
                                                        #f
                                                        (-> self root trans)
@@ -1170,9 +1170,9 @@
         (set! (-> self part-track) (ppointer->handle (process-spawn
                                                        part-tracker
                                                        :init part-tracker-init
-                                                       (-> *part-group-id-table* 459)
+                                                       (-> *part-group-id-table* 859)
                                                        -1
-                                                       race-ring-set-particle-rotation-callback
+                                                       mount-race-ring-set-particle-rotation-callback
                                                        (-> self ppointer)
                                                        #f
                                                        (-> self root trans)
@@ -1182,7 +1182,7 @@
               )
         )
     (cond
-      ((first-ring? self)
+      ((mount-first-ring? self)
        (logclear! (-> self mask) (process-mask actor-pause))
        (process-entity-status! self (entity-perm-status bit-3) #t)
        )
@@ -1206,9 +1206,9 @@
        (set! (-> self part-track) (ppointer->handle (process-spawn
                                                       part-tracker
                                                       :init part-tracker-init
-                                                      (-> *part-group-id-table* 460)
+                                                      (-> *part-group-id-table* 860)
                                                       -1
-                                                      race-ring-blue-set-particle-rotation-callback
+                                                      mount-race-ring-blue-set-particle-rotation-callback
                                                       (-> self ppointer)
                                                       #f
                                                       (-> self root trans)
@@ -1222,9 +1222,9 @@
         (set! (-> self part-track) (ppointer->handle (process-spawn
                                                        part-tracker
                                                        :init part-tracker-init
-                                                       (-> *part-group-id-table* 457)
+                                                       (-> *part-group-id-table* 857)
                                                        -1
-                                                       race-ring-set-particle-rotation-callback
+                                                       mount-race-ring-set-particle-rotation-callback
                                                        (-> self ppointer)
                                                        #f
                                                        (-> self root trans)
@@ -1236,7 +1236,7 @@
         )
       )
     (cond
-      ((not (last-ring? self))
+      ((not (mount-last-ring? self))
        )
       ((= (-> self entity extra perm task) (game-task mount-ringrace))
        (spool-push *art-control* "race-ring-second-anim" 0 self -99.0)
@@ -1250,7 +1250,7 @@
     (loop
       (suspend)
       (cond
-        ((first-ring? self)
+        ((mount-first-ring? self)
          )
         ((>= (- (-> *display* game-frame-counter) (-> self state-time)) (-> self timeout))
          (level-hint-spawn
@@ -1276,7 +1276,7 @@
                )
              )
            )
-         (go race-ring-idle)
+         (go mount-race-ring-idle)
          )
         )
       (when *target*
@@ -1302,7 +1302,7 @@
                   )
                 )
             (cond
-              ((first-ring? self)
+              ((mount-first-ring? self)
                (close-specific-task! (-> self entity extra perm task) (task-status need-hint))
                (entity-birth-no-kill (-> self link next))
                (let ((a1-9 (new 'stack-no-clear 'event-message-block)))
@@ -1321,7 +1321,7 @@
                    )
                  )
                )
-              ((last-ring? self)
+              ((mount-last-ring? self)
                (let ((gp-2 (ppointer->handle (process-spawn othercam self 4 #f #t :to self)))
                      (s5-2 (ppointer->handle (process-spawn
                                                fuel-cell
@@ -1387,7 +1387,7 @@
                   )
                 )
               )
-            (go race-ring-idle)
+            (go mount-race-ring-idle)
             )
           )
         )
@@ -1396,7 +1396,7 @@
   :post ja-post
   )
 
-(defstate race-ring-wait (race-ring)
+(defstate mount-race-ring-wait (mount-race-ring)
   :code (behavior ()
     (if (nonzero? (-> self sound))
         (stop! (-> self sound))
@@ -1406,18 +1406,18 @@
       (when (= (get-task-status (the-as game-task (-> self alt-task))) (task-status invalid))
         (close-specific-task! (-> self entity extra perm task) (task-status need-hint))
         (logclear! (-> self mask) (process-mask actor-pause))
-        (go race-ring-active)
+        (go mount-race-ring-active)
         )
       )
     )
   )
 
-(defstate race-ring-idle (race-ring)
+(defstate mount-race-ring-idle (mount-race-ring)
   :event (behavior ((proc process) (argc int) (message symbol) (block event-message-block))
     (case message
       (('activate)
        (logclear! (-> self mask) (process-mask actor-pause))
-       (go race-ring-active)
+       (go mount-race-ring-active)
        )
       )
     )
@@ -1431,7 +1431,7 @@
     )
   )
 
-(defmethod init-from-entity! ((this race-ring) (arg0 entity-actor))
+(defmethod init-from-entity! ((this mount-race-ring) (arg0 entity-actor))
   (let ((a0-1 arg0))
     (if (not (entity-actor-lookup a0-1 'next-actor 0))
         (stack-size-set! (-> this main-thread) 512)
@@ -1439,7 +1439,7 @@
     )
   (set! (-> this root) (new 'process 'trsqv))
   (process-drawable-from-entity! this arg0)
-  (initialize-skeleton this *race-ring-sg* '())
+  (initialize-skeleton this *mount-race-ring-sg* '())
   (set! (-> this root pause-adjust-distance) 122880.0)
   (set! (-> this link) (new 'process 'actor-link-info this))
   (set! (-> this part-track) (the-as handle #f))
@@ -1489,7 +1489,7 @@
   (set! (-> this cyl radius) 24576.0)
   (set! (-> this cyl length) 4096.0)
   (cond
-    ((and (first-ring? this)
+    ((and (mount-first-ring? this)
           (!= (get-task-status (-> this entity extra perm task)) (task-status invalid))
           (!= (get-task-status (-> this entity extra perm task)) 7)
           )
@@ -1497,11 +1497,11 @@
      (if (or (= (-> this alt-task) 0)
              (= (get-task-status (the-as game-task (-> this alt-task))) (task-status invalid))
              )
-         (go race-ring-active)
-         (go race-ring-wait)
+         (go mount-race-ring-active)
+         (go mount-race-ring-wait)
          )
      )
-    ((and (last-ring? this) (= (get-task-status (-> this entity extra perm task)) (task-status need-resolution)))
+    ((and (mount-last-ring? this) (= (get-task-status (-> this entity extra perm task)) (task-status need-resolution)))
      (let ((s5-2 (new 'stack-no-clear 'vector)))
        (logclear! (-> this draw status) (draw-status hidden))
        (ja-post)
@@ -1517,11 +1517,11 @@
          )
        )
      )
-    ((and (last-ring? this) (!= (get-task-status (-> this entity extra perm task)) (task-status invalid)))
+    ((and (mount-last-ring? this) (!= (get-task-status (-> this entity extra perm task)) (task-status invalid)))
      )
     )
-  (set! (-> this event-hook) (-> race-ring-idle event))
-  (go race-ring-idle)
+  (set! (-> this event-hook) (-> mount-race-ring-idle event))
+  (go mount-race-ring-idle)
   (none)
   )
 

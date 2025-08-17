@@ -2146,6 +2146,7 @@
 (goal-src "levels/test-zone/test-zone-obs.gc" "process-drawable")
 (goal-src "levels/brume/brume-obs.gc" "process-drawable")
 (goal-src "levels/abandoned/abandoned-obs.gc" "process-drawable")
+(goal-src "levels/abandoned/pathing-minecart.gc" "process-drawable")
 (goal-src "levels/mount/mount-obs.gc" "process-drawable")
 (goal-src "levels/preundg/preundg-obs.gc" "process-drawable")
 

@@ -2482,12 +2482,12 @@
        '()
        :sound-banks
        '()
-       :music-bank 'village3
+       :music-bank #f
        :ambient-sounds
        '()
-       :mood '*snow-mood*
-       :mood-func 'update-mood-snow
-       :ocean #f
+       :mood '*village1-mood*
+       :mood-func 'update-mood-village1
+       :ocean '*ocean-map-village1*
        :sky #t
        :sun-fade 1.0
        :continues
@@ -2496,7 +2496,7 @@
              :name "test-zone-start"
              :level 'test-zone
              :trans
-             (new 'static 'vector :x (meters -2024.16) :y (meters 179.41) :z (meters 206.81) :w 1.0) ;; 0.16   6.41 370.81 
+             (new 'static 'vector :x 0.0 :y (meters 10.) :z (meters 10.) :w 1.0)
              :quat
              (new 'static 'quaternion :w 1.0)
              :camera-trans
