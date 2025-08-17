@@ -1511,7 +1511,7 @@
                   :bot (meters 155)
                   :points ((meters -1677.5) (meters 440.35) (meters -1606.5) (meters 440.37))
                   
-                  :bwd (display mount brume)
+                  :bwd (display mount display)
   )
   
   (static-load-boundary :flags ( player )
@@ -1526,7 +1526,7 @@
                   :top (meters 255)
                   :bot (meters 155)
                   :points ((meters -1677.5) (meters 411.35) (meters -1606.5) (meters 411.37))
-                  :fwd (display abandon brume)
+                  :fwd (display abandon display)
                   
   )
 
@@ -1646,7 +1646,7 @@
      (meters -1852.9) (meters 134.73)   ; P2
      (meters -1864.9) (meters 134.73) ) ; P3
   :bwd (load abandon brume)
-  :fwd (display preundg brume))
+  :fwd (display preundg display))
 
 (static-load-boundary
   :flags (closed player)
@@ -1669,7 +1669,7 @@
      (meters -1852.9) (meters 146.73)   ; P1
      (meters -1852.9) (meters 134.73)   ; P2
      (meters -1864.9) (meters 134.73) ) ; P3
-  :bwd (display abandon brume )
+  :bwd (display abandon display )
   :fwd (load preundg brume))
 
   (static-load-boundary
