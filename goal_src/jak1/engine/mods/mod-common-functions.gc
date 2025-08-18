@@ -330,7 +330,7 @@ if the result of rand-vu-int-range is 1, then DANCE! if it is not 1, then Don't 
 
         (('brume)
 
-         (play-main-music "sound_replacements/jungsun.mp3"
+         (play-main-music "sound_replacements/jungsunrep.wav"
 
                           (the int (* 0.3 (-> *setting-control* default music-volume)))))
 
@@ -338,7 +338,7 @@ if the result of rand-vu-int-range is 1, then DANCE! if it is not 1, then Don't 
 
         (('abandon)
 
-         (play-main-music "sound_replacements/junsynth.mp3"
+         (play-main-music "sound_replacements/junsynthrep.wav"
 
                           (the int (* 0.3 (-> *setting-control* default music-volume)))))
 
@@ -346,7 +346,7 @@ if the result of rand-vu-int-range is 1, then DANCE! if it is not 1, then Don't 
 
         (('mount)
 
-         (play-main-music "sound_replacements/junrav.mp3"
+         (play-main-music "sound_replacements/junraverep.wav"
 
                           (the int (* 0.3 (-> *setting-control* default music-volume)))))
 
@@ -354,7 +354,7 @@ if the result of rand-vu-int-range is 1, then DANCE! if it is not 1, then Don't 
 
         (('preundg)
 
-         (play-main-music "sound_replacements/jungtemp.mp3"
+         (play-main-music "sound_replacements/juntemprep.wav"
 
                           (the int (* 0.3 (-> *setting-control* default music-volume)))))
 
