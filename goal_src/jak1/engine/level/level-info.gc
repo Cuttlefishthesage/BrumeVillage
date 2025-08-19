@@ -2798,7 +2798,7 @@
   :trans (new 'static 'vector :x (meters -1878.29) :y (meters 234.65) :z (meters 960.18) :w 1.0)
   :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
   :camera-trans (new 'static 'vector :x (meters -1878.29) :y (meters 234.65) :z (meters 960.18) :w 1.0)
-  :camera-rot (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+  :camera-rot (new 'static 'array float 9 -0.9997 -0.0000 -0.0206 0.0024 0.9927 -0.1198 0.0205 -0.1198 -0.9925)
   :load-commands '()
   
   :lev0 'mount

@@ -4244,9 +4244,9 @@
     [1.000, 0.000, -0.000, -1440.458],
     [0.000, 0.000, 1.000, 1082.217],
     [0.000, -1.000, -0.000, -246.923],
-    [0.000, 1.000, -0.000, 253.97]
+    [0.000, 1.000, -0.000, 256.97]
   ],
-  "water-height": [ "float", 1044453.12, 2048, 8192, 1048588.0 ] // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+  "water-height": [ "float", 1048453.12, 2048, 8192, 1048588.0 ] // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
   }
 },
 //waterfall//
@@ -4317,7 +4317,7 @@
         "name": "mount-launcher-1",
         "spring-height": [ "meters", 100.0 ],
         "vis-dist": [ "meters", 200.0 ],
-        "alt-vector": ["vector3m", [-1821.59, 314.18, 675.46]]
+        "alt-vector": ["vector4m", [-1821.59, 314.18, 675.46, 0.0006]] // last one x by 4096 to get the seconds value. so 0.0006 is 2.45 seconds
       }
     },
 
