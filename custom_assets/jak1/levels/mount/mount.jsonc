@@ -4946,7 +4946,7 @@
 
 //RINGS//
 {
-  "trans": [ -1437.59, 215.06, 843.03 ],
+  "trans": [ -1467.90, 199.62, 798.39 ],
   "etype": "mount-race-ring",
   "game_task": "(game-task mount-ringrace)",
   "quat": [ 0.000, 0.000, 0.000, 1.000 ],
