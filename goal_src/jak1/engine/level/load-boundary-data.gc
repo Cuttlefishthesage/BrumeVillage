@@ -1498,37 +1498,36 @@
                                         (checkpt "finalboss-start" #f))
                   ;; custom levels
 
-                   (static-load-boundary :flags ( player )
+  (static-load-boundary :flags ( player )
                   :top (meters 255)
                   :bot (meters 155)
-                  :points ((meters -1677.5) (meters 430.35) (meters -1606.5) (meters 430.37))
-                  
+                  :points ((meters -1687.5) (meters 430.35) (meters -1596.5) (meters 430.37))
                   :bwd (load mount brume)
   )
 
-  (static-load-boundary :flags ( player )
+(static-load-boundary :flags ( player )
                   :top (meters 255)
                   :bot (meters 155)
-                  :points ((meters -1677.5) (meters 440.35) (meters -1606.5) (meters 440.37))
-                  
+                  :points ((meters -1687.5) (meters 457.35) (meters -1596.5) (meters 457.37))
+                  :fwd (display mount #f)
                   :bwd (display mount display)
   )
-  
-  (static-load-boundary :flags ( player )
+
+(static-load-boundary :flags ( player )
                   :top (meters 255)
                   :bot (meters 155)
-                  :points ((meters -1677.5) (meters 430.35) (meters -1606.5) (meters 430.37))
+                  :points ((meters -1687.5) (meters 435.35) (meters -1596.5) (meters 435.37))
                   :fwd (load abandon brume)
-                  
   )
 
-  (static-load-boundary :flags ( player )
+(static-load-boundary :flags ( player )
                   :top (meters 255)
                   :bot (meters 155)
-                  :points ((meters -1677.5) (meters 411.35) (meters -1606.5) (meters 411.37))
+                  :points ((meters -1687.5) (meters 411.35) (meters -1596.5) (meters 411.37))
                   :fwd (display abandon display)
-                  
+                  :bwd (display abandon #f)
   )
+
 
   
 
@@ -1638,7 +1637,7 @@
 
 (static-load-boundary
   :flags (closed player)
-  :top (meters 126.15)
+  :top (meters 131.15)
   :bot (meters 0.0)
   :points
    ( (meters -1864.9) (meters 146.73)   ; P0
@@ -1659,6 +1658,17 @@
      (meters -1864.9) (meters 134.73) ) ; P3
   :fwd (checkpt "preundg-checkpoint1" #f))
 
+  (static-load-boundary
+  :flags (closed player)
+  :top (meters 123.15)
+  :bot (meters 0.0)
+  :points
+   ( (meters -1864.9) (meters 146.73)   ; P0
+     (meters -1852.9) (meters 146.73)   ; P1
+     (meters -1852.9) (meters 134.73)   ; P2
+     (meters -1864.9) (meters 134.73) ) ; P3
+  :bwd (display preundg #f))
+
 
   (static-load-boundary
   :flags (closed player)
@@ -1671,6 +1681,17 @@
      (meters -1864.9) (meters 134.73) ) ; P3
   :bwd (display abandon display )
   :fwd (load preundg brume))
+
+  (static-load-boundary
+  :flags (closed player)
+  :top (meters 176.15)
+  :bot (meters 0.0)
+  :points
+   ( (meters -1864.9) (meters 146.73)   ; P0
+     (meters -1852.9) (meters 146.73)   ; P1
+     (meters -1852.9) (meters 134.73)   ; P2
+     (meters -1864.9) (meters 134.73) ) ; P3
+  :fwd (display abandon #f))
 
   (static-load-boundary
   :flags (closed player)
