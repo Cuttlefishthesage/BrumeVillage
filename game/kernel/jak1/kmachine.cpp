@@ -299,7 +299,7 @@ AutoSplitterBlock g_auto_splitter_block_jak1;
  * TODO finish up things which are commented.
  */
 int InitMachine() {
-  u32 debug_heap_end = (0xffffffff - DEBUG_HEAP_SPACE_FOR_STACK + 1) & 0x7ffffff;
+  u32 debug_heap_end = (0xffffffff - DEBUG_HEAP_SPACE_FOR_STACK + 1) & 0xeffffff;
 
   // initialize the global heap
   u32 global_heap_size = GLOBAL_HEAP_END - HEAP_START;

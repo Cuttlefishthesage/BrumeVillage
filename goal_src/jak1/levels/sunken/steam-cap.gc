@@ -432,7 +432,7 @@
            (set! s5-0 #f)
            (set! (-> this do-falling-sound?) #t)
            (when (-> this do-burst?)
-             (sound-play "sunk-top-rises")
+             ;; (sound-play "sunk-top-rises") annoying sound
              (set! (-> this do-burst?) #f)
              (spawn (-> this part) (-> this down))
              (spawn (-> this part) (-> this down))

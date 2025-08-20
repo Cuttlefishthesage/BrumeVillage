@@ -71,7 +71,7 @@
        ;; Code here runs as soon as you pickup small green eco
        )
       (((pickup-type eco-green))
-       ;; Code here runs as soon as you pickup big green eco 
+       ;; Code here runs as soon as you pickup big green eco
        ))
     (when from-vent?
       ;; Code here runs only if the eco was picked up from a vent
@@ -81,7 +81,13 @@
 (defun runs-on-jak-spawn ()
   ;; Code here runs every time jak spawns (loading a file new game or death)
   ;;uncomment this to use custom music for custom levels - the function is in mod-common-functions.gc
-  ;;(process-spawn-function process music-manager-proc)
+  (process-spawn-function process music-manager-proc)
+  (none))
+
+(defun runs-on-checkpt ()
+  ;; Code here runs every time jak spawns (loading a file new game or death)
+  ;;uncomment this to use custom music for custom levels - the function is in mod-common-functions.gc
+  (process-spawn-function process music-manager-proc)
   (none))
 
 (defun runs-on-jak-death ((death-event symbol))

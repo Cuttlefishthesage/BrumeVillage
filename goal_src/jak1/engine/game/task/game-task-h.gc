@@ -124,4 +124,45 @@
   (plunger-lurker-hit 113)
   (leaving-misty 114)
   (assistant-village3 115)
-  (max 116))
+  ;; BRUME ;;
+  (brume-buzzer 116)
+  (brume-muse-hide-1 117)
+  (brume-muse-hide-2 118)
+  (brume-muse-hide-3 119)
+  (brume-oracle-1 120)
+  (brume-oracle-2 121)
+  (brume-findcell-1 122)
+  (brume-restore-power 123)
+
+  ;; ABANDON ;;
+
+  (abandon-buzzer 124)
+  (abandon-findcell-1 125)
+  (abandon-findcell-2 126)
+  (abandon-findcell-3 127)
+  (abandon-drillers 128)
+  (abandon-rock 129)
+
+  ;;MOUNT ;;
+
+  (mount-buzzer 130)
+  (mount-findcell-1 131)
+  (mount-findcell-waterfall 132)
+  (mount-zoomer 133)
+  (mount-towertop 134)
+  (mount-ringrace 135)
+  (mount-platformbutton 136)
+
+  ;; PREUNDG ;;
+
+  (preundg-buzzer 137)
+  (preundg-spireclimb 138)
+  (preundg-battlearena 139)
+  (preundg-fluthalls 140)
+  (preundg-switchroom 141)
+  (preundg-slideclimb 142)
+
+  ;;WARP;;
+
+  (brume-warp 143)
+  (max 144))

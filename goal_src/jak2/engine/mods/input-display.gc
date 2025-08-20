@@ -95,7 +95,7 @@ Down lets you edit buttons, left lets you edit the sticks, right for dpad, up to
 (define down-offset (new 'static 'vector4w :x -12 :y 4 :z 0 :w 0))
 (define left-offset (new 'static 'vector4w :x -30   :y -16 :z 0 :w 0))
 (define right-offset (new 'static 'vector4w :x 6 :y -16 :z 0 :w 0))
-    
+
 (defun draw-dpad ((arg0 dma-buffer))
     (when (cpad-hold? 0 up)
         (draw-string-xy "up" arg0 (+ (-> dpad-origin x) (-> up-offset x)) (+ (-> dpad-origin y) (-> up-offset y)) (the font-color 13) (font-flags shadow kerning)) )
@@ -124,40 +124,40 @@ Down lets you edit buttons, left lets you edit the sticks, right for dpad, up to
 (defun draw-stick ((arg0 dma-buffer))
     (when show-stick1?
     ;up/down axis
-      (draw-sprite2d-xy arg0 
+      (draw-sprite2d-xy arg0
         (-> stick-origin x)       ;the vertical line's x coordinate = stick center x coordinate
         (- (-> stick-origin y) (/ height-idk 2))  ;we shift the line up, by half its height, so that the line midpoint = center y coordinate
         2
         height-idk
         *color-black*)
       ;left/right axis
-      (draw-sprite2d-xy arg0 
+      (draw-sprite2d-xy arg0
         (- (-> stick-origin x) (/ width-idk 2))
         (-> stick-origin y)
-        width-idk 
-        1 
+        width-idk
+        1
         *color-gray*)
-  
+
       ;Text for stick values
-      (draw-string-xy-scaled (string-format "~d  ~d" (-> *cpad-list* cpads 0 leftx) (-> *cpad-list* cpads 0 lefty)) arg0 
+      (draw-string-xy-scaled (string-format "~d  ~d" (-> *cpad-list* cpads 0 leftx) (-> *cpad-list* cpads 0 lefty)) arg0
         (+ (-> stick-origin x) (-> stick-text-offset x))
         (+ (-> stick-origin y) (-> stick-text-offset y))
         (font-color green) (font-flags shadow kerning ) 0.75)
-      
+
       ;raw stick location, nice for locating screen coordinates
       ;(draw-sprite2d-xy testbuf (the int (-> *cpad-list* cpads 0 leftx)) (the int(-> *cpad-list* cpads 0 lefty)) 5 3 *color-red*)
-  
+
       ;stick location scaled to picture
-      (draw-sprite2d-xy arg0 
-        ;analog-input takes left stick x int value and maps its min/max to negative/positive of the last argument 
+      (draw-sprite2d-xy arg0
+        ;analog-input takes left stick x int value and maps its min/max to negative/positive of the last argument
         ;in our case we scale to half of the picture's width, so the stick can go full + (right) or full - (left)
         (+ (-> stick-origin x)
           (analog-input (the int (-> *cpad-list* cpads 0 leftx)) 128.0 0.0 128.0 (the float (/ width-idk 2))))
         ;repeat for y coordinate
         (+ (-> stick-origin y)
           (analog-input (the int (-> *cpad-list* cpads 0 lefty)) 128.0 0.0 128.0 (the float (/ height-idk 2))))
-        3 
-        2 
+        3
+        2
         *color-cyan*)
     )
 )
@@ -172,34 +172,34 @@ Down lets you edit buttons, left lets you edit the sticks, right for dpad, up to
 (defun draw-stick2 ((arg0 dma-buffer))
     (when show-stick2?
       ;up/down axis
-      (draw-sprite2d-xy arg0 
-        (-> stick2-origin x)       
-        (- (-> stick2-origin y) (/ height-idk 2))  
+      (draw-sprite2d-xy arg0
+        (-> stick2-origin x)
+        (- (-> stick2-origin y) (/ height-idk 2))
         2
         height-idk
         *color-black*)
       ;left/right axis
-      (draw-sprite2d-xy arg0 
+      (draw-sprite2d-xy arg0
         (- (-> stick2-origin x) (/ width-idk 2))
         (-> stick2-origin y)
-        width-idk 
-        1 
+        width-idk
+        1
         *color-gray*)
-      
+
       ;Text for stick values
-      (draw-string-xy-scaled (string-format "~d  ~d" (-> *cpad-list* cpads 0 rightx) (-> *cpad-list* cpads 0 righty)) arg0 
+      (draw-string-xy-scaled (string-format "~d  ~d" (-> *cpad-list* cpads 0 rightx) (-> *cpad-list* cpads 0 righty)) arg0
         (+ (-> stick2-origin x) (-> stick2-text-offset x))
         (+ (-> stick2-origin y) (-> stick2-text-offset y))
         (font-color cyan) (font-flags shadow kerning ) 0.75)
 
       ;stick location scaled to picture
-      (draw-sprite2d-xy arg0 
+      (draw-sprite2d-xy arg0
         (+ (-> stick2-origin x)
           (analog-input (the int (-> *cpad-list* cpads 0 rightx)) 128.0 0.0 128.0 (the float (/ width-idk 2))))
         (+ (-> stick2-origin y)
           (analog-input (the int (-> *cpad-list* cpads 0 righty)) 128.0 0.0 128.0 (the float (/ height-idk 2))))
-        3 
-        2 
+        3
+        2
         *color-green*)
     )
 )
@@ -223,26 +223,26 @@ Down lets you edit buttons, left lets you edit the sticks, right for dpad, up to
       (when (cpad-pressed? 0 left) (set! button-edit-mode 2))
       (when (cpad-pressed? 0 right) (set! button-edit-mode 3))
     )
-    
+
     ;moves individual face buttons with dpad
     (when (= button-edit-mode 1)
       (when (cpad-hold? 0 triangle) ;when you hold triangle, you can move triangle's offset vector with the dpad
         (when (cpad-hold? 0 up) (+! (-> triangle-offset y) -1))
         (when (cpad-hold? 0 down) (+! (-> triangle-offset y) 1))
         (when (cpad-hold? 0 left) (+! (-> triangle-offset x) -1))
-        (when (cpad-hold? 0 right) (+! (-> triangle-offset x) 1))          
+        (when (cpad-hold? 0 right) (+! (-> triangle-offset x) 1))
       )
       (when (cpad-hold? 0 circle)
         (when (cpad-hold? 0 up) (+! (-> circle-offset y) -1))
         (when (cpad-hold? 0 down) (+! (-> circle-offset y) 1))
         (when (cpad-hold? 0 left) (+! (-> circle-offset x) -1))
-        (when (cpad-hold? 0 right) (+! (-> circle-offset x) 1))          
+        (when (cpad-hold? 0 right) (+! (-> circle-offset x) 1))
       )
       (when (cpad-hold? 0 x)
         (when (cpad-hold? 0 up) (+! (-> x-offset y) -1))
         (when (cpad-hold? 0 down) (+! (-> x-offset y) 1))
         (when (cpad-hold? 0 left) (+! (->  x-offset x) -1))
-        (when (cpad-hold? 0 right) (+! (->  x-offset x) 1))          
+        (when (cpad-hold? 0 right) (+! (->  x-offset x) 1))
       )
       (when (cpad-hold? 0 square)
         (when (cpad-hold? 0 up) (+! (-> square-offset y) -1))
@@ -255,37 +255,37 @@ Down lets you edit buttons, left lets you edit the sticks, right for dpad, up to
         (when (cpad-hold? 0 up) (+! (-> r1-offset y) -1))
         (when (cpad-hold? 0 down) (+! (-> r1-offset y) 1))
         (when (cpad-hold? 0 left) (+! (-> r1-offset x) -1))
-        (when (cpad-hold? 0 right) (+! (-> r1-offset x) 1))          
+        (when (cpad-hold? 0 right) (+! (-> r1-offset x) 1))
       )
       (when (cpad-hold? 0 r2)
         (when (cpad-hold? 0 up) (+! (-> r2-offset y) -1))
         (when (cpad-hold? 0 down) (+! (-> r2-offset y) 1))
         (when (cpad-hold? 0 left) (+! (-> r2-offset x) -1))
-        (when (cpad-hold? 0 right) (+! (-> r2-offset x) 1))          
+        (when (cpad-hold? 0 right) (+! (-> r2-offset x) 1))
       )
       (when (or (cpad-hold? 0 r3) (cpad-hold? 0 start)) ;use an or here since start/r3 share coords
         (when (cpad-hold? 0 up) (+! (-> r3-offset y) -1))
         (when (cpad-hold? 0 down) (+! (-> r3-offset y) 1))
         (when (cpad-hold? 0 left) (+! (-> r3-offset x) -1))
-        (when (cpad-hold? 0 right) (+! (-> r3-offset x) 1))          
+        (when (cpad-hold? 0 right) (+! (-> r3-offset x) 1))
       )
       (when (cpad-hold? 0 l1)
         (when (cpad-hold? 0 up) (+! (-> l1-offset y) -1))
         (when (cpad-hold? 0 down) (+! (-> l1-offset y) 1))
         (when (cpad-hold? 0 left) (+! (->  l1-offset x) -1))
-        (when (cpad-hold? 0 right) (+! (->  l1-offset x) 1))          
+        (when (cpad-hold? 0 right) (+! (->  l1-offset x) 1))
       )
       (when (cpad-hold? 0 l2)
         (when (cpad-hold? 0 up) (+! (-> l2-offset y) -1))
         (when (cpad-hold? 0 down) (+! (-> l2-offset y) 1))
         (when (cpad-hold? 0 left) (+! (-> l2-offset x) -1))
-        (when (cpad-hold? 0 right) (+! (-> l2-offset x) 1))          
+        (when (cpad-hold? 0 right) (+! (-> l2-offset x) 1))
       )
       (when (or (cpad-hold? 0 l3) (cpad-hold? 0 select)) ;use an or here since select/l3 share coords
         (when (cpad-hold? 0 up) (+! (-> l3-offset y) -1))
         (when (cpad-hold? 0 down) (+! (-> l3-offset y) 1))
         (when (cpad-hold? 0 left) (+! (-> l3-offset x) -1))
-        (when (cpad-hold? 0 right) (+! (-> l3-offset x) 1))          
+        (when (cpad-hold? 0 right) (+! (-> l3-offset x) 1))
       )
     )
     ;moves joysticks
@@ -331,7 +331,7 @@ Down lets you edit buttons, left lets you edit the sticks, right for dpad, up to
         ;
         ;Loop runs once per frame while process is active
         (loop
-          
+
           ;function that checks input to turn on editing
           (edit-mode-controls)
 
@@ -351,7 +351,7 @@ Down lets you edit buttons, left lets you edit the sticks, right for dpad, up to
             (draw-dpad testbuf)
 
             (draw-stick testbuf)
-            
+
             (draw-stick2 testbuf)
             )
 
@@ -361,7 +361,7 @@ Down lets you edit buttons, left lets you edit the sticks, right for dpad, up to
         )
       )
     )
-    
+
   ;Lisp returns the last form as the function return
   (none)
   )

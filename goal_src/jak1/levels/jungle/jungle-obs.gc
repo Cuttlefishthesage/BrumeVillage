@@ -901,9 +901,9 @@
             'inline-array
             ripple-wave
             4
-            (new 'static 'ripple-wave :scale 30.0 :xdiv -2 :speed 4.0)
-            (new 'static 'ripple-wave :scale 30.0 :xdiv 1 :zdiv -1 :speed 4.0)
-            (new 'static 'ripple-wave :scale 10.0 :xdiv -5 :zdiv -3 :speed 2.0)
+            (new 'static 'ripple-wave :scale 20.0 :xdiv -2 :speed 1.0)
+            (new 'static 'ripple-wave :scale 20.0 :xdiv 1 :zdiv -1 :speed 1.0)
+            (new 'static 'ripple-wave :scale 5.0 :xdiv -5 :zdiv -3 :speed 1.0)
             (new 'static 'ripple-wave))))
 
 (defmethod water-vol-method-22 ((this jungle-water))

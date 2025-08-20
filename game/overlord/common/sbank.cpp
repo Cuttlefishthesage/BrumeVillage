@@ -8,15 +8,19 @@
 
 #include "game/runtime.h"
 
-static constexpr int N_BANKS = 6;
+static constexpr int N_BANKS = 23;
 
 SoundBank gCommonBank;
 SoundBank gGunBank;
 SoundBank gBoardBank;
-SoundBank gLevelBanks[3];
+SoundBank gLevelBanks[20];
 
-SoundBank* gBanks[N_BANKS] = {&gCommonBank,    &gGunBank,       &gBoardBank,
-                              &gLevelBanks[0], &gLevelBanks[1], &gLevelBanks[2]};
+SoundBank* gBanks[N_BANKS] = {
+    &gCommonBank,     &gGunBank,        &gBoardBank,      &gLevelBanks[0],  &gLevelBanks[1],
+    &gLevelBanks[2],  &gLevelBanks[3],  &gLevelBanks[4],  &gLevelBanks[5],  &gLevelBanks[6],
+    &gLevelBanks[7],  &gLevelBanks[8],  &gLevelBanks[9],  &gLevelBanks[10], &gLevelBanks[11],
+    &gLevelBanks[12], &gLevelBanks[13], &gLevelBanks[14], &gLevelBanks[15], &gLevelBanks[16],
+    &gLevelBanks[17], &gLevelBanks[18], &gLevelBanks[19]};
 
 void sbank_init_globals() {
   gCommonBank = {};

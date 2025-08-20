@@ -83,12 +83,8 @@
         (let ((v1-0 (-> self condition)))
           (cond
             ((or (zero? v1-0) (= v1-0 1))
-             (if (or (and (task-complete? *game-info* (game-task beach-flutflut))
-                          (or (and (zero? (-> self condition)) (task-closed? (game-task village2-levitator) (task-status need-hint)))
-                              (and (= (-> self condition) 1) (task-closed? (game-task village3-button) (task-status need-hint)))))
-                     (and *cheat-mode* (cpad-hold? 0 l3))
-                     (and *target* (logtest? (-> *target* control root-prim prim-core action) (collide-action flut))))
-               (goto cfg-75)))
+             ;; removed flutflut code preventing it on spawning unless gametasks were completed or debug button press
+               (goto cfg-75))
             ((= v1-0 4)
              (if (and *target* (logtest? (-> *target* control root-prim prim-core action) (collide-action flut))) (goto cfg-75)))
             ((= v1-0 3)
@@ -239,9 +235,16 @@
     (set! (-> v1-24 0 param1) (the-as basic (-> this root trans)))
     (set! (-> v1-24 0 param2) (the-as basic (-> this extra-trans))))
   (dotimes (s4-2 2)
-    (let ((v1-27 (new 'process 'curve-control this 'path (the float (+ s4-2 1)))))
-      (set! (-> this path-data s4-2) v1-27)
-      (if v1-27 (logior! (-> v1-27 flags) (path-control-flag display draw-line draw-point draw-text)))))
+  (let ((v1-27 ;; change to make blocking planes work via path for custom levels below:
+          (new 'process 'curve-control this 'path
+               (if (and (res-lump-struct arg0 'use-default-keyframe symbol)
+                        (= s4-2 1))
+                   -1000000000.0
+                   (the float (+ s4-2 1))))))
+    (set! (-> this path-data s4-2) v1-27)
+    (if v1-27
+        (logior! (-> v1-27 flags)
+                 (path-control-flag display draw-line draw-point draw-text))))) ;; change to make blocking planes work via path for custom levels above:
   (set! (-> this condition) (res-lump-value arg0 'index int))
   (set! (-> this fact) (new 'process 'fact-info this (pickup-type eco-pill-random) (-> *FACT-bank* default-pill-inc)))
   (set! (-> this part) (create-launch-control (-> *part-group-id-table* 120) this))

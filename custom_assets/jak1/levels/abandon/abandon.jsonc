@@ -1,0 +1,6689 @@
+{
+    // The "in-game" name of the level. Should be lower case, with dashes (GOAL symbol name)
+    // the name of this file, and the folder this file is in must have the same name.
+    "long_name": "abandon",
+    // The file name, should be upper case and 8 characters or less.
+    "iso_name": "ABANDON",
+    // The nickname, should be exactly 3 characters
+    "nickname": "aba", // 3 char name, all lowercase
+    // Background mesh file.
+    // Must have vertex colors. Use the blender cycles renderer, bake, diffuse, uncheck color,
+    // and bake to vertex colors. For now, only the first vertex color group is used, so make sure you
+    // only have 1.
+    "gltf_file": "custom_assets/jak1/levels/abandon/abandon.glb",
+  
+    // automatically set wall vs. ground based on angle. Useful if you don't want to assign this yourself
+    "automatic_wall_detection": true,
+    "automatic_wall_angle": 45.0,
+  
+    // if your mesh has triangles with incorrect orientation, set this to make all collision mesh triangles double sided
+    // this makes collision 2x slower and bigger, so only use if really needed
+    "double_sided_collide": false,
+  
+    // available res-lump tag types:
+    // integer types: int32, uint32, enum-int32, enum-uint32
+    // float types: float, meters (1 meter = 4096.0 units), degrees (65536.0 = 360°)
+    // vector types: vector (normal floats), vector4m (meters), vector3m (meters with w set to 1.0), vector-vol (normal floats with w in meters), movie-pos (meters with w in degrees)
+    // special types: symbol, type, string, eco-info, cell-info, buzzer-info, water-height
+    //
+    // examples:
+    //
+    // adds a float tag 'spring-height' with value of 200 meters (1 meter = 4096.0 units):
+    // "spring-height": ["meters", 200.0]
+    //
+    // adds a degrees tag 'rotoffset':
+    // "rotoffset": ["degrees", -45.0]
+    //
+    // adds a movie-pos tag:
+    // "movie-pos": ["movie-pos", [100.22, -25.3, 99.5, 180.0]]
+    //
+    // adds an enum tag 'options':
+    // "options": ["enum-int32", "(fact-options large)"]
+    //
+    // adds a water-height tag:
+    // "water-height": ["water-height", 25.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"]
+    //
+    // adds an eco-info tag:
+    // "eco-info": ["eco-info", "(pickup-type health)", 2]
+    //
+    // adds a cell-info tag:
+    // "eco-info": ["cell-info", "(game-task training-gimmie)"]
+    //
+    // adds a buzzer-info tag:
+    // "eco-info": ["buzzer-info", "(game-task training-buzzer)", 5]
+    //
+    // adds a 'symbol' tag (using the 'type' and 'string' lump types works the same way):
+    // "symbol-list": ["symbol", "sym-1", "sym-2"]
+  
+    // The base actor id for your custom level. If you have multiple levels, this should be unique!
+    "base_id": 70000,
+  
+    // All art groups you want to use in your custom level. Will add their models and corresponding textures to the FR3 file.
+    // Note: You will still have to add them to your level's .gd file.
+     "art_groups": ["plat-ag", "minecartsteel-ag", "shortcut-boulder-ag", "ecoventrock-ag", "kickrock-ag", "water-anim-sunken-ag", "water-anim-sunken-dark-eco-ag", "pontoonten-ag", "eggtop-ag","swamp-bat-ag","driller-lurker-ag", "babak-ag", "swamp-rat-ag", "swamp-rat-nest-ag"],
+  
+    // If you have any custom models in the "custom_assets/jak1/models/custom_levels" folder that you want to use in your level, add them to this list.
+    // Note: Like with art groups, these should also be added to your level's .gd file.
+    "custom_models": ["gravityswitch"],
+  
+  // Any textures you want to include in your custom level. This is mainly useful for things such as the zoomer HUD,
+  // sky textures and cases where you want to use objects drawn with the generic renderer,
+  // which also requires you to set a texture remap table and a list of tpages.
+  // To get a list of all the textures, you can extract all of the game's textures
+  // by setting "save_texture_pngs" to true in the decompiler config.
+  // The format is ["tpage-name", "texture-name1", "texture-name2", ...].
+  // If you want all textures from a tpage, you can just do ["tpage-name"].
+  "textures": [
+    ["village1-vis-alpha"]
+  ],
+
+  // Which vanilla level's texture remap table to use.
+  // This is needed if you want to have proper textures for objects that are drawn using generic, such as
+  // dark eco pools or dying enemies. If you choose to use this,
+  // the order of art groups and tpages in your level's .gd MUST match the vanilla level's for the textures to work.
+  "tex_remap": "village1",
+
+  // Which sky to use for your custom level. This needs to be the name of a vanilla level with sky textures.
+  // Your level's mood update needs to be set up to copy the sky texture (update-mood-default already handles this as an example).
+  // You also need to add a specific tpage to your level .gd depending on the level you chose:
+  // training:   tpage-1308.go
+  // village1:   tpage-401.go
+  // beach:      tpage-215.go
+  // jungle:     tpage-388.go
+  // misty:      tpage-520.go
+  // firecanyon: tpage-1123.go
+  // village2:   tpage-921.go
+  // rolling:    tpage-925.go
+  // sunkenb:    tpage-162.go
+  // swamp:      tpage-630.go
+  // ogre:       tpage-1117.go
+  // village3:   tpage-1194.go
+  // snow:       tpage-712.go
+  // finalboss:  tpage-1418.go
+  // The tpage you choose also has to be in the alpha (4th) slot in the "tpages" list below.
+  "sky": "village1",
+
+    // Any texture pages that are added to the level's "texture-ids" array.
+    // These will be logged in and linked as part of level loading.
+    // There are five tpage categories, in this order:
+    // - tfrag
+    // - pris
+    // - shrub
+    // - alpha
+    // - water
+    // This is also (with the exception of levels that use the zoomer) the order that the tpages are listed in in the vanilla .gd files.
+    // You need to also add these to your level .gd as well.
+    // Sky textures use the alpha slot.
+    // If this is empty and "tex_remap" and "sky" are the same level, this will be auto-filled with the tpages from the
+    // corresponding level (check its .gd file for the art group/tpage order to copy over).
+    "tpages": [],
+  
+    // Ambients you want to use in your custom level. Ambients can be used for various things like changing the music variation (flava),
+    // adding ambient sounds, level name hints, etc.
+    "ambients": [
+      
+{
+  "trans": [ -1506.06, 174.90, 275.21, 50.0 ],
+  "bsphere": [ -1506.06, 174.90, 275.21, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon2",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1476.84, 173.14, 230.75, 50.0 ],
+  "bsphere": [ -1476.84, 173.14, 230.75, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon3",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1480.41, 178.61, 172.25, 50.0 ],
+  "bsphere": [ -1480.41, 178.61, 172.25, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon4",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1490.34, 180.84, 85.45, 50.0 ],
+  "bsphere": [ -1490.34, 180.84, 85.45, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon5",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1421.91, 180.47, 42.91, 50.0 ],
+  "bsphere": [ -1421.91, 180.47, 42.91, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon6",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1333.98, 176.50, 124.12, 50.0 ],
+  "bsphere": [ -1333.98, 176.50, 124.12, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon7",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1304.24, 172.64, 121.58, 50.0 ],
+  "bsphere": [ -1304.24, 172.64, 121.58, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon8",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1125.63, 183.18, 154.37, 50.0 ],
+  "bsphere": [ -1125.63, 183.18, 154.37, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon9",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1061.62, 174.38, 220.06, 50.0 ],
+  "bsphere": [ -1061.62, 174.38, 220.06, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon10",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1061.45, 175.09, 273.95, 50.0 ],
+  "bsphere": [ -1061.45, 175.09, 273.95, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon11",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1059.37, 182.01, 300.92, 50.0 ],
+  "bsphere": [ -1059.37, 182.01, 300.92, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon12",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1156.54, 182.90, 455.44, 50.0 ],
+  "bsphere": [ -1156.54, 182.90, 455.44, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon13",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1197.08, 180.18, 501.33, 50.0 ],
+  "bsphere": [ -1197.08, 180.18, 501.33, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon14",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1219.97, 175.83, 619.42, 50.0 ],
+  "bsphere": [ -1219.97, 175.83, 619.42, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon15",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1285.44, 187.69, 646.06, 50.0 ],
+  "bsphere": [ -1285.44, 187.69, 646.06, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon16",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1325.29, 186.51, 682.80, 50.0 ],
+  "bsphere": [ -1325.29, 186.51, 682.80, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon17",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1283.81, 179.93, 752.20, 50.0 ],
+  "bsphere": [ -1283.81, 179.93, 752.20, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon18",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1202.43, 175.50, 762.18, 50.0 ],
+  "bsphere": [ -1202.43, 175.50, 762.18, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon19",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1248.66, 174.58, 886.00, 50.0 ],
+  "bsphere": [ -1248.66, 174.58, 886.00, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon20",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1272.26, 174.18, 936.03, 50.0 ],
+  "bsphere": [ -1272.26, 174.18, 936.03, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon21",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1326.06, 166.75, 954.49, 50.0 ],
+  "bsphere": [ -1326.06, 166.75, 954.49, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon22",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1435.70, 117.60, 864.98, 50.0 ],
+  "bsphere": [ -1435.70, 117.60, 864.98, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon23",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1455.18, 120.05, 754.02, 50.0 ],
+  "bsphere": [ -1455.18, 120.05, 754.02, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon24",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1486.45, 170.24, 437.47, 50.0 ],
+  "bsphere": [ -1486.45, 170.24, 437.47, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon25",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+//additional wind//
+{
+  "trans": [ -1218.26, 185.90, 71.61, 50.0 ],
+  "bsphere": [ -1218.26, 185.90, 71.61, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon-additional1",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1144.09, 180.22, 273.71, 50.0 ],
+  "bsphere": [ -1144.09, 180.22, 273.71, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon-additional2",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1127.09, 197.30, 338.20, 50.0 ],
+  "bsphere": [ -1127.09, 197.30, 338.20, 50.0 ],
+  "lump": {
+    "name": "ambient-wind-abandon-additional3",
+    "type": "'sound",
+    "effect-name": "'wind-loop",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+}
+      
+    ],
+  
+    "actors" : [
+      
+       {
+  "trans": [-1078.77, 176.02, 261.99],
+  "etype": "pathing-minecart",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1078.77, 176.02, 261.99, 10],
+  "lump": {
+    "name": "pathcart1",
+    "path": ["vector4m", 
+      [-1078.77, 176.02, 261.99, 1.0],
+      [-1044.57, 168.06, 262.41, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "sync": ["float", 8.0, 0.0]
+  }
+},
+{
+  "trans": [-1078.77, 176.02, 261.99],
+  "etype": "pathing-minecart",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1078.77, 176.02, 261.99, 10],
+  "lump": {
+    "name": "pathcart2",
+    "path": ["vector4m", 
+      [-1078.77, 176.02, 261.99, 1.0],
+      [-1044.57, 168.06, 262.41, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "sync": ["float", 8.0, 0.5]
+  }
+},
+
+{
+  "trans": [-1043.71, 177.27, 273.98],
+  "etype": "pathing-minecart",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1043.71, 177.27, 273.98, 10],
+  "lump": {
+    "name": "pathcart3",
+    "path": ["vector4m", 
+      [-1043.71, 177.27, 273.98, 1.0],
+      [-1080.31, 169.98, 273.55, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "sync": ["float", 10.0, 0.0]
+  }
+},
+{
+  "trans": [-1043.71, 177.27, 273.98],
+  "etype": "pathing-minecart",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1043.71, 177.27, 273.98, 10],
+  "lump": {
+    "name": "pathcart4",
+    "path": ["vector4m", 
+      [-1043.71, 177.27, 273.98, 1.0],
+      [-1080.31, 169.98, 273.55, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "sync": ["float", 10.0, 0.6]
+  }
+},
+
+{
+  "trans": [-1081.46, 180.36, 288.87],
+  "etype": "pathing-minecart",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1081.46, 180.36, 288.87, 10],
+  "lump": {
+    "name": "pathcart5",
+    "path": ["vector4m", 
+      [-1081.46, 180.36, 288.87, 1.0],
+      [-1046.83, 170.62, 287.23, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "sync": ["float", 8.0, 0.0]
+  }
+},
+{
+  "trans": [-1081.46, 180.36, 288.87],
+  "etype": "pathing-minecart",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1081.46, 180.36, 288.87, 10],
+  "lump": {
+    "name": "pathcart6",
+    "path": ["vector4m", 
+      [-1081.46, 180.36, 288.87, 1.0],
+      [-1046.83, 170.62, 287.23, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "sync": ["float", 8.0, 0.4]
+  }
+},
+
+{
+  "trans": [-1041.04, 185.58, 301.18],
+  "etype": "pathing-minecart",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1041.04, 185.58, 301.18, 10],
+  "lump": {
+    "name": "pathcart7",
+    "path": ["vector4m", 
+      [-1041.04, 185.58, 301.18, 1.0],
+      [-1080.59, 174.71, 300.56, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "sync": ["float", 10.0, 0.0]
+  }
+},
+{
+  "trans": [-1041.04, 185.58, 301.18],
+  "etype": "pathing-minecart",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1041.04, 185.58, 301.18, 10],
+  "lump": {
+    "name": "pathcart8",
+    "path": ["vector4m", 
+      [-1041.04, 185.58, 301.18, 1.0],
+      [-1080.59, 174.71, 300.56, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "sync": ["float", 10.0, 0.5]
+  }
+},
+
+{
+  "trans": [-1078.24, 175.75, 313.98],
+  "etype": "pathing-minecart",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1078.24, 175.75, 313.98, 10],
+  "lump": {
+    "name": "pathcart9",
+    "path": ["vector4m", 
+      [-1078.24, 175.75, 313.98, 1.0],
+      [-1043.02, 176.23, 313.80, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "sync": ["float", 9.0, 0.0]
+  }
+},
+{
+  "trans": [-1078.24, 175.75, 313.98],
+  "etype": "pathing-minecart",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1078.24, 175.75, 313.98, 10],
+  "lump": {
+    "name": "pathcart10",
+    "path": ["vector4m", 
+      [-1078.24, 175.75, 313.98, 1.0],
+      [-1043.02, 176.23, 313.80, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "sync": ["float", 9.0, 0.6]
+  }
+},
+
+{
+  "trans": [-1042.94, 179.83, 324.29],
+  "etype": "pathing-minecart",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1042.94, 179.83, 324.29, 10],
+  "lump": {
+    "name": "pathcart11",
+    "path": ["vector4m", 
+      [-1042.94, 179.83, 324.29, 1.0],
+      [-1078.12, 180.14, 323.01, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "sync": ["float", 10.0, 0.0]
+  }
+},
+{
+  "trans": [-1042.94, 179.83, 324.29],
+  "etype": "pathing-minecart",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1042.94, 179.83, 324.29, 10],
+  "lump": {
+    "name": "pathcart12",
+    "path": ["vector4m", 
+      [-1042.94, 179.83, 324.29, 1.0],
+      [-1078.12, 180.14, 323.01, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "sync": ["float", 10.0, 0.4]
+  }
+},
+
+{
+  "trans": [-1162.4, 181.98, 464.26],
+  "etype": "minecartsteel",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1048.94, 179.88, 324.07, 10],
+  "lump": {
+    "name": "pathcart13",
+    "path": ["vector4m", 
+      [-1048.94, 179.88, 324.07, 1.0],
+      [-1072.12, 180.09, 323.23, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "index": ["int32", 2]
+  }
+},
+{
+  "trans": [-1176.7, 181.98, 523.45],
+  "etype": "minecartsteel",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1048.94, 179.88, 324.07, 10],
+  "lump": {
+    "name": "pathcart14",
+    "path": ["vector4m", 
+      [-1048.94, 179.88, 324.07, 1.0],
+      [-1072.12, 180.09, 323.23, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "index": ["int32", 2]
+  }
+},
+{
+  "trans": [-1250.9, 175.65, 929.54],
+  "etype": "minecartsteel",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1048.94, 179.88, 324.07, 10],
+  "lump": {
+    "name": "pathcart15",
+    "path": ["vector4m", 
+      [-1048.94, 179.88, 324.07, 1.0],
+      [-1072.12, 180.09, 323.23, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "index": ["int32", 2]
+  }
+},
+{
+  "trans": [-1301.9, 168.21, 969.76],
+  "etype": "minecartsteel",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1048.94, 179.88, 324.07, 10],
+  "lump": {
+    "name": "pathcart16",
+    "path": ["vector4m", 
+      [-1048.94, 179.88, 324.07, 1.0],
+      [-1072.12, 180.09, 323.23, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "index": ["int32", 2]
+  }
+},
+{
+  "trans": [-1303.7, 190.06, 642.73],
+  "etype": "minecartsteel",
+  "game_task": "(game-task none)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [-1048.94, 179.88, 324.07, 10],
+  "lump": {
+    "name": "pathcart17",
+    "path": ["vector4m", 
+      [-1048.94, 179.88, 324.07, 1.0],
+      [-1072.12, 180.09, 323.23, 1.0]
+    ],
+    "options": ["enum-int32", "(fact-options wrap-phase)"],
+    "index": ["int32", 2]
+  }
+},
+
+/////money//////
+{
+  "trans": [ -1480.00, 173.53, 248.29 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1480.00, 173.53, 248.29, 10 ],
+  "lump": {
+    "name": "abandon-money-01"
+  }
+},
+{
+  "trans": [ -1479.33, 173.10, 236.13 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1479.33, 173.10, 236.13, 10 ],
+  "lump": {
+    "name": "abandon-money-02"
+  }
+},
+{
+  "trans": [ -1477.37, 173.31, 220.72 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1477.37, 173.31, 220.72, 10 ],
+  "lump": {
+    "name": "abandon-money-03"
+  }
+},
+{
+  "trans": [ -1473.88, 175.21, 207.60 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1473.88, 175.21, 207.60, 10 ],
+  "lump": {
+    "name": "abandon-money-04"
+  }
+},
+{
+  "trans": [ -1470.56, 178.09, 193.37 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1470.56, 178.09, 193.37, 10 ],
+  "lump": {
+    "name": "abandon-money-05"
+  }
+},
+{
+  "trans": [ -1478.06, 178.91, 181.45 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1478.06, 178.91, 181.45, 10 ],
+  "lump": {
+    "name": "abandon-money-06"
+  }
+},
+{
+  "trans": [ -1461.33, 182.16, 163.77 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1461.33, 182.16, 163.77, 10 ],
+  "lump": {
+    "name": "abandon-money-07"
+  }
+},
+{
+  "trans": [ -1449.45, 181.92, 161.71 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1449.45, 181.92, 161.71, 10 ],
+  "lump": {
+    "name": "abandon-money-08"
+  }
+},
+{
+  "trans": [ -1455.23, 182.24, 151.42 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1455.23, 182.24, 151.42, 10 ],
+  "lump": {
+    "name": "abandon-money-09"
+  }
+},
+{
+  "trans": [ -1449.36, 182.28, 155.03 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1449.36, 182.28, 155.03, 10 ],
+  "lump": {
+    "name": "abandon-money-10"
+  }
+},
+{
+  "trans": [ -1488.34, 180.11, 101.62 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1488.34, 180.11, 101.62, 10 ],
+  "lump": {
+    "name": "abandon-money-11"
+  }
+},
+{
+  "trans": [ -1490.30, 180.93, 88.69 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1490.30, 180.93, 88.69, 10 ],
+  "lump": {
+    "name": "abandon-money-12"
+  }
+},
+{
+  "trans": [ -1496.57, 180.92, 76.25 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1496.57, 180.92, 76.25, 10 ],
+  "lump": {
+    "name": "abandon-money-13"
+  }
+},
+{
+  "trans": [ -1495.26, 180.99, 55.76 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1495.26, 180.99, 55.76, 10 ],
+  "lump": {
+    "name": "abandon-money-14"
+  }
+},
+{
+  "trans": [ -1490.90, 180.58, 36.31 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1490.90, 180.58, 36.31, 10 ],
+  "lump": {
+    "name": "abandon-money-15"
+  }
+},
+{
+  "trans": [ -1480.31, 181.26, 28.83 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1480.31, 181.26, 28.83, 10 ],
+  "lump": {
+    "name": "abandon-money-16"
+  }
+},
+{
+  "trans": [ -1466.77, 180.06, 5.05 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1466.77, 180.06, 5.05, 10 ],
+  "lump": {
+    "name": "abandon-money-17"
+  }
+},
+{
+  "trans": [ -1447.69, 181.06, 1.90 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1447.69, 181.06, 1.90, 10 ],
+  "lump": {
+    "name": "abandon-money-18"
+  }
+},
+{
+  "trans": [ -1441.47, 180.42, 17.73 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1441.47, 180.42, 17.73, 10 ],
+  "lump": {
+    "name": "abandon-money-19"
+  }
+},
+{
+  "trans": [ -1432.07, 179.73, 30.29 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1432.07, 179.73, 30.29, 10 ],
+  "lump": {
+    "name": "abandon-money-20"
+  }
+},
+{
+  "trans": [ -1422.16, 180.48, 40.01 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1422.16, 180.48, 40.01, 10 ],
+  "lump": {
+    "name": "abandon-money-21"
+  }
+},
+{
+  "trans": [ -1411.56, 180.46, 53.53 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1411.56, 180.46, 53.53, 10 ],
+  "lump": {
+    "name": "abandon-money-22"
+  }
+},
+{
+  "trans": [ -1393.00, 177.72, 101.13 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1393.00, 177.72, 101.13, 10 ],
+  "lump": {
+    "name": "abandon-money-23"
+  }
+},
+{
+  "trans": [ -1379.53, 176.40, 110.40 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1379.53, 176.40, 110.40, 10 ],
+  "lump": {
+    "name": "abandon-money-24"
+  }
+},
+{
+  "trans": [ -1361.85, 175.67, 119.43 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1361.85, 175.67, 119.43, 10 ],
+  "lump": {
+    "name": "abandon-money-25"
+  }
+},
+{
+  "trans": [ -1333.86, 176.54, 124.12 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1333.86, 176.54, 124.12, 10 ],
+  "lump": {
+    "name": "abandon-money-26"
+  }
+},
+{
+  "trans": [ -1319.91, 175.00, 117.72 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1319.91, 175.00, 117.72, 10 ],
+  "lump": {
+    "name": "abandon-money-27"
+  }
+},
+{
+  "trans": [ -1305.13, 172.40, 122.05 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1305.13, 172.40, 122.05, 10 ],
+  "lump": {
+    "name": "abandon-money-28"
+  }
+},
+{
+  "trans": [ -1288.81, 170.84, 117.46 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1288.81, 170.84, 117.46, 10 ],
+  "lump": {
+    "name": "abandon-money-29"
+  }
+},
+{
+  "trans": [ -1235.77, 177.76, 103.09 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1235.77, 177.76, 103.09, 10 ],
+  "lump": {
+    "name": "abandon-money-30"
+  }
+},
+{
+  "trans": [ -1221.68, 179.10, 111.96 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1221.68, 179.10, 111.96, 10 ],
+  "lump": {
+    "name": "abandon-money-31"
+  }
+},
+{
+  "trans": [ -1228.93, 177.18, 124.93 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1228.93, 177.18, 124.93, 10 ],
+  "lump": {
+    "name": "abandon-money-32"
+  }
+},
+{
+  "trans": [ -1131.09, 182.59, 161.89 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1131.09, 182.59, 161.89, 10 ],
+  "lump": {
+    "name": "abandon-money-33"
+  }
+},
+{
+  "trans": [ -1123.49, 183.35, 147.61 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1123.49, 183.35, 147.61, 10 ],
+  "lump": {
+    "name": "abandon-money-34"
+  }
+},
+{
+  "trans": [ -1108.82, 182.28, 140.61 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1108.82, 182.28, 140.61, 10 ],
+  "lump": {
+    "name": "abandon-money-35"
+  }
+},
+{
+  "trans": [ -1127.77, 177.26, 116.38 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1127.77, 177.26, 116.38, 10 ],
+  "lump": {
+    "name": "abandon-money-36"
+  }
+},
+{
+  "trans": [ -1139.91, 178.17, 121.13 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1139.91, 178.17, 121.13, 10 ],
+  "lump": {
+    "name": "abandon-money-37"
+  }
+},
+{
+  "trans": [ -1156.31, 178.71, 119.51 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1156.31, 178.71, 119.51, 10 ],
+  "lump": {
+    "name": "abandon-money-38"
+  }
+},
+{
+  "trans": [ -1173.28, 176.97, 110.86 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1173.28, 176.97, 110.86, 10 ],
+  "lump": {
+    "name": "abandon-money-39"
+  }
+},
+{
+  "trans": [ -1072.27, 175.55, 163.95 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1072.27, 175.55, 163.95, 10 ],
+  "lump": {
+    "name": "abandon-money-40"
+  }
+},
+{
+  "trans": [ -1061.05, 172.25, 173.60 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1061.05, 172.25, 173.60, 10 ],
+  "lump": {
+    "name": "abandon-money-41"
+  }
+},
+{
+  "trans": [ -1064.13, 169.43, 191.87 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1064.13, 169.43, 191.87, 10 ],
+  "lump": {
+    "name": "abandon-money-42"
+  }
+},
+{
+  "trans": [ -1071.03, 178.29, 261.71 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1071.03, 178.29, 261.71, 10 ],
+  "lump": {
+    "name": "abandon-money-43"
+  }
+},
+{
+  "trans": [ -1063.93, 176.66, 262.00 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1063.93, 176.66, 262.00, 10 ],
+  "lump": {
+    "name": "abandon-money-44"
+  }
+},
+{
+  "trans": [ -1059.03, 175.52, 262.06 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1059.03, 175.52, 262.06, 10 ],
+  "lump": {
+    "name": "abandon-money-45"
+  }
+},
+{
+  "trans": [ -1054.67, 174.51, 262.11 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1054.67, 174.51, 262.11, 10 ],
+  "lump": {
+    "name": "abandon-money-46"
+  }
+},
+{
+  "trans": [ -1052.67, 179.57, 273.72 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1052.67, 179.57, 273.72, 10 ],
+  "lump": {
+    "name": "abandon-money-47"
+  }
+},
+{
+  "trans": [ -1058.62, 178.39, 273.65 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1058.62, 178.39, 273.65, 10 ],
+  "lump": {
+    "name": "abandon-money-48"
+  }
+},
+{
+  "trans": [ -1062.87, 177.54, 273.60 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1062.87, 177.54, 273.60, 10 ],
+  "lump": {
+    "name": "abandon-money-49"
+  }
+},
+{
+  "trans": [ -1069.09, 176.30, 273.53 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1069.09, 176.30, 273.53, 10 ],
+  "lump": {
+    "name": "abandon-money-50"
+  }
+},
+{
+  "trans": [ -1072.97, 182.12, 288.68 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1072.97, 182.12, 288.68, 10 ],
+  "lump": {
+    "name": "abandon-money-51"
+  }
+},
+{
+  "trans": [ -1067.83, 180.67, 288.44 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1067.83, 180.67, 288.44, 10 ],
+  "lump": {
+    "name": "abandon-money-52"
+  }
+},
+{
+  "trans": [ -1062.10, 179.06, 288.17 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1062.10, 179.06, 288.17, 10 ],
+  "lump": {
+    "name": "abandon-money-53"
+  }
+},
+{
+  "trans": [ -1055.15, 177.10, 287.84 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1055.15, 177.10, 287.84, 10 ],
+  "lump": {
+    "name": "abandon-money-54"
+  }
+},
+{
+  "trans": [ -1050.24, 187.18, 301.39 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1050.24, 187.18, 301.39, 10 ],
+  "lump": {
+    "name": "abandon-money-55"
+  }
+},
+{
+  "trans": [ -1056.88, 185.36, 301.10 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1056.88, 185.36, 301.10, 10 ],
+  "lump": {
+    "name": "abandon-money-56"
+  }
+},
+{
+  "trans": [ -1064.64, 183.23, 300.64 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1064.64, 183.23, 300.64, 10 ],
+  "lump": {
+    "name": "abandon-money-57"
+  }
+},
+{
+  "trans": [ -1071.58, 181.32, 300.53 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1071.58, 181.32, 300.53, 10 ],
+  "lump": {
+    "name": "abandon-money-58"
+  }
+},
+{
+  "trans": [ -1071.27, 179.86, 314.25 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1071.27, 179.86, 314.25, 10 ],
+  "lump": {
+    "name": "abandon-money-59"
+  }
+},
+{
+  "trans": [ -1064.09, 179.97, 313.98 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1064.09, 179.97, 313.98, 10 ],
+  "lump": {
+    "name": "abandon-money-60"
+  }
+},
+{
+  "trans": [ -1057.15, 180.07, 313.94 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1057.15, 180.07, 313.94, 10 ],
+  "lump": {
+    "name": "abandon-money-61"
+  }
+},
+{
+  "trans": [ -1050.58, 180.13, 314.03 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1050.58, 180.13, 314.03, 10 ],
+  "lump": {
+    "name": "abandon-money-62"
+  }
+},
+{
+  "trans": [ -1049.56, 183.89, 323.95 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1049.56, 183.89, 323.95, 10 ],
+  "lump": {
+    "name": "abandon-money-63"
+  }
+},
+{
+  "trans": [ -1056.88, 183.99, 323.81 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1056.88, 183.99, 323.81, 10 ],
+  "lump": {
+    "name": "abandon-money-64"
+  }
+},
+{
+  "trans": [ -1064.38, 184.05, 323.54 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1064.38, 184.05, 323.54, 10 ],
+  "lump": {
+    "name": "abandon-money-65"
+  }
+},
+{
+  "trans": [ -1071.76, 184.12, 323.27 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1071.76, 184.12, 323.27, 10 ],
+  "lump": {
+    "name": "abandon-money-66"
+  }
+},
+{
+  "trans": [ -1077.51, 180.32, 376.40 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1077.51, 180.32, 376.40, 10 ],
+  "lump": {
+    "name": "abandon-money-67"
+  }
+},
+{
+  "trans": [ -1089.28, 175.05, 387.34 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1089.28, 175.05, 387.34, 10 ],
+  "lump": {
+    "name": "abandon-money-68"
+  }
+},
+{
+  "trans": [ -1101.23, 170.84, 397.64 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1101.23, 170.84, 397.64, 10 ],
+  "lump": {
+    "name": "abandon-money-69"
+  }
+},
+{
+  "trans": [ -1109.91, 175.01, 413.31 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1109.91, 175.01, 413.31, 10 ],
+  "lump": {
+    "name": "abandon-money-70"
+  }
+},
+{
+  "trans": [ -1118.28, 178.36, 409.59 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1118.28, 178.36, 409.59, 10 ],
+  "lump": {
+    "name": "abandon-money-71"
+  }
+},
+{
+  "trans": [ -1126.55, 183.56, 421.05 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1126.55, 183.56, 421.05, 10 ],
+  "lump": {
+    "name": "abandon-money-72"
+  }
+},
+{
+  "trans": [ -1184.16, 182.71, 469.06 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1184.16, 182.71, 469.06, 10 ],
+  "lump": {
+    "name": "abandon-money-73"
+  }
+},
+{
+  "trans": [ -1178.21, 182.70, 471.82 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1178.21, 182.70, 471.82, 10 ],
+  "lump": {
+    "name": "abandon-money-74"
+  }
+},
+{
+  "trans": [ -1170.96, 182.89, 470.66 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1170.96, 182.89, 470.66, 10 ],
+  "lump": {
+    "name": "abandon-money-75"
+  }
+},
+{
+  "trans": [ -1165.02, 183.31, 466.54 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1165.02, 183.31, 466.54, 10 ],
+  "lump": {
+    "name": "abandon-money-76"
+  }
+},
+{
+  "trans": [ -1160.53, 183.93, 461.74 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1160.53, 183.93, 461.74, 10 ],
+  "lump": {
+    "name": "abandon-money-77"
+  }
+},
+{
+  "trans": [ -1156.68, 184.46, 456.60 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1156.68, 184.46, 456.60, 10 ],
+  "lump": {
+    "name": "abandon-money-78"
+  }
+},
+{
+  "trans": [ -1152.90, 184.73, 450.52 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1152.90, 184.73, 450.52, 10 ],
+  "lump": {
+    "name": "abandon-money-79"
+  }
+},
+{
+  "trans": [ -1149.78, 183.88, 443.74 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1149.78, 183.88, 443.74, 10 ],
+  "lump": {
+    "name": "abandon-money-80"
+  }
+},
+{
+  "trans": [ -1171.53, 183.01, 480.14 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1171.53, 183.01, 480.14, 10 ],
+  "lump": {
+    "name": "abandon-money-81"
+  }
+},
+{
+  "trans": [ -1180.14, 183.28, 479.56 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1180.14, 183.28, 479.56, 10 ],
+  "lump": {
+    "name": "abandon-money-82"
+  }
+},
+{
+  "trans": [ -1187.22, 183.31, 482.08 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1187.22, 183.31, 482.08, 10 ],
+  "lump": {
+    "name": "abandon-money-83"
+  }
+},
+{
+  "trans": [ -1191.89, 183.19, 487.58 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1191.89, 183.19, 487.58, 10 ],
+  "lump": {
+    "name": "abandon-money-84"
+  }
+},
+{
+  "trans": [ -1194.33, 182.94, 494.43 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1194.33, 182.94, 494.43, 10 ],
+  "lump": {
+    "name": "abandon-money-85"
+  }
+},
+{
+  "trans": [ -1196.97, 182.67, 501.79 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1196.97, 182.67, 501.79, 10 ],
+  "lump": {
+    "name": "abandon-money-86"
+  }
+},
+{
+  "trans": [ -1201.03, 182.56, 508.28 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1201.03, 182.56, 508.28, 10 ],
+  "lump": {
+    "name": "abandon-money-87"
+  }
+},
+{
+  "trans": [ -1203.57, 182.67, 517.49 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1203.57, 182.67, 517.49, 10 ],
+  "lump": {
+    "name": "abandon-money-88"
+  }
+},
+{
+  "trans": [ -1295.86, 193.08, 632.12 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1295.86, 193.08, 632.12, 10 ],
+  "lump": {
+    "name": "abandon-money-89"
+  }
+},
+{
+  "trans": [ -1291.29, 192.67, 623.95 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1291.29, 192.67, 623.95, 10 ],
+  "lump": {
+    "name": "abandon-money-90"
+  }
+},
+{
+  "trans": [ -1289.01, 191.45, 615.89 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1289.01, 191.45, 615.89, 10 ],
+  "lump": {
+    "name": "abandon-money-91"
+  }
+},
+{
+  "trans": [ -1289.80, 191.06, 607.76 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1289.80, 191.06, 607.76, 10 ],
+  "lump": {
+    "name": "abandon-money-92"
+  }
+},
+{
+  "trans": [ -1294.19, 191.15, 601.68 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1294.19, 191.15, 601.68, 10 ],
+  "lump": {
+    "name": "abandon-money-93"
+  }
+},
+{
+  "trans": [ -1300.81, 191.63, 598.62 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1300.81, 191.63, 598.62, 10 ],
+  "lump": {
+    "name": "abandon-money-94"
+  }
+},
+{
+  "trans": [ -1308.02, 191.73, 598.72 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1308.02, 191.73, 598.72, 10 ],
+  "lump": {
+    "name": "abandon-money-95"
+  }
+},
+{
+  "trans": [ -1314.90, 191.72, 601.95 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1314.90, 191.72, 601.95, 10 ],
+  "lump": {
+    "name": "abandon-money-96"
+  }
+},
+{
+  "trans": [ -1319.03, 191.58, 607.84 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1319.03, 191.58, 607.84, 10 ],
+  "lump": {
+    "name": "abandon-money-97"
+  }
+},
+{
+  "trans": [ -1321.44, 191.31, 615.26 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1321.44, 191.31, 615.26, 10 ],
+  "lump": {
+    "name": "abandon-money-98"
+  }
+},
+{
+  "trans": [ -1325.41, 191.05, 623.50 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1325.41, 191.05, 623.50, 10 ],
+  "lump": {
+    "name": "abandon-money-99"
+  }
+},
+{
+  "trans": [ -1329.15, 191.03, 629.67 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1329.15, 191.03, 629.67, 10 ],
+  "lump": {
+    "name": "abandon-money-100"
+  }
+},
+{
+  "trans": [ -1330.31, 191.12, 637.21 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1330.31, 191.12, 637.21, 10 ],
+  "lump": {
+    "name": "abandon-money-101"
+  }
+},
+{
+  "trans": [ -1326.75, 191.15, 645.54 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1326.75, 191.15, 645.54, 10 ],
+  "lump": {
+    "name": "abandon-money-102"
+  }
+},
+{
+  "trans": [ -1327.54, 189.67, 659.60 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1327.54, 189.67, 659.60, 10 ],
+  "lump": {
+    "name": "abandon-money-103"
+  }
+},
+{
+  "trans": [ -1321.45, 186.10, 670.53 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1321.45, 186.10, 670.53, 10 ],
+  "lump": {
+    "name": "abandon-money-104"
+  }
+},
+{
+  "trans": [ -1325.54, 186.71, 683.46 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1325.54, 186.71, 683.46, 10 ],
+  "lump": {
+    "name": "abandon-money-105"
+  }
+},
+{
+  "trans": [ -1315.62, 184.28, 691.18 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1315.62, 184.28, 691.18, 10 ],
+  "lump": {
+    "name": "abandon-money-106"
+  }
+},
+{
+  "trans": [ -1296.56, 176.30, 722.73 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1296.56, 176.30, 722.73, 10 ],
+  "lump": {
+    "name": "abandon-money-107"
+  }
+},
+{
+  "trans": [ -1297.95, 176.32, 732.15 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1297.95, 176.32, 732.15, 10 ],
+  "lump": {
+    "name": "abandon-money-108"
+  }
+},
+{
+  "trans": [ -1288.78, 176.46, 739.45 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1288.78, 176.46, 739.45, 10 ],
+  "lump": {
+    "name": "abandon-money-109"
+  }
+},
+{
+  "trans": [ -1283.74, 180.00, 752.47 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1283.74, 180.00, 752.47, 10 ],
+  "lump": {
+    "name": "abandon-money-110"
+  }
+},
+{
+  "trans": [ -1273.85, 177.53, 760.16 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1273.85, 177.53, 760.16, 10 ],
+  "lump": {
+    "name": "abandon-money-111"
+  }
+},
+{
+  "trans": [ -1271.33, 174.55, 785.20 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1271.33, 174.55, 785.20, 10 ],
+  "lump": {
+    "name": "abandon-money-112"
+  }
+},
+{
+  "trans": [ -1268.22, 175.82, 798.37 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1268.22, 175.82, 798.37, 10 ],
+  "lump": {
+    "name": "abandon-money-113"
+  }
+},
+{
+  "trans": [ -1263.63, 175.95, 812.17 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1263.63, 175.95, 812.17, 10 ],
+  "lump": {
+    "name": "abandon-money-114"
+  }
+},
+{
+  "trans": [ -1253.90, 175.54, 825.84 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1253.90, 175.54, 825.84, 10 ],
+  "lump": {
+    "name": "abandon-money-115"
+  }
+},
+{
+  "trans": [ -1216.07, 172.46, 813.53 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1216.07, 172.46, 813.53, 10 ],
+  "lump": {
+    "name": "abandon-money-116"
+  }
+},
+{
+  "trans": [ -1214.83, 174.96, 799.52 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1214.83, 174.96, 799.52, 10 ],
+  "lump": {
+    "name": "abandon-money-117"
+  }
+},
+{
+  "trans": [ -1214.61, 176.49, 787.50 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1214.61, 176.49, 787.50, 10 ],
+  "lump": {
+    "name": "abandon-money-118"
+  }
+},
+{
+  "trans": [ -1210.56, 176.42, 776.59 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1210.56, 176.42, 776.59, 10 ],
+  "lump": {
+    "name": "abandon-money-119"
+  }
+},
+{
+  "trans": [ -1186.06, 171.21, 744.26 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1186.06, 171.21, 744.26, 10 ],
+  "lump": {
+    "name": "abandon-money-120"
+  }
+},
+{
+  "trans": [ -1181.55, 171.90, 735.27 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1181.55, 171.90, 735.27, 10 ],
+  "lump": {
+    "name": "abandon-money-121"
+  }
+},
+{
+  "trans": [ -1173.54, 170.76, 723.13 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1173.54, 170.76, 723.13, 10 ],
+  "lump": {
+    "name": "abandon-money-122"
+  }
+},
+{
+  "trans": [ -1177.05, 164.07, 653.48 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1177.05, 164.07, 653.48, 10 ],
+  "lump": {
+    "name": "abandon-money-123"
+  }
+},
+{
+  "trans": [ -1181.15, 165.67, 645.92 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1181.15, 165.67, 645.92, 10 ],
+  "lump": {
+    "name": "abandon-money-124"
+  }
+},
+{
+  "trans": [ -1191.41, 165.95, 642.79 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1191.41, 165.95, 642.79, 10 ],
+  "lump": {
+    "name": "abandon-money-125"
+  }
+},
+{
+  "trans": [ -1241.62, 179.27, 847.70 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1241.62, 179.27, 847.70, 10 ],
+  "lump": {
+    "name": "abandon-money-126"
+  }
+},
+{
+  "trans": [ -1244.88, 179.59, 859.81 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1244.88, 179.59, 859.81, 10 ],
+  "lump": {
+    "name": "abandon-money-127"
+  }
+},
+{
+  "trans": [ -1247.97, 180.66, 872.04 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1247.97, 180.66, 872.04, 10 ],
+  "lump": {
+    "name": "abandon-money-128"
+  }
+},
+{
+  "trans": [ -1243.40, 176.88, 887.07 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1243.40, 176.88, 887.07, 10 ],
+  "lump": {
+    "name": "abandon-money-129"
+  }
+},
+{
+  "trans": [ -1248.21, 177.26, 885.26 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1248.21, 177.26, 885.26, 10 ],
+  "lump": {
+    "name": "abandon-money-130"
+  }
+},
+{
+  "trans": [ -1255.26, 177.36, 885.38 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1255.26, 177.36, 885.38, 10 ],
+  "lump": {
+    "name": "abandon-money-131"
+  }
+},
+{
+  "trans": [ -1274.76, 176.79, 931.60 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1274.76, 176.79, 931.60, 10 ],
+  "lump": {
+    "name": "abandon-money-132"
+  }
+},
+{
+  "trans": [ -1269.55, 176.75, 935.89 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1269.55, 176.75, 935.89, 10 ],
+  "lump": {
+    "name": "abandon-money-133"
+  }
+},
+{
+  "trans": [ -1261.54, 176.83, 936.63 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1261.54, 176.83, 936.63, 10 ],
+  "lump": {
+    "name": "abandon-money-134"
+  }
+},
+{
+  "trans": [ -1293.57, 172.12, 958.84 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1293.57, 172.12, 958.84, 10 ],
+  "lump": {
+    "name": "abandon-money-135"
+  }
+},
+{
+  "trans": [ -1289.54, 171.77, 951.39 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1289.54, 171.77, 951.39, 10 ],
+  "lump": {
+    "name": "abandon-money-136"
+  }
+},
+{
+  "trans": [ -1287.27, 170.41, 942.22 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1287.27, 170.41, 942.22, 10 ],
+  "lump": {
+    "name": "abandon-money-137"
+  }
+},
+{
+  "trans": [ -1323.70, 170.03, 949.75 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1323.70, 170.03, 949.75, 10 ],
+  "lump": {
+    "name": "abandon-money-138"
+  }
+},
+{
+  "trans": [ -1326.99, 170.05, 955.99 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1326.99, 170.05, 955.99, 10 ],
+  "lump": {
+    "name": "abandon-money-139"
+  }
+},
+{
+  "trans": [ -1328.40, 170.11, 963.50 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1328.40, 170.11, 963.50, 10 ],
+  "lump": {
+    "name": "abandon-money-140"
+  }
+},
+{
+  "trans": [ -1349.00, 158.99, 956.50 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1349.00, 158.99, 956.50, 10 ],
+  "lump": {
+    "name": "abandon-money-141"
+  }
+},
+{
+  "trans": [ -1360.45, 159.89, 956.37 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1360.45, 159.89, 956.37, 10 ],
+  "lump": {
+    "name": "abandon-money-142"
+  }
+},
+{
+  "trans": [ -1369.80, 160.44, 951.55 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1369.80, 160.44, 951.55, 10 ],
+  "lump": {
+    "name": "abandon-money-143"
+  }
+},
+{
+  "trans": [ -1376.86, 154.63, 952.49 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1376.86, 154.63, 952.49, 10 ],
+  "lump": {
+    "name": "abandon-money-144"
+  }
+},
+{
+  "trans": [ -1381.65, 150.67, 941.74 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1381.65, 150.67, 941.74, 10 ],
+  "lump": {
+    "name": "abandon-money-145"
+  }
+},
+{
+  "trans": [ -1392.68, 142.00, 951.83 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1392.68, 142.00, 951.83, 10 ],
+  "lump": {
+    "name": "abandon-money-146"
+  }
+},
+{
+  "trans": [ -1400.28, 140.87, 943.98 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1400.28, 140.87, 943.98, 10 ],
+  "lump": {
+    "name": "abandon-money-147"
+  }
+},
+{
+  "trans": [ -1402.55, 139.24, 931.53 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1402.55, 139.24, 931.53, 10 ],
+  "lump": {
+    "name": "abandon-money-148"
+  }
+},
+{
+  "trans": [ -1408.37, 135.15, 922.76 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1408.37, 135.15, 922.76, 10 ],
+  "lump": {
+    "name": "abandon-money-149"
+  }
+},
+{
+  "trans": [ -1418.72, 129.34, 937.56 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1418.72, 129.34, 937.56, 10 ],
+  "lump": {
+    "name": "abandon-money-150"
+  }
+},
+{
+  "trans": [ -1434.45, 124.17, 944.72 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1434.45, 124.17, 944.72, 10 ],
+  "lump": {
+    "name": "abandon-money-151"
+  }
+},
+{
+  "trans": [ -1445.44, 120.02, 922.46 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1445.44, 120.02, 922.46, 10 ],
+  "lump": {
+    "name": "abandon-money-152"
+  }
+},
+{
+  "trans": [ -1449.29, 120.11, 906.86 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1449.29, 120.11, 906.86, 10 ],
+  "lump": {
+    "name": "abandon-money-153"
+  }
+},
+{
+  "trans": [ -1442.61, 120.37, 891.97 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1442.61, 120.37, 891.97, 10 ],
+  "lump": {
+    "name": "abandon-money-154"
+  }
+},
+{
+  "trans": [ -1437.26, 118.76, 875.10 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1437.26, 118.76, 875.10, 10 ],
+  "lump": {
+    "name": "abandon-money-155"
+  }
+},
+{
+  "trans": [ -1487.49, 120.80, 891.70 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1487.49, 120.80, 891.70, 10 ],
+  "lump": {
+    "name": "abandon-money-156"
+  }
+},
+{
+  "trans": [ -1487.14, 121.40, 879.83 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1487.14, 121.40, 879.83, 10 ],
+  "lump": {
+    "name": "abandon-money-157"
+  }
+},
+{
+  "trans": [ -1487.20, 121.57, 864.67 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1487.20, 121.57, 864.67, 10 ],
+  "lump": {
+    "name": "abandon-money-158"
+  }
+},
+{
+  "trans": [ -1499.41, 122.10, 853.39 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1499.41, 122.10, 853.39, 10 ],
+  "lump": {
+    "name": "abandon-money-159"
+  }
+},
+{
+  "trans": [ -1226.03, 172.05, 178.29 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1509.81, 121.05, 843.47, 10 ],
+  "lump": {
+    "name": "abandon-money-160"
+  }
+},
+{
+  "trans": [ -1200.45, 172.06, 205.32 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1514.23, 120.08, 829.33, 10 ],
+  "lump": {
+    "name": "abandon-money-161"
+  }
+},
+{
+  "trans": [ -1165.61, 172.11, 220.16 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1515.00, 120.01, 815.97, 10 ],
+  "lump": {
+    "name": "abandon-money-162"
+  }
+},
+{
+  "trans": [ -1147.12, 172.21, 193.51 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.41, 120.01, 801.88, 10 ],
+  "lump": {
+    "name": "abandon-money-163"
+  }
+},
+{
+  "trans": [ -1240.18, 175.13, 165.39 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1506.54, 120.10, 789.11, 10 ],
+  "lump": {
+    "name": "abandon-money-164"
+  }
+},
+{
+  "trans": [ -1252.92, 176.5, 153.59 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1501.31, 121.38, 774.76, 10 ],
+  "lump": {
+    "name": "abandon-money-165"
+  }
+},
+{
+  "trans": [ -1468.48, 128.89, 698.26 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1468.48, 128.89, 698.26, 10 ],
+  "lump": {
+    "name": "abandon-money-166"
+  }
+},
+{
+  "trans": [ -1468.07, 131.78, 681.63 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1468.07, 131.78, 681.63, 10 ],
+  "lump": {
+    "name": "abandon-money-167"
+  }
+},
+{
+  "trans": [ -1466.51, 134.19, 662.17 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1466.51, 134.19, 662.17, 10 ],
+  "lump": {
+    "name": "abandon-money-168"
+  }
+},
+{
+  "trans": [ -1458.35, 138.33, 624.91 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1458.35, 138.33, 624.91, 10 ],
+  "lump": {
+    "name": "abandon-money-169"
+  }
+},
+{
+  "trans": [ -1464.79, 138.38, 615.54 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1464.79, 138.38, 615.54, 10 ],
+  "lump": {
+    "name": "abandon-money-170"
+  }
+},
+{
+  "trans": [ -1469.41, 147.10, 608.54 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1469.41, 147.10, 608.54, 10 ],
+  "lump": {
+    "name": "abandon-money-171"
+  }
+},
+{
+  "trans": [ -1471.18, 151.32, 596.36 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1471.18, 151.32, 596.36, 10 ],
+  "lump": {
+    "name": "abandon-money-172"
+  }
+},
+{
+  "trans": [ -1463.29, 154.12, 592.16 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1463.29, 154.12, 592.16, 10 ],
+  "lump": {
+    "name": "abandon-money-173"
+  }
+},
+{
+  "trans": [ -1452.34, 155.73, 597.46 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1452.34, 155.73, 597.46, 10 ],
+  "lump": {
+    "name": "abandon-money-174"
+  }
+},
+{
+  "trans": [ -1462.72, 161.53, 578.43 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1462.72, 161.53, 578.43, 10 ],
+  "lump": {
+    "name": "abandon-money-175"
+  }
+},
+{
+  "trans": [ -1467.71, 163.96, 565.15 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1467.71, 163.96, 565.15, 10 ],
+  "lump": {
+    "name": "abandon-money-176"
+  }
+},
+{
+  "trans": [ -1473.48, 166.19, 552.14 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1473.48, 166.19, 552.14, 10 ],
+  "lump": {
+    "name": "abandon-money-177"
+  }
+},
+{
+  "trans": [ -1482.49, 162.89, 521.26 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1482.49, 162.89, 521.26, 10 ],
+  "lump": {
+    "name": "abandon-money-178"
+  }
+},
+{
+  "trans": [ -1488.84, 164.16, 503.54 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1488.84, 164.16, 503.54, 10 ],
+  "lump": {
+    "name": "abandon-money-179"
+  }
+},
+{
+  "trans": [ -1499.53, 164.26, 488.48 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1499.53, 164.26, 488.48, 10 ],
+  "lump": {
+    "name": "abandon-money-180"
+  }
+},
+{
+  "trans": [ -1489.85, 167.02, 464.45 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1489.85, 167.02, 464.45, 10 ],
+  "lump": {
+    "name": "abandon-money-181"
+  }
+},
+{
+  "trans": [ -1485.78, 169.00, 449.81 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1485.78, 169.00, 449.81, 10 ],
+  "lump": {
+    "name": "abandon-money-182"
+  }
+},
+{
+  "trans": [ -1486.02, 170.21, 437.31 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1486.02, 170.21, 437.31, 10 ],
+  "lump": {
+    "name": "abandon-money-183"
+  }
+},
+{
+  "trans": [ -1489.41, 168.5, 413.32 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ 1489.41, 168.5, 413.32, 10 ],
+  "lump": {
+    "name": "abandon-money-184"
+  }
+},
+{
+  "trans": [ -1492.87, 168.45, 405.93 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1492.87, 168.45, 405.93, 10 ],
+  "lump": {
+    "name": "abandon-money-185"
+  }
+},
+//additional orba//
+{
+  "trans": [ -1225.41, 183.68, 69.74 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1225.41, 183.68, 69.74, 10 ],
+  "lump": {
+    "name": "abandon-money-additional1"
+  }
+},
+{
+  "trans": [ -1214.37, 187.48, 72.49 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1214.37, 187.48, 72.49, 10 ],
+  "lump": {
+    "name": "abandon-money-additional2"
+  }
+},
+{
+  "trans": [ -1213.96, 192.38, 57.10 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1213.96, 192.38, 57.10, 10 ],
+  "lump": {
+    "name": "abandon-money-additional3"
+  }
+},
+{
+  "trans": [ -1203.70, 193.18, 48.85 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1203.70, 193.18, 48.85, 10 ],
+  "lump": {
+    "name": "abandon-money-additional4"
+  }
+},
+{
+  "trans": [ -1187.55, 194.80, 46.78 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1187.55, 194.80, 46.78, 10 ],
+  "lump": {
+    "name": "abandon-money-additional5"
+  }
+},
+{
+  "trans": [ -1137.78, 187.36, 285.08 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1137.78, 187.36, 285.08, 10 ],
+  "lump": {
+    "name": "abandon-money-additional6"
+  }
+},
+{
+  "trans": [ -1137.46, 187.34, 297.83 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1137.46, 187.34, 297.83, 10 ],
+  "lump": {
+    "name": "abandon-money-additional7"
+  }
+},
+{
+  "trans": [ -1139.13, 189.87, 308.01 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1139.13, 189.87, 308.01, 10 ],
+  "lump": {
+    "name": "abandon-money-additional8"
+  }
+},
+{
+  "trans": [ -1132.02, 195.58, 330.55 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1132.02, 195.58, 330.55, 10 ],
+  "lump": {
+    "name": "abandon-money-additional9"
+  }
+},
+{
+  "trans": [ -1126.37, 198.63, 337.06 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1126.37, 198.63, 337.06, 10 ],
+  "lump": {
+    "name": "abandon-money-additional10"
+  }
+},
+{
+  "trans": [ -1125.66, 198.53, 348.80 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1125.66, 198.53, 348.80, 10 ],
+  "lump": {
+    "name": "abandon-money-additional11"
+  }
+},
+{
+  "trans": [ -1113.58, 194.69, 357.09 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1113.58, 194.69, 357.09, 10 ],
+  "lump": {
+    "name": "abandon-money-additional12"
+  }
+},
+{
+  "trans": [ -1106.34, 194.89, 364.58 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1106.34, 194.89, 364.58, 10 ],
+  "lump": {
+    "name": "abandon-money-additional13"
+  }
+},
+{
+  "trans": [ -1098.20, 194.64, 372.68 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1098.20, 194.64, 372.68, 10 ],
+  "lump": {
+    "name": "abandon-money-additional14"
+  }
+},
+{
+  "trans": [ -1478.99, 120.0, 910.29 ],
+  "etype": "money",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1098.20, 194.64, 372.68, 10 ],
+  "lump": {
+    "name": "abandon-money-additional15"
+  }
+},
+
+//////scoutflies////
+
+{
+  "trans": [ -1425.91, 178.76, 152.38 ],
+  "etype": "crate",
+  "game_task": "(game-task abandon-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1425.91, 178.76, 152.38, 10 ],
+  "lump": {
+    "name": "abandon-fly1",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 0 ],
+    "movie-pos": ["movie-pos", [ -1425.91, 178.76, 152.38, -70.0 ]],
+    "movie-mask": ["int32", 495]
+  }
+},
+{
+  "trans": [ -1397.78, 178.67, 144.51 ],
+  "etype": "crate",
+  "game_task": "(game-task abandon-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1397.78, 178.67, 144.51, 10 ],
+  "lump": {
+    "name": "abandon-fly2",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 1 ],
+    "movie-pos": ["movie-pos", [ -1397.78, 178.67, 144.51, -10.0 ]],
+    "movie-mask": ["int32", 495]
+  }
+},
+{
+  "trans": [ -1183.47, 173.36, 123.50 ],
+  "etype": "crate",
+  "game_task": "(game-task abandon-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1183.47, 173.36, 123.50, 10 ],
+  "lump": {
+    "name": "abandon-fly3",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 2 ],
+    "movie-pos": ["movie-pos", [ -1183.47, 173.36, 123.50, -10.0 ]],
+    "movie-mask": ["int32", 495]
+  }
+},
+{
+  "trans": [ -1470.49, 182.88, 34.73 ],
+  "etype": "crate",
+  "game_task": "(game-task abandon-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1125.63, 181.66, 429.58, 10 ],
+  "lump": {
+    "name": "abandon-fly4",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 3 ],
+    "movie-pos": ["movie-pos", [ -1470.49, 182.88, 34.73, -10.0 ]],
+    "movie-mask": ["int32", 495]
+  }
+},
+{
+  "trans": [ -1317.59, 170.02, 635.47 ],
+  "etype": "crate",
+  "game_task": "(game-task abandon-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1281.27, 186.44, 645.15, 10 ],
+  "lump": {
+    "name": "abandon-fly5",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 4 ],
+    "movie-pos": ["movie-pos", [ -1317.59, 170.02, 635.47, -10.0 ]],
+    "movie-mask": ["int32", 495]
+  }
+},
+{
+  "trans": [ -1511.59, 121.02, 858.26 ],
+  "etype": "crate",
+  "game_task": "(game-task abandon-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1173.83, 170.37, 736.18, 10 ],
+  "lump": {
+    "name": "abandon-fly6",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 5 ],
+    "movie-pos": ["movie-pos", [ -1511.59, 121.02, 858.26, -10.0 ]],
+    "movie-mask": ["int32", 495]
+  }
+},
+{
+  "trans": [ -1126.75, 189.46, 324.72 ],
+  "etype": "crate",
+  "game_task": "(game-task abandon-buzzer)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1493.19, 118.51, 812.26, 10 ],
+  "lump": {
+    "name": "abandon-fly7",
+    "crate-type": "'iron",
+    "eco-info": [ "buzzer-info", "(game-task abandon-buzzer)", 6 ],
+    "movie-pos": ["movie-pos", [ -1126.75, 189.46, 324.72, -80.0 ]],
+    "movie-mask": ["int32", 495]
+  }
+},
+
+///powercell////
+
+{
+  "trans": [ -1279.56, 192.64, 489.88 ],
+  "etype": "fuel-cell",
+  "game_task": "(game-task abandon-findcell-1)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1470.74, 184.33, 36.12, 10 ],
+  "lump": {
+    "name": "abandon-fuel-cell-01",
+    "eco-info": ["cell-info", "(game-task abandon-findcell-1)"],
+    "movie-pos": [ "movie-pos", [ -1279.56, 191.64, 489.88, 1.255 ] ]
+  }
+},
+
+{
+  "trans": [ -1309.39, 192.17, 623.76 ],
+  "etype": "fuel-cell",
+  "game_task": "(game-task abandon-findcell-2)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1309.39, 192.17, 623.76, 10 ],
+  "lump": {
+    "name": "abandon-fuel-cell-02",
+    "eco-info": ["cell-info", "(game-task abandon-findcell-2)"],
+    "movie-pos": [ "movie-pos", [ -1309.39, 190.67, 623.76, 1.255 ] ]
+  }
+},
+{
+  "trans": [ -1434.61, 119.59, 811.79 ],
+  "etype": "fuel-cell",
+  "game_task": "(game-task abandon-findcell-3)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1309.39, 192.17, 623.76, 10 ],
+  "lump": {
+    "name": "abandon-fuel-cell-03",
+    "eco-info": ["cell-info", "(game-task abandon-findcell-3)"],
+    "movie-pos": [ "movie-pos", [ -1434.61, 118.59, 811.79, 1.255 ] ]
+  }
+},
+{
+  "trans": [ -1486.96, 170.24, 421.24 ],
+  "etype": "fuel-cell",
+  "game_task": "(game-task abandon-rock)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1309.39, 192.17, 623.76, 10 ],
+  "lump": {
+    "name": "abandon-fuel-cell-04",
+    "eco-info": ["cell-info", "(game-task abandon-rock)"],
+    "movie-pos": [ "movie-pos", [ -1486.96, 167.24, 421.24, 1.255 ] ],
+    "movie-mask": ["int32", 495]
+  }
+},
+
+/////drips/////
+
+{
+  "trans": [ -1494.17, 175.52, 271.58 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1494.17, 175.52, 271.58, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip4",
+    "art-name": "group-cave-cavedrip-3"
+  }
+},
+{
+  "trans": [ -1485.87, 173.00, 231.93 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1485.87, 173.00, 231.93, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip5",
+    "art-name": "group-cave-cavedrip-1"
+  }
+},
+{
+  "trans": [ -1465.56, 178.53, 190.07 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1465.56, 178.53, 190.07, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip6",
+    "art-name": "group-cave-cavedrip-2"
+  }
+},
+{
+  "trans": [ -1440.27, 180.45, 135.20 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1440.27, 180.45, 135.20, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip7",
+    "art-name": "group-cave-cavedrip-3"
+  }
+},
+{
+  "trans": [ -1494.88, 180.55, 99.05 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1494.88, 180.55, 99.05, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip8",
+    "art-name": "group-cave-cavedrip-1"
+  }
+},
+{
+  "trans": [ -1482.37, 180.47, 40.89 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1482.37, 180.47, 40.89, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip9",
+    "art-name": "group-cave-cavedrip-2"
+  }
+},
+{
+  "trans": [ -1451.69, 180.59, -2.84 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1451.69, 180.59, -2.84, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip10",
+    "art-name": "group-cave-cavedrip-3"
+  }
+},
+{
+  "trans": [ -1407.53, 178.85, 106.49 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1407.53, 178.85, 106.49, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip11",
+    "art-name": "group-cave-cavedrip-1"
+  }
+},
+{
+  "trans": [ -1365.11, 176.79, 101.42 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1365.11, 176.79, 101.42, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip12",
+    "art-name": "group-cave-cavedrip-2"
+  }
+},
+{
+  "trans": [ -1222.01, 177.51, 125.04 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1222.01, 177.51, 125.04, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip13",
+    "art-name": "group-cave-cavedrip-3"
+  }
+},
+{
+  "trans": [ -1114.46, 182.79, 149.27 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1114.46, 182.79, 149.27, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip14",
+    "art-name": "group-cave-cavedrip-1"
+  }
+},
+{
+  "trans": [ -1170.39, 177.74, 105.07 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1170.39, 177.74, 105.07, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip15",
+    "art-name": "group-cave-cavedrip-2"
+  }
+},
+{
+  "trans": [ -1054.23, 171.88, 173.41 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1054.23, 171.88, 173.41, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip16",
+    "art-name": "group-cave-cavedrip-3"
+  }
+},
+{
+  "trans": [ -1069.82, 175.55, 247.59 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1069.82, 175.55, 247.59, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip17",
+    "art-name": "group-cave-cavedrip-1"
+  }
+},
+{
+  "trans": [ -1059.49, 187.18, 366.13 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1059.49, 187.18, 366.13, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip18",
+    "art-name": "group-cave-cavedrip-2"
+  }
+},
+{
+  "trans": [ -1234.91, 186.90, 530.12 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1234.91, 186.90, 530.12, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip19",
+    "art-name": "group-cave-cavedrip-3"
+  }
+},
+{
+  "trans": [ -1251.28, 179.34, 857.27 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1251.28, 179.34, 857.27, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip20",
+    "art-name": "group-cave-cavedrip-1"
+  }
+},
+{
+  "trans": [ -1364.67, 160.39, 958.16 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1364.67, 160.39, 958.16, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip21",
+    "art-name": "group-cave-cavedrip-2"
+  }
+},
+{
+  "trans": [ -1394.95, 140.81, 931.72 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1394.95, 140.81, 931.72, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip22",
+    "art-name": "group-cave-cavedrip-3"
+  }
+},
+{
+  "trans": [ -1402.28, 140.14, 956.58 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1402.28, 140.14, 956.58, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip23",
+    "art-name": "group-cave-cavedrip-1"
+  }
+},
+{
+  "trans": [ -1506.69, 123.02, 864.35 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1506.69, 123.02, 864.35, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip24",
+    "art-name": "group-cave-cavedrip-2"
+  }
+},
+{
+  "trans": [ -1496.47, 120.01, 809.61 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1496.47, 120.01, 809.61, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip25",
+    "art-name": "group-cave-cavedrip-3"
+  }
+},
+{
+  "trans": [ -1507.89, 124.42, 751.87 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1507.89, 124.42, 751.87, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip26",
+    "art-name": "group-cave-cavedrip-1"
+  }
+},
+{
+  "trans": [ -1452.25, 135.81, 631.74 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1452.25, 135.81, 631.74, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip27",
+    "art-name": "group-cave-cavedrip-2"
+  }
+},
+{
+  "trans": [ -1472.08, 150.57, 599.22 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1472.08, 150.57, 599.22, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip28",
+    "art-name": "group-cave-cavedrip-3"
+  }
+},
+{
+  "trans": [ -1481.26, 162.89, 518.40 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1481.26, 162.89, 518.40, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip29",
+    "art-name": "group-cave-cavedrip-1"
+  }
+},
+{
+  "trans": [ -1497.69, 165.38, 471.47 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1497.69, 165.38, 471.47, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip30",
+    "art-name": "group-cave-cavedrip-2"
+  }
+},
+{
+  "trans": [ -1482.79, 168.39, 415.49 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1482.79, 168.39, 415.49, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip31",
+    "art-name": "group-cave-cavedrip-3"
+  }
+},
+//additional drips//
+{
+  "trans": [ -1217.10, 180.60, 84.43 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1217.10, 180.60, 84.43, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip-additional1",
+    "art-name": "group-cave-cavedrip-1"
+  }
+},
+{
+  "trans": [ -1210.08, 191.07, 48.06 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1210.08, 191.07, 48.06, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip-additional2",
+    "art-name": "group-cave-cavedrip-2"
+  }
+},
+{
+  "trans": [ -1145.76, 178.08, 233.66 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1145.76, 178.08, 233.66, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip-additional3",
+    "art-name": "group-cave-cavedrip-3"
+  }
+},
+{
+  "trans": [ -1138.02, 190.79, 321.06 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1138.02, 190.79, 321.06, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip-additional4",
+    "art-name": "group-cave-cavedrip-1"
+  }
+},
+{
+  "trans": [ -1096.28, 193.42, 372.64 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1096.28, 193.42, 372.64, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip-additional5",
+    "art-name": "group-cave-cavedrip-2"
+  }
+},
+{
+  "trans": [ -1491.49, 120.30, 858.46 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1491.49, 120.30, 858.46, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip-additional6",
+    "art-name": "group-cave-cavedrip-3"
+  }
+},
+{
+  "trans": [ -1494.22, 123.90, 724.93 ],
+  "etype": "maincave-part",
+  "game_task": 0,
+  "quat": [ 0, -0.425, 0, 0.905 ],
+  "bsphere": [ -1494.22, 123.90, 724.93, 50 ],
+  "lump": {
+    "name": "abandoncavewaterdrip-additional7",
+    "art-name": "group-cave-cavedrip-1"
+  }
+},
+
+//flamepots//
+{
+  "trans": [ -1462.00, 182.05, 178.71 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1462.00, 182.05, 178.71, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-1"
+  }
+},
+{
+  "trans": [ -1489.48, 181.23, 188.84 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1489.48, 181.23, 188.84, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-2"
+  }
+},
+{
+  "trans": [ -1485.89, 183.67, 83.95 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1485.89, 183.67, 83.95, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-3"
+  }
+},
+{
+  "trans": [ -1441.72, 183.78, -5.07 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1441.72, 183.78, -5.07, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-4"
+  }
+},
+{
+  "trans": [ -1409.71, 184.64, 39.06 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1409.71, 184.64, 39.06, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-5"
+  }
+},
+{
+  "trans": [ -1401.73, 183.55, 147.23 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1401.73, 183.55, 147.23, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-6"
+  }
+},
+{
+  "trans": [ -1228.38, 181.84, 100.38 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1228.38, 181.84, 100.38, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-7"
+  }
+},
+{
+  "trans": [ -1145.61, 182.13, 128.12 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1145.61, 182.13, 128.12, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-8"
+  }
+},
+{
+  "trans": [ -1131.42, 186.16, 144.62 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1131.42, 186.16, 144.62, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-9"
+  }
+},
+{
+  "trans": [ -1080.16, 180.92, 385.44 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1080.16, 180.92, 385.44, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-10"
+  }
+},
+{
+  "trans": [ -1198.06, 178.72, 578.60 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1198.06, 178.72, 578.60, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-11"
+  }
+},
+{
+  "trans": [ -1240.87, 178.47, 590.06 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1240.87, 178.47, 590.06, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-12"
+  }
+},
+{
+  "trans": [ -1209.26, 177.44, 606.65 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1209.26, 177.44, 606.65, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-13"
+  }
+},
+{
+  "trans": [ -1277.42, 191.05, 647.14 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1277.42, 191.05, 647.14, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-14"
+  }
+},
+{
+  "trans": [ -1188.52, 167.22, 650.62 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1188.52, 167.22, 650.62, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-15"
+  }
+},
+{
+  "trans": [ -1149.95, 166.62, 667.72 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1149.95, 166.62, 667.72, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-16"
+  }
+},
+{
+  "trans": [ -1156.02, 165.61, 705.35 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1156.02, 165.61, 705.35, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-17"
+  }
+},
+{
+  "trans": [ -1177.39, 174.94, 741.30 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1177.39, 174.94, 741.30, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-18"
+  }
+},
+{
+  "trans": [ -1292.05, 179.35, 729.91 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1292.05, 179.35, 729.91, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-19"
+  }
+},
+{
+  "trans": [ -1487.92, 123.22, 913.64 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1487.92, 123.22, 913.64, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-20"
+  }
+},
+{
+  "trans": [ -1472.58, 137.59, 659.62 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1472.58, 137.59, 659.62, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-21"
+  }
+},
+{
+  "trans": [ -1495.44, 173.58, 434.19 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1495.44, 173.58, 434.19, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-22"
+  }
+},
+{
+  "trans": [ -1491.17, 166.55, 534.88 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1491.17, 166.55, 534.88, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-23"
+  }
+},
+{
+  "trans": [ -1453.85, 163.32, 581.56 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1453.85, 163.32, 581.56, 10 ],
+  "lump": {
+    "art-name": "group-abandon-flamepot-half",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-flamepot-24"
+  }
+},
+
+//mininglanterns//
+{
+  "trans": [ -1429.09, 179.01, 160.51 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1429.09, 179.01, 160.51, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-1"
+  }
+},
+{
+  "trans": [ -1435.84, 179.21, 133.90 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1435.84, 179.21, 133.90, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-2"
+  }
+},
+{
+  "trans": [ -1486.80, 180.12, 21.35 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1486.80, 180.12, 21.35, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-3"
+  }
+},
+{
+  "trans": [ -1415.10, 182.00, 71.80 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1415.10, 182.00, 71.80, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-4"
+  }
+},
+{
+  "trans": [ -1237.23, 175.78, 156.30 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1237.23, 175.78, 156.30, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-5"
+  }
+},
+{
+  "trans": [ -1139.71, 178.26, 233.56 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1139.71, 178.26, 233.56, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-6"
+  }
+},
+{
+  "trans": [ -1095.40, 178.73, 98.40 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1095.40, 178.73, 98.40, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-7"
+  }
+},
+{
+  "trans": [ -1052.63, 167.57, 212.00 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1052.63, 167.57, 212.00, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-8"
+  }
+},
+{
+  "trans": [ -1052.79, 186.28, 359.45 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1052.79, 186.28, 359.45, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-9"
+  }
+},
+{
+  "trans": [ -1107.39, 174.39, 415.83 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1107.39, 174.39, 415.83, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-10"
+  }
+},
+{
+  "trans": [ -1126.63, 182.94, 415.96 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1126.63, 182.94, 415.96, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-11"
+  }
+},
+{
+  "trans": [ -1183.15, 162.00, 696.66 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1183.15, 162.00, 696.66, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-12"
+  }
+},
+{
+  "trans": [ -1218.71, 170.70, 821.13 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1218.71, 170.70, 821.13, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-13"
+  }
+},
+{
+  "trans": [ -1409.66, 137.38, 957.39 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1409.66, 137.38, 957.39, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-14"
+  }
+},
+{
+  "trans": [ -1403.70, 134.96, 919.35 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1403.70, 134.96, 919.35, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-15"
+  }
+},
+{
+  "trans": [ -1413.44, 121.01, 879.28 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1413.44, 121.01, 879.28, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-16"
+  }
+},
+{
+  "trans": [ -1509.54, 121.68, 879.13 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1509.54, 121.68, 879.13, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-17"
+  }
+},
+{
+  "trans": [ -1495.00, 125.50, 719.09 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1495.00, 125.50, 719.09, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-18"
+  }
+},
+{
+  "trans": [ -1459.01, 126.02, 700.05 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1459.01, 126.02, 700.05, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-19"
+  }
+},
+{
+  "trans": [ -1467.71, 142.89, 623.83 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1467.71, 142.89, 623.83, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-20"
+  }
+},
+{
+  "trans": [ -1477.60, 163.88, 474.45 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1477.60, 163.88, 474.45, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-21"
+  }
+},
+{
+  "trans": [ -1095.18, 178.42, 146.087 ],
+  "etype": "abandon-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1095.18, 178.42, 146.087, 10 ],
+  "lump": {
+    "art-name": "group-abandon-candle",
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "effect-name": "'fire-loop",
+    "effect-param": [ "float", 3.0, 90.0, 12.0, 40.0 ],
+    "name": "abandon-lantern-22"
+  }
+},
+//fireflies///
+{
+  "trans": [ -1513.18, 173.47, 277.04 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-1"
+  }
+},
+{
+  "trans": [ -1471.97, 173.76, 207.74 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-2"
+  }
+},
+{
+  "trans": [ -1474.37, 180.48, 119.33 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-3"
+  }
+},
+{
+  "trans": [ -1471.35, 179.25, 18.43 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-4"
+  }
+},
+{
+  "trans": [ -1390.22, 175.91, 106.20 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-5"
+  }
+},
+{
+  "trans": [ -1253.86, 173.24, 117.80 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-6"
+  }
+},
+{
+  "trans": [ -1124.20, 181.89, 149.58 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-7"
+  }
+},
+{
+  "trans": [ -1061.17, 173.15, 235.56 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-8"
+  }
+},
+{
+  "trans": [ -1129.47, 181.82, 426.10 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-9"
+  }
+},
+{
+  "trans": [ -1221.59, 173.35, 595.66 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-10"
+  }
+},
+{
+  "trans": [ -1310.40, 190.62, 624.42 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-11"
+  }
+},
+{
+  "trans": [ -1268.62, 174.15, 793.88 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-12"
+  }
+},
+{
+  "trans": [ -1182.50, 170.37, 738.86 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-13"
+  }
+},
+{
+  "trans": [ -1305.32, 168.24, 951.78 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-14"
+  }
+},
+{
+  "trans": [ -1481.27, 119.05, 885.80 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-15"
+  }
+},
+{
+  "trans": [ -1493.04, 122.51, 734.55 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-16"
+  }
+},
+{
+  "trans": [ -1483.77, 161.43, 522.75 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-17"
+  }
+},
+{
+  "trans": [ -1494.46, 166.98, 405.96 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1513.18, 173.47, 277.04, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": ["float",
+        12.0,
+        30.0
+      ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-18"
+  }
+},
+
+//additional firefly//
+{
+  "trans": [ -1214.39, 190.88, 57.92 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1214.39, 190.88, 57.92, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": [ "float", 12.0, 30.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-additional1"
+  }
+},
+{
+  "trans": [ -1148.93, 180.57, 257.41 ],
+  "etype": "jungle-part",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1148.93, 180.57, 257.41, 10 ],
+  "lump": {
+    "art-name": "group-jungle-dapple-light-1",
+    "effect-name": "'jungle-part",
+    "effect-param": [ "float", 12.0, 30.0 ],
+    "cycle-speed": [ "float", -1.0, 0.0 ],
+    "name": "abandon-firefly-additional2"
+  }
+},
+//eco globs//
+{
+  "trans": [ -1442.94, 179.04, 140.11 ],
+  "etype": "eco-yellow",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1442.94, 179.04, 140.11, 10 ],
+  "lump": {
+    "name": "abandon-yellow-eco-2"
+  }
+},
+{
+  "trans": [ -1430.93, 178.28, 31.57 ],
+  "etype": "eco-yellow",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1430.93, 178.28, 31.57, 10 ],
+  "lump": {
+    "name": "abandon-yellow-eco-3"
+  }
+},
+{
+  "trans": [ -1488.73, 168.85, 437.91 ],
+  "etype": "eco-yellow",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1488.73, 168.85, 437.91, 10 ],
+  "lump": {
+    "name": "abandon-yellow-eco-4"
+  }
+},
+
+{
+  "trans": [ -1244.06, 175.10, 108.41 ],
+  "etype": "eco-yellow",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1488.73, 168.85, 437.91, 10 ],
+  "lump": {
+    "name": "abandon-yellow-eco-5"
+  }
+},
+
+{
+  "trans": [ -1142.46, 175.86, 100.92 ],
+  "etype": "eco-yellow",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1488.73, 168.85, 437.91, 10 ],
+  "lump": {
+    "name": "abandon-yellow-eco-6"
+  }
+},
+
+{
+  "trans": [ -1126.97, 181.78, 427.65 ],
+  "etype": "eco-yellow",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1488.73, 168.85, 437.91, 10 ],
+  "lump": {
+    "name": "abandon-yellow-eco-7"
+  }
+},
+
+{
+  "trans": [ -1440.36, 118.55, 918.43 ],
+  "etype": "eco-yellow",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1488.73, 168.85, 437.91, 10 ],
+  "lump": {
+    "name": "abandon-yellow-eco-8"
+  }
+},
+
+{
+  "trans": [ -1454.45, 119.83, 738.89 ],
+  "etype": "eco-yellow",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1488.73, 168.85, 437.91, 10 ],
+  "lump": {
+    "name": "abandon-yellow-eco-9"
+  }
+},
+
+{
+  "trans": [ -1158.84, 179.87, 238.79 ],
+  "etype": "eco-yellow",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1488.73, 168.85, 437.91, 10 ],
+  "lump": {
+    "name": "abandon-yellow-eco-10"
+  }
+},
+
+{
+  "trans": [ -1211.21, 172.27, 597.22 ],
+  "etype": "ecovent",
+  "game_task": "(game-task brume-restore-power)",
+  "quat": [ -0.062256, 0.015842, -0.038488, 0.997192 ],
+  "bsphere": [ -1212.52, 172.68, 597.07, 10 ],
+  "lump": {
+    "name": "abandon-vent-02",
+    "eco-info": ["int32", 1, 1],
+    "options": ["enum-uint32", "(fact-options vent-valve vent-blocked)"]
+  }
+},
+{
+  "trans": [ -1181.74, 169.50, 744.66 ],
+  "etype": "ecovent",
+  "game_task": "(game-task brume-restore-power)",
+  "quat": [ 0.060143, 0.022576, 0.031970, 0.997422 ],
+  "bsphere": [ -1283.79, 186.30, 645.50, 10 ],
+  "lump": {
+    "name": "abandon-vent-03",
+    "eco-info": ["int32", 1, 1],
+    "options": ["enum-uint32", "(fact-options vent-valve vent-blocked)"]
+  }
+},
+{
+  "trans": [ -1299.94, 174.80, 727.47 ],
+  "etype": "ecovent",
+  "game_task": "(game-task brume-restore-power)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -0.022683, 0.048111, -0.035066, 0.997969 ],
+  "lump": {
+    "name": "abandon-vent-04",
+    "eco-info": ["int32", 1, 1],
+    "options": ["enum-uint32", "(fact-options vent-valve vent-blocked)"]
+  }
+},
+{
+  "trans": [ -1273.37, 185.73, 641.46 ],
+  "etype": "ecovent",
+  "game_task": "(game-task brume-restore-power)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -0.061958, 0.045745, -0.016032, 0.996901 ],
+  "lump": {
+    "name": "abandon-vent-05",
+    "eco-info": ["int32", 1, 1],
+    "options": ["enum-uint32", "(fact-options vent-valve vent-blocked)"]
+  }
+},
+
+//bigrock//
+
+//smolrock//
+{
+  "trans": [ -1476.38, 172.24, 245.89 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0.707, 0, 0.707 ], //  0, 1, 0, 0 // 0, 0.707, 0, -0.707
+  "bsphere": [ -1476.38, 172.24, 245.89, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-2"
+  }
+},
+{
+  "trans": [ -1487.79, 178.96, 92.74 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1487.79, 178.96, 92.74, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-3"
+  }
+},
+{
+  "trans": [ -1499.36, 179.49, 52.75 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 1, 0, 0 ],
+  "bsphere": [ -1499.36, 179.49, 52.75, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-4"
+  }
+},
+{
+  "trans": [ -1453.25, 178.37, 26.84 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0.707, 0, -0.707 ],
+  "bsphere": [ -1453.25, 178.37, 26.84, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-5"
+  }
+},
+{
+  "trans": [ -1388.51, 175.79, 101.80 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0.707, 0, 0.707 ],
+  "bsphere": [ -1388.51, 175.79, 101.80, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-6"
+  }
+},
+{
+  "trans": [ -1402.28, 176.48, 117.04 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1402.28, 176.48, 117.04, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-7"
+  }
+},
+{
+  "trans": [ -1263.65, 170.48, 129.50 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0.707, 0, 0.707 ],
+  "bsphere": [ -1263.65, 170.48, 129.50, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-8"
+  }
+},
+{
+  "trans": [ -1213.50, 190.96, 50.29 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 1, 0, 0 ],
+  "bsphere": [ -1213.50, 190.96, 50.29, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-9"
+  }
+},
+{
+  "trans": [ -1187.65, 193.48, 53.01 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1187.65, 193.48, 53.01, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-10"
+  }
+},
+{
+  "trans": [ -1133.90, 176.66, 124.42 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0.707, 0, -0.707 ],
+  "bsphere": [ -1133.90, 176.66, 124.42, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-11"
+  }
+},
+{
+  "trans": [ -1185.18, 162.32, 686.49 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1185.18, 162.32, 686.49, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-12"
+  }
+},
+{
+  "trans": [ -1153.09, 162.99, 680.28 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0.707, 0, 0.707 ],
+  "bsphere": [ -1153.09, 162.99, 680.28, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-13"
+  }
+},
+{
+  "trans": [ -1206.78, 172.85, 754.87 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1206.78, 172.85, 754.87, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-14"
+  }
+},
+{
+  "trans": [ -1242.56, 179.02, 868.93 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0.707, 0, -0.707 ],
+  "bsphere": [ -1242.56, 179.02, 868.93, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-15"
+  }
+},
+{
+  "trans": [ -1398.85, 139.66, 948.40 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1398.85, 139.66, 948.40, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-16"
+  }
+},
+{
+  "trans": [ -1456.32, 118.51, 927.69 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 1, 0, 0 ],
+  "bsphere": [ -1456.32, 118.51, 927.69, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-17"
+  }
+},
+{
+  "trans": [ -1487.68, 119.85, 882.06 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1487.68, 119.85, 882.06, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-18"
+  }
+},
+{
+  "trans": [ -1509.10, 121.51, 865.18 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0.707, 0, -0.707 ],
+  "bsphere": [ -1509.10, 121.51, 865.18, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-19"
+  }
+},
+{
+  "trans": [ -1450.37, 134.29, 630.10 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0.707, 0, 0.707 ],
+  "bsphere": [ -1450.37, 134.29, 630.10, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-20",
+    "scale": ["float", 1.1]
+  }
+},
+{
+  "trans": [ -1473.75, 161.39, 533.92 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 1, 0, 0 ],
+  "bsphere": [ -1473.75, 161.39, 533.92, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-21"
+  }
+},
+{
+  "trans": [ -1498.09, 163.07, 506.44 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1498.09, 163.07, 506.44, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-22"
+  }
+},
+{
+  "trans": [ -1482.09, 163.90, 471.92 ],
+  "etype": "ecoventrock",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0.707, 0, -0.707 ],
+  "bsphere": [ -1482.09, 163.90, 471.92, 10 ],
+  "lump": {
+    "name": "abandon-smolrock-23"
+  }
+},
+//water//
+{
+      "aid": 71000,
+      "trans": [ -1178.2, 169.195, 200.65 ],
+      "etype": "jungle-water",
+      "game_task": 0,
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ],
+      "bsphere": [ 1100.0, 0.0, 0.0, 10 ],
+      "lump": {
+        "name": "WaterShape-8",
+        "look": [ "int32", 8 ],
+        "scale": [ "float", 1.7 ],
+        "vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, 1255.459],
+    [0.000, 0.000, -1.000, -156.028],
+    [1.000, 0.000, -0.000, -1116.328],
+    [0.000, 0.000, 1.000, 253.097],
+    [0.000, -1.000, -0.000, -149.159],
+    [0.000, 1.000, -0.000, 169.159]
+  ]
+      ,
+    "water-height": [ "float", 697214.72, 2048, 8192, 1048588.0 ] // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+    }},
+
+    {
+      "trans": [-1279.6, 188.842, 488.81],
+      "etype": "water-anim",
+      "game_task": 0,
+      "quat" : [0.0, 0.0, -0.0, 1.0],
+      "bsphere": [48.77, -0.08, -112.62, 10],
+      "lump": {
+        "name":"WaterShape-13-second",
+        "scale": ["float", 2.0],
+        "look": ["int32", 13]
+      }
+    },
+    {
+      "trans": [-1279.6, 188.842, -10488.81],
+      "etype": "dark-eco-pool",
+      "game_task": 0,
+      "quat" : [0.0, 0.0, -0.0, 1.0],
+      "bsphere": [48.77, -0.08, -112.62, 10],
+      "lump": {
+        "name":"WaterShape-13-ecopooldeadly",
+        "scale": ["float", 2.0],
+        "look": ["int32", 13],
+        "vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, 1311.807],
+    [0.000, 0.000, -1.000, -462.463],
+    [1.000, 0.000, -0.000, -1245.123],
+    [0.000, 0.000, 1.000, 523.468],
+    [0.000, -1.000, -0.000, -168.842],
+    [0.000, 1.000, -0.000, 188.842]
+  ]
+,
+  "water-height": ["float",
+        777688.832, // Dark Eco Water Height use trans x 4096 + 4192 for the height
+        2048, // Wade Height 
+        8192, // Swim Height
+        1572872.0 // Flags - dont know the actual dark eco flag so sticking with floats. 
+  ]
+      }
+    },
+{
+      "trans": [ -1226.01, 169.60, 177.74 ], // translation
+      "etype": "pontoonten", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.000000, -0.388234, -0.000000, 0.921561 ], // quaternion - Along Z axis in Blender
+      "bsphere": [ -973.63, 358.12, 228.97, 10 ], // bounding sphere
+      "lump": {
+        "name": "abandon-pontoon-01",
+        "water-actor": [ "uint32", 71000 ]
+      }
+    },
+{
+      "trans": [ -1210.82, 169.60, 192.12 ], // translation
+      "etype": "pontoonten", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.000000, -0.448429, -0.000000, 0.893819 ], // quaternion - Along Z axis in Blender
+      "bsphere": [ -973.63, 358.12, 228.97, 10 ], // bounding sphere
+      "lump": {
+        "name": "abandon-pontoon-02",
+        "water-actor": [ "uint32", 71000 ]
+      }
+    },
+{
+      "trans": [ -1200.11, 169.60, 205.94 ], // translation
+      "etype": "pontoonten", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.000000, 0.662691, -0.000000, 0.748893 ], // quaternion - Along Z axis in Blender
+      "bsphere": [ -973.63, 358.12, 228.97, 10 ], // bounding sphere
+      "lump": {
+        "name": "abandon-pontoon-03",
+        "water-actor": [ "uint32", 71000 ]
+      }
+    },
+{
+      "trans": [ -1186.18, 169.60, 217.02 ], // translation
+      "etype": "pontoonten", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.000000, -0.212316, -0.000000, 0.977201 ], // quaternion - Along Z axis in Blender
+      "bsphere": [ -973.63, 358.12, 228.97, 10 ], // bounding sphere
+      "lump": {
+        "name": "abandon-pontoon-04",
+        "water-actor": [ "uint32", 71000 ]
+      }
+    },
+{
+      "trans": [ -1164.89, 169.60, 220.83 ], // translation
+      "etype": "pontoonten", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.000000, -0.490781, -0.000000, 0.871283 ], // quaternion - Along Z axis in Blender
+      "bsphere": [ -973.63, 358.12, 228.97, 10 ], // bounding sphere
+      "lump": {
+        "name": "abandon-pontoon-05",
+        "water-actor": [ "uint32", 71000 ]
+      }
+    },
+{
+      "trans": [ -1139.12, 169.60, 178.69 ], // translation
+      "etype": "pontoonten", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.000000, 0.470238, -0.000000, 0.882540 ], // quaternion - Along Z axis in Blender
+      "bsphere": [ -973.63, 358.12, 228.97, 10 ], // bounding sphere
+      "lump": {
+        "name": "abandon-pontoon-06",
+        "water-actor": [ "uint32", 71000 ]
+      }
+    },
+{
+      "trans": [ -1154.02, 169.60, 206.94 ], // translation
+      "etype": "pontoonten", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.000000, 0.662691, -0.000000, 0.748893 ], // quaternion - Along Z axis in Blender
+      "bsphere": [ -973.63, 358.12, 228.97, 10 ], // bounding sphere
+      "lump": {
+        "name": "abandon-pontoon-07",
+        "water-actor": [ "uint32", 71000 ]
+      }
+   },
+   {
+      "trans": [ -1146.89, 169.60, 193.26 ], // translation
+      "etype": "pontoonten", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.000000, -0.212316, -0.000000, 0.977201 ], // quaternion - Along Z axis in Blender
+      "bsphere": [ -973.63, 358.12, 228.97, 10 ], // bounding sphere
+      "lump": {
+        "name": "abandon-pontoon-08",
+        "water-actor": [ "uint32", 71000 ]
+      }
+   },
+
+    {
+      "trans": [ -1166.63, 170.60, 683.81 ],
+      "etype": "cave-eggtop",
+      "game_task": "(game-task brume-restore-power)",
+      "quat" : [ 0.000000, -0.127188, -0.000000, 0.991879 ],
+      "bsphere": [48.77, -0.08, -112.62, 10],
+      "lump": {
+        "name":"eggtop",
+        "movie-pos": ["movie-pos", [-1166.63, 169.95, 683.81, 1.255]],
+        "movie-mask": ["int32", 495]
+      }
+    },
+
+    //plats//
+{
+  "trans": [ -1266.61, 190.47, 501.76 ],
+  "etype": "plat",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1266.61, 190.47, 501.76, 10 ],
+  "lump": {
+    "name": "abandon-plat-2",
+    "sync": [ "float", 5.0, 0.0 ]
+  }
+},
+{
+      "trans": [-1251.03, 170.0, 917.82],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1251.03, 170.0, 917.82, 10],
+      "lump": {
+        "name": "NurbsCurve-0",
+        "path": ["vector4m",
+          [-1251.0308, 170.0, 917.8167, 1.0],
+          [-1257.339, 170.0, 909.5145, 1.0],
+          [-1249.1019, 170.0, 892.7795, 1.0],
+          [-1238.6753, 170.0, 892.7143, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+
+{
+      "trans": [-1259.01, 170.0, 903.39],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1259.01, 170.0, 903.39, 10],
+      "lump": {
+        "name": "NurbsCurve.005-0",
+        "path": ["vector4m",
+          [-1259.0059, 170.0, 903.3895, 1.0],
+          [-1252.6976, 170.0, 911.6917, 1.0],
+          [-1260.9347, 170.0, 928.4266, 1.0],
+          [-1271.3613, 170.0, 928.4919, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+
+{
+      "trans": [-1314.5, 163.0, 954.7],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1314.5, 163.0, 954.7, 10],
+      "lump": {
+        "name": "NurbsCurve.006-0",
+        "path": ["vector4m",
+          [-1314.5, 163.0, 954.697, 1.0],
+          [-1312.0, 163.0, 949.697, 1.0],
+          [-1302.0, 163.0, 949.697, 1.0],
+          [-1299.5, 163.0, 954.697, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 5.0, 0.0]
+      }
+    },
+{
+  "trans": [ -1458.86, 114.72, 824.00 ],
+  "etype": "plat",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1458.86, 114.72, 824.00, 10 ],
+  "lump": {
+    "name": "abandon-plat-6",
+    "sync": [ "float", 5.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1434.61, 118.59, 811.79 ],
+  "etype": "plat",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1434.61, 118.59, 811.79, 10 ],
+  "lump": {
+    "name": "abandon-plat-7",
+    "sync": [ "float", 5.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1446.22, 114.72, 782.62 ],
+  "etype": "plat",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1446.22, 114.72, 782.62, 10 ],
+  "lump": {
+    "name": "abandon-plat-8",
+    "sync": [ "float", 5.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1452.24, 117.51, 762.94 ],
+  "etype": "plat",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1452.24, 117.51, 762.94, 10 ],
+  "lump": {
+    "name": "abandon-plat-9",
+    "sync": [ "float", 5.0, 0.0 ]
+  }
+},
+{
+  "trans": [ -1282.14, 169.91, 604.71 ],
+  "etype": "plat",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1452.24, 117.51, 762.94, 10 ],
+  "lump": {
+    "name": "abandon-plat-10",
+    "path": ["vector4m",
+          [-1282.14, 169.91, 604.71, 1.0],
+          [-1282.14, 174.91, 604.71, 1.0],
+          [-1282.14, 179.91, 604.71, 1.0],
+          [-1282.14, 184.91, 604.71, 1.0]],
+    "sync": [ "float", 5.0, 0.0 ]
+  }
+},
+  {
+      "trans": [-1413.47, 114.72, 858.62],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1413.47, 114.72, 858.62, 10],
+      "lump": {
+        "name": "NurbsCurve.002-0",
+        "path": ["vector4m",
+          [-1413.4729, 114.7152, 858.6231, 1.0],
+          [-1435.1721, 114.7152, 864.0219, 1.0],
+          [-1461.1694, 114.7152, 833.6223, 1.0],
+          [-1452.469, 114.7152, 813.0237, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+{
+      "trans": [-1458.9, 115.2, 826.68],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1458.9, 115.2, 826.68, 10],
+      "lump": {
+        "name": "NurbsCurve.001-0",
+        "path": ["vector4m",
+          [-1458.8994, 115.2002, 826.6802, 1.0],
+          [-1458.1211, 115.2002, 815.5269, 1.0],
+          [-1439.6533, 115.2002, 807.8495, 1.0],
+          [-1431.1978, 115.2002, 815.1641, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+{
+      "trans": [-1453.05, 114.72, 784.64],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1453.05, 114.72, 784.64, 10],
+      "lump": {
+        "name": "NurbsCurve.003-0",
+        "path": ["vector4m",
+          [-1453.054, 114.7152, 784.6373, 1.0],
+          [-1441.9006, 114.7152, 785.4155, 1.0],
+          [-1434.2233, 114.7152, 803.8833, 1.0],
+          [-1441.5378, 114.7152, 812.3389, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+{
+      "trans": [-1444.0, 114.72, 777.44],
+      "etype": "plat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1444.0, 114.72, 777.44, 10],
+      "lump": {
+        "name": "NurbsCurve.004-0",
+        "path": ["vector4m",
+          [-1444.0039, 114.7152, 777.4359, 1.0],
+          [-1449.5806, 114.7152, 777.0468, 1.0],
+          [-1453.4192, 114.7152, 767.8129, 1.0],
+          [-1449.762, 114.7152, 763.5851, 1.0]],
+        "path-k": ["float",
+          0.0, -2.0, -1.0, 0.0, 1.0, 
+          2.0, 3.0, 1.0],
+        "sync": ["float", 10.0, 0.0]
+      }
+    },
+
+    // shortcutboulder //
+
+  {
+  "trans": [ -1486.4, 166.24, 421.24 ],
+  "etype": "shortcut-boulder",
+  "game_task": "(game-task none)",
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1452.24, 117.51, 762.94, 10 ],
+  "lump": {
+    "name": "abandon-boulder",
+    "scale": ["float", 1.7]
+  }
+},
+
+// enemies //
+// bats //
+
+{
+      "trans": [ -1470.35, 187.13, 194.18 ],
+      "etype": "swamp-bat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1727.03, 34.98, -70.69, 10],
+      "lump": {
+        "name": "abandon-bat1",
+        "idle-rand-min": ["float", 0.6],
+        "idle-rand-max": ["float", 1.3],
+        "invert-select-plane": ["symbol", "#t"],
+        "path": ["vector4m",
+  [-1470.35, 185.13, 194.18, 1.0],
+  [-1470.35, 183.92, 201.34, 1.0],
+  [-1470.93, 181.85, 209.62, 1.0],
+  [-1472.28, 179.51, 217.22, 1.0],
+  [-1473.36, 176.70, 223.05, 1.0],
+  [-1475.53, 175.08, 229.48, 1.0],
+  [-1480.75, 175.08, 234.50, 1.0],
+  [-1485.42, 175.45, 229.86, 1.0],
+  [-1485.42, 176.78, 221.01, 1.0],
+  [-1481.43, 179.86, 210.68, 1.0],
+  [-1478.68, 182.78, 201.86, 1.0],
+  [-1470.35, 185.13, 194.18, 1.0]
+],
+"path-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"pathb": ["vector4m",
+  [-1470.35, 185.13, 194.18, 1.0],
+  [-1470.35, 183.92, 201.34, 1.0],
+  [-1470.93, 181.85, 209.62, 1.0],
+  [-1472.28, 179.51, 217.22, 1.0],
+  [-1473.36, 176.70, 223.05, 1.0],
+  [-1475.53, 175.08, 229.48, 1.0],
+  [-1480.75, 175.08, 234.50, 1.0],
+  [-1485.42, 175.45, 229.86, 1.0],
+  [-1485.42, 176.78, 221.01, 1.0],
+  [-1481.43, 179.86, 210.68, 1.0],
+  [-1478.68, 182.78, 201.86, 1.0],
+  [-1470.35, 185.13, 194.18, 1.0]
+],
+"pathb-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"vol": ["vector-vol",
+    [-0.997, 0.000, -0.082, 1465.737],
+    [0.000, 0.000, -1.000, -193.184],
+    [0.994, 0.000, 0.113, -1434.024],
+    [0.000, 0.000, 1.000, 243.938],
+    [0.000, -0.999, 0.053, -160.997],
+    [0.000, 0.999, 0.053, 201.947]
+  ]
+,
+        "num-lurkers": ["int32", 6]
+      }
+    },
+
+{
+      "trans": [ -1402.07, 191.44, 78.53 ],
+      "etype": "swamp-bat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1727.03, 34.98, -70.69, 10],
+      "lump": {
+        "name": "abandon-bat2",
+        "idle-rand-min": ["float", 0.6],
+        "idle-rand-max": ["float", 1.3],
+        "path": ["vector4m",
+  [-1402.07, 191.44, 78.53, 1.0],
+  [-1399.05, 190.04, 71.90, 1.0],
+  [-1399.05, 188.40, 63.80, 1.0],
+  [-1400.77, 186.92, 55.74, 1.0],
+  [-1405.26, 184.77, 47.15, 1.0],
+  [-1411.89, 182.28, 45.84, 1.0],
+  [-1419.28, 181.70, 47.97, 1.0],
+  [-1419.28, 182.60, 55.36, 1.0],
+  [-1417.06, 184.27, 64.73, 1.0],
+  [-1414.62, 188.36, 71.58, 1.0],
+  [-1408.32, 190.33, 75.15, 1.0],
+  [-1402.07, 191.44, 78.53, 1.0]
+],
+"path-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"pathb": ["vector4m",
+  [-1402.07, 191.44, 78.53, 1.0],
+  [-1399.05, 190.04, 71.90, 1.0],
+  [-1399.05, 188.40, 63.80, 1.0],
+  [-1400.77, 186.92, 55.74, 1.0],
+  [-1405.26, 184.77, 47.15, 1.0],
+  [-1411.89, 182.28, 45.84, 1.0],
+  [-1419.28, 181.70, 47.97, 1.0],
+  [-1419.28, 182.60, 55.36, 1.0],
+  [-1417.06, 184.27, 64.73, 1.0],
+  [-1414.62, 188.36, 71.58, 1.0],
+  [-1408.32, 190.33, 75.15, 1.0],
+  [-1402.07, 191.44, 78.53, 1.0]
+],
+"pathb-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"vol": ["vector-vol",
+    [-0.934, 0.000, 0.358, 1354.228],
+    [0.000, 0.000, -1.000, -37.812],
+    [0.916, 0.000, -0.402, -1298.800],
+    [0.172, 0.000, 0.985, -159.694],
+    [0.000, -1.000, -0.000, -180.066],
+    [0.000, 1.000, -0.000, 192.439]
+  ]
+,
+        "num-lurkers": ["int32", 6]
+      }
+    },
+
+{
+      "trans": [ -1061.79, 179.98, 210.97 ],
+      "etype": "swamp-bat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1727.03, 34.98, -70.69, 10],
+      "lump": {
+        "name": "abandon-bat3",
+        "idle-rand-min": ["float", 0.6],
+        "idle-rand-max": ["float", 1.3],
+        "path": ["vector4m",
+  [-1061.79, 179.98, 210.97, 1.0],
+  [-1056.52, 177.81, 206.11, 1.0],
+  [-1056.12, 176.07, 196.73, 1.0],
+  [-1057.08, 176.07, 188.29, 1.0],
+  [-1057.29, 174.66, 180.37, 1.0],
+  [-1058.67, 173.50, 174.25, 1.0],
+  [-1064.17, 173.50, 172.26, 1.0],
+  [-1066.26, 172.66, 181.83, 1.0],
+  [-1066.26, 171.26, 192.12, 1.0],
+  [-1066.26, 172.86, 199.28, 1.0],
+  [-1066.06, 177.29, 207.47, 1.0],
+  [-1061.79, 179.98, 210.97, 1.0]
+],
+"path-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"pathb": ["vector4m",
+  [-1061.79, 179.98, 210.97, 1.0],
+  [-1056.52, 177.81, 206.11, 1.0],
+  [-1056.12, 176.07, 196.73, 1.0],
+  [-1057.08, 176.07, 188.29, 1.0],
+  [-1057.29, 174.66, 180.37, 1.0],
+  [-1058.67, 173.50, 174.25, 1.0],
+  [-1064.17, 173.50, 172.26, 1.0],
+  [-1066.26, 172.66, 181.83, 1.0],
+  [-1066.26, 171.26, 192.12, 1.0],
+  [-1066.26, 172.86, 199.28, 1.0],
+  [-1066.06, 177.29, 207.47, 1.0],
+  [-1061.79, 179.98, 210.97, 1.0]
+],
+"pathb-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"vol": ["vector-vol",
+    [-0.999, 0.000, 0.052, 1081.228],
+    [0.000, 0.000, -1.000, -168.830],
+    [0.999, 0.000, 0.052, -1038.739],
+    [0.000, 0.000, 1.000, 217.002],
+    [0.000, -0.999, 0.037, -158.436],
+    [0.000, 0.999, 0.037, 190.884]
+  ]
+,
+        "num-lurkers": ["int32", 6]
+      }
+    },
+
+{
+      "trans": [ -1172.01, 188.46, 472.19 ],
+      "etype": "swamp-bat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1727.03, 34.98, -70.69, 10],
+      "lump": {
+        "name": "abandon-bat4",
+        "idle-rand-min": ["float", 0.6],
+        "idle-rand-max": ["float", 1.3],
+        "path": ["vector4m",
+  [-1172.01, 188.46, 472.19, 1.0],
+  [-1164.99, 186.60, 466.43, 1.0],
+  [-1160.26, 185.44, 462.75, 1.0],
+  [-1154.35, 184.86, 455.34, 1.0],
+  [-1149.05, 184.86, 447.85, 1.0],
+  [-1150.89, 184.86, 441.21, 1.0],
+  [-1157.36, 184.86, 443.87, 1.0],
+  [-1164.80, 184.86, 450.94, 1.0],
+  [-1170.72, 184.86, 457.24, 1.0],
+  [-1175.27, 187.45, 463.46, 1.0],
+  [-1175.27, 188.58, 469.20, 1.0],
+  [-1172.01, 188.46, 472.19, 1.0]
+],
+"path-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"pathb": ["vector4m",
+  [-1172.01, 188.46, 472.19, 1.0],
+  [-1164.99, 186.60, 466.43, 1.0],
+  [-1160.26, 185.44, 462.75, 1.0],
+  [-1154.35, 184.86, 455.34, 1.0],
+  [-1149.05, 184.86, 447.85, 1.0],
+  [-1150.89, 184.86, 441.21, 1.0],
+  [-1157.36, 184.86, 443.87, 1.0],
+  [-1164.80, 184.86, 450.94, 1.0],
+  [-1170.72, 184.86, 457.24, 1.0],
+  [-1175.27, 187.45, 463.46, 1.0],
+  [-1175.27, 188.58, 469.20, 1.0],
+  [-1172.01, 188.46, 472.19, 1.0]
+],
+"pathb-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"vol": ["vector-vol",
+    [-0.736, 0.000, -0.677, 554.839],
+    [0.603, 0.000, -0.798, -1029.850],
+    [0.747, 0.000, 0.664, -554.552],
+    [-0.586, 0.000, 0.810, 1080.249],
+    [0.000, -1.000, -0.000, -177.015],
+    [0.000, 1.000, -0.000, 189.459]
+  ]
+,
+        "num-lurkers": ["int32", 6]
+      }
+    },
+
+{
+      "trans": [ -1209.56, 188.46, 516.78 ],
+      "etype": "swamp-bat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1727.03, 34.98, -70.69, 10],
+      "lump": {
+        "name": "abandon-bat5",
+        "idle-rand-min": ["float", 0.6],
+        "idle-rand-max": ["float", 1.3],
+        "path": ["vector4m",
+   [-1209.56, 188.46, 516.78, 1.0],
+  [-1204.89, 186.96, 512.78, 1.0],
+  [-1201.45, 184.43, 508.44, 1.0],
+  [-1197.45, 184.43, 500.91, 1.0],
+  [-1194.07, 184.43, 493.80, 1.0],
+  [-1188.98, 184.43, 485.20, 1.0],
+  [-1181.27, 184.43, 486.64, 1.0],
+  [-1179.17, 184.43, 495.02, 1.0],
+  [-1183.56, 184.43, 502.76, 1.0],
+  [-1192.83, 184.43, 514.76, 1.0],
+  [-1199.55, 186.56, 518.91, 1.0],
+  [-1209.56, 188.46, 516.78, 1.0]
+],
+"path-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"pathb": ["vector4m",
+   [-1209.56, 188.46, 516.78, 1.0],
+  [-1204.89, 186.96, 512.78, 1.0],
+  [-1201.45, 184.43, 508.44, 1.0],
+  [-1197.45, 184.43, 500.91, 1.0],
+  [-1194.07, 184.43, 493.80, 1.0],
+  [-1188.98, 184.43, 485.20, 1.0],
+  [-1181.27, 184.43, 486.64, 1.0],
+  [-1179.17, 184.43, 495.02, 1.0],
+  [-1183.56, 184.43, 502.76, 1.0],
+  [-1192.83, 184.43, 514.76, 1.0],
+  [-1199.55, 186.56, 518.91, 1.0],
+  [-1209.56, 188.46, 516.78, 1.0]
+],
+"pathb-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"vol": ["vector-vol",
+    [-0.746, 0.000, -0.666, 568.163],
+    [0.628, 0.000, -0.779, -1113.911],
+    [0.759, 0.000, 0.652, -565.537],
+    [-0.614, 0.000, 0.789, 1158.340],
+    [0.000, -1.000, -0.000, -177.015],
+    [0.000, 1.000, -0.000, 189.459]
+  ]
+,
+        "num-lurkers": ["int32", 6]
+      }
+    },
+
+{
+      "trans": [ -1321.68, 191.30, 697.18 ],
+      "etype": "swamp-bat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1727.03, 34.98, -70.69, 10],
+      "lump": {
+        "name": "abandon-bat6",
+        "idle-rand-min": ["float", 0.6],
+        "idle-rand-max": ["float", 1.3],
+        "path": ["vector4m",
+  [-1321.68, 191.30, 697.18, 1.0],
+  [-1317.87, 188.68, 691.59, 1.0],
+  [-1316.36, 188.68, 685.32, 1.0],
+  [-1315.56, 188.68, 678.40, 1.0],
+  [-1314.60, 188.68, 672.24, 1.0],
+  [-1316.58, 188.68, 667.66, 1.0],
+  [-1321.31, 188.68, 663.21, 1.0],
+  [-1327.06, 188.68, 667.80, 1.0],
+  [-1329.37, 188.68, 674.63, 1.0],
+  [-1330.05, 188.68, 683.71, 1.0],
+  [-1328.44, 190.02, 690.53, 1.0],
+  [-1321.68, 191.30, 697.18, 1.0]
+],
+"path-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"pathb": ["vector4m",
+  [-1321.68, 191.30, 697.18, 1.0],
+  [-1317.87, 188.68, 691.59, 1.0],
+  [-1316.36, 188.68, 685.32, 1.0],
+  [-1315.56, 188.68, 678.40, 1.0],
+  [-1314.60, 188.68, 672.24, 1.0],
+  [-1316.58, 188.68, 667.66, 1.0],
+  [-1321.31, 188.68, 663.21, 1.0],
+  [-1327.06, 188.68, 667.80, 1.0],
+  [-1329.37, 188.68, 674.63, 1.0],
+  [-1330.05, 188.68, 683.71, 1.0],
+  [-1328.44, 190.02, 690.53, 1.0],
+  [-1321.68, 191.30, 697.18, 1.0]
+],
+"pathb-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, 1337.001],
+    [0.000, 0.000, -1.000, -659.137],
+    [1.000, 0.000, -0.000, -1310.942],
+    [0.000, 0.000, 1.000, 700.739],
+    [0.000, -1.000, -0.000, -177.611],
+    [0.000, 1.000, -0.000, 192.302]
+  ]
+,
+        "num-lurkers": ["int32", 6]
+      }
+    },
+
+{
+      "trans": [ -1498.18, 130.14, 852.92 ],
+      "etype": "swamp-bat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1727.03, 34.98, -70.69, 10],
+      "lump": {
+        "name": "abandon-bat7",
+        "idle-rand-min": ["float", 0.6],
+        "idle-rand-max": ["float", 1.3],
+        "path": ["vector4m",
+  [-1498.18, 130.14, 852.92, 1.0],
+  [-1503.13, 128.92, 856.96, 1.0],
+  [-1503.13, 128.03, 864.76, 1.0],
+  [-1503.13, 126.80, 872.60, 1.0],
+  [-1503.13, 124.71, 878.79, 1.0],
+  [-1498.45, 123.33, 885.14, 1.0],
+  [-1490.33, 121.95, 885.14, 1.0],
+  [-1488.05, 122.49, 877.69, 1.0],
+  [-1489.03, 123.59, 869.13, 1.0],
+  [-1491.78, 126.56, 859.93, 1.0],
+  [-1493.56, 126.56, 854.36, 1.0],
+  [-1498.18, 130.14, 852.92, 1.0]
+],
+"path-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"pathb": ["vector4m",
+  [-1498.18, 130.14, 852.92, 1.0],
+  [-1503.13, 128.92, 856.96, 1.0],
+  [-1503.13, 128.03, 864.76, 1.0],
+  [-1503.13, 126.80, 872.60, 1.0],
+  [-1503.13, 124.71, 878.79, 1.0],
+  [-1498.45, 123.33, 885.14, 1.0],
+  [-1490.33, 121.95, 885.14, 1.0],
+  [-1488.05, 122.49, 877.69, 1.0],
+  [-1489.03, 123.59, 869.13, 1.0],
+  [-1491.78, 126.56, 859.93, 1.0],
+  [-1493.56, 126.56, 854.36, 1.0],
+  [-1498.18, 130.14, 852.92, 1.0]
+],
+"pathb-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, 1510.312],
+    [0.000, 0.000, -1.000, -851.922],
+    [1.000, 0.000, -0.000, -1486.410],
+    [0.000, 0.000, 1.000, 893.493],
+    [0.000, -1.000, -0.000, -118.994],
+    [0.000, 1.000, -0.000, 132.846]
+  ]
+,
+        "num-lurkers": ["int32", 6]
+      }
+    },
+
+{
+      "trans": [ -1485.20, 173.23, 514.69 ],
+      "etype": "swamp-bat",
+      "game_task": 0,
+      "quat": [0, 0, 0, 1],
+      "bsphere": [-1727.03, 34.98, -70.69, 10],
+      "lump": {
+        "name": "abandon-bat8",
+        "idle-rand-min": ["float", 0.6],
+        "idle-rand-max": ["float", 1.3],
+        "path": ["vector4m",
+  [-1485.20, 173.23, 514.69, 1.0],
+  [-1489.94, 169.84, 520.14, 1.0],
+  [-1489.94, 168.06, 529.07, 1.0],
+  [-1488.21, 167.11, 539.19, 1.0],
+  [-1481.76, 167.11, 549.16, 1.0],
+  [-1474.75, 167.11, 549.16, 1.0],
+  [-1469.70, 167.11, 540.56, 1.0],
+  [-1473.42, 167.98, 533.02, 1.0],
+  [-1475.40, 168.33, 524.36, 1.0],
+  [-1478.21, 169.52, 520.41, 1.0],
+  [-1482.12, 171.10, 516.81, 1.0],
+  [-1485.20, 173.23, 514.69, 1.0]
+],
+"path-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"pathb": ["vector4m",
+  [-1485.20, 173.23, 514.69, 1.0],
+  [-1489.94, 169.84, 520.14, 1.0],
+  [-1489.94, 168.06, 529.07, 1.0],
+  [-1488.21, 167.11, 539.19, 1.0],
+  [-1481.76, 167.11, 549.16, 1.0],
+  [-1474.75, 167.11, 549.16, 1.0],
+  [-1469.70, 167.11, 540.56, 1.0],
+  [-1473.42, 167.98, 533.02, 1.0],
+  [-1475.40, 168.33, 524.36, 1.0],
+  [-1478.21, 169.52, 520.41, 1.0],
+  [-1482.12, 171.10, 516.81, 1.0],
+  [-1485.20, 173.23, 514.69, 1.0]
+],
+"pathb-k": ["float",
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  7.0,
+  8.0,
+  9.0,
+  9.0,
+  9.0,
+  9.0
+],
+"vol": ["vector-vol",
+    [-0.981, 0.000, 0.194, 1569.716],
+    [0.000, 0.000, -1.000, -510.549],
+    [0.981, 0.000, -0.194, -1543.106],
+    [0.000, 0.000, 1.000, 556.339],
+    [0.000, -1.000, -0.000, -160.457],
+    [0.000, 1.000, -0.000, 174.234]
+  ]
+,
+        "num-lurkers": ["int32", 6]
+      }
+    },
+
+//driller and master//
+
+{
+  "trans": [ -1264.33, 181.37, 677.87 ],
+  "etype": "driller-puzzle-master",
+  "game_task": "(game-task abandon-drillers)",
+  "quat": [0, 0, 0, 1],
+  "bsphere": [ -1264.33, 181.37, 677.87, 20 ],
+  "lump": {
+    "name": "driller-puzzle-master"
+  }
+},
+
+{
+  "trans": [ -1264.33, 181.37, 677.87 ],
+  "etype": "abandon-driller-lurker",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1264.33, 181.37, 677.87, 10 ],
+  "lump": {
+    "name": "abandon-driller-1",
+    "extra-id": [ "int32", 0 ],                // NEW
+    "alt-actor": [ "string", "driller-puzzle-master" ], // NEW
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1264.33, 181.37, 677.87, 1.0 ],
+      [ -1265.33, 181.37, 677.87, 1.0 ],
+      [ -1264.33, 181.37, 677.87, 1.0 ]
+    ],
+    "abandon-driller-lurker": ["float", 0.9, 1.0, 150.0]
+  }
+},
+{
+  "trans": [ -1249.76, 182.67, 677.87 ],
+  "etype": "abandon-driller-lurker",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1249.76, 182.67, 677.87, 10 ],
+  "lump": {
+    "name": "abandon-driller-2",
+    "extra-id": [ "int32", 1 ],                // NEW
+    "alt-actor": [ "string", "driller-puzzle-master" ], // NEW
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1249.76, 182.67, 677.87, 1.0 ],
+      [ -1250.76, 182.67, 677.87, 1.0 ],
+      [ -1251.76, 182.67, 677.87, 1.0 ]
+    ],
+    "abandon-driller-lurker": ["float", 0.9, 1.0, 150.0]
+  }
+},
+{
+  "trans": [ -1234.88, 181.42, 671.38 ],
+  "etype": "abandon-driller-lurker",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1234.88, 181.42, 671.38, 10 ],
+  "lump": {
+    "name": "abandon-driller-3",
+    "extra-id": [ "int32", 2 ],                // NEW
+    "alt-actor": [ "string", "driller-puzzle-master" ], // NEW
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1234.88, 181.42, 671.38, 1.0 ],
+      [ -1235.88, 181.42, 671.38, 1.0 ],
+      [ -1236.88, 181.42, 671.38, 1.0 ]
+    ],
+    "abandon-driller-lurker": ["float", 0.9, 1.0, 240.0]
+  }
+},
+{
+  "trans": [ -1151.95, 172.10, 638.89 ],
+  "etype": "abandon-driller-lurker",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1151.95, 172.10, 638.89, 10 ],
+  "lump": {
+    "name": "abandon-driller-4",
+    "extra-id": [ "int32", 3 ],                // NEW
+    "alt-actor": [ "string", "driller-puzzle-master" ], // NEW
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1151.95, 172.10, 638.89, 1.0 ],
+      [ -1152.95, 172.10, 638.89, 1.0 ],
+      [ -1153.95, 172.10, 638.89, 1.0 ]
+    ],
+    "abandon-driller-lurker": ["float", 0.9, 1.0, 90.0]
+  }
+},
+{
+  "trans": [ -1232.35, 160.76, 716.79 ],
+  "etype": "abandon-driller-lurker",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1232.35, 160.76, 716.79, 10 ],
+  "lump": {
+    "name": "abandon-driller-5",
+    "extra-id": [ "int32", 4 ],                // NEW
+    "alt-actor": [ "string", "driller-puzzle-master" ], // NEW
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1232.35, 160.76, 716.79, 1.0 ],
+      [ -1233.35, 160.76, 716.79, 1.0 ],
+      [ -1234.35, 160.76, 716.79, 1.0 ]
+    ],
+    "abandon-driller-lurker": ["float", 0.9, 1.0, 30.0]
+  }
+},
+{
+  "trans": [ -1246.80, 160.21, 722.98 ],
+  "etype": "abandon-driller-lurker",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1246.80, 160.21, 722.98, 10 ],
+  "lump": {
+    "name": "abandon-driller-6",
+    "extra-id": [ "int32", 5 ],                // NEW
+    "alt-actor": [ "string", "driller-puzzle-master" ], // NEW
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1246.80, 160.21, 722.98, 1.0 ],
+      [ -1247.80, 160.21, 722.98, 1.0 ],
+      [ -1248.80, 160.21, 722.98, 1.0 ]
+    ],
+    "abandon-driller-lurker": ["float", 0.9, 1.0, 30.0]
+  }
+},
+{
+  "trans": [ -1325.24, 168.55, 732.59 ],
+  "etype": "abandon-driller-lurker",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1325.24, 168.55, 732.59, 10 ],
+  "lump": {
+    "name": "abandon-abandon-driller-7",
+    "extra-id": [ "int32", 6 ],                // NEW
+    "alt-actor": [ "string", "driller-puzzle-master" ], // NEW
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1325.24, 168.55, 732.59, 1.0 ],
+      [ -1324.24, 168.55, 732.59, 1.0 ],
+      [ -1323.24, 168.55, 732.59, 1.0 ]
+    ],
+    "abandon-driller-lurker": ["float", 0.9, 1.0, -90.0]
+  }
+},
+{
+  "trans": [ -1335.46, 167.75, 719.76 ],
+  "etype": "abandon-driller-lurker",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1335.46, 167.75, 719.76, 10 ],
+  "lump": {
+    "name": "abandon-driller-8",
+    "extra-id": [ "int32", 7 ],                // NEW
+    "alt-actor": [ "string", "driller-puzzle-master" ], // NEW
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1335.46, 167.75, 719.76, 1.0 ],
+      [ -1334.46, 167.75, 719.76, 1.0 ],
+      [ -1333.46, 167.75, 719.76, 1.0 ]
+    ],
+    "abandon-driller-lurker": ["float", 0.9, 1.0, -90.0]
+  }
+},
+{
+  "trans": [ -1161.88, 159.75, 776.41 ],
+  "etype": "abandon-driller-lurker",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1161.88, 159.75, 776.41, 10 ],
+  "lump": {
+    "name": "abandon-driller-9",
+    "extra-id": [ "int32", 8 ],                // NEW
+    "alt-actor": [ "string", "driller-puzzle-master" ], // NEW
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1161.88, 159.75, 776.41, 1.0 ],
+      [ -1162.88, 159.75, 776.41, 1.0 ],
+      [ -1163.88, 159.75, 776.41, 1.0 ]
+    ],
+    "abandon-driller-lurker": ["float", 0.9, 1.0, 30.0]
+  }
+},
+{
+  "trans": [ -1169.55, 158.27, 790.84 ],
+  "etype": "abandon-driller-lurker",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1169.55, 158.27, 790.84, 10 ],
+  "lump": {
+    "name": "abandon-driller-10",
+    "extra-id": [ "int32", 9 ],                // NEW
+    "alt-actor": [ "string", "driller-puzzle-master" ], // NEW
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1169.55, 158.27, 790.84, 1.0 ],
+      [ -1170.55, 158.27, 790.84, 1.0 ],
+      [ -1171.55, 158.27, 790.84, 1.0 ]
+    ],
+    "abandon-driller-lurker": ["float", 0.9, 1.0, 30.0]
+  }
+},
+
+//babak//
+{
+  "aid": 70500,
+  "trans": [-1438.22, 179.01, 140.28],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1438.22, 179.01, 140.28, 10],
+  "lump": {
+    "name": "abandon-babak-1",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1438.22, 179.01, 140.28],
+      [-1452.17, 178.48, 137.30],
+      [-1470.63, 176.59, 136.50]
+    ]
+  }
+},
+{
+  "aid": 70501,
+  "trans": [-1464.29, 180.67, 156.0],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1464.29, 180.67, 156.0, 10],
+  "lump": {
+    "name": "abandon-babak-2",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1464.29, 180.67, 156.0],
+      [-1458.30, 180.18, 148.31],
+      [-1445.77, 180.50, 157.96]
+    ],
+  "nav-mesh-sphere": ["vector4m",
+          [-1456.47, 184.24, 158.66, 5.49]]
+  }
+},
+{
+  "aid": 70503,
+  "trans": [-1490.39, 179.04, 35.0],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1490.39, 179.04, 35.0, 10],
+  "lump": {
+    "name": "abandon-babak-3",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1490.39, 179.04, 35.0],
+      [-1490.76, 179.43, 51.83],
+      [-1482.27, 179.76, 24.96]
+    ],
+    "nav-mesh-sphere": ["vector4m",
+          [-1456.35, 178.62, 12.34, 5.22]]
+  }
+},
+{
+  "aid": 70504,
+  "trans": [-1394.56, 175.65, 116.71],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1394.56, 175.65, 116.71, 10],
+  "lump": {
+    "name": "abandon-babak-4",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1394.56, 175.65, 116.71],
+      [-1401.63, 177.08, 99.25],
+      [-1387.33, 176.02, 93.41]
+    ],
+    "nav-mesh-sphere": ["vector4m",
+          [-1380.29, 177.96, 128.79, 6.0],
+          [-1377.39, 176.43, 95.74, 8.0]]
+  }
+},
+{
+  "aid": 70505,
+  "trans": [-1444.74, 178.83, 20.66],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1444.74, 178.83, 20.66, 10],
+  "lump": {
+    "name": "abandon-babak-5",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1444.74, 178.83, 20.66],
+      [-1458.53, 178.69, 21.46],
+      [-1475.20, 179.76, 22.76]
+    ],
+        "nav-mesh-actor": [ "uint32", 70503 ],
+        "nav-sphere-actor": [ "uint32", 70503 ]
+  }
+},
+{
+  "aid": 70506,
+  "trans": [-1365.32, 174.71, 107.0],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1365.32, 174.71, 107.0, 10],
+  "lump": {
+    "name": "abandon-babak-6",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1365.32, 174.71, 107.0],
+      [-1380.92, 175.10, 103.09],
+      [-1359.54, 174.25, 114.83]
+    ],
+    "nav-mesh-actor": [ "uint32", 70504 ],
+    "nav-sphere-actor": [ "uint32", 70504 ]
+  }
+},
+{
+  "aid": 70507,
+  "trans": [-1221.97, 175.36, 129.18],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1221.97, 175.36, 129.18, 10],
+  "lump": {
+    "name": "abandon-babak-7",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1221.97, 175.36, 129.18],
+      [-1236.44, 175.54, 121.47],
+      [-1256.29, 171.82, 131.01]
+    ],
+    "nav-mesh-sphere": ["vector4m",
+          [-1232.48, 176.58, 113.59, 5.85]]
+  }
+},
+{
+  "aid": 70508,
+  "trans": [-1370.33, 174.10, 123.54],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1370.33, 174.10, 123.54, 10],
+  "lump": {
+    "name": "abandon-babak-8",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1370.33, 174.10, 123.54],
+      [-1351.59, 175.74, 128.37],
+      [-1355.84, 174.35, 115.63]
+    ],
+    "nav-mesh-actor": [ "uint32", 70504 ],
+    "nav-sphere-actor": [ "uint32", 70504 ]
+  }
+},
+{
+  "aid": 70509,
+  "trans": [-1250.33, 173.82, 121.44],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1250.33, 173.82, 121.44, 10],
+  "lump": {
+    "name": "abandon-babak-9",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1250.33, 173.82, 121.44],
+      [-1261.98, 171.45, 121.11],
+      [-1266.74, 170.18, 110.11]
+    ],
+    "nav-mesh-actor": [ "uint32", 70507 ],
+    "nav-sphere-actor": [ "uint32", 70507 ]
+  }
+},
+{
+  "aid": 70510,
+  "trans": [-1157.82, 177.16, 123.36],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1157.82, 177.16, 123.36, 10],
+  "lump": {
+    "name": "abandon-babak-10",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1157.82, 177.16, 123.36],
+      [-1163.85, 176.55, 114.63],
+      [-1146.56, 176.89, 116.35]
+    ],
+    "nav-mesh-sphere": ["vector4m",
+          [-1173.4, 178.11, 122.54, 6.55],
+          [-1157.71, 178.11, 107.55, 5.56],
+          [-1083.77, 178.11, 123.85, 5.56],
+          [-1061.42, 175.77, 161.54, 5.56]]
+  }
+},
+{
+  "aid": 70511,
+  "trans": [-1070.39, 176.33, 148.23],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1070.39, 176.33, 148.23, 10],
+  "lump": {
+    "name": "abandon-babak-11",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1070.39, 176.33, 148.23],
+      [-1085.44, 177.86, 136.46],
+      [-1098.23, 177.66, 130.84]
+    ],
+    "nav-mesh-actor": [ "uint32", 70510 ],
+    "nav-sphere-actor": [ "uint32", 70510 ]
+  }
+},
+{
+  "aid": 70512,
+  "trans": [-1063.07, 173.40, 237.10],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1063.07, 173.40, 237.10, 10],
+  "lump": {
+    "name": "abandon-babak-12",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1063.07, 173.40, 237.10],
+      [-1058.80, 172.94, 222.02],
+      [-1069.95, 172.47, 226.24]
+    ],
+        "nav-mesh-sphere": ["vector4m",
+          [-1051.27, 175.33, 227.93, 2.0],
+          [-1073.22, 175.33, 227.59, 2.0]]
+  }
+},
+{
+  "aid": 70513,
+  "trans": [-1059.69, 183.62, 347.32],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1059.69, 183.62, 347.32, 10],
+  "lump": {
+    "name": "abandon-babak-13",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1059.69, 183.62, 347.32],
+      [-1052.74, 181.10, 335.41],
+      [-1066.30, 180.59, 333.76]
+    ],
+        "nav-mesh-sphere": ["vector4m",
+          [-1069.22, 183.68, 346.88, 2.0],
+          [-1047.49, 185.14, 346.56, 2.0]]
+  }
+},
+{
+  "aid": 70514,
+  "trans": [-1223.73, 174.78, 592.90],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1223.73, 174.78, 592.90, 10],
+  "lump": {
+    "name": "abandon-babak-14",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1223.73, 174.78, 592.90],
+      [-1215.78, 173.82, 607.02],
+      [-1220.63, 174.76, 615.46]
+    ],
+        "nav-mesh-sphere": ["vector4m",
+          [-1225.64, 178.54, 602.99, 4.9]]
+  }
+},
+{
+  "aid": 70515,
+  "trans": [-1256.00, 179.73, 617.97],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1256.00, 179.73, 617.97, 10],
+  "lump": {
+    "name": "abandon-babak-15",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1256.00, 179.73, 617.97],
+      [-1248.84, 179.54, 620.56],
+      [-1256.45, 179.36, 609.78]
+    ]
+  }
+},
+{
+  "aid": 70516,
+  "trans": [-1182.92, 164.11, 647.66],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1182.92, 164.11, 647.66, 10],
+  "lump": {
+    "name": "abandon-babak-16",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1182.92, 164.11, 647.66],
+      [-1182.49, 165.77, 639.68],
+      [-1188.84, 163.67, 646.38]
+    ]
+  }
+},
+{
+  "aid": 70517,
+  "trans": [-1179.60, 171.48, 734.75],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1179.60, 171.48, 734.75, 10],
+  "lump": {
+    "name": "abandon-babak-17",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1179.60, 171.48, 734.75],
+      [-1172.78, 170.60, 731.18],
+      [-1170.33, 169.23, 723.33]
+    ]
+  }
+},
+{
+  "aid": 70518,
+  "trans": [-1204.36, 175.76, 763.14],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1204.36, 175.76, 763.14, 10],
+  "lump": {
+    "name": "abandon-babak-18",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1204.36, 175.76, 763.14],
+      [-1200.84, 172.88, 756.58],
+      [-1196.24, 172.81, 763.07]
+    ]
+  }
+},
+{
+  "aid": 70519,
+  "trans": [-1318.48, 170.85, 644.33],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1318.48, 170.85, 644.33, 10],
+  "lump": {
+    "name": "abandon-babak-19",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1318.48, 170.85, 644.33],
+      [-1309.57, 169.85, 646.58],
+      [-1307.89, 170.10, 638.78]
+    ]
+  }
+},
+{
+  "aid": 70520,
+  "trans": [-1301.94, 170.83, 613.09],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1301.94, 170.83, 613.09, 10],
+  "lump": {
+    "name": "abandon-babak-20",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1301.94, 170.83, 613.09],
+      [-1301.79, 170.07, 607.16],
+      [-1299.40, 170.33, 632.03]
+    ],
+    "nav-mesh-actor": [ "uint32", 70519 ]
+  }
+},
+{
+  "aid": 70521,
+  "trans": [-1302.73, 181.06, 706.73],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1302.73, 181.06, 706.73, 10],
+  "lump": {
+    "name": "abandon-babak-21",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1302.73, 181.06, 706.73],
+      [-1296.14, 178.73, 704.89],
+      [-1309.96, 179.77, 708.34]
+    ]
+  }
+},
+{
+  "aid": 70522,
+  "trans": [-1272.27, 172.94, 780.28],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1272.27, 172.94, 780.28, 10],
+  "lump": {
+    "name": "abandon-babak-22",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1272.27, 172.94, 780.28],
+      [-1269.65, 173.66, 788.98],
+      [-1265.18, 174.46, 805.79]
+
+    ]
+  }
+},
+{
+  "aid": 70523,
+  "trans": [-1214.82, 172.94, 810.20],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1214.82, 172.94, 810.20, 10],
+  "lump": {
+    "name": "abandon-babak-23",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1214.82, 172.94, 810.20],
+      [-1216.14, 174.15, 795.14],
+      [-1214.03, 175.03, 779.65]
+    ],
+    "nav-mesh-actor": [ "uint32", 70522 ]
+  }
+},
+{
+  "aid": 70524,
+  "trans": [-1384.42, 142.63, 941.64],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1384.42, 142.63, 941.64, 10],
+  "lump": {
+    "name": "abandon-babak-24",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1384.42, 142.63, 941.64],
+      [-1394.46, 140.34, 940.86],
+      [-1408.42, 136.97, 936.85]
+    ]
+  }
+},
+{
+  "aid": 70525,
+  "trans": [-1409.23, 137.92, 941.64],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1409.23, 137.92, 941.64, 10],
+  "lump": {
+    "name": "abandon-babak-25",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1409.23, 137.92, 941.64],
+      [-1403.54, 138.74, 945.06],
+      [-1402.12, 138.78, 955.50]
+    ],
+    "nav-mesh-actor": [ "uint32", 70524 ]
+  }
+},
+{
+  "aid": 70526,
+  "trans": [-1447.48, 117.91, 878.73],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1447.48, 117.91, 878.73, 10],
+  "lump": {
+    "name": "abandon-babak-26",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1447.48, 117.91, 878.73],
+      [-1451.91, 118.54, 899.54],
+      [-1439.80, 118.56, 918.31]
+    ],
+        "nav-mesh-sphere": ["vector4m",
+          [-1433.91, 121.82, 905.04, 8.0],
+          [-1468.97, 121.82, 904.6, 6.35]]
+
+  }
+},
+{
+  "aid": 70527,
+  "trans": [-1466.05, 164.71, 567.65],
+  "etype": "babak",
+  "game_task": 0,
+  "quat": [0.0, 0.0, -0.0, 1.0],
+  "bsphere": [-1466.05, 164.71, 567.65, 10],
+  "lump": {
+    "name": "abandon-babak-27",
+    "cam-notice-dist": ["meters", 15.0],
+    "idle-distance": ["meters", 90.0],
+    "cam-vert": ["meters", 5.0],
+    "cam-horz": ["meters", 10.0],
+    "path": [
+      "vector3m",
+      [-1466.05, 164.71, 567.65],
+      [-1462.59, 160.07, 577.93],
+      [-1461.16, 159.16, 585.06]
+    ]
+  }
+},
+
+//rats//
+
+{
+  "aid": 70528,
+  "trans": [ -1441.05, 179.57, 8.40 ],
+  "etype": "swamp-rat-nest",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1441.05, 179.57, 8.40, 10 ],
+  "lump": {
+    "name": "abandon-rats-1",
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1441.05, 179.57, 8.40, 1.0 ]
+    ],
+        "nav-mesh-actor": [ "uint32", 70503 ],
+        "nav-sphere-actor": [ "uint32", 70503 ]
+  }
+},
+{
+  "aid": 70529,
+  "trans": [ -1465.60, 178.41, 0.96 ],
+  "etype": "swamp-rat-nest",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1465.60, 178.41, 0.96, 10 ],
+  "lump": {
+    "name": "abandon-rats-2",
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1465.60, 178.41, 0.96, 1.0 ]
+    ],
+        "nav-mesh-actor": [ "uint32", 70503 ],
+        "nav-sphere-actor": [ "uint32", 70503 ]
+  }
+},
+{
+  "aid": 70530,
+  "trans": [ -1392.25, 177.5, 143.40 ],
+  "etype": "swamp-rat-nest",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1392.25, 178.16, 143.40, 10 ],
+  "lump": {
+    "name": "abandon-rats-3",
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1392.25, 178.16, 143.40, 1.0 ]
+    ]
+  }
+},
+{
+  "aid": 70531,
+  "trans": [ -1257.04, 173.60, 156.36 ],
+  "etype": "swamp-rat-nest",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1257.04, 174.40, 156.36, 10 ],
+  "lump": {
+    "name": "abandon-rats-4",
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1257.04, 174.40, 156.36, 1.0 ]
+    ],
+        "nav-mesh-sphere": ["vector4m",
+          [-1233.8, 175.25, 157.16, 6.33]]
+
+  }
+},
+{
+  "aid": 70532,
+  "trans": [ -1105.15, 176.67, 105.38 ],
+  "etype": "swamp-rat-nest",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1105.15, 176.67, 105.38, 10 ],
+  "lump": {
+    "name": "abandon-rats-5",
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1105.15, 176.67, 105.38, 1.0 ]
+    ],
+        "nav-mesh-actor": [ "uint32", 70510 ],
+        "nav-sphere-actor": [ "uint32", 70510 ]
+  }
+},
+{
+  "aid": 70533,
+  "trans": [ -1146.16, 177.89, 230.69 ],
+  "etype": "swamp-rat-nest",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1146.16, 177.89, 230.69, 10 ],
+  "lump": {
+    "name": "abandon-rats-6",
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1146.16, 177.89, 230.69, 1.0 ]
+    ],
+        "nav-mesh-sphere": ["vector4m",
+          [-1167.79, 183.84, 241.39, 5.0],
+          [-1151.14, 183.84, 245.65, 5.0]]
+  }
+},
+{
+  "aid": 70534,
+  "trans": [ -1450.66, 119.08, 932.02 ],
+  "etype": "swamp-rat-nest",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1450.66, 119.08, 932.02, 10 ],
+  "lump": {
+    "name": "abandon-rats-7",
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1450.66, 119.08, 932.02, 1.0 ]
+    ],
+        "nav-mesh-actor": [ "uint32", 70526 ],
+        "nav-sphere-actor": [ "uint32", 70526 ]
+  }
+},
+{
+  "aid": 70535,
+  "trans": [ -1472.53, 118.54, 882.79 ],
+  "etype": "swamp-rat-nest",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1472.53, 118.54, 882.79, 10 ],
+  "lump": {
+    "name": "abandon-rats-8",
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1472.53, 118.54, 882.79, 1.0 ]
+    ],
+        "nav-mesh-actor": [ "uint32", 70526 ],
+        "nav-sphere-actor": [ "uint32", 70526 ]
+  }
+},
+{
+  "aid": 70536,
+  "trans": [ -1481.91, 123.50, 719.73 ],
+  "etype": "swamp-rat-nest",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ -1481.91, 124.02, 719.73, 10 ],
+  "lump": {
+    "name": "abandon-rats-9",
+    "vis-dist": [ "meters", 200.0 ],
+    "path": [
+      "vector4m",
+      [ -1481.91, 124.02, 719.73, 1.0 ]
+    ],
+        "nav-mesh-sphere": ["vector4m",
+          [-1464.0, 127.26, 723.77, 7.0],
+          [-1475.4, 130.95, 705.01, 7.0],
+          [-1446.97, 133.8, 639.1, 5.0]]
+  }
+}
+
+
+
+
+    ]
+  }

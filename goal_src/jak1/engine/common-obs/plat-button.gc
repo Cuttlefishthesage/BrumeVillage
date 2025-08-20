@@ -142,12 +142,21 @@
                                  (not (logtest? (-> *target* control status) (cshape-moving-flags onsurf)))))))
           (set! (-> self go-back-if-lost-player?) #f)
           (go-virtual plat-button-move-upward)))
-      (let ((f0-4 (seek-with-smooth (-> self path-pos) 1.0 (* 0.1 (seconds-per-frame)) 0.25 0.001)))
-        (set! (-> self path-pos) f0-4)
-        (let ((gp-0 (new 'stack-no-clear 'vector)))
-          (eval-path-curve! (-> self path) gp-0 f0-4 'interp)
-          (vector+! gp-0 gp-0 (-> self trans-off))
-          (move-to-point! (-> self root) gp-0)))
+      (let ((lvl (-> (level-get-target-inside *level*) name)))
+  (let ((gain (case lvl
+                (('brume)  0.08)   ; slower in Brume
+                (('preundg) 0.08)  ; slower in Preundg
+                (else       0.10)))) ; same elsewhere
+    (let ((f0-4 (seek-with-smooth (-> self path-pos)
+                                  1.0
+                                  (* gain (seconds-per-frame))
+                                  0.25
+                                  0.001)))
+      (set! (-> self path-pos) f0-4)
+      (let ((gp-0 (new 'stack-no-clear 'vector)))
+        (eval-path-curve! (-> self path) gp-0 f0-4 'interp)
+        (vector+! gp-0 gp-0 (-> self trans-off))
+        (move-to-point! (-> self root) gp-0)))))
       (sound-play "elev-loop" :id (-> self sound-id))
       (let ((gp-1 (the-as sound-rpc-set-param (get-sound-buffer-entry))))
         (set! (-> gp-1 command) (sound-command set-param))

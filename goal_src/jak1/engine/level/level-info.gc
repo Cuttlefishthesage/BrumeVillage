@@ -2472,7 +2472,7 @@
 (define test-zone
   (new 'static
        'level-load-info
-       :index 26
+       :index 27
        :name 'test-zone
        :visname 'test-zone-vis
        ;; name + -vis
@@ -2524,5 +2524,455 @@
        :run-packages
        '()
        :wait-for-load #t))
+(define brume
+  (new 'static
+       'level-load-info
+       :index 28
+       :name 'brume
+       :visname 'brume-vis
+       ;; name + -vis
+       :nickname 'bru
+       ;; nickname
+       :packages
+       '()
+       :sound-banks
+       '()
+       :music-bank #f
+       :ambient-sounds
+       '()
+       :mood '*snow-mood*
+       :mood-func 'update-mood-snow
+       :ocean '*ocean-map-village1*
+       :sky #t
+       :sun-fade 1.0
+       :continues
+       '((new 'static
+             'continue-point
+             :name "brume-start"
+             :level 'brume
+             :trans
+             (new 'static 'vector :x (meters -2024.16) :y (meters 179.41) :z (meters 206.81) :w 1.0) ;; 0.16   6.41 370.81
+             :quat
+             (new 'static 'quaternion :w 1.0)
+             :camera-trans
+             (new 'static 'vector :x 0.0 :y 4096.0 :z 0.0 :w 1.0)
+             :camera-rot
+             (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+             :load-commands
+             '()
+
+             :lev0 'brume
+             :disp0 'display
+             :lev1 'abandon
+             :disp1 'display)
+
+     (new 'static 'continue-point
+        :name "brume-warp"
+        :level 'brume
+        :flags (continue-flags warp)
+        :trans (new 'static 'vector :x (meters -2027.35) :y (meters 179.00) :z (meters 203.48) :w 1.0)
+        :quat (new 'static 'quaternion :x -0.0492 :y -0.9320 :z -0.1470 :w -0.3310)
+        :camera-trans (new 'static 'vector :x 0.0 :y 4096.0 :z 0.0 :w 1.0)
+        :camera-rot (new 'static 'array float 9 -0.2092 -0.0000 0.9778 -0.1159 0.9929 -0.0248 -0.9709 -0.1185 -0.2077)
+                                              :load-commands '()
+
+                                              :lev0 'brume
+                                              :disp0 'display
+                                              :lev1 'abandon
+                                              :disp1 'display
+                                              ))
+       :tasks
+       '()
+       :priority 100
+       :load-commands
+       '()
+       :alt-load-commands
+       '()
+       :bsp-mask #xffffffffffffffff
+       :bsphere
+       (new 'static 'sphere :w 167772160000.0)
+       :bottom-height (meters -20)
+       :run-packages
+       '()
+       :wait-for-load #t))
+(define abandon
+  (new 'static
+       'level-load-info
+       :index 29
+       :name 'abandon
+       :visname 'abandon-vis
+       ;; name + -vis
+       :nickname 'aba
+       ;; nickname
+       :packages
+       '()
+       :sound-banks
+       '()
+       :music-bank #f
+       :ambient-sounds
+       '()
+       :mood '*robocave-mood*
+       :mood-func 'update-mood-robocave
+       :ocean #f
+       :sky #t
+       :sun-fade 1.0
+       :continues
+       '((new 'static
+             'continue-point
+             :name "abandon-start"
+             :level 'abandon
+             :trans
+             (new 'static 'vector :x (meters -1558.8) :y (meters 174.41) :z (meters 285.81) :w 1.0) ;; -1558.51 174.40 285.63
+             :quat
+             (new 'static 'quaternion :w 1.0)
+             :camera-trans
+             (new 'static 'vector :x 0.0 :y 4096.0 :z 0.0 :w 1.0)
+             :camera-rot
+             (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+             :load-commands
+             '()
+
+             :lev0 'abandon
+             :disp0 'display
+             :lev1 'brume
+             :disp1 'display)
+  (new 'static 'continue-point
+  :name "abandon-checkpoint1"
+  :level 'abandon
+  :trans (new 'static 'vector :x (meters -1508.36) :y (meters 173.79) :z (meters 275.85) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1524.63) :y (meters 173.79) :z (meters 280.72) :w 1.0)
+  :camera-rot (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+  :load-commands '()
+
+  :lev0 'abandon
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display)
+
+  (new 'static 'continue-point
+  :name "abandon-checkpoint2"
+  :level 'abandon
+  :trans (new 'static 'vector :x (meters -1159.45) :y (meters 179.53) :z (meters 231.79) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1159.45) :y (meters 179.53) :z (meters 231.79) :w 1.0)
+  :camera-rot (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+  :load-commands '()
+
+  :lev0 'abandon
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display)
+
+  (new 'static 'continue-point
+  :name "abandon-checkpoint2.5"
+  :level 'abandon
+  :trans (new 'static 'vector :x (meters -1127.12) :y (meters 181.41) :z (meters 157.88) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1127.12) :y (meters 181.41) :z (meters 157.88) :w 1.0)
+  :camera-rot (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+  :load-commands '()
+
+  :lev0 'abandon
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display)
+
+  (new 'static 'continue-point
+  :name "abandon-checkpoint3"
+  :level 'abandon
+  :trans (new 'static 'vector :x (meters -1220.83) :y (meters 182.73) :z (meters 531.79) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1220.83) :y (meters 182.73) :z (meters 531.79) :w 1.0)
+  :camera-rot (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+  :load-commands '()
+
+  :lev0 'abandon
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display)
+
+  (new 'static 'continue-point
+  :name "abandon-checkpoint4"
+  :level 'abandon
+  :trans (new 'static 'vector :x (meters -1367.07) :y (meters 158.82) :z (meters 952.22) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1367.07) :y (meters 158.82) :z (meters 952.22) :w 1.0)
+  :camera-rot (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+  :load-commands '()
+
+  :lev0 'abandon
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display)
+
+  (new 'static 'continue-point
+  :name "abandon-checkpoint5"
+  :level 'abandon
+  :trans (new 'static 'vector :x (meters -1488.30) :y (meters 169.11) :z (meters 440.36) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1488.30) :y (meters 169.11) :z (meters 440.36) :w 1.0)
+  :camera-rot (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+  :load-commands '()
+
+  :lev0 'abandon
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display)
+
+  )
+       :tasks
+       '()
+       :priority 100
+       :load-commands
+       '()
+       :alt-load-commands
+       '()
+       :bsp-mask #xffffffffffffffff
+       :bsphere
+       (new 'static 'sphere :w 167772160000.0)
+       :bottom-height (meters -20)
+       :run-packages
+       '()
+       :wait-for-load #t))
+(define mount
+  (new 'static
+       'level-load-info
+       :index 30
+       :name 'mount
+       :visname 'mount-vis
+       ;; name + -vis
+       :nickname 'mou
+       ;; nickname
+       :packages
+       '()
+       :sound-banks
+       '(ogre)
+       :music-bank '#f
+       :ambient-sounds
+       '()
+       :mood '*village1-mood*
+       :mood-func 'update-mood-village1
+       :ocean #f
+       :sky #t
+       :sun-fade 1.0
+       :continues
+       '((new 'static
+             'continue-point
+             :name "mountain-start"
+             :level 'mount
+             :trans
+             (new 'static 'vector :x (meters -1645.26) :y (meters 232.92) :z (meters 485.21) :w 1.0) ;; -1645.26 232.92 485.21
+             :quat
+             (new 'static 'quaternion :w 1.0)
+             :camera-trans
+             (new 'static 'vector :x 0.0 :y 4096.0 :z 0.0 :w 1.0)
+             :camera-rot
+             (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+             :load-commands
+             '()
+
+             :lev0 'mount
+             :disp0 'display
+             :lev1 'brume
+             :disp1 'display)
+
+  (new 'static 'continue-point
+  :name "mount-checkpoint1"
+  :level 'mount
+  :trans (new 'static 'vector :x (meters -1641.43) :y (meters 232.58) :z (meters 488.10) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1641.43) :y (meters 232.58) :z (meters 488.10) :w 1.0)
+  :camera-rot (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+  :load-commands '()
+
+  :lev0 'mount
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display)
+
+
+  (new 'static 'continue-point
+  :name "mount-checkpoint3"
+  :level 'mount
+  :trans (new 'static 'vector :x (meters -1878.29) :y (meters 234.65) :z (meters 960.18) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1878.29) :y (meters 234.65) :z (meters 960.18) :w 1.0)
+  :camera-rot (new 'static 'array float 9 -0.9997 -0.0000 -0.0206 0.0024 0.9927 -0.1198 0.0205 -0.1198 -0.9925)
+  :load-commands '()
+
+  :lev0 'mount
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display)
+
+  (new 'static 'continue-point
+  :name "mount-checkpoint4"
+  :level 'mount
+  :trans (new 'static 'vector :x (meters -1690.76) :y (meters 236.35) :z (meters 670.64) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1690.76) :y (meters 236.35) :z (meters 670.64) :w 1.0)
+  :camera-rot (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+  :load-commands '()
+
+  :lev0 'mount
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display)
+
+
+             )
+       :tasks
+       '()
+       :priority 100
+       :load-commands
+       '()
+       :alt-load-commands
+       '()
+       :bsp-mask #xffffffffffffffff
+       :bsphere
+       (new 'static 'sphere :w 167772160000.0)
+       :bottom-height (meters -20)
+       :run-packages
+       '()
+       :wait-for-load #t))
+
+
+(define preundg
+  (new 'static
+       'level-load-info
+       :index 31
+       :name 'preundg
+       :visname 'preundg-vis
+       ;; name + -vis
+       :nickname 'pre
+       ;; nickname
+       :packages
+       '()
+       :sound-banks
+       '(ogre)
+       :music-bank #f
+       :ambient-sounds
+       '()
+       :mood '*jungleb-mood*
+       :mood-func 'update-mood-jungleb
+       :ocean #f
+       :sky #t
+       :sun-fade 1.0
+       :continues
+       '((new 'static
+             'continue-point
+             :name "preundg-start"
+             :level 'preundg
+             :trans
+             (new 'static 'vector :x (meters -1858.91) :y (meters 41.25) :z (meters 148.01) :w 1.0) ;; -1858.91  41.25 148.01
+             :quat
+             (new 'static 'quaternion :w 1.0)
+             :camera-trans
+             (new 'static 'vector :x 0.0 :y 4096.0 :z 0.0 :w 1.0)
+             :camera-rot
+             (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+             :load-commands
+             '()
+
+             :lev0 'preundg
+             :disp0 'display
+             :lev1 'brume
+             :disp1 'display)
+
+(new 'static 'continue-point
+  :name "preundg-checkpoint1"
+  :level 'preundg
+  :trans (new 'static 'vector :x (meters -1858.54) :y (meters 46.54) :z (meters 104.96) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1858.54) :y (meters 46.54) :z (meters 104.96) :w 1.0)
+  :camera-rot
+    (new 'static 'array float 9 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0)
+  :load-commands '()
+
+  :lev0 'preundg
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display
+)
+(new 'static 'continue-point
+  :name "preundg-checkpoint2"
+  :level 'preundg
+  :trans (new 'static 'vector :x (meters -1785.62) :y (meters 42.67) :z (meters 17.23) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1785.62) :y (meters 42.67) :z (meters 17.23) :w 1.0)
+  :camera-rot
+    (new 'static 'array float 9 -0.9997 0.0000 0.0233 -0.0028 0.9926 -0.1208 -0.0231 -0.1208 -0.9923)
+  :load-commands '()
+
+  :lev0 'preundg
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display
+)
+(new 'static 'continue-point
+  :name "preundg-checkpoint3"
+  :level 'preundg
+  :trans (new 'static 'vector :x (meters -1785.65) :y (meters 33.83) :z (meters -138.07) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1785.65) :y (meters 33.83) :z (meters -138.07) :w 1.0)
+  :camera-rot
+    (new 'static 'array float 9 -0.9997 0.0000 0.0233 -0.0028 0.9926 -0.1208 -0.0231 -0.1208 -0.9923)
+  :load-commands '()
+
+  :lev0 'preundg
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display
+)
+(new 'static 'continue-point
+  :name "preundg-checkpoint3.5"
+  :level 'preundg
+  :trans (new 'static 'vector :x (meters -1739.45) :y (meters 20.40) :z (meters -142.71) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1739.45) :y (meters 20.40) :z (meters -142.71) :w 1.0)
+  :camera-rot
+    (new 'static 'array float 9 -0.9956 0.0000 -0.0932 0.0110 0.9929 -0.1176 0.0925 -0.1181 -0.9886)
+  :load-commands '()
+
+  :lev0 'preundg
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display
+)
+(new 'static 'continue-point
+  :name "preundg-checkpoint4"
+  :level 'preundg
+  :trans (new 'static 'vector :x (meters -1525.75) :y (meters 143.60) :z (meters -38.18) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1525.75) :y (meters 143.60) :z (meters -38.18) :w 1.0)
+  :camera-rot
+    (new 'static 'array float 9 0.9999 -0.0000 0.0048 -0.0006 0.9895 0.1438 -0.0047 -0.1438 0.9895)
+  :load-commands '()
+
+  :lev0 'preundg
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display
+)
+   )
+       :tasks
+       '()
+       :priority 100
+       :load-commands
+       '()
+       :alt-load-commands
+       '()
+       :bsp-mask #xffffffffffffffff
+       :bsphere
+       (new 'static 'sphere :w 167772160000.0)
+       :bottom-height (meters -20)
+       :run-packages
+       '()
+       :wait-for-load #t))
 
 (cons! *level-load-list* 'test-zone)
+(cons! *level-load-list* 'brume)
+(cons! *level-load-list* 'abandon)
+(cons! *level-load-list* 'mount)
+(cons! *level-load-list* 'preundg)

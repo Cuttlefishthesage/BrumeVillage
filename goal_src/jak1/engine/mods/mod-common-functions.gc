@@ -309,19 +309,64 @@ if the result of rand-vu-int-range is 1, then DANCE! if it is not 1, then Don't 
 (defun in-bubble? ((x float) (y float) (z float) (w float))
   (<= (vector-vector-distance (target-pos 0) (set-vector! (new-stack-vector0) x y z 1.0)) (/ w 2.0)))
 
+(define *last-music-level* (the-as symbol #f))
+
 (defun music-manager ()
-  (stop-main-music)
-  (case (-> (level-get-target-inside *level*) name)
-    (('test-zone)
-     ;;  (if (> (knuth-rand-int-range 0 15) (+ 8 5))
-     ;;   (play-main-music "SND/music-test-zone.mp3" (the int (-> *setting-control* default music-volume)))
-     ;;   (play-main-music "SND/music-test-zone-track2.mp3" (the int (-> *setting-control* default music-volume))))
-     )
-    ;;Add more cases here for each level
-    (else
-     (play-main-music "" (the int (-> *setting-control* default music-volume)))
-     ;;(stop-main-music) This function is broken but playing a invalid sound does the same thing
-     ))
+  (let ((cur-level (the-as symbol (-> (level-get-target-inside *level*) name))))
+
+    ;; only do anything if the level actually changed
+
+    (when (!= cur-level *last-music-level*)
+
+      (set! *last-music-level* cur-level)
+
+
+
+      (stop-main-music)
+
+
+
+      (case cur-level
+
+        (('brume)
+
+         (play-main-music "sound_replacements/jungsunrep.wav"
+
+                          (the int (* 0.3 (-> *setting-control* default music-volume)))))
+
+
+
+        (('abandon)
+
+         (play-main-music "sound_replacements/junsynthrep.wav"
+
+                          (the int (* 0.3 (-> *setting-control* default music-volume)))))
+
+
+
+        (('mount)
+
+         (play-main-music "sound_replacements/junraverep.wav"
+
+                          (the int (* 0.3 (-> *setting-control* default music-volume)))))
+
+
+
+        (('preundg)
+
+         (play-main-music "sound_replacements/juntemprep.wav"
+
+                          (the int (* 0.3 (-> *setting-control* default music-volume)))))
+
+
+
+        (else
+
+         ;; unknown/none: stop by playing empty
+
+         (play-main-music "" (the int (-> *setting-control* default music-volume))))))
+
+    )
   (none))
 
 (defbehavior music-manager-proc process ()

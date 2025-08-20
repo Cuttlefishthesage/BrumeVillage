@@ -121,7 +121,7 @@
   (rigid-body-platform-method-30 this)
   (process-drawable-from-entity! this arg0)
   (rigid-body-platform-method-31 this)
-  (set! (-> this water-anim) #f)
+  ;;(set! (-> this water-anim) #f) Disableds to allow pontoons to spawn anywhere that isn't Y 0
   (set! (-> this root-overlay pause-adjust-distance) -122880.0)
   (set! (-> this task) (the-as uint (-> arg0 extra perm task)))
   (set! (-> this alt-task) (res-lump-value arg0 'alt-task uint))

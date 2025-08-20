@@ -1728,8 +1728,16 @@
          (set! (-> this block-func)
                (the-as (function vent symbol) (lambda () (not (task-complete? *game-info* (game-task red-eggtop)))))))
         (((pickup-type eco-yellow))
-         (set! (-> this block-func)
-               (the-as (function vent symbol) (lambda () (not (task-complete? *game-info* (game-task snow-eggtop))))))))
+ (if (or (= (-> (level-get-target-inside *level*) name) 'brume)
+         (= (-> (level-get-target-inside *level*) name) 'abandon))
+     ;; Only Abandon vents use this task
+     (set! (-> this block-func)
+           (the-as (function vent symbol)
+             (lambda () (not (task-complete? *game-info* (game-task brume-restore-power))))))
+     ;; else stays on snow-eggtop
+     (set! (-> this block-func)
+           (the-as (function vent symbol)
+             (lambda () (not (task-complete? *game-info* (game-task snow-eggtop)))))))))
       (process-spawn ecovalve (-> this block-func) :from *pickup-dead-pool* :to this))
     (if ((-> this block-func) this) (go vent-blocked)))
   (go vent-wait-for-touch)

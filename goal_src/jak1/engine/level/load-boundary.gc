@@ -8,7 +8,7 @@
 (require "engine/game/settings.gc")
 
 ;; DECOMP BEGINS
-
+(define-extern runs-on-checkpt (function none)) ;; music hack to change music during checkpts /level change/
 ;; the editor state
 (deftype lb-editor-parms (basic)
   ((boundary load-boundary)
@@ -1367,6 +1367,7 @@
       (cond
         ((= (-> s4-0 cmd) (load-boundary-cmd vis)) (load-state-want-vis (the-as symbol (-> s4-0 lev0))))
         ((= (-> s4-0 cmd) (load-boundary-cmd load))
+        ;;(runs-on-checkpt) ;; music hack for changing levels in brume
          (load-state-want-levels (the-as symbol (-> s4-0 lev0)) (the-as symbol (-> s4-0 lev1))))
         ((= (-> s4-0 cmd) (load-boundary-cmd display))
          (load-state-want-display-level (the-as symbol (-> s4-0 lev0)) (the-as symbol (-> s4-0 lev1))))
@@ -1374,7 +1375,9 @@
          (load-state-want-force-vis (the-as symbol (-> s4-0 lev0)) (the-as symbol (-> s4-0 lev1))))
         ((= (-> s4-0 cmd) (load-boundary-cmd checkpt))
          (format 0 "Setting continue to ~A~%" (-> s4-0 lev0))
-         (set-continue! *game-info* (-> s4-0 lev0))))))
+         ;; (runs-on-checkpt) ;; music hack for changing levels in brume
+         (set-continue! *game-info* (-> s4-0 lev0))
+         (runs-on-checkpt) )))) ;; music hack for changing levels in brume
   (label cfg-28)
   (none))
 

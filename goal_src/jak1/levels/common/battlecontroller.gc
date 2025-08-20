@@ -295,6 +295,14 @@ battlecontroller-default-event-handler
       (battlecontroller-update-spawners))
   :code
     (behavior ()
+    (countdown (gp-2 (entity-actor-count (-> self entity) 'alt-actor))
+        (let ((s5-2 (new 'stack-no-clear 'event-message-block)))
+          (set! (-> s5-2 from) self)
+          (set! (-> s5-2 num-params) 0)
+          (set! (-> s5-2 message) 'ambushdoor)
+          (let ((s4-1 send-event-function)
+                (v1-8 (entity-actor-lookup (-> self entity) 'alt-actor gp-2)))
+            (s4-1 (if v1-8 (-> v1-8 extra process)) s5-2))))
       (set-time! (-> self state-time))
       (battlecontroller-camera-on)
       (loop
@@ -394,7 +402,7 @@ battlecontroller-default-event-handler
   (set! (-> this fact) (new 'process 'fact-info this (pickup-type eco-pill-random) (-> *FACT-bank* default-pill-inc)))
   (set! (-> this path) (new 'process 'path-control this 'path 0.0))
   (logior! (-> this path flags) (path-control-flag display draw-line draw-point draw-text))
-  (set! (-> this activate-distance) 122880.0)
+  (set! (-> this activate-distance) 52880.0)
   (let ((s5-0 0))
     (let* ((s4-0 '(patha pathb pathc pathd pathe pathf pathg pathh))
            (s2-0 (car s4-0)))
