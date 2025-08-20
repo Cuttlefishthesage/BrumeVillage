@@ -1421,9 +1421,9 @@
                       :task-name
                       (new 'static 'array text-id 4 (text-id citadel-buzzer) (text-id citadel-buzzer) (text-id citadel-buzzer) (text-id zero)))))
 
-                      
 
- ;;BRUME;;                     
+
+ ;;BRUME;;
 
  (new 'static 'level-tasks-info
               :level-name-id (text-id brume)

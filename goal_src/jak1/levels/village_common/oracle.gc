@@ -29,7 +29,7 @@
      (case (-> (level-get-target-inside *level*) name)
        (('village1) (new 'static 'spool-anim :name "oracle-intro-1" :index 9 :parts 5 :command-list '()))
        (('brume) (new 'static 'spool-anim :name "oracle-intro-1" :index 9 :parts 5 :command-list '()))
-       (('village2) 
+       (('village2)
         (new 'static
              'spool-anim
              :name "oracle-intro-2"

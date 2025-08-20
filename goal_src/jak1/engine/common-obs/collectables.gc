@@ -1729,7 +1729,7 @@
                (the-as (function vent symbol) (lambda () (not (task-complete? *game-info* (game-task red-eggtop)))))))
         (((pickup-type eco-yellow))
  (if (or (= (-> (level-get-target-inside *level*) name) 'brume)
-         (= (-> (level-get-target-inside *level*) name) 'abandon)) 
+         (= (-> (level-get-target-inside *level*) name) 'abandon))
      ;; Only Abandon vents use this task
      (set! (-> this block-func)
            (the-as (function vent symbol)

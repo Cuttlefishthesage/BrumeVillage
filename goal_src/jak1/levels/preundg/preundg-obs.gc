@@ -231,15 +231,15 @@
     (set! (-> cshape reaction) default-collision-reaction)
     (set! (-> cshape no-reaction)
           (the (function collide-shape-moving collide-shape-intersect vector vector none) nothing))
-    
-   
+
+
     (let ((cgroup (new 'process 'collide-shape-prim-group cshape (the uint 2) 0)))
       (set! (-> cgroup prim-core collide-as) (collide-kind ground-object))
       (set! (-> cgroup collide-with) (collide-kind target))
       (set! (-> cgroup prim-core action) (collide-action solid rider-plat-sticky))
       (set! (-> cgroup transform-index) 0)
       (set-vector! (-> cgroup local-sphere) 0.0 0.0 0.0 (meters 5))
-      
+
       ;; Attach group as root
       (set-root-prim! cshape cgroup)
 
@@ -260,7 +260,7 @@
         (set! (-> sphere2 prim-core offense) (collide-offense normal-attack))
         (set-vector! (-> sphere2 local-sphere) 0.0 15000.0 0.0 (meters 2))
         (append-prim cgroup sphere2)))
-    
+
     ;; Finish up
     (set! (-> cshape nav-radius) (* 0.75 (-> cshape root-prim local-sphere w)))
     (backup-collide-with-as cshape)
@@ -296,7 +296,7 @@
   :event
     (behavior ((proc process) (argc int) (message symbol) (block event-message-block))
       (case message
-        
+
         ((#t) #f)))
   :trans
     (behavior ()
@@ -308,7 +308,7 @@
       (vector-copy! pos (-> self root trans))
       ;; add a fixed vertical offset
       (set! (-> pos y) (+ (-> pos y) (meters 3.0)))
-      ;; add small random horizontal offset (Â±0.5m X/Z)
+      ;; add small random horizontal offset (±0.5m X/Z)
       (set! (-> pos x) (+ (-> pos x) (meters (* 0.05 (- (rand-vu-int-range 0 200) 100)))))
       (set! (-> pos z) (+ (-> pos z) (meters (* 0.05 (- (rand-vu-int-range 0 200) 100)))))
 
@@ -326,7 +326,7 @@
       (vector-copy! pos (-> self root trans))
       ;; add a fixed vertical offset
       (set! (-> pos y) (+ (-> pos y) (meters 4.0)))
-      ;; add small random horizontal offset (Â±0.5m X/Z)
+      ;; add small random horizontal offset (±0.5m X/Z)
       (set! (-> pos x) (+ (-> pos x) (meters (* 0.01 (- (rand-vu-int-range 0 200) 100)))))
       (set! (-> pos z) (+ (-> pos z) (meters (* 0.01 (- (rand-vu-int-range 0 200) 100)))))
 
@@ -338,7 +338,7 @@
 
     (let ((pos (new 'stack-no-clear 'vector)))
   (vector-copy! pos (-> self root trans))
-  (set! (-> pos y) (+ (-> pos y) (meters 4.0))) 
+  (set! (-> pos y) (+ (-> pos y) (meters 4.0)))
   (launch-particles (-> *part-id-table* 3363) pos)
   (launch-particles (-> *part-id-table* 3364) pos)) ;; spawn particles at an offset from root
 
@@ -441,7 +441,7 @@
   small-swingpole-active
   small-swingpole-stance)
   )
-  
+
 
 (defstate small-swingpole-stance (small-swingpole)
   :code
@@ -478,7 +478,7 @@
   (set! (-> this range) 12288.0)
   (set! (-> this edge-length) 2192.0)
   (go small-swingpole-stance)
- 
+
   (none))
 
 
@@ -490,7 +490,7 @@
   long-swingpole-active
   long-swingpole-stance)
   )
-  
+
 
 (defstate long-swingpole-stance (long-swingpole)
   :code
@@ -528,7 +528,7 @@
   (set! (-> this range) 16288.0)
   (set! (-> this edge-length) 12192.0)
   (go long-swingpole-stance)
- 
+
   (none))
 
 
@@ -567,7 +567,7 @@
    (init-collision! (_type_) none))
   (:states
    open-door
-   closed-door)) 
+   closed-door))
 
 
 (defstate open-door (ambushdoor)
@@ -649,4 +649,4 @@
   (none)
   )
 
-  
+

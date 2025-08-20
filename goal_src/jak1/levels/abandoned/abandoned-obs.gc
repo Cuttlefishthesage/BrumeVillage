@@ -1241,7 +1241,7 @@
    #f
    self
    (the-as fact-info #f))
-             
+
              ))
          #t)
         ((#t) #f))) ;; spawns powercell at jak ^^^

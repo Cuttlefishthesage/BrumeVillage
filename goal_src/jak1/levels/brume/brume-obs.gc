@@ -85,7 +85,7 @@
       (loop
         (when (task-complete? *game-info* (game-task brume-restore-power)) ;; added temp game-task to be completed by yellow eggtop. spinners "power on" when completed
   (quaternion-rotate-y! (-> self root quat) (-> self root quat) (* (degrees 20) (seconds-per-frame))))
-        
+
         ; (debug-draw-tris (-> (res-lump-struct (-> self draw art-group data 0 extra) 'collide-mesh-group (array collide-mesh)) 0) self 2)
         ; (dotimes (i (-> self node-list length))
         ;   (let* ((joint (-> self node-list data i)) (jpos (vector<-cspace! (new-stack-vector0) joint)))
@@ -120,7 +120,7 @@
    (:g 192.0)
    (:b 192.0)
    (:a 32.0 16.0)
-   (:vel-x (meters 0.05)) 
+   (:vel-x (meters 0.05))
    (:vel-y (meters 0.013333334) (meters 0.013333334))
    (:vel-z (meters -0.0016666667) (meters 0.0033333334))
    (:scalevel-x (meters 0.0073242188))
@@ -154,7 +154,7 @@
    (:g 192.0)
    (:b 192.0)
    (:a 32.0 16.0)
-   (:vel-x (meters 0.05)) 
+   (:vel-x (meters 0.05))
    (:vel-y (meters 0.013333334) (meters 0.013333334))
    (:vel-z (meters -0.0016666667) (meters 0.0033333334))
    (:scalevel-x (meters 0.0073242188))
@@ -188,7 +188,7 @@
    (:g 192.0)
    (:b 192.0)
    (:a 32.0 16.0)
-   (:vel-x (meters 0.05)) 
+   (:vel-x (meters 0.05))
    (:vel-y (meters 0.013333334) (meters 0.013333334))
    (:vel-z (meters -0.0016666667) (meters 0.0033333334))
    (:scalevel-x (meters 0.0073242188))
@@ -357,7 +357,7 @@
   (behavior ()
     (when (and *target*
                ;; Only show prompt if all 3 aren't done yet
-               (not (and 
+               (not (and
                          (task-complete? *game-info* (game-task brume-muse-hide-3))))
                (>= 51920.0 (vector-vector-distance (-> self root trans) (-> *target* control trans))))
       ;; Show "Press O to hide and seek!" only if close enough and game not fully done
@@ -396,12 +396,12 @@
 ;;    (go fade-out-hide)))
 
 (defstate hide-n-seek (muse-v4)
-  :event 
+  :event
     (behavior ((proc process) (argc int) (msg symbol) (block event-message-block))
     (case msg
       (('caught-hide-n-seek)
        (format 0 "[NPC MUSE] Received caught-hide-n-seek from ~A~%" proc)
-       
+
        (go muse-v4-idle))))
   :enter
 (behavior ()
@@ -621,13 +621,13 @@ nav-enemy-default-event-handler
      )
      (else
      (nav-enemy-default-event-handler proc argc msg block))))
-     
+
 
 
 (defstate muse-v4-catchable-idle (muse-v4-catchable)
   :event muse-v4-catchable-events
   :enter
-  (behavior () 
+  (behavior ()
   (logior! (-> self draw status) (draw-status hidden))
   (clear-collide-with-as (-> self root))
   )
@@ -755,13 +755,13 @@ nav-enemy-default-event-handler
 
 (defstate muse-v4-catchable-caught (muse-v4-catchable)
   :event #f
-  :enter 
+  :enter
    (behavior  ()
    (let ((msg (new 'stack-no-clear 'event-message-block)))
   (set! (-> msg from) self)
   (set! (-> msg num-params) 0)
   (set! (-> msg message) 'caught-hide-n-seek)
-  ;; Send back to NPC muse (e.g. parent, or use alt-actor 0 if thatâ€™s how theyâ€™re linked)
+  ;; Send back to NPC muse (e.g. parent, or use alt-actor 0 if that’s how they’re linked)
   (send-event-function (-> (entity-actor-lookup (-> self entity) 'alt-actor 0) extra process) msg))
 )
   :trans
@@ -1569,7 +1569,7 @@ nav-enemy-default-event-handler
   (none))
 
 (defmethod steam-cap-method-21 ((this steam-cap-v4))
-  (when (task-complete? *game-info* (game-task brume-restore-power)) ;; added temp task ready for yellow eggtop. this stops steamcaps from moving until that task is complete 
+  (when (task-complete? *game-info* (game-task brume-restore-power)) ;; added temp task ready for yellow eggtop. this stops steamcaps from moving until that task is complete
   (local-vars (at-0 int) (at-1 int) (s5-0 symbol))
   (rlet ((vf0 :class vf)
          (vf1 :class vf)
@@ -1594,7 +1594,7 @@ nav-enemy-default-event-handler
            (set! s5-0 #f)
            (set! (-> this do-falling-sound?) #t)
            (when (-> this do-burst?)
-             ;;(sound-play "sunk-top-rises") ;; annoying sound 
+             ;;(sound-play "sunk-top-rises") ;; annoying sound
              (set! (-> this do-burst?) #f)
              (spawn (-> this part) (-> this down))
              (spawn (-> this part) (-> this down))
@@ -1637,7 +1637,7 @@ nav-enemy-default-event-handler
                (when (< f0-20 0.0)
                  (let ((f0-22 (* 0.3 (- f0-20))))
                    (set! (-> s2-0 transv y) f0-22)
-                   (if (< 7782.4 f0-22) (sound-play "sunk-top-lands" :vol 60))))))) 
+                   (if (< 7782.4 f0-22) (sound-play "sunk-top-lands" :vol 60)))))))
           (else
            (set! (-> this do-landing-sound?) #t)
            (let ((f0-24 (* 0.000048828126 (- (-> this up y) (-> s2-0 trans y)))))
@@ -1819,13 +1819,13 @@ nav-enemy-default-event-handler
         (suspend))))
 
 (defmethod init-from-entity! ((this beam-vent) (arg0 entity-actor))
-  
+
   (set! (-> this root) (new 'process 'trsqv))
   (process-drawable-from-entity! this arg0)
 
   ;; Beam source and end positions
   (set! (-> this beam-start quad) (-> this root trans quad))
-  (set! (-> this beam-start y)  (-> this beam-start y)) 
+  (set! (-> this beam-start y)  (-> this beam-start y))
   (set! (-> this beam-end quad) (-> this root trans quad))
   (set! (-> this beam-end y) (+ 11981920.0 (-> this beam-end y))) ; Far above actor
 
@@ -1840,7 +1840,7 @@ nav-enemy-default-event-handler
   ;;;game-task specific plats;;;
   (deftype brume-plat (plat)
   ((timings     float 64))) ;; inline array of floats
-  
+
 
 (defmethod init-from-entity! ((this brume-plat) (arg0 entity-actor))
   (when (task-complete? *game-info* (game-task mount-platformbutton))(logior! (-> this mask) (process-mask platform))
@@ -1913,7 +1913,7 @@ nav-enemy-default-event-handler
         ((0.0)
          ;;(load-state-want-levels 'preundg 'brume) moved to load boundary
          ;;(load-state-want-display-level 'preundg 'display) moved to load boundary
-         
+
          0)
         ((1.0)
          ))))

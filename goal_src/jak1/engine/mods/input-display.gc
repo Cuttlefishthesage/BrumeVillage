@@ -232,7 +232,7 @@ Down lets you edit buttons, left lets you edit the sticks, right for dpad, up to
     ;(draw-sprite2d-xy testbuf (the int (-> *cpad-list* cpads 0 leftx)) (the int(-> *cpad-list* cpads 0 lefty)) 5 3 *color-red*)
     ;stick location scaled to picture
     (draw-sprite2d-xy arg0
-                      ;analog-input takes left stick x int value and maps its min/max to negative/positive of the last argument 
+                      ;analog-input takes left stick x int value and maps its min/max to negative/positive of the last argument
                       ;in our case we scale to half of the picture's width, so the stick can go full + (right) or full - (left)
                       (+ (-> stick-origin x)
                          (analog-input (the int (-> *cpad-list* cpads 0 leftx)) 128.0 0.0 128.0 (the float (/ width-idk 2))))

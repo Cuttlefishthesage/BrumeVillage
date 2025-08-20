@@ -173,7 +173,7 @@
    (:g 192.0)
    (:b 192.0)
    (:a 32.0 16.0)
-   (:vel-x (meters 0.05)) 
+   (:vel-x (meters 0.05))
    (:vel-y (meters 0.013333334) (meters 0.013333334))
    (:vel-z (meters -0.0016666667) (meters 0.0033333334))
    (:scalevel-x (meters 0.0073242188))
@@ -367,7 +367,7 @@
       (suspend)
       (update-transforms! (-> self root))
       (loop
-        (when (or 
+        (when (or
                   (and (and *target* (>= (-> self thresh w) (vector-vector-distance (-> self root trans) (-> *target* control trans))))
                        ))
           (go mount-maindoor-open #f))
@@ -391,7 +391,7 @@
       (set! (-> self root root-prim prim-core offense) (collide-offense no-offense))
       (while (not (ja-max? 0))
         (ja :num! (seek! max 2.0))
-        
+
         (suspend))
       (logior! (-> self draw status) (draw-status hidden))
       (loop

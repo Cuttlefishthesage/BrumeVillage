@@ -19,7 +19,7 @@
 ;; Useful GOAL modding documentation
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-#| 
+#|
 Checks the condition and if it is true it does first argument if false it does optional second argument
 (if (condition) (do if true) (do if false))
 

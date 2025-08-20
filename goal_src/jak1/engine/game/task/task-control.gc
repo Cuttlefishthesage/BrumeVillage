@@ -1278,7 +1278,7 @@
                  :condition
                  (lambda :behavior process-taskable ((arg0 task-control))
                    #t)))))
-                   
+
 (define *oracle-brume-tasks*
   (new 'static
        'task-control
@@ -1370,7 +1370,7 @@
                  :condition
                  (lambda :behavior process-taskable ((arg0 task-control))
                    #t)))))
-                   
+
 (define *miners-tasks*
   (new 'static
        'task-control
@@ -5183,7 +5183,7 @@
             (lambda :behavior process-taskable ((arg0 task-control))
               (and
                 (task-complete? *game-info* (game-task brume-muse-hide-1))
-                
+
                 (not (closed? arg0 (game-task brume-muse-hide-3) (task-status need-hint))))))
                          (new 'static
                               'task-cstage
@@ -5267,7 +5267,7 @@
                               (lambda :behavior process-taskable ((arg0 task-control))
               (and
                 (task-complete? *game-info* (game-task brume-muse-hide-1))
-                
+
                 (not (closed? arg0 (game-task brume-muse-hide-3) (task-status need-hint))))))
                          (new 'static
                               'task-cstage
@@ -5294,7 +5294,7 @@
                               (lambda :behavior process-taskable ((arg0 task-control))
                                 #t))))
 
-;;ABANDON;;                                
+;;ABANDON;;
 
 (new 'static 'task-control
                     :current-stage -1
@@ -5472,7 +5472,7 @@
                               (lambda :behavior process-taskable ((arg0 task-control))
               (and
                 (task-complete? *game-info* (game-task brume-muse-hide-1))
-                
+
                 (not (closed? arg0 (game-task brume-muse-hide-3) (task-status need-hint))))))
                          (new 'static
                               'task-cstage
@@ -6104,7 +6104,7 @@
                                 #t))))
 
 )))
-          
+
 
 (defun task-control-reset ((arg0 symbol))
   "Reset all task controls and set their current stage"

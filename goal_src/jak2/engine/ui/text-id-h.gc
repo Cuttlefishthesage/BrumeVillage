@@ -829,7 +829,7 @@
   (progress-graphics-ps2-lod-dist #x1337)
   (progress-graphics-msaa-off #x1338)
   (progress-graphics-display #x1339)
-  (language-name-finnish #x133a)  
+  (language-name-finnish #x133a)
   (progress-hint-subtitles #x133b)
   (language-name-portuguese #x133c)
   (language-name-swedish #x133d)

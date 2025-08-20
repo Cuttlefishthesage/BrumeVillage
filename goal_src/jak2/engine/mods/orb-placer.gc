@@ -142,7 +142,7 @@
   )
 
 (defun orb-placer-highlight ((orb skill) (highlight? symbol))
-  (cond 
+  (cond
     (highlight?
       (set-vector! (-> orb draw color-mult) 0.8 0.8 0.0 1.0)
       (set-vector! (-> orb draw color-emissive) 0.0 1.0 0.2 1.0)
@@ -165,7 +165,7 @@
         (let ((orb-proc (the skill (handle->process orb-handle))))
           (when (and orb-proc (!= (-> orb-proc next-state name) 'dead-state))
             ;; ensure correct highlighting
-            (orb-placer-highlight 
+            (orb-placer-highlight
               orb-proc
               is-selected?
               )
@@ -281,7 +281,7 @@
           )
         )
       )
-          
+
 
     (cond
       ((process-by-name "orb-placer" *active-pool*)
@@ -344,12 +344,12 @@
                           (vector-matrix*! vec vec (matrix-local->world #t #f))
                           (vector-flatten! vec vec (-> *camera* local-down))
                           (vector-float*! vec vec (* (-> pad stick0-speed) 512.0))
-                          
+
                           ;; actually move orb
                           (vector+! (-> orb root trans) (-> orb root trans) vec)
                           (vector+! (-> orb base) (-> orb base) vec)
                           )
-                        
+
 
                         (cond
                           ;; fine tune/axis-aligned X/Z

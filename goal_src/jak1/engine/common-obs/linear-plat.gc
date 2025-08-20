@@ -7,7 +7,7 @@
 (require "engine/common-obs/plat.gc")
 
 #| custom platform for complex animations
-  
+
   define path array of vector4m as usual, probably you want first and last positions to be the same
     "path": ["vector4m",
         [0.0, 50.0, 10.0, 1.0],
@@ -18,7 +18,7 @@
         [0.0, 60.0, 10.0, 1.0],
         [0.0, 50.0, 10.0, 1.0]
       ],
- 
+
   define timings array, which says how long in seconds it should take to transition between path positions
     "timings": ["float",
         0.0, // offset before starting
@@ -35,7 +35,7 @@
 |#
 (deftype linear-plat (plat)
   ((timings     float 64))) ;; inline array of floats
-  
+
 (defun get-current-phase-linear-plat ((this linear-plat))
   (let* ((cur-time (mod (the-as uint (current-time)) (-> this sync period)))
          (pos 0))

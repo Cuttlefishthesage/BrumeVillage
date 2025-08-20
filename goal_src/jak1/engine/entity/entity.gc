@@ -876,7 +876,7 @@
                 ;; Commenting it out, but leaving it here because it may be useful for something.
                 ;; Also I probably have redundancy among the properties (for example I am not sure if radius-x is needed if we have radius, and vice-versa).
                 #|
-:nodes (new 'static 'inline-array nav-node 1 
+:nodes (new 'static 'inline-array nav-node 1
                   (new 'static 'nav-node :center-x (meters 0.4020) :center-y (meters -0.2929) :center-z (meters -0.0592)
                   :type 1
                   :parent-offset 0
@@ -909,7 +909,7 @@
                      (new 'static 'vector4ub :data (new 'static 'array uint8 4 #x0 #x0 #x0 #x0)))))
      (entity-nav-login this) ;; I don't need to know what this does, all I know is that this is needed - the navmesh won't be okay without it.
      )
-     
+
      ;;abandonstart;;
      ((70500)
       (set! (-> this nav-mesh)
@@ -8606,7 +8606,7 @@
             :pat 0))
           :route (new 'static 'inline-array vector4ub 1
             (new 'static 'vector4ub :data (new 'static 'array uint8 4 #xff #x0 #x0 #x0)))))
-      (entity-nav-login this))  
+      (entity-nav-login this))
   ((80505)
       (set! (-> this nav-mesh)
         (new 'static 'nav-mesh
@@ -21496,7 +21496,7 @@
             (new 'static 'vector4ub :data (new 'static 'array uint8 4 #xaa #xab #xaa #xaa))
             (new 'static 'vector4ub :data (new 'static 'array uint8 4 #xeb #x0 #x0 #x0)))))
       (entity-nav-login this))))
-      
+
 
 
 
