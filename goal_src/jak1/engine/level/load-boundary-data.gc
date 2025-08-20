@@ -1503,6 +1503,7 @@
                   :bot (meters 155)
                   :points ((meters -1687.5) (meters 430.35) (meters -1596.5) (meters 430.37))
                   :bwd (load mount brume)
+                  :fwd (load abandon brume)
   )
 
 (static-load-boundary :flags ( player )
@@ -1513,12 +1514,6 @@
                   :bwd (display mount display)
   )
 
-(static-load-boundary :flags ( player )
-                  :top (meters 255)
-                  :bot (meters 155)
-                  :points ((meters -1687.5) (meters 435.35) (meters -1596.5) (meters 435.37))
-                  :fwd (load abandon brume)
-  )
 
 (static-load-boundary :flags ( player )
                   :top (meters 255)
