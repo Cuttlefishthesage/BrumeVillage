@@ -201,7 +201,7 @@
   (case (-> *speedrun-info* category)
     (((speedrun-category full-game))
      ;; spawn at the geyser warp gate checkpoint
-     (initialize! *game-info* 'game (the-as game-save #f) "game-start"))
+     (initialize! *game-info* 'game (the-as game-save #f) "brume-warp"))
     (((speedrun-category il-training))
      ;; spawn at the geyser warp gate checkpoint
      (initialize! *game-info* 'game (the-as game-save #f) "game-start"))
