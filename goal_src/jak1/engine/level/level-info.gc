@@ -2580,6 +2580,20 @@
                                               :disp0 'display
                                               :lev1 'abandon
                                               :disp1 'display
+                                              )
+     (new 'static 'continue-point
+        :name "brume-checkpoint1"
+        :level 'brume
+        :trans (new 'static 'vector :x (meters -1749.68) :y (meters 199.77) :z (meters 321.56) :w 1.0)
+        :quat (new 'static 'quaternion :x -0.0492 :y -0.9320 :z -0.1470 :w -0.3310)
+        :camera-trans (new 'static 'vector :x 0.0 :y 4096.0 :z 0.0 :w 1.0)
+        :camera-rot (new 'static 'array float 9 0.0378 0.0000 -0.9992 0.1149 0.9933 0.0043 0.9926 -0.1150 0.0376)
+                                              :load-commands '()
+
+                                              :lev0 'brume
+                                              :disp0 'display
+                                              :lev1 'abandon
+                                              :disp1 'display
                                               ))
        :tasks
        '()
@@ -2799,6 +2813,20 @@
   :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
   :camera-trans (new 'static 'vector :x (meters -1878.29) :y (meters 234.65) :z (meters 960.18) :w 1.0)
   :camera-rot (new 'static 'array float 9 -0.9997 -0.0000 -0.0206 0.0024 0.9927 -0.1198 0.0205 -0.1198 -0.9925)
+  :load-commands '()
+
+  :lev0 'mount
+  :disp0 'display
+  :lev1 'brume
+  :disp1 'display)
+
+  (new 'static 'continue-point
+  :name "mount-checkpoint3.5"
+  :level 'mount
+  :trans (new 'static 'vector :x (meters -1850.07) :y (meters 242.62) :z (meters 609.48) :w 1.0)
+  :quat (new 'static 'quaternion :x 0.0 :y 0.0 :z 0.0 :w 1.0)
+  :camera-trans (new 'static 'vector :x (meters -1878.29) :y (meters 234.65) :z (meters 960.18) :w 1.0)
+  :camera-rot (new 'static 'array float 9 -0.0430 0.0000 -0.9990 0.1203 0.9927 -0.0051 0.9917 -0.1204 -0.0427)
   :load-commands '()
 
   :lev0 'mount

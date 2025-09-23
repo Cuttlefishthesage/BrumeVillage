@@ -1055,7 +1055,7 @@
   "bsphere": [-1731.09, 20.49, -143.44, 10],
   "lump": {
     "name": "preundg-launcher-5",
-    "spring-height": ["meters", 15.0],
+    "spring-height": ["meters", 15.5],
     "vis-dist": ["meters", 200.0]
   }
 },
