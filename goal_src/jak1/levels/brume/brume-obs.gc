@@ -761,7 +761,7 @@ nav-enemy-default-event-handler
   (set! (-> msg from) self)
   (set! (-> msg num-params) 0)
   (set! (-> msg message) 'caught-hide-n-seek)
-  ;; Send back to NPC muse (e.g. parent, or use alt-actor 0 if that�s how they�re linked)
+  ;; Send back to NPC muse (e.g. parent, or use alt-actor 0 if that's how they're linked)
   (send-event-function (-> (entity-actor-lookup (-> self entity) 'alt-actor 0) extra process) msg))
 )
   :trans

@@ -309,7 +309,7 @@
       (vector-copy! pos (-> self root trans))
       ;; add a fixed vertical offset
       (set! (-> pos y) (+ (-> pos y) (meters 3.0)))
-      ;; add small random horizontal offset (�0.5m X/Z)
+      ;; add small random horizontal offset (0.5m X/Z)
       (set! (-> pos x) (+ (-> pos x) (meters (* 0.05 (- (rand-vu-int-range 0 200) 100)))))
       (set! (-> pos z) (+ (-> pos z) (meters (* 0.05 (- (rand-vu-int-range 0 200) 100)))))
 
@@ -327,7 +327,7 @@
       (vector-copy! pos (-> self root trans))
       ;; add a fixed vertical offset
       (set! (-> pos y) (+ (-> pos y) (meters 4.0)))
-      ;; add small random horizontal offset (�0.5m X/Z)
+      ;; add small random horizontal offset (0.5m X/Z)
       (set! (-> pos x) (+ (-> pos x) (meters (* 0.01 (- (rand-vu-int-range 0 200) 100)))))
       (set! (-> pos z) (+ (-> pos z) (meters (* 0.01 (- (rand-vu-int-range 0 200) 100)))))
 
