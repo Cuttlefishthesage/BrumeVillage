@@ -272,6 +272,7 @@
     (behavior ((proc process) (argc int) (message symbol) (block event-message-block))
       (case message
         (('attack) ;; when jak hits, send a message to alt-actor of actors lump
+        (send-event *target* 'shove #f (static-attack-info ((shove-up (meters 0.5)) (shove-back (meters 1.5)))))
          (format 0 "[SWITCH] Activated by ~A~%" proc)
          (let ((msg (new 'stack-no-clear 'event-message-block)))
            (set! (-> msg from) self)
@@ -308,7 +309,7 @@
       (vector-copy! pos (-> self root trans))
       ;; add a fixed vertical offset
       (set! (-> pos y) (+ (-> pos y) (meters 3.0)))
-      ;; add small random horizontal offset (±0.5m X/Z)
+      ;; add small random horizontal offset (ï¿½0.5m X/Z)
       (set! (-> pos x) (+ (-> pos x) (meters (* 0.05 (- (rand-vu-int-range 0 200) 100)))))
       (set! (-> pos z) (+ (-> pos z) (meters (* 0.05 (- (rand-vu-int-range 0 200) 100)))))
 
@@ -326,7 +327,7 @@
       (vector-copy! pos (-> self root trans))
       ;; add a fixed vertical offset
       (set! (-> pos y) (+ (-> pos y) (meters 4.0)))
-      ;; add small random horizontal offset (±0.5m X/Z)
+      ;; add small random horizontal offset (ï¿½0.5m X/Z)
       (set! (-> pos x) (+ (-> pos x) (meters (* 0.01 (- (rand-vu-int-range 0 200) 100)))))
       (set! (-> pos z) (+ (-> pos z) (meters (* 0.01 (- (rand-vu-int-range 0 200) 100)))))
 

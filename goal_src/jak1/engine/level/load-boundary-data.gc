@@ -1524,15 +1524,19 @@
   )
 
 
-
-
+(static-load-boundary :flags (player)
+  :top (meters 220.0)
+  :bot (meters 190.0)
+  :points ((meters -1750.57) (meters 300.37) (meters -1750.43) (meters 341.59) (meters -1701.35) (meters 341.10) (meters -1701.28) (meters 300.62) (meters -1750.57) (meters 300.37))
+  :fwd (checkpt "brume-checkpoint1" #f)
+  :bwd (checkpt "brume-checkpoint1" #f))
 
 (static-load-boundary :flags (player)
   :top (meters 200.18)
   :bot (meters 173.55)
   :points ((meters -1523.71) (meters 270.27) (meters -1521.30) (meters 295.53))
   :fwd (checkpt "abandon-checkpoint1" #f)
-  :bwd (checkpt "brume-start" #f))
+  :bwd (checkpt "brume-checkpoint1" #f))
 
 (static-load-boundary :flags (player)
   :top (meters 200.58)
@@ -1574,7 +1578,7 @@
   :top (meters 260.73)
   :bot (meters 230.06)
   :points ((meters -1660.79) (meters 488.20) (meters -1620.48) (meters 482.73))
-  :fwd (checkpt "brume-start" #f)
+  :fwd (checkpt "brume-checkpoint1" #f)
   :bwd (checkpt "mount-checkpoint1" #f)
   )
 
@@ -1584,6 +1588,13 @@
   :points ((meters -1840.78) (meters 964.61) (meters -1905.24) (meters 961.98))
   :fwd (checkpt "mount-checkpoint3" #f)
   :bwd (checkpt "mount-checkpoint3" #f))
+
+(static-load-boundary :flags (player)
+  :top (meters 260.65)
+  :bot (meters 245.92)
+  :points ((meters -1848.27) (meters 627.28) (meters -1864.80) (meters 627.17))
+  :fwd (checkpt "mount-checkpoint3.5" #f)
+  :bwd (checkpt "mount-checkpoint3.5" #f))
 
 (static-load-boundary :flags (player)
   :top (meters 265.50)

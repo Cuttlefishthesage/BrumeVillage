@@ -2523,7 +2523,7 @@
 // fuel cell //
 
 {
-  "trans": [ -1466.99, 194.97, 678.88 ],
+  "trans": [ -1457.60, 198.76, 681.08 ],
   "etype": "fuel-cell",
   "game_task": "(game-task mount-findcell-1)",
   "quat": [ 0, 0, 0, 1 ],
@@ -2531,7 +2531,7 @@
   "lump": {
     "name": "mount-fuel-cell-01",
     "eco-info": ["cell-info", "(game-task mount-findcell-1)"],
-    "movie-pos": ["movie-pos", [ -1466.99, 192.97, 678.88, 1.255 ]]
+    "movie-pos": ["movie-pos", [ -1457.60, 198.76, 681.08, 1.255 ]]
   }
 },
 
@@ -5423,7 +5423,7 @@
   }
 },
 {
-  "trans": [ -1463.09, 192.77, 701.36 ],
+  "trans": [ -1460.69, 192.90, 703.20 ],
   "etype": "crate",
   "game_task": "(game-task none)",
   "quat": [ 0.003081, 0.157347, 0.122895, 0.979862 ],
@@ -5507,6 +5507,94 @@
   "bsphere": [ -1477.99, 194.07, 733.55, 10 ],
   "lump": {
     "name": "mount-darkecobox-12",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1456.13, 192.23, 733.78 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ -0.042749, 0.859799, -0.020335, 0.508433 ],
+  "bsphere": [ -1456.13, 194.23, 733.78, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-13",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1459.28, 192.15, 724.82 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ 0.112193, 0.968709, -0.042220, 0.217331 ],
+  "bsphere": [ -1459.28, 194.15, 724.82, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-14",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1475.28, 191.87, 729.78 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ -0.019058, 0.318316, -0.043334, 0.946802 ],
+  "bsphere": [ -1475.28, 193.87, 729.78, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-15",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1481.53, 191.93, 714.56 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ -0.042749, 0.859799, -0.020335, 0.508433 ],
+  "bsphere": [ -1481.53, 193.93, 714.56, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-16",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1456.01, 193.84, 701.35 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ 0.112193, 0.968709, -0.042220, 0.217331 ],
+  "bsphere": [ -1456.01, 195.84, 701.35, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-17",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1471.97, 192.68, 696.73 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ -0.019058, 0.318316, -0.043334, 0.946802 ],
+  "bsphere": [ -1471.97, 194.68, 696.73, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-18",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1465.43, 191.95, 738.46 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ -0.042749, 0.859799, -0.020335, 0.508433 ],
+  "bsphere": [ -1465.43, 193.95, 738.46, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-19",
+    "crate-type": "'darkeco"
+  }
+},
+{
+  "trans": [ -1469.69, 191.29, 718.37 ],
+  "etype": "crate",
+  "game_task": "(game-task none)",
+  "quat": [ 0.112193, 0.968709, -0.042220, 0.217331 ],
+  "bsphere": [ -1469.69, 193.29, 718.37, 10 ],
+  "lump": {
+    "name": "mount-darkecobox-20",
     "crate-type": "'darkeco"
   }
 }
